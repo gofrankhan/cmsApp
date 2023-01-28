@@ -23,6 +23,13 @@
             </li>
 
             <li>
+                <a href=" {{ route('create.category') }}" class=" waves-effect">
+                    <i class="mdi mdi-18px mdi-account"></i>
+                    <span>Category</span>
+                </a>
+            </li>
+
+            <li>
                 <a href=" {{ route('comments.attachments') }}" class=" waves-effect">
                     <i class="mdi mdi-18px mdi-account"></i>
                     <span>Comments & Attachments</span>

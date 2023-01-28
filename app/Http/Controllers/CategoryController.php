@@ -14,5 +14,9 @@ use App\Models\Attachment;
 
 class CategoryController extends Controller
 {
-    //
+    public function CreateCategory(): View
+
+    {
+        return view('admin.add_category');
+    }
 }
