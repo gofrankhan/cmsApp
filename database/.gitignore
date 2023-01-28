@@ -1,1 +1,4 @@
 *.sqlite*
+upload/
+.gitignore
+database/.gitignore

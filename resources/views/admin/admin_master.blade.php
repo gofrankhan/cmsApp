@@ -40,9 +40,11 @@
 
         <!-- Begin page -->
         <div id="layout-wrapper">
+            @once
             @include('admin.body.header')
             <!-- ========== Left Sidebar Start ========== -->
             @include('admin.body.sidebar')
+            @endonce
             <!-- Left Sidebar End -->
 
             <!-- ============================================================== -->
@@ -55,7 +57,9 @@
                 
             </div>
             <!-- end main content-->
+            @once
             @include('admin.body.footer')
+            @endonce
         </div>
         <!-- END layout-wrapper -->
 

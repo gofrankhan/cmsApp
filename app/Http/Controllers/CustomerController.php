@@ -17,7 +17,8 @@ class CustomerController extends Controller
 
     {
         $username = Auth::user()->username;
-        return view('admin.customer_data_table', ['customers' => DB::table('customers')->where('username', $username)->get()]);
+        $customers = DB::table('customers')->where('username', $username)->paginate(30);
+        return view('admin.customer_data_table', compact('customers'));
     }
 
     public function NewCustomerData(): View
@@ -87,12 +88,9 @@ class CustomerController extends Controller
     */
     public function ShowCustomerData($id)
     {
-        
         $customer = DB::table('customers')->where('id', $id)->first();
-        //$customerData = Customer::find($id);
         return view('admin.customer_show',compact('customer'));
     }
-
       /**
     * Display the specified resource.
     *
@@ -115,7 +113,6 @@ class CustomerController extends Controller
     public function EditCustomerData($id): View
     {
         $customer = DB::table('customers')->where('id', $id)->first();
-        //$customerData = Customer::find($id);
         return view('admin.customer_edit',compact('customer'));
     }
 
@@ -163,5 +160,4 @@ class CustomerController extends Controller
         );
         return redirect()->route('customer.data')->with($notification);
     }
-
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CommentAttachmentController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,6 +67,14 @@ Route::middleware('auth')->group(function(){
 
 Route::middleware('auth')->group(function(){
     Route::get('/comments/attachments', [CommentAttachmentController::class, 'CommentAttachment'])->name('comments.attachments');
+    Route::post('/post/comment', [CommentAttachmentController::class, 'PostComment'])->name('post.comment');
+    Route::post('/upload/file', [CommentAttachmentController::class, 'UploadFile'])->name('upload.file');
+});
+
+Route::middleware('auth')->group(function(){
+    Route::get('/create/category', [CategoryController::class, 'CreateCategory'])->name('create.category');
+    Route::get('/show/category', [CategoryController::class, 'ShowCategory'])->name('show.category');
+    Route::post('/add/category', [CategoryController::class, 'AddCategory'])->name('add.category');
 });
 
 require __DIR__.'/auth.php';
