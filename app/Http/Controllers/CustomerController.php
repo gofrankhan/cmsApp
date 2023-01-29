@@ -10,15 +10,54 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\RedirectResponse;
 use App\Models\User;
 use App\Models\Customer;
+use DataTables;
 
 class CustomerController extends Controller
 {
-    public function CustomerDataTable(): View
+    public function CustomerDataTable(Request $request)
 
     {
-        $username = Auth::user()->username;
-        $customers = DB::table('customers')->where('username', $username)->paginate(30);
-        return view('admin.customer_data_table', compact('customers'));
+        //$username = Auth::user()->username;
+        //$customers = DB::table('customers')->where('username', $username)->paginate(30);
+        //return view('admin.customer_data_table', compact('customers'));
+        if ($request->ajax()) {
+            $data = Customer::select('id','taxid','customertype','firstname');
+            return Datatables::of($data)->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $btn = '
+                    <form action="'.route('customer.delete',$row->id).'" method="Post">
+                        <a class="btn btn-outline-secondary btn-sm edit" href="'.route('customer.show',$row->id).'" target="_blank" title="Show">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        <a class="btn btn-outline-secondary btn-sm edit" href="'.route('customer.edit',$row->id).'" title="Edit">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
+
+                        <a type="submit" class="btn btn-outline-secondary btn-sm edit" href="'.route('customer.delete' ,$row->id).'" title="Delete">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+                    </form>
+                    ';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('admin.customer_data_table');
+    }
+
+    public function getCustomerData(){
+        if ($request->ajax()) {
+            $data = Customer::select('id','taxid','customertype','firstname', 'lastname');
+            return Datatables::of($data)->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $btn = '<a href="javascript:void(0)" class="btn btn-primary btn-sm">View</a>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
     }
 
     public function NewCustomerData(): View

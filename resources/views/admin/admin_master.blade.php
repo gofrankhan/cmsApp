@@ -123,6 +123,23 @@
         <!-- Datatable init js -->
         <script src="{{ asset('backend/assets/js/pages/datatables.init.js') }}"></script>
 
+        <script type="text/javascript">
+        $(function () {
+            var table = $('.customer_datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('customer.data') }}",
+                columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'customertype', name: 'customertype'},
+                    {data: 'taxid', name: 'taxid'},
+                    {data: 'firstname', name: 'firstname'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
+            });
+        });
+        </script>
+
         <script>
         @if(Session::has('message'))
         var type = "{{ Session::get('alert-type','info') }}"
