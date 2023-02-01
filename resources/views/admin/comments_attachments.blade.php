@@ -15,7 +15,6 @@
                         <input type="submit" href="" class="btn btn-primary waves-effect waves-light" value="Post Comments">
                     </div>
                 </form>
-                <br><br>
                 <div class="row mb-3">
                     <table class="table table-sm m-0">
                         <thead>
