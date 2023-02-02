@@ -45,7 +45,7 @@
                         </div>
                     </div>
 
-                    <input type="submit" herf="{{ route('admin.profile') }}" class="btn btn-primary btn-rounded waves-effect waves-light" value="Update">
+                    <input type="submit" href="{{ route('admin.profile') }}" class="btn btn-primary btn-rounded waves-effect waves-light" value="Update">
                 </form>
             </div>
         </div>

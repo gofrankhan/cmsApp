@@ -17,9 +17,6 @@ class CustomerController extends Controller
     public function CustomerDataTable(Request $request)
 
     {
-        //$username = Auth::user()->username;
-        //$customers = DB::table('customers')->where('username', $username)->paginate(30);
-        //return view('admin.customer_data_table', compact('customers'));
         if ($request->ajax()) {
             $data = Customer::select('id','taxid','customertype','firstname');
             return Datatables::of($data)->addIndexColumn()

@@ -5,7 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CommentAttachmentController;
 use App\Http\Controllers\ClientController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ServiceCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -72,9 +72,11 @@ Route::middleware('auth')->group(function(){
 });
 
 Route::middleware('auth')->group(function(){
-    Route::get('/create/category', [CategoryController::class, 'CreateCategory'])->name('create.category');
-    Route::get('/show/category', [CategoryController::class, 'ShowCategory'])->name('show.category');
-    Route::post('/add/category', [CategoryController::class, 'AddCategory'])->name('add.category');
+    Route::get('/create/category', [ServiceCategoryController::class, 'CreateCategory'])->name('create.category');
+    Route::get('/show/category', [ServiceCategoryController::class, 'ShowCategory'])->name('show.category');
+    Route::post('/add/category', [ServiceCategoryController::class, 'AddCategory'])->name('add.category');
+    Route::post('/add/service', [ServiceCategoryController::class, 'AddService'])->name('add.service');
+    Route::post('/add/service_category', [ServiceCategoryController::class, 'AddServiceCategory'])->name('add.service_category');
 });
 
 require __DIR__.'/auth.php';
