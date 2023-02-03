@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CommentAttachmentController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\ServiceCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -77,6 +78,10 @@ Route::middleware('auth')->group(function(){
     Route::post('/add/category', [ServiceCategoryController::class, 'AddCategory'])->name('add.category');
     Route::post('/add/service', [ServiceCategoryController::class, 'AddService'])->name('add.service');
     Route::post('/add/service_category', [ServiceCategoryController::class, 'AddServiceCategory'])->name('add.service_category');
+});
+
+Route::middleware('auth')->group(function(){
+    Route::get('/file/data', [FileController::class, 'FileDataTable'])->name('file.data');
 });
 
 require __DIR__.'/auth.php';

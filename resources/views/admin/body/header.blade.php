@@ -35,7 +35,7 @@
         </button>
 
         <button type="button" class="btn header-item waves-effect">
-            <a class="navbar-brand d-none d-xl-inline-block ms-1 nav-link">Files</a>
+            <a class="navbar-brand d-none d-xl-inline-block ms-1 nav-link" href="{{ route('file.data') }}">Files</a>
         </button>
 
         <button type="button" class="btn header-item waves-effect">
