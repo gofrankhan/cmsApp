@@ -115,4 +115,9 @@ class ServiceCategoryController extends Controller
             return redirect()->back()->with($notification);
         }
     }
+
+    public function getServices(Request $request){
+        $data = Service::where('category', $request->value)->get();
+        return response()->json($data);
+    }
 }

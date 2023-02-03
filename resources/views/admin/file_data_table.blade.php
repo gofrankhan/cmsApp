@@ -1,6 +1,48 @@
 @extends('admin.admin_master')
 @section('admin')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#category').change(function() {
+      var value = $(this).val();
+      $.ajax({
+        url: "{{ route('load.services') }}",
+        type: "GET",
+        data: { value: value },
+        success: function(data) {
+          $("#service").empty();
+          $("#service").append("<option value=''>Select a service</option>");
+          $.each(data, function(index, item) {
+            $("#service").append("<option value='" + item.service + "'>" + item.service + "</option>");
+          });
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $('#taxid').change(function() {
+      var value = $(this).val();
+      $.ajax({
+        url: "{{ route('customer.info') }}",
+        type: "GET",
+        data: { value: value },
+        success: function(data) {
+          $("#customer_type").val(data.customertype);
+          $("#first_name").val(data.firstname);
+          $("#last_name").val(data.lastname);
+          $("#date_of_birth").val(data.dateofbirth);
+          $("#telephone").val(data.telephone);
+        }
+      });
+    });
+  });
+</script>
+
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
@@ -48,10 +90,10 @@
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label  class="form-label">Service Category</label>
-                                                        <select class="form-select" >
-                                                            <option value="Choose">Choose...</option>
+                                                        <select class="form-select" id="category">
+                                                            <option value="Choose" selected>Choose...</option>
                                                             @foreach ($categories as $category)
-                                                            <option value="{{ $category->category }}">{{ $category->category }}</option>
+                                                            <option value="{{ $category->category }}" >{{ $category->category }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -59,9 +101,7 @@
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label  class="form-label">Service</label>
-                                                        <select class="form-select" >
-                                                            <option selected disabled value="">Choose...</option>
-                                                            <option>...</option>
+                                                        <select class="form-select" id="service">
                                                         </select>
                                                     </div>
                                                 </div>
@@ -70,7 +110,7 @@
                                                 <div>
                                                     <div class="mb-3">
                                                         <label  class="form-label">Tax ID</label>
-                                                        <input type="text" class="form-control
+                                                        <input type="text" id="taxid" class="form-control
                                                             placeholder="Tax ID" value="Mark">
                                                     </div>
                                                 </div>
@@ -79,8 +119,8 @@
                                                 <div>
                                                     <div class="mb-3">
                                                         <label  class="form-label">Customer Type</label>
-                                                        <input type="text" class="form-control
-                                                            placeholder="Customer Type" value="Mark">
+                                                        <input type="text" id="customer_type" class="form-control
+                                                            placeholder="Customer Type" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -88,15 +128,15 @@
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label  class="form-label">First name</label>
-                                                        <input type="text" class="form-control
-                                                            placeholder="First name" value="Mark">
+                                                        <input type="text" id="first_name" class="form-control
+                                                            placeholder="First name">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">Last name</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Last name" value="Otto">
+                                                        <input type="text" id="last_name" class="form-control"
+                                                            placeholder="Last name">
                                                     </div>
                                                 </div>
                                             </div>
@@ -104,14 +144,14 @@
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label  class="form-label">Date of birth</label>
-                                                        <input type="date" class="form-control">
+                                                        <input type="date" id="date_of_birth" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">Telephone</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Telephone" value="Otto">
+                                                        <input type="text" id="telephone" class="form-control"
+                                                            placeholder="Telephone">
                                                     </div>
                                                 </div>
                                             </div>

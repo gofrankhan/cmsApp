@@ -82,6 +82,8 @@ Route::middleware('auth')->group(function(){
 
 Route::middleware('auth')->group(function(){
     Route::get('/file/data', [FileController::class, 'FileDataTable'])->name('file.data');
+    Route::get('/load/services', [ServiceCategoryController::class, 'getServices'])->name('load.services');
+    Route::get('/load/customer', [CustomerController::class, 'GetCustomerInfo'])->name('customer.info');
 });
 
 require __DIR__.'/auth.php';

@@ -44,19 +44,6 @@ class CustomerController extends Controller
         return view('admin.customer_data_table');
     }
 
-    public function getCustomerData(){
-        if ($request->ajax()) {
-            $data = Customer::select('id','taxid','customertype','firstname', 'lastname');
-            return Datatables::of($data)->addIndexColumn()
-                ->addColumn('action', function($row){
-                    $btn = '<a href="javascript:void(0)" class="btn btn-primary btn-sm">View</a>';
-                    return $btn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
-    }
-
     public function NewCustomerData(): View
 
     {
@@ -195,5 +182,10 @@ class CustomerController extends Controller
             'alert-type' => 'success'
         );
         return redirect()->route('customer.data')->with($notification);
+    }
+
+    public function GetCustomerInfo(Request $request){
+        $data = Customer::where('taxid', $request->value)->first();
+        return response()->json($data);
     }
 }
