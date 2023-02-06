@@ -70,6 +70,10 @@ Route::middleware('auth')->group(function(){
     Route::get('/comments/attachments', [CommentAttachmentController::class, 'CommentAttachment'])->name('comments.attachments');
     Route::post('/post/comment', [CommentAttachmentController::class, 'PostComment'])->name('post.comment');
     Route::post('/upload/file', [CommentAttachmentController::class, 'UploadFile'])->name('upload.file');
+    Route::post('/delete/file', [CommentAttachmentController::class, 'DeleteFile'])->name('delete.file');
+    Route::post('/delete/comment', [CommentAttachmentController::class, 'DeleteComment'])->name('delete.comment');
+    Route::post('/update/comment', [CommentAttachmentController::class, 'UpdateComment'])->name('update.comment');
+    Route::get('/download/file/{id}', [CommentAttachmentController::class, 'DownloadFile'])->name('download.file');
 });
 
 Route::middleware('auth')->group(function(){

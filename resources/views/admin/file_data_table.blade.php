@@ -56,7 +56,7 @@
                             </div>
                         </p>
 
-                        <table id="file_datatable" class="table table-bordered">
+                        <table data-page-length='50' id="file_datatable" class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>ID</th>

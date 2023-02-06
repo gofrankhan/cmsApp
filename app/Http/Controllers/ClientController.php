@@ -51,12 +51,20 @@ class ClientController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        if(empty($request->new_shop) && $request->shop_name != 'create_new')
+            {
+                $new_shop_name =  $request->shop_name;
+            }else{ 
+                $new_shop_name =  $request->new_shop;
+            }
+
         $user = User::create([
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
             'user_type' => $request->usertype,
             'password' => Hash::make($request->password),
+            'shop_name' => $new_shop_name,
         ]);
 
         return $this->ClientDataTable();

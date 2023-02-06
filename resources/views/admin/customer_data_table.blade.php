@@ -14,7 +14,7 @@
                             </div>
                         </p>
 
-                        <table id="customer_datatable" class="table table-bordered customer_datatable">
+                        <table data-page-length='50' id="customer_datatable" class="table table-bordered customer_datatable">
                             <thead>
                                 <tr>
                                     <th>ID</th>

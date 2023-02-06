@@ -2,6 +2,20 @@
 @section('admin')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<script>
+    $(document).ready(function(){
+        $('select#shop_name').change(function(e){
+            $('#div_new_shop').hide();
+            var selectValue = $(this).children("option:selected").val();
+            if(selectValue === "create_new"){
+                $('#div_new_shop').show();
+            }else{
+                $('#div_new_shop').hide();
+            }
+        });
+    });
+</script>
+
 <div class="page-content">
     <div class="container-fluid">
         
@@ -54,6 +68,26 @@
                         <label for="password_confirmation" class="col-sm-2 col-form-label">Confirm Password</label>
                         <div class="col-sm-10">
                             <input class="form-control" name="password_confirmation" placeholder="Confirm Password" type="password" id="password_confirmation">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="email" class="col-sm-2 col-form-label">Select Shop</label>
+                        <div class="col-sm-10">
+                            <select class="form-select" name="shop_name" aria-label="Default select example" id="shop_name">
+                                <option selected value="create_new">Create New Shop</option>
+                                @php 
+                                    $shops = App\Models\User::select('shop_name')->distinct()->get();
+                                @endphp
+                                @foreach ($shops as $shop)
+                                <option value="{{ $shop->shop_name }}">{{ $shop->shop_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3" id="div_new_shop">
+                        <label for="email" class="col-sm-2 col-form-label">New Shop Name</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" name="new_shop" placeholder="New Shop Name" type="text" id="new_shop" >
                         </div>
                     </div>
                     <div class="row mb-3">

@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Madnest\Madzipper\Madzipper;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use App\Models\Comment;
@@ -74,6 +77,60 @@ class CommentAttachmentController extends Controller
             );
          }
         
+        return redirect()->route('comments.attachments')->with($notification);
+    }
+
+    public function DeleteFile(Request $request){
+        $files = DB::table('attachments')
+                        ->where('file_id', $request->file_id)
+                        ->where('file_name', $request->file_name)
+                        ->delete();
+        
+        $file = public_path('upload/file_attachments/'.$request->file_id.'/'.$request->file_name);
+        $realPath = realpath($file);
+        if ($realPath) {
+            File::delete($realPath);
+            $notification = array(
+                'message' => 'File Deleted successfully!', 
+                'alert-type' => 'success'
+             );
+        } else {
+            $notification = array(
+                'message' => 'File doesnot exist of incorrect path!', 
+                'alert-type' => 'warning'
+             );
+        }
+        return redirect()->route('comments.attachments')->with($notification);
+    }
+
+    public function DeleteComment(Request $request){
+        $files = DB::table('comments')
+                        ->where('id', $request->id)
+                        ->delete();
+        
+        $notification = array(
+            'message' => 'Comment deleted successfully!', 
+            'alert-type' => 'success'
+        );
+        return redirect()->route('comments.attachments')->with($notification);
+    }
+
+    public function DownloadFile($file_id){
+        $disk = Storage::disk('local');
+        $fs = $disk->getDriver();
+        $zipper = new Madzipper($fs, realpath(public_path('upload/file_attachments/'.$file_id)));
+        $zipper->zip($file_id.'.zip');
+        return $zipper->download();
+    }
+
+    public function UpdateComment(Request $request){
+        // $comment = Comment::find($request->id);
+        // $comment->comment = $request->content;
+        // $comment->save();
+        $notification = array(
+            'message' => 'Comment updated successfully!', 
+            'alert-type' => 'success'
+        );
         return redirect()->route('comments.attachments')->with($notification);
     }
 
