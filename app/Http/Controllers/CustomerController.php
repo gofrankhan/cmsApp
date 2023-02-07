@@ -30,7 +30,7 @@ class CustomerController extends Controller
                             <i class="fas fa-pencil-alt"></i>
                         </a>
 
-                        <a type="submit" class="btn btn-outline-secondary btn-sm edit" href="'.route('customer.delete' ,$row->id).'" title="Delete">
+                        <a type="submit" class="btn btn-danger btn-sm edit" href="'.route('customer.delete' ,$row->id).'" title="Delete">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
                     </form>

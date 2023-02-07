@@ -85,7 +85,11 @@ Route::middleware('auth')->group(function(){
 });
 
 Route::middleware('auth')->group(function(){
+    Route::post('/file/store', [FileController::class, 'FileStore'])->name('file.store');
     Route::get('/file/data', [FileController::class, 'FileDataTable'])->name('file.data');
+    Route::get('/file/edit/{id}', [FileController::class, 'FileEdit'])->name('file.edit');
+    Route::get('/file/delete/{id}', [FileController::class, 'FileDelete'])->name('file.delete');
+    Route::get('/file/show/{id}', [FileController::class, 'FileShow'])->name('file.show');
     Route::get('/load/services', [ServiceCategoryController::class, 'getServices'])->name('load.services');
     Route::get('/load/customer', [CustomerController::class, 'GetCustomerInfo'])->name('customer.info');
 });

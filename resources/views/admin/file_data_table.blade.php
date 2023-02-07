@@ -56,10 +56,11 @@
                             </div>
                         </p>
 
-                        <table data-page-length='50' id="file_datatable" class="table table-bordered">
+                        <table data-page-length='50' id="file_datatable" class="table table-bordered file_datatable">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th type="hidden">#</th>
+                                    <th>File ID</th>
                                     <th>Tax ID</th>
                                     <th>Customer</th>
                                     <th>Shop</th>
@@ -84,13 +85,14 @@
                                         <h5 class="modal-title" id="myModalLabel">New File</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
-                                        <form>
+                                    <form method="post" action="{{ route('file.store')}}">
+                                        @csrf
+                                        <div class="modal-body">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label  class="form-label">Service Category</label>
-                                                        <select class="form-select" id="category">
+                                                        <select class="form-select" id="category" name="category">
                                                             <option value="Choose" selected>Choose...</option>
                                                             @foreach ($categories as $category)
                                                             <option value="{{ $category->category }}" >{{ $category->category }}</option>
@@ -101,7 +103,7 @@
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label  class="form-label">Service</label>
-                                                        <select class="form-select" id="service">
+                                                        <select class="form-select" id="service" name="service">
                                                         </select>
                                                     </div>
                                                 </div>
@@ -111,7 +113,7 @@
                                                     <div class="mb-3">
                                                         <label  class="form-label">Tax ID</label>
                                                         <input type="text" id="taxid" class="form-control
-                                                            placeholder="Tax ID" value="Mark">
+                                                            placeholder="Tax ID" name="taxid">
                                                     </div>
                                                 </div>
                                             </div>
@@ -120,7 +122,7 @@
                                                     <div class="mb-3">
                                                         <label  class="form-label">Customer Type</label>
                                                         <input type="text" id="customer_type" class="form-control
-                                                            placeholder="Customer Type" >
+                                                            placeholder="Customer Type"  name="customertype">
                                                     </div>
                                                 </div>
                                             </div>
@@ -129,14 +131,14 @@
                                                     <div class="mb-3">
                                                         <label  class="form-label">First name</label>
                                                         <input type="text" id="first_name" class="form-control
-                                                            placeholder="First name">
+                                                            placeholder="First name" name="firstname">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">Last name</label>
                                                         <input type="text" id="last_name" class="form-control"
-                                                            placeholder="Last name">
+                                                            placeholder="Last name" name="lastname">
                                                     </div>
                                                 </div>
                                             </div>
@@ -144,23 +146,23 @@
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label  class="form-label">Date of birth</label>
-                                                        <input type="date" id="date_of_birth" class="form-control">
+                                                        <input type="date" id="date_of_birth" class="form-control" name="dateofbirth">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">Telephone</label>
                                                         <input type="text" id="telephone" class="form-control"
-                                                            placeholder="Telephone">
+                                                            placeholder="Telephone" name="telephone">
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-light waves-effect" data-bs-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-primary waves-effect waves-light">Create</button>
-                                    </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light waves-effect" data-bs-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light">Create</button>
+                                        </div>
+                                    </form>
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal-dialog -->
                         </div><!-- /.modal -->
