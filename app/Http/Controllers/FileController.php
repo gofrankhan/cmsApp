@@ -23,10 +23,10 @@ class FileController extends Controller
                 ->addColumn('action', function($row){
                     $btn = '
                     <form action="'.route('file.delete',$row->id).'" method="Post">
-                        <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->id).'" target="_blank" title="Show">
+                        <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show">
                             <i class="fas fa-eye"></i>
                         </a>
-                        <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->id).'" title="Edit">
+                        <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->file_id).'" title="Edit">
                             <i class="fas fa-pencil-alt"></i>
                         </a>
 
@@ -67,7 +67,7 @@ class FileController extends Controller
         $comments = DB::table('comments')->where('file_id', $file_id)->get();
         $attachments = DB::table('attachments')->where('file_id', $file_id)->get();
         $files = DB::table('files')->where('file_id', $file_id)->get();
-        return view('admin.file_view', compact('comments', 'attachments'));
+        return view('admin.file_view', compact('comments', 'attachments', 'files'));
     }
 
     public function FileShow($file_id): View

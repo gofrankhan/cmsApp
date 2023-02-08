@@ -35,11 +35,10 @@ class CommentAttachmentController extends Controller
         }
 
         $username = Auth::user()->username;
-        $file_id = "12650304";
         
         $comment = new Comment();
         $comment->comment = $request->comment;
-        $comment->file_id = $file_id;
+        $comment->file_id = $request->file_id;
         $comment->username = $username;
         $comment->save();
 
@@ -55,14 +54,14 @@ class CommentAttachmentController extends Controller
         $attachment = new Attachment();
         $attachment->username = Auth::user()->username;
         $attachment->category = $request->category;
-        $attachment->file_id = "12650304";
+        $attachment->file_id = $request->file_id;
 
         if ($request->file('upload_file')) {
             $file = $request->file('upload_file');
  
             $filename = $file->getClientOriginalName();
             $filename = str_replace(' ', '_', $filename);
-            $file->move(public_path('upload/file_attachments/12650304'),$filename);
+            $file->move(public_path('upload/file_attachments/'.$request->file_id),$filename);
             $attachment['file_name'] = $filename;
 
             $attachment->save();
@@ -77,7 +76,7 @@ class CommentAttachmentController extends Controller
             );
          }
         
-        return redirect()->route('comments.attachments')->with($notification);
+        return redirect()->back()->with($notification);
     }
 
     public function DeleteFile(Request $request){
@@ -91,7 +90,7 @@ class CommentAttachmentController extends Controller
         if ($realPath) {
             File::delete($realPath);
             $notification = array(
-                'message' => 'File Deleted successfully!', 
+                'message' => 'File deleted successfully!', 
                 'alert-type' => 'success'
              );
         } else {
@@ -100,7 +99,7 @@ class CommentAttachmentController extends Controller
                 'alert-type' => 'warning'
              );
         }
-        return redirect()->route('comments.attachments')->with($notification);
+        return redirect()->back()->with($notification);
     }
 
     public function DeleteComment(Request $request){
@@ -112,7 +111,7 @@ class CommentAttachmentController extends Controller
             'message' => 'Comment deleted successfully!', 
             'alert-type' => 'success'
         );
-        return redirect()->route('comments.attachments')->with($notification);
+        return redirect()->back()->with($notification);
     }
 
     public function DownloadFile($file_id){

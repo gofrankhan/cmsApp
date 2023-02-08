@@ -4,7 +4,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 @php 
-    $file_id = '12650304';
+    $file_id =  $files[0]->file_id;
 @endphp
 
 <div class="page-content">
@@ -36,7 +36,7 @@
                         <label for="service" class="col-form-label">Service</label>
                     </div>
                     <div class="col-sm-8">
-                        <input class="form-control" name="service" placeholder="Service" type="text" id="service" >
+                        <input class="form-control" name="service" placeholder="Service" type="text" id="service" value="{{ $files[0]->service }}">
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                         <label for="customer" class="col-form-label">Customer</label>
                     </div>
                     <div class="col-sm-8">
-                        <input class="form-control" name="customer" placeholder="Customer" type="text" id="customer" >
+                        <input class="form-control" name="customer" placeholder="Customer" type="text" id="customer" value="{{ $files[0]->customer }}" >
                     </div>
                 </div>
             </div>
@@ -59,6 +59,7 @@
                     </div>
                     <div class="col-sm-8">
                         <select class="form-select" name="shop" id="shop">
+                            <option value="{{ $files[0]->shop }}">{{ $files[0]->shop }}</option>
                         </select>
                     </div>
                     <div class="col-sm-2">
@@ -96,6 +97,7 @@
                         <label class="form-label" for="basicpill-address-input"><h3>Comments</h3></label>
                         <textarea id="basicpill-address-input" name="comment" class="form-control" placeholder="Add comments here" rows="4"></textarea>
                     </div>
+                    <input type="hidden" name="file_id" class="btn btn-primary waves-effect waves-light" value="{{ $file_id }}">
                    <div class="mb-3">
                         <input type="submit" href="" class="btn btn-primary waves-effect waves-light" value="Post Comments">
                     </div>
@@ -169,6 +171,7 @@
                             </select>
                         </div>
                     </div>
+                    <input type="hidden" name="file_id" class="btn btn-primary" value="{{ $file_id }}">
                     <div class="row mb-3">
                         <label for="profile_image" class="col-sm-2 col-form-label">Upload File</label>
                         <div class="col-sm-10">
@@ -198,7 +201,7 @@
                                     <div class="card {{$card_type}} text-black-50' }}" style="opacity: 0.75;">
                                         <div class="card-body">
                                             <div class="row mb-4 text-black"><i>Uploaded On : {{ $attachment->created_at }} || By : {{ $user->name }} || Status : Pending</i></div>
-                                            <div class="card-text text-black"><a style="color: blue" href="{{  asset('upload/file_attachments/12650304/'.$attachment->file_name) }}" target="_blank">{{ $attachment->file_name }}</a>
+                                            <div class="card-text text-black"><a style="color: blue" href="{{  asset('upload/file_attachments/'.$attachment->file_id.'/'.$attachment->file_name) }}" target="_blank">{{ $attachment->file_name }}</a>
                                             <form id="myForm" method="post" action="{{ route('delete.file') }}">
                                                 @csrf
                                                 <div align="right">
