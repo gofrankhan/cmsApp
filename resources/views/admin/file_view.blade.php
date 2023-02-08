@@ -1,12 +1,93 @@
 @extends('admin.admin_master')
 @section('admin')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 @php 
     $file_id = '12650304';
 @endphp
 
 <div class="page-content">
     <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="mb-3">
+                    <label class="form-label" for="basicpill-address-input"><h3>File #{{ $file_id}}</h3></label>
+                </div>
+            </div>
+            <div class="col">
+                <div align="right" class="mb-3">
+                    <button class="col-sm-2 btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Print    <i class="mdi mdi-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                    <input class="col-sm-2 btn btn-primary" href="" title="Submit" value="Submit">
+                </div>    
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-2">
+                        <label for="service" class="col-form-label">Service</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input class="form-control" name="service" placeholder="Service" type="text" id="service" >
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-2">
+                        <label for="customer" class="col-form-label">Customer</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input class="form-control" name="customer" placeholder="Customer" type="text" id="customer" >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-1">
+                        <label for="shop" class="col-form-label">Shop</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <select class="form-select" name="shop" id="shop">
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="button" class="form-control btn btn-primary" name="shop_btn" id="shop_btn" value="Update">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-11">
+                        <label for="pagamento" class="col-form-label">Pagamento</label>
+                        <input class="form-control" name="pagamento" placeholder="Pagamento" type="text" id="pagamento" >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-11">
+                        <label for="ARCHIVIO DSU" class="col-form-label">ARCHIVIO DSU</label>
+                        <input class="form-control" name="ARCHIVIO DSU" placeholder="ARCHIVIO DSU" type="text" id="ARCHIVIO DSU" >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
         <div class="row">
             <div class="col">
                 <form method="post" action="{{ route('post.comment')}}">

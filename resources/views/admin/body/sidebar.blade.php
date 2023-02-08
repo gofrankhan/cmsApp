@@ -32,7 +32,7 @@
             <li>
                 <a href=" {{ route('comments.attachments') }}" class=" waves-effect">
                     <i class="mdi mdi-18px mdi-account"></i>
-                    <span>Comments & Attachments</span>
+                    <span>Comm & Attach</span>
                 </a>
             </li>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -60,4 +61,18 @@ class FileController extends Controller
 
         return view('admin.file_data_table');
     }
+
+    public function CommentAttachment($file_id): View
+    {
+        $comments = DB::table('comments')->where('file_id', $file_id)->get();
+        $attachments = DB::table('attachments')->where('file_id', $file_id)->get();
+        $files = DB::table('files')->where('file_id', $file_id)->get();
+        return view('admin.file_view', compact('comments', 'attachments'));
+    }
+
+    public function FileShow($file_id): View
+    {
+        return $this->CommentAttachment($file_id);
+    }
+
 }
