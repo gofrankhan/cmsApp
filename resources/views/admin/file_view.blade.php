@@ -164,10 +164,12 @@
                         <div class="col-sm-10">
                             <select class="form-select" name="category" aria-label="Default select example" id="category">
                                 <option selected="" hidden></option>
-                                <option value="category1">Category 1</option>
-                                <option value="category2">Category 2</option>
-                                <option value="category3">Category 3</option>
-                                <option value="category4">Category 4</option>
+                                @php
+                                    $upload_types = Illuminate\Support\Facades\DB::table('upload_types')->get();
+                                @endphp
+                                @foreach($upload_types as $upload_type)
+                                    <option value="{{ $upload_type->upload_type }}">{{ $upload_type->upload_type }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
