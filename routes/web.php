@@ -7,6 +7,7 @@ use App\Http\Controllers\CommentAttachmentController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\ServiceCategoryController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -92,6 +93,11 @@ Route::middleware('auth')->group(function(){
     Route::get('/file/show/{id}', [FileController::class, 'FileShow'])->name('file.show');
     Route::get('/load/services', [ServiceCategoryController::class, 'getServices'])->name('load.services');
     Route::get('/load/customer', [CustomerController::class, 'GetCustomerInfo'])->name('customer.info');
+});
+
+Route::middleware('auth')->group(function(){
+    Route::get('/create/settings', [SettingsController::class, 'CreateSettings'])->name('create.settings');
+    Route::post('/add/upload_type', [SettingsController::class, 'AddUploadType'])->name('add.upload_type');
 });
 
 require __DIR__.'/auth.php';

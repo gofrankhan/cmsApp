@@ -36,7 +36,7 @@
                         <label for="service" class="col-form-label">Service</label>
                     </div>
                     <div class="col-sm-8">
-                        <input class="form-control" name="service" placeholder="Service" type="text" id="service" value="{{ $files[0]->service }}" disabled>
+                        <input class="form-control" name="service" placeholder="Service" type="text" id="service" value="{{ $files[0]->service }}">
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                         <label for="customer" class="col-form-label">Customer</label>
                     </div>
                     <div class="col-sm-8">
-                        <input class="form-control" name="customer" placeholder="Customer" type="text" id="customer" value="{{ $files[0]->customer }}" disabled>
+                        <input class="form-control" name="customer" placeholder="Customer" type="text" id="customer" value="{{ $files[0]->customer }}" >
                     </div>
                 </div>
             </div>
@@ -59,11 +59,11 @@
                     </div>
                     <div class="col-sm-8">
                         <select class="form-select" name="shop" id="shop">
-                            <option value="{{ $files[0]->shop }}" disabled>{{ $files[0]->shop }}</option>
+                            <option value="{{ $files[0]->shop }}">{{ $files[0]->shop }}</option>
                         </select>
                     </div>
                     <div class="col-sm-2">
-                        <input type="button" class="form-control btn btn-primary" name="shop_btn" id="shop_btn" value="Update" disabled>
+                        <input type="button" class="form-control btn btn-primary" name="shop_btn" id="shop_btn" value="Update">
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                 <div class="row mb-3">
                     <div class="col-sm-11">
                         <label for="pagamento" class="col-form-label">Pagamento</label>
-                        <input class="form-control" name="pagamento" placeholder="Pagamento" type="text" id="pagamento" disabled>
+                        <input class="form-control" name="pagamento" placeholder="Pagamento" type="text" id="pagamento" >
                     </div>
                 </div>
             </div>
@@ -83,7 +83,7 @@
                 <div class="row mb-3">
                     <div class="col-sm-11">
                         <label for="ARCHIVIO DSU" class="col-form-label">ARCHIVIO DSU</label>
-                        <input class="form-control" name="ARCHIVIO DSU" placeholder="ARCHIVIO DSU" type="text" id="ARCHIVIO DSU" disabled>
+                        <input class="form-control" name="ARCHIVIO DSU" placeholder="ARCHIVIO DSU" type="text" id="ARCHIVIO DSU" >
                     </div>
                 </div>
             </div>
@@ -164,10 +164,12 @@
                         <div class="col-sm-10">
                             <select class="form-select" name="category" aria-label="Default select example" id="category">
                                 <option selected="" hidden></option>
-                                <option value="category1">Category 1</option>
-                                <option value="category2">Category 2</option>
-                                <option value="category3">Category 3</option>
-                                <option value="category4">Category 4</option>
+                                @php
+                                    $upload_types = Illuminate\Support\Facades\DB::table('upload_types')->get();
+                                @endphp
+                                @foreach($upload_types as $upload_type)
+                                    <option value="{{ $upload_type->upload_type }}">{{ $upload_type->upload_type }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

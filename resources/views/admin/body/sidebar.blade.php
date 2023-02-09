@@ -30,6 +30,13 @@
             </li>
 
             <li>
+                <a href=" {{ route('create.settings') }}" class=" waves-effect">
+                    <i class="mdi mdi-18px mdi-account"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+
+            <li>
                 <a href=" {{ route('comments.attachments') }}" class=" waves-effect">
                     <i class="mdi mdi-18px mdi-account"></i>
                     <span>Comm & Attach</span>

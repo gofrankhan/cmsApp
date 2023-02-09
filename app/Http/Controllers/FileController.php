@@ -43,23 +43,30 @@ class FileController extends Controller
         return view('admin.file_data_table');
     }
 
-    public function FileStore(Request $request): View
+    public function FileStore(Request $request)
     {
         $lastInsertedRow = File::latest()->first();
-        $file_id = $lastInsertedRow->id + 10000;
+        $file_id = $lastInsertedRow->file_id + 1;
 
         $shop_name = Auth::user()->shop_name;
+        if(!empty($request->service) && !empty($request->taxid)){
+            $file = new File();
+            $file->file_id = $file_id;
+            $file->taxid = $request->taxid;
+            $file->customer = $request->firstname. " ".$request->lastname ;
+            $file->shop = $shop_name;
+            $file->service = $request->service;
+            $file->status = "pending";
+            $file->save();
+            return $this->FileEdit($file_id);
+        }else{
+            $notification = array(
+                'message' => 'File cannot be created!', 
+                'alert-type' => 'alert'
+            );
+            return redirect()->back()->with($notification);
+        }
 
-        $file = new File();
-        $file->file_id = $file_id;
-        $file->taxid = $request->taxid;
-        $file->customer = $request->firstname. " ".$request->lastname ;
-        $file->shop = $shop_name;
-        $file->service = $request->service;
-        $file->status = "pending";
-        $file->save();
-
-        return view('admin.file_data_table');
     }
 
     public function CommentAttachment($file_id): View
@@ -72,7 +79,34 @@ class FileController extends Controller
 
     public function FileShow($file_id): View
     {
-        return $this->CommentAttachment($file_id);
+        $comments = DB::table('comments')->where('file_id', $file_id)->get();
+        $attachments = DB::table('attachments')->where('file_id', $file_id)->get();
+        $files = DB::table('files')->where('file_id', $file_id)->get();
+        return view('admin.file_view', compact('comments', 'attachments', 'files'));
+    }
+
+    public function FileEdit($file_id)
+    {
+        $comments = DB::table('comments')->where('file_id', $file_id)->get();
+        $attachments = DB::table('attachments')->where('file_id', $file_id)->get();
+        $files = DB::table('files')->where('file_id', $file_id)->get();
+        return view('admin.file_edit', compact('comments', 'attachments', 'files'));
+    }
+
+      /**
+    * Display the specified resource.
+    *
+    * @param  \App\company  $company
+    * @return \Illuminate\Http\Response
+    */
+    public function FileDelete($id)
+    {
+        $customer = DB::table('files')->where('id', $id)->delete();
+        $notification = array(
+            'message' => 'File deleted successfully', 
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
     }
 
 }
