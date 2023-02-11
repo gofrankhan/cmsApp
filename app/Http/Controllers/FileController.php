@@ -64,7 +64,11 @@ class FileController extends Controller
             $service_id = Service::select('id')->where('service', $request->service)->first();
             $file->service_id = $service_id->id;
             $file->save();
-            return $this->FileEdit($file_id);
+            $notification = array(
+                'message' => 'File created successfully!', 
+                'alert-type' => 'alert'
+            );
+            return redirect()->back()->with($notification);
         }else{
             $notification = array(
                 'message' => 'File cannot be created!', 
@@ -115,7 +119,7 @@ class FileController extends Controller
     */
     public function FileDelete($id)
     {
-        $customer = DB::table('files')->where('id', $id)->delete();
+        DB::table('invoices')->where('id', $id)->delete();
         $notification = array(
             'message' => 'File deleted successfully', 
             'alert-type' => 'success'

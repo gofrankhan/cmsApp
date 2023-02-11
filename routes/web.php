@@ -41,7 +41,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/profile', [AdminController::class, 'Profile'])->name('admin.profile');
     Route::get('/edit/profile', [AdminController::class, 'EditProfile'])->name('edit.profile');
     Route::post('/store/profile', [AdminController::class, 'StoreProfile'])->name('store.profile');
-    
     Route::get('/change/password', [AdminController::class, 'ChangePassword'])->name('change.password');
     Route::post('/update/password', [AdminController::class, 'UpdatePassword'])->name('update.password');
 });
@@ -57,7 +56,7 @@ Route::middleware('auth')->group(function(){
 
 });
 
-Route::middleware('auth')->group(function(){
+Route::middleware('auth' , 'admin')->group(function(){
     Route::get('/client/table', [ClientController::class, 'ClientDataTable'])->name('client.table');
     Route::get('/client/new', [ClientController::class, 'NewClientData'])->name('client.new');
     Route::post('/client/store', [ClientController::class, 'StoreClientData'])->name('client.store');
@@ -68,7 +67,6 @@ Route::middleware('auth')->group(function(){
 });
 
 Route::middleware('auth')->group(function(){
-    Route::get('/comments/attachments', [CommentAttachmentController::class, 'CommentAttachment'])->name('comments.attachments');
     Route::post('/post/comment', [CommentAttachmentController::class, 'PostComment'])->name('post.comment');
     Route::post('/upload/file', [CommentAttachmentController::class, 'UploadFile'])->name('upload.file');
     Route::post('/delete/file', [CommentAttachmentController::class, 'DeleteFile'])->name('delete.file');
@@ -77,7 +75,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/download/file/{id}', [CommentAttachmentController::class, 'DownloadFile'])->name('download.file');
 });
 
-Route::middleware('auth')->group(function(){
+Route::middleware('auth', 'admin')->group(function(){
     Route::get('/create/category', [ServiceCategoryController::class, 'CreateCategory'])->name('create.category');
     Route::get('/show/category', [ServiceCategoryController::class, 'ShowCategory'])->name('show.category');
     Route::post('/add/category', [ServiceCategoryController::class, 'AddCategory'])->name('add.category');
@@ -95,7 +93,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/load/customer', [CustomerController::class, 'GetCustomerInfo'])->name('customer.info');
 });
 
-Route::middleware('auth')->group(function(){
+Route::middleware('auth' , 'admin')->group(function(){
     Route::get('/create/settings', [SettingsController::class, 'CreateSettings'])->name('create.settings');
     Route::post('/add/upload_type', [SettingsController::class, 'AddUploadType'])->name('add.upload_type');
 });
