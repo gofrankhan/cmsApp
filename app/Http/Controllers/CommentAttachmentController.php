@@ -53,7 +53,7 @@ class CommentAttachmentController extends Controller
     {
         $attachment = new Attachment();
         $attachment->username = Auth::user()->username;
-        $attachment->category = $request->category;
+        $attachment->upload_type = $request->upload_type;
         $attachment->file_id = $request->file_id;
 
         if ($request->file('upload_file')) {

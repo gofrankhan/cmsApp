@@ -23,7 +23,7 @@
                 <div class="row mb-3">
                     <table class="table table-sm m-0">
                         <tbody>
-                            @foreach ($comments as $comment)
+                        @foreach ($comments as $comment)
                                 @php
                                     $user = Illuminate\Support\Facades\DB::table('users')->where('username', $comment->username)->first();
                                     if($user->user_type == 'admin') 

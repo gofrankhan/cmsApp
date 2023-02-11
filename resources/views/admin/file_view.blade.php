@@ -160,9 +160,9 @@
                         </div>
                     </div>    
                     <div class="row mb-3">
-                        <label for="category" class="col-sm-2 col-form-label">Category</label>
+                        <label for="upload_type" class="col-sm-2 col-form-label">Upload Type</label>
                         <div class="col-sm-10">
-                            <select class="form-select" name="category" aria-label="Default select example" id="category">
+                            <select class="form-select" name="upload_type" aria-label="Default select example" id="upload_type">
                                 <option selected="" hidden></option>
                                 @php
                                     $upload_types = Illuminate\Support\Facades\DB::table('upload_types')->get();
