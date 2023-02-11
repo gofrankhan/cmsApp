@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use App\Models\User;
 use App\Models\File;
+use App\Models\Invoice;
 use DataTables;
 
 class FileController extends Controller
@@ -18,7 +19,10 @@ class FileController extends Controller
     public function FileDataTable(Request $request)
     {
         if ($request->ajax()) {
-            $data = File::select('id', 'file_id', 'taxid','customer','shop','service', 'status');
+            $data = Invoice::select('invoices.id', 'invoices.file_id', 'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop','services.service', 'services.category as status')
+                                    ->join('customers', 'invoices.customer_id', '=', 'customers.id')
+                                    ->join('services', 'invoices.service_id', '=', 'services.id')
+                                    ->get();
             return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row){
                     $btn = '
@@ -81,7 +85,10 @@ class FileController extends Controller
     {
         $comments = DB::table('comments')->where('file_id', $file_id)->get();
         $attachments = DB::table('attachments')->where('file_id', $file_id)->get();
-        $files = DB::table('files')->where('file_id', $file_id)->get();
+        $files = Invoice::select('invoices.id', 'invoices.file_id', 'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop','services.service', 'services.category as status')
+                                    ->join('customers', 'invoices.customer_id', '=', 'customers.id')
+                                    ->join('services', 'invoices.service_id', '=', 'services.id')
+                                    ->get();
         return view('admin.file_view', compact('comments', 'attachments', 'files'));
     }
 
