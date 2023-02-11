@@ -12,6 +12,8 @@ use Illuminate\View\View;
 use App\Models\User;
 use App\Models\File;
 use App\Models\Invoice;
+use App\Models\Customer;
+use App\Models\Service;
 use DataTables;
 
 class FileController extends Controller
@@ -49,18 +51,18 @@ class FileController extends Controller
 
     public function FileStore(Request $request)
     {
-        $lastInsertedRow = File::latest()->first();
-        $file_id = $lastInsertedRow->file_id + 1;
+        $file_id = Invoice::max('file_id');
+        $file_id += 1;
 
         $shop_name = Auth::user()->shop_name;
         if(!empty($request->service) && !empty($request->taxid)){
-            $file = new File();
+            $file = new Invoice();
             $file->file_id = $file_id;
-            $file->taxid = $request->taxid;
-            $file->customer = $request->firstname. " ".$request->lastname ;
-            $file->shop = $shop_name;
-            $file->service = $request->service;
-            $file->status = "pending";
+            $customer_id = Customer::select('id')->where('taxid', $request->taxid)->first();
+            $file->customer_id = $customer_id->id;
+            $file->shop_name = $shop_name;
+            $service_id = Service::select('id')->where('service', $request->service)->first();
+            $file->service_id = $service_id->id;
             $file->save();
             return $this->FileEdit($file_id);
         }else{
