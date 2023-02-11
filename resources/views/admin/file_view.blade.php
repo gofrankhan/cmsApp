@@ -109,7 +109,7 @@
                             @foreach ($comments as $comment)
                                 @php
                                     $user = Illuminate\Support\Facades\DB::table('users')->where('username', $comment->username)->first();
-                                    if($user->user_type == 'admin') 
+                                    if($user != null && $user->user_type == 'admin')
                                         $card_type = "bg-warning";
                                     else 
                                         $card_type = "bg-primary";
@@ -121,7 +121,7 @@
                                             @php
                                                 $user = Illuminate\Support\Facades\DB::table('users')->where('username', $comment->username)->first();
                                             @endphp
-                                            <div class="row mb-4 text-black"><i>Created At : {{ $comment->created_at }} || By : {{ $user->name }} || Status : Pending</i></div>
+                                            <div class="row mb-4 text-black"><i>Created At : {{ $comment->created_at }} || By : @if($user != null) {{ $user->name }} @else Unknown User @endif || Status : Pending</i></div>
                                             <div class="card-text">
                                                 <p contentEditable="true" style="color: black">
                                                     <b>{{ $comment->comment }}</b>
@@ -202,7 +202,7 @@
                                 <div>
                                     <div class="card {{$card_type}} text-black-50' }}" style="opacity: 0.75;">
                                         <div class="card-body">
-                                            <div class="row mb-4 text-black"><i>Uploaded On : {{ $attachment->created_at }} || By : @if($user != null) $user->name @else Unknown User @endif  || Status : Pending</i></div>
+                                            <div class="row mb-4 text-black"><i>Uploaded On : {{ $attachment->created_at }} || By : @if($user != null)  {{ $user->name }} @else Unknown User @endif  || Status : Pending</i></div>
                                             <div class="card-text text-black"><a style="color: blue" href="{{  asset('upload/file_attachments/'.$attachment->file_id.'/'.$attachment->file_name) }}" target="_blank">{{ $attachment->file_name }}</a>
                                             <form id="myForm" method="post" action="{{ route('delete.file') }}">
                                                 @csrf

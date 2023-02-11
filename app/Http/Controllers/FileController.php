@@ -88,6 +88,7 @@ class FileController extends Controller
         $files = Invoice::select('invoices.id', 'invoices.file_id', 'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop','services.service', 'services.category as status')
                                     ->join('customers', 'invoices.customer_id', '=', 'customers.id')
                                     ->join('services', 'invoices.service_id', '=', 'services.id')
+                                    ->where('invoices.file_id', $file_id)
                                     ->get();
         return view('admin.file_view', compact('comments', 'attachments', 'files'));
     }
@@ -96,7 +97,11 @@ class FileController extends Controller
     {
         $comments = DB::table('comments')->where('file_id', $file_id)->get();
         $attachments = DB::table('attachments')->where('file_id', $file_id)->get();
-        $files = DB::table('files')->where('file_id', $file_id)->get();
+        $files = Invoice::select('invoices.id', 'invoices.file_id', 'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop','services.service', 'services.category as status')
+                                    ->join('customers', 'invoices.customer_id', '=', 'customers.id')
+                                    ->join('services', 'invoices.service_id', '=', 'services.id')
+                                    ->where('invoices.file_id', $file_id)
+                                    ->get();
         return view('admin.file_edit', compact('comments', 'attachments', 'files'));
     }
 
