@@ -122,9 +122,12 @@ class CustomerController extends Controller
     */
     public function DeleteCustomerData($id)
     {
-        $customer = DB::table('customers')->where('id', $id)->delete();
-        
-        return $this->CustomerDataTable();
+        DB::table('customers')->where('id', $id)->delete();
+        $notification = array(
+            'message' => 'Customer data deleted successfully', 
+            'alert-type' => 'success'
+        );
+        return redirect()->route('customer.data')->with($notification);
     }
 
     /**

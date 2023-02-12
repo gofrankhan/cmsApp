@@ -25,21 +25,21 @@
         <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn">
             <i class="ri-menu-2-line align-middle"></i>
         </button>
-
-        <button type="button" class="btn header-item waves-effect" >
-            <a class="navbar-brand d-none d-xl-inline-block ms-1 nav-link">CSN Services</a>
+            
+        <button type="button" id="btn_csn_services" class="btn font-size-20 header-item waves-effect">
+            CSN Services
         </button>
 
-        <button type="button" class="btn header-item waves-effect">
-            <a class="navbar-brand d-none d-xl-inline-block ms-1 nav-link" href="{{ route('customer.data') }}">Customers</a>
+        <button type="button" id="btn_customer" class="btn font-size-20 header-item waves-effect">
+            Customers
         </button>
 
-        <button type="button" class="btn header-item waves-effect">
-            <a class="navbar-brand d-none d-xl-inline-block ms-1 nav-link" href="{{ route('file.data') }}">Files</a>
+        <button type="button" id="btn_file" class="btn font-size-20 header-item waves-effect">
+            Files
         </button>
 
-        <button type="button" class="btn header-item waves-effect">
-            <a class="navbar-brand d-none d-xl-inline-block ms-1">Movements</a>
+        <button type="button" class="btn font-size-20 header-item waves-effect">
+            Movements
         </button>
 
     </div>
@@ -69,3 +69,16 @@
     </div>
 </div>
 </header>
+
+
+<script>
+document.getElementById("btn_customer").addEventListener("click", function(event) {
+  event.preventDefault();
+  window.location.href = '/customer/data';
+});
+
+document.getElementById("btn_file").addEventListener("click", function(event) {
+  event.preventDefault();
+  window.location.href = '/file/data';
+});
+</script>

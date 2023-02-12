@@ -128,6 +128,7 @@
             var table = $('.customer_datatable').DataTable({
                 processing: true,
                 serverSide: true,
+                order: [[0, 'desc']],
                 ajax: "{{ route('customer.data') }}",
                 columns: [
                     {data: 'id', name: 'id'},
@@ -145,6 +146,10 @@
             var table = $('.file_datatable').DataTable({
                 processing: true,
                 serverSide: true,
+                order: [[0, 'desc']],
+                "columnDefs": [
+                    { "width": "10%", "targets": 7 }
+                ],
                 ajax: "{{ route('file.data') }}",
                 columns: [
                     {data: 'id', name: 'id'},

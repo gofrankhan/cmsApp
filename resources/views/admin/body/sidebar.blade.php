@@ -21,7 +21,7 @@
             
             <li>
                 <a href=" {{ route('customer.data') }}" class=" waves-effect">
-                    <i class="mdi mdi-18px mdi-account"></i>
+                    <i class="mdi mdi-18px mdi-account-multiple-outline"></i>
                     <span>Customers</span>
                 </a>
             </li>
@@ -29,14 +29,14 @@
 
             <li>
                 <a href=" {{ route('file.data') }}" class=" waves-effect">
-                    <i class="mdi mdi-18px mdi-account"></i>
+                    <i class="mdi mdi-18px mdi-file-outline"></i>
                     <span>Files</span>
                 </a>
             </li>
 
             <li>
                 <a href="{{ route('dashboard')}}" class=" waves-effect">
-                    <i class="mdi mdi-18px mdi-account"></i>
+                    <i class="mdi mdi-18px mdi-arrow-up-down-bold-outline"></i>
                     <span>Movements</span>
                 </a>
             </li>
@@ -44,21 +44,21 @@
             @if($user_type == 'admin')
             <li>
                 <a href=" {{ route('client.table') }}" class=" waves-effect">
-                    <i class="mdi mdi-18px mdi-account"></i>
+                    <i class="mdi mdi-18px mdi-account-outline"></i>
                     <span>Users</span>
                 </a>
             </li>
 
             <li>
                 <a href=" {{ route('create.category') }}" class=" waves-effect">
-                    <i class="mdi mdi-18px mdi-account"></i>
+                    <i class="mdi mdi-18px mdi-table-cog"></i>
                     <span>Category Setup</span>
                 </a>
             </li>
 
             <li>
                 <a href=" {{ route('create.settings') }}" class=" waves-effect">
-                    <i class="mdi mdi-18px mdi-account"></i>
+                    <i class="mdi mdi-18px mdi-cog-outline"></i>
                     <span>Settings</span>
                 </a>
             </li>
