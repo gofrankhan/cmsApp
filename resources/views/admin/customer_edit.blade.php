@@ -2,23 +2,6 @@
 @section('admin')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<script>
-    $(document).ready(function(){
-        $('select.form-select').change(function(e){
-            var selectValue = $(this).children("option:selected").val();
-            if(selectValue === "company"){
-                $('#div_firstname').hide();
-                $('#div_lastname').hide();
-                $('#div_company').show();
-            }else{
-                $('#div_company').hide();
-                $('#div_firstname').show();
-                $('#div_lastname').show();
-            }
-        });
-    });
-</script>
-
 <div class="page-content">
     <div class="container-fluid">
         
@@ -39,8 +22,13 @@
                         <div class="col-sm-10">
                             <select class="form-select" name="customertype" aria-label="Default select example" id="customertype" value="{{ $customer->customertype }}">
                                 <option selected="" hidden></option>
-                                <option value="company">Company</option>
+                                @if($customer->customertype == 'company')
+                                <option selected value="company">Company</option>
                                 <option value="person">Person</option>
+                                @else
+                                <option value="company">Company</option>
+                                <option selected value="person">Person</option>
+                                @endif
                             </select>
                         </div>
                     </div>
@@ -128,5 +116,22 @@
     </div>
 </div>
 
+
+<script>
+    $(document).ready(function(){
+        $('select.form-select').change(function(e){
+            var selectValue = $(this).children("option:selected").val();
+            if(selectValue === "company"){
+                $('#div_firstname').hide();
+                $('#div_lastname').hide();
+                $('#div_company').show();
+            }else{
+                $('#div_company').hide();
+                $('#div_firstname').show();
+                $('#div_lastname').show();
+            }
+        });
+    });
+</script>
 
 @endsection

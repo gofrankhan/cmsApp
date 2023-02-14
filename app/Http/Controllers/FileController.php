@@ -21,7 +21,7 @@ class FileController extends Controller
     public function FileDataTable(Request $request)
     {
         if ($request->ajax()) {
-            $data = Invoice::select('invoices.id', 'invoices.file_id', 'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop','services.service', 'services.category as status')
+            $data = Invoice::select('invoices.id', 'invoices.file_id', 'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop','services.service', 'invoices.status')
                                     ->join('customers', 'invoices.customer_id', '=', 'customers.id')
                                     ->join('services', 'invoices.service_id', '=', 'services.id')
                                     ->get();
@@ -59,6 +59,13 @@ class FileController extends Controller
             $file = new Invoice();
             $file->file_id = $file_id;
             $customer_id = Customer::select('id')->where('taxid', $request->taxid)->first();
+            if($customer_id == null){
+                $notification = array(
+                    'message' => 'Tax ID not found!', 
+                    'alert-type' => 'error'
+                );
+                return redirect()->back()->with($notification);
+            }
             $file->customer_id = $customer_id->id;
             $file->shop_name = $shop_name;
             $service_id = Service::select('id')->where('service', $request->service)->first();
@@ -66,13 +73,13 @@ class FileController extends Controller
             $file->save();
             $notification = array(
                 'message' => 'File created successfully!', 
-                'alert-type' => 'alert'
+                'alert-type' => 'success'
             );
             return redirect()->back()->with($notification);
         }else{
             $notification = array(
-                'message' => 'File cannot be created!', 
-                'alert-type' => 'alert'
+                'message' => 'No Service or Tax ID found', 
+                'alert-type' => 'error'
             );
             return redirect()->back()->with($notification);
         }
