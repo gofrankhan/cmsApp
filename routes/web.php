@@ -98,4 +98,9 @@ Route::middleware('auth' , 'admin')->group(function(){
     Route::post('/add/upload_type', [SettingsController::class, 'AddUploadType'])->name('add.upload_type');
 });
 
+Route::middleware('auth' , 'admin')->group(function(){
+    Route::get('/reset/password', [AdminController::class, 'ViewResetPassword'])->name('reset.password');
+    Route::post('/store/new_password', [AdminController::class, 'ResetPassword'])->name('store.new_password');
+});
+
 require __DIR__.'/auth.php';

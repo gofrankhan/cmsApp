@@ -57,6 +57,14 @@
             </li>
 
             <li>
+                <a href=" {{ route('reset.password') }}" class=" waves-effect">
+                    <i class="mdi mdi-18px mdi-table-cog"></i>
+                    <span>Reset Password</span>
+                </a>
+            </li>
+
+
+            <li>
                 <a href=" {{ route('create.settings') }}" class=" waves-effect">
                     <i class="mdi mdi-18px mdi-cog-outline"></i>
                     <span>Settings</span>
