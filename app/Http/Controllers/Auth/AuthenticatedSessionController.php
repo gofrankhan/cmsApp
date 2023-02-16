@@ -25,16 +25,20 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        try {
+            $request->authenticate();
+            $request->session()->regenerate();
+            $notification = array(
+                'message' => 'User Login Successfully', 
+                'alert-type' => 'success'
+            );
+            return redirect()->intended(RouteServiceProvider::HOME)->with($notification);
 
-        $request->session()->regenerate();
-
-        $notification = array(
-            'message' => 'User Login Successfully', 
-            'alert-type' => 'success'
-        );
-
-        return redirect()->intended(RouteServiceProvider::HOME)->with($notification);
+        } catch (AuthenticationException $exception) {
+            return redirect()->route('login')->withErrors([
+                'email' => 'These credentials do not match our records.',
+            ]);
+        }
     }
 
     /**
