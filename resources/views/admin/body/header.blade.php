@@ -1,33 +1,13 @@
-<header id="page-topbar">
+<header id="page-topbar" data-topbar="dark" data-layout="horizontal" data-layout-size="boxed">
 <div class="navbar-header">
     <div class="d-flex">
-        <!-- LOGO -->
-        <div class="navbar-brand-box">
-            <a href="{{ route('dashboard')}}" class="logo logo-dark">
-                <span class="logo-sm">
-                    <img src="{{ asset('backend/assets/images/PCPoint_Logo_r.png') }}" alt="logo-sm" height="22">
-                </span>
-                <span class="logo-lg">
-                    <img src="{{ asset('backend/assets/images/PCPoint_Logo_r.png') }}" alt="logo-dark" height="20">
-                </span>
-            </a>
 
-            <a href="{{ route('dashboard')}}" class="logo logo-light">
-                <span class="logo-sm">
-                    <img src="{{ asset('backend/assets/images/PCPoint_Logo_r.png') }}" alt="logo-sm-light" height="44">
-                </span>
-                <span class="logo-lg">
-                    <img src="{{ asset('backend/assets/images/PCPoint_Logo.png') }}" alt="logo-light" height="40">
-                </span>
-            </a>
-        </div>
-
-        <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn">
-            <i class="ri-menu-2-line align-middle"></i>
+        <button type="button" style="width:30px" id="btn_csn_services" class="btn font-size-20 header-item waves-effect">
+           
         </button>
             
         <button type="button" id="btn_csn_services" class="btn font-size-20 header-item waves-effect">
-            CSN Services
+            PC Point
         </button>
 
         <button type="button" id="btn_customer" class="btn font-size-20 header-item waves-effect">
@@ -65,7 +45,25 @@
                 <a class="dropdown-item text-danger" href="{{ route('admin.logout') }}"><i class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
             </div>
         </div>
-
+        @php
+            $user_type = Auth::user()->user_type;
+        @endphp
+        @if($user_type == 'admin')
+        <div class="dropdown d-inline-block user-dropdown">
+            <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="d-none d-xl-inline-block ms-1">More</span>
+                <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end">
+                <!-- item-->
+                <a class="dropdown-item" href="{{ route('client.table') }}"><i class="ri-user-line align-middle me-1"></i>Config Users</a>
+                <a class="dropdown-item" href="{{ route('reset.password')}}"><i class=" ri-key-line align-middle me-1"></i>Reset Password</a>
+                <a class="dropdown-item" href="{{ route('create.category') }}"><i class="mdi mdi-18px mdi-cog-transfer-outline align-middle me-1"></i>Set Category</a>
+                <a class="dropdown-item" href="{{ route('create.settings') }}"><i class="mdi mdi-18px mdi-cog-transfer-outline align-middle me-1"></i>Set Upload Type</a>
+            </div>
+        </div>
+        @endif
     </div>
 </div>
 </header>

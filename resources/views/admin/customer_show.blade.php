@@ -24,12 +24,6 @@
                             {{ $customer->taxid }}
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <label for="username" class="col-sm-2 col-form-label">Customer Type</label>
-                        <div class="col-sm-10">
-                            {{ $customer->customertype }}
-                        </div>
-                    </div>
                     @if($customer->customertype == 'company')
                     <div class="row mb-3" id="div_company">
                         <label id="lbl_company"  for="email" class="col-sm-2 col-form-label">Company</label>
@@ -52,12 +46,6 @@
                     </div>
                     @endif
                     <div class="row mb-3">
-                        <label for="email" class="col-sm-2 col-form-label">Telephone</label>
-                        <div class="col-sm-10">
-                            {{ $customer->telephone }}
-                        </div>
-                    </div>
-                    <div class="row mb-3">
                         <label for="email" class="col-sm-2 col-form-label">Mobile</label>
                         <div class="col-sm-10">
                            {{ $customer->mobile }}
@@ -79,12 +67,6 @@
                         <label for="email" class="col-sm-2 col-form-label">Address Line 1</label>
                         <div class="col-sm-10">
                             {{ $customer->addressline1 }}
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="email" class="col-sm-2 col-form-label">Address Line 2</label>
-                        <div class="col-sm-10">
-                            {{ $customer->addressline2 }}
                         </div>
                     </div>
                     <div class="row mb-3">

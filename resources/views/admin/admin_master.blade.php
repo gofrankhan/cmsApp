@@ -39,7 +39,7 @@
 
     </head>
 
-    <body data-topbar="dark">
+    <body data-topbar="dark" data-layout="horizontal" data-layout-size="boxed">
     
     <!-- <body data-layout="horizontal" data-topbar="dark"> -->
 
@@ -48,7 +48,6 @@
             @once
             @include('admin.body.header')
             <!-- ========== Left Sidebar Start ========== -->
-            @include('admin.body.sidebar')
             @endonce
             <!-- Left Sidebar End -->
 
@@ -129,6 +128,13 @@
                 processing: true,
                 serverSide: true,
                 order: [[0, 'desc']],
+                "columnDefs": [
+                    { "width": "15%", "targets": 0 },
+                    { "width": "30%", "targets": 1 },
+                    { "width": "15%", "targets": 2 },
+                    { "width": "25%", "targets": 3 },
+                    { "width": "10%", "targets": 4 }
+                ],
                 ajax: "{{ route('customer.data') }}",
                 columns: [
                     {data: 'id', name: 'id'},
@@ -148,7 +154,8 @@
                 serverSide: true,
                 order: [[0, 'desc']],
                 "columnDefs": [
-                    { "width": "10%", "targets": 7 }
+                    { "width": "10%", "targets": 7 },
+                    { "width": "7%", "targets": 1 }
                 ],
                 ajax: "{{ route('file.data') }}",
                 columns: [

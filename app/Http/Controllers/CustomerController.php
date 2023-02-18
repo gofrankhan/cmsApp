@@ -29,12 +29,19 @@ class CustomerController extends Controller
                         <a class="btn btn-outline-secondary btn-sm edit" href="'.route('customer.edit',$row->id).'" title="Edit">
                             <i class="fas fa-pencil-alt"></i>
                         </a>
-
                         <a type="submit" class="btn btn-danger btn-sm edit" href="'.route('customer.delete' ,$row->id).'" title="Delete">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
-                    </form>
-                    ';
+                    </form>';
+                    // $user_type = Auth::user()->user_type;
+                    // if($user_type == 'admin'){
+                    //     $btn += '<a type="submit" class="btn btn-danger btn-sm edit" href="'.route('customer.delete' ,$row->id).'" title="Delete">
+                    //         <i class="fa fa-trash" aria-hidden="true"></i>
+                    //     </a>
+                    // </form>';
+                    // }else{
+                    //     $btn +='</form>';
+                    // }
                     return $btn;
                 })
                 ->rawColumns(['action'])
