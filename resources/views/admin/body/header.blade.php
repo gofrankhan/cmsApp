@@ -6,7 +6,7 @@
            
         </button>
             
-        <button type="button" id="btn_csn_services" class="btn font-size-20 header-item waves-effect">
+        <button type="button" id="btn_bashboard" class="btn font-size-20 header-item waves-effect">
             PC Point
         </button>
 
@@ -25,6 +25,25 @@
     </div>
 
     <div class="d-flex">
+        @php
+            $user_type = Auth::user()->user_type;
+        @endphp
+        @if($user_type == 'admin')
+        <div class="dropdown d-inline-block user-dropdown">
+            <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="d-none d-xl-inline-block ms-1">More</span>
+                <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end">
+                <!-- item-->
+                <a class="dropdown-item" href="{{ route('client.table') }}"><i class="ri-user-line align-middle me-1"></i>Config Users</a>
+                <a class="dropdown-item" href="{{ route('reset.password')}}"><i class=" ri-key-line align-middle me-1"></i>Reset Password</a>
+                <a class="dropdown-item" href="{{ route('create.category') }}"><i class="mdi mdi-18px mdi-table-cog align-middle me-1"></i>Set Category</a>
+                <a class="dropdown-item" href="{{ route('create.settings') }}"><i class="mdi mdi-18px mdi-cog-transfer-outline align-middle me-1"></i>Set Upload Type</a>
+            </div>
+        </div>
+        @endif
         @php
             $id = Auth::user()->id;
             $adminData = App\Models\User::find($id);
@@ -45,31 +64,17 @@
                 <a class="dropdown-item text-danger" href="{{ route('admin.logout') }}"><i class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
             </div>
         </div>
-        @php
-            $user_type = Auth::user()->user_type;
-        @endphp
-        @if($user_type == 'admin')
-        <div class="dropdown d-inline-block user-dropdown">
-            <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="d-none d-xl-inline-block ms-1">More</span>
-                <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-end">
-                <!-- item-->
-                <a class="dropdown-item" href="{{ route('client.table') }}"><i class="ri-user-line align-middle me-1"></i>Config Users</a>
-                <a class="dropdown-item" href="{{ route('reset.password')}}"><i class=" ri-key-line align-middle me-1"></i>Reset Password</a>
-                <a class="dropdown-item" href="{{ route('create.category') }}"><i class="mdi mdi-18px mdi-cog-transfer-outline align-middle me-1"></i>Set Category</a>
-                <a class="dropdown-item" href="{{ route('create.settings') }}"><i class="mdi mdi-18px mdi-cog-transfer-outline align-middle me-1"></i>Set Upload Type</a>
-            </div>
-        </div>
-        @endif
     </div>
 </div>
 </header>
 
 
 <script>
+document.getElementById("btn_bashboard").addEventListener("click", function(event) {
+  event.preventDefault();
+  window.location.href = '/dashboard';
+});
+
 document.getElementById("btn_customer").addEventListener("click", function(event) {
   event.preventDefault();
   window.location.href = '/customer/data';

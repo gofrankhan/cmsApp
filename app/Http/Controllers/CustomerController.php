@@ -33,15 +33,6 @@ class CustomerController extends Controller
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
                     </form>';
-                    // $user_type = Auth::user()->user_type;
-                    // if($user_type == 'admin'){
-                    //     $btn += '<a type="submit" class="btn btn-danger btn-sm edit" href="'.route('customer.delete' ,$row->id).'" title="Delete">
-                    //         <i class="fa fa-trash" aria-hidden="true"></i>
-                    //     </a>
-                    // </form>';
-                    // }else{
-                    //     $btn +='</form>';
-                    // }
                     return $btn;
                 })
                 ->rawColumns(['action'])

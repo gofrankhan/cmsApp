@@ -52,7 +52,7 @@ Route::middleware('auth')->group(function(){
     Route::post('/customer/update/{id}', [CustomerController::class, 'UpdateCustomerData'])->name('customer.update');
     Route::get('/customer/edit/{id}', [CustomerController::class, 'EditCustomerData'])->name('customer.edit');
     Route::get('/customer/show/{id}', [CustomerController::class, 'ShowCustomerData'])->name('customer.show');
-    Route::get('/customer/delete/{id}', [CustomerController::class, 'DeleteCustomerData'])->name('customer.delete');
+    Route::get('/customer/delete/{id}', [CustomerController::class, 'DeleteCustomerData'])->name('customer.delete')->middleware('admin');
 
 });
 
@@ -69,8 +69,8 @@ Route::middleware('auth' , 'admin')->group(function(){
 Route::middleware('auth')->group(function(){
     Route::post('/post/comment', [CommentAttachmentController::class, 'PostComment'])->name('post.comment');
     Route::post('/upload/file', [CommentAttachmentController::class, 'UploadFile'])->name('upload.file');
-    Route::post('/delete/file', [CommentAttachmentController::class, 'DeleteFile'])->name('delete.file');
-    Route::post('/delete/comment', [CommentAttachmentController::class, 'DeleteComment'])->name('delete.comment');
+    Route::post('/delete/file', [CommentAttachmentController::class, 'DeleteFile'])->name('delete.file')->middleware('admin');
+    Route::post('/delete/comment', [CommentAttachmentController::class, 'DeleteComment'])->name('delete.comment')->middleware('admin');
     Route::post('/update/comment', [CommentAttachmentController::class, 'UpdateComment'])->name('update.comment');
     Route::get('/download/file/{id}', [CommentAttachmentController::class, 'DownloadFile'])->name('download.file');
 });
@@ -87,7 +87,7 @@ Route::middleware('auth')->group(function(){
     Route::post('/file/store', [FileController::class, 'FileStore'])->name('file.store');
     Route::get('/file/data', [FileController::class, 'FileDataTable'])->name('file.data');
     Route::get('/file/edit/{id}', [FileController::class, 'FileEdit'])->name('file.edit');
-    Route::get('/file/delete/{id}', [FileController::class, 'FileDelete'])->name('file.delete');
+    Route::get('/file/delete/{id}', [FileController::class, 'FileDelete'])->name('file.delete')->middleware('admin');
     Route::get('/file/show/{id}', [FileController::class, 'FileShow'])->name('file.show');
     Route::get('/load/services', [ServiceCategoryController::class, 'getServices'])->name('load.services');
     Route::get('/load/customer', [CustomerController::class, 'GetCustomerInfo'])->name('customer.info');

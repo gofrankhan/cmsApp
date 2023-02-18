@@ -7,7 +7,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Client Informations</h4>
+                        <h4 class="card-title">User's Informations</h4>
                         <p class="card-title-desc" >
                             <div align="right">
                                 <a href="{{ route('client.new') }}" class="btn btn-primary waves-effect waves-light">New</a>
