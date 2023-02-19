@@ -12,10 +12,19 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <div class="mb-3">
-                    <label class="form-label" for="basicpill-address-input"><h3>File #{{ $file_id}}</h3></label>
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h3 class="card-title">File #{{ $file_id }}</h3>
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('file.data')}}">Files</a></li>
+                            <li class="breadcrumb-item active"><a href="">Edit</a></li>
+                        </ol>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col">
                 <div align="right" class="mb-3">
                     <button class="col-sm-2 btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -36,7 +45,7 @@
                     <div class="col-sm-2">
                         <label for="service" class="col-form-label">Service</label>
                     </div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-10">
                         <input class="form-control" name="service" placeholder="Service" type="text" id="service" value="{{ $files[0]->service }}">
                     </div>
                 </div>
@@ -46,7 +55,7 @@
                     <div class="col-sm-2">
                         <label for="customer" class="col-form-label">Customer</label>
                     </div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-10">
                         <input class="form-control" name="customer" placeholder="Customer" type="text" id="customer" value="{{ $files[0]->customer }}" >
                     </div>
                 </div>
@@ -58,7 +67,7 @@
                     <div class="col-sm-1">
                         <label for="shop" class="col-form-label">Shop</label>
                     </div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-9">
                         <select class="form-select" name="shop" id="shop">
                             <option value="{{ $files[0]->shop }}">{{ $files[0]->shop }}</option>
                         </select>
@@ -72,7 +81,7 @@
         <div class="row">
             <div class="col">
                 <div class="row mb-3">
-                    <div class="col-sm-11">
+                    <div class="col-sm-12">
                         <label for="pagamento" class="col-form-label">Pagamento</label>
                         <input class="form-control" name="pagamento" placeholder="Pagamento" type="text" id="pagamento" >
                     </div>
@@ -82,7 +91,7 @@
         <div class="row">
             <div class="col">
                 <div class="row mb-3">
-                    <div class="col-sm-11">
+                    <div class="col-sm-12">
                         <label for="ARCHIVIO DSU" class="col-form-label">ARCHIVIO DSU</label>
                         <input class="form-control" name="ARCHIVIO DSU" placeholder="ARCHIVIO DSU" type="text" id="ARCHIVIO DSU" >
                     </div>

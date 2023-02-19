@@ -7,7 +7,9 @@
         <!-- start page title -->
         <div class="row">
             <div class="col-lg-8">
-                <h4 class="card-title">Change Password Page</h4><hr><hr>
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="card-title">Reset Password for User</h4>
+                </div>
 
                 @if(count($errors))
                     @foreach ($errors->all() as $error)
@@ -18,20 +20,20 @@
                 <form method="post" action="{{ route('store.new_password') }}">
                     @csrf
                     <div class="row mb-3">
-                        <label for="username" class="col-sm-2 col-form-label">Username</label>
-                        <div class="col-sm-10">
+                        <label for="username" class="col-sm-3 col-form-label">Username</label>
+                        <div class="col-sm-9">
                             <input class="form-control" name="username" type="text" id="username">
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="newpassword" class="col-sm-2 col-form-label">New Password</label>
-                        <div class="col-sm-10">
+                        <label for="newpassword" class="col-sm-3 col-form-label">New Password</label>
+                        <div class="col-sm-9">
                             <input class="form-control" name="newpassword" type="password" id="newpassword">
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="confirm_password" class="col-sm-2 col-form-label">Confirm Password</label>
-                        <div class="col-sm-10">
+                        <label for="confirm_password" class="col-sm-3 col-form-label">Confirm Password</label>
+                        <div class="col-sm-9">
                             <input class="form-control" name="confirm_password" type="password" id="confirm_password">
                         </div>
                     </div>
