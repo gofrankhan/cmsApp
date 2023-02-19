@@ -1,4 +1,4 @@
-<header id="page-topbar" data-topbar="dark" data-layout="horizontal" data-layout-size="boxed">
+<header id="page-topbar" data-layout="horizontal" data-layout-size="boxed">
 <div class="navbar-header">
     <div class="d-flex">
 
