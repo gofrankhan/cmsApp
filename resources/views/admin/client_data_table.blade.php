@@ -6,13 +6,13 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="card-title">User's Informations</h4>
+                    <h4 class="card-title">User's Informations</h4>
+                </div>
                 <p class="card-title-desc" >
                     <div align="right">
                         <a href="{{ route('client.new') }}" class="btn btn-primary waves-effect waves-light">New</a>
                     </div>
                 </p>
-                </div>
                 <table id="alternative-page-datatable" class="table dt-responsive nowrap w-100">
                     <thead>
                         <tr>

@@ -294,7 +294,7 @@ body[data-layout=horizontal] .navbar-brand-box {
 }
 
 body[data-layout=horizontal] .page-content {
-    margin-top: 70px;
+    margin-top: 20px;
     padding: calc(55px + 24px) calc(24px / 2) 60px calc(24px / 2)
 }
 
@@ -351,7 +351,7 @@ body[data-topbar=colored] .app-search span {
 }
 
 .page-title-box {
-    padding-bottom: 24px
+    padding-bottom: 0px
 }
 
 .page-title-box .breadcrumb {

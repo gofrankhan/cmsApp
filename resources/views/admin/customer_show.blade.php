@@ -25,7 +25,7 @@
                         </ol>
                     </div>
                 </div>
-                <hr><hr>
+                <div class="row bottom-space"></div>
                 <form action="{{ route('customer.edit', $customer->id)}}">
                     @csrf
                     <div class="row mb-3">

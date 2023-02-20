@@ -1,10 +1,14 @@
 .navbar-header {
     background-color: #1f7698;
-   
+
 }
 
 .right-aligned {
     right: 30px;
+}
+
+.bottom-space {
+    padding-bottom: 30px;
 }
 
 .header-font {

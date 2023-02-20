@@ -18,6 +18,7 @@
                         </ol>
                     </div>
                 </div>
+                <div class="row bottom-space"></div>
                 <form method="post" action="{{ route('customer.update', $customer->id)}}">
                     @csrf
                     <div class="row mb-3">

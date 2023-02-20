@@ -7,7 +7,10 @@
         <!-- start page title -->
         <div class="row">
             <div class="col-lg-8">
-                <h4 class="card-title">Change Password Page</h4><hr><hr>
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="card-title">Change Password Page</h4>
+                </div>
+                <div class="row bottom-space"></div>
 
                 @if(count($errors))
                     @foreach ($errors->all() as $error)

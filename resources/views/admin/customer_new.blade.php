@@ -35,6 +35,7 @@
                         </ol>
                     </div>
                 </div>
+                <div class="row bottom-space"></div>
                 <form method="post" action="{{ route('customer.store')}}">
                     @csrf
                     <div class="row mb-3">
