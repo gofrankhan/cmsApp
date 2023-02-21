@@ -21,10 +21,9 @@ class FileController extends Controller
     public function FileDataTable(Request $request)
     {
         if ($request->ajax()) {
-            $data = Invoice::select('invoices.id', 'invoices.file_id', 'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop','services.service', 'invoices.status')
+            $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'invoices.shop_name as shop','services.service', 'invoices.status')
                                     ->join('customers', 'invoices.customer_id', '=', 'customers.id')
-                                    ->join('services', 'invoices.service_id', '=', 'services.id')
-                                    ->get();
+                                    ->join('services', 'invoices.service_id', '=', 'services.id')->get();
             return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row){
                     $btn = '

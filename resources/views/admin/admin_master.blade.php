@@ -130,9 +130,9 @@
                 order: [[0, 'desc']],
                 "columnDefs": [
                     { "width": "15%", "targets": 0 },
-                    { "width": "30%", "targets": 1 },
-                    { "width": "15%", "targets": 2 },
-                    { "width": "25%", "targets": 3 },
+                    { "width": "15%", "targets": 1 },
+                    { "width": "30%", "targets": 2 },
+                    { "width": "30%", "targets": 3 },
                     { "width": "10%", "targets": 4 }
                 ],
                 ajax: "{{ route('customer.data') }}",
@@ -140,7 +140,7 @@
                     {data: 'id', name: 'id'},
                     {data: 'customertype', name: 'customertype'},
                     {data: 'taxid', name: 'taxid'},
-                    {data: 'firstname', name: 'firstname'},
+                    {data: 'fullname', name: 'fullname'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });

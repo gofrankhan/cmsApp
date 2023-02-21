@@ -18,7 +18,7 @@ class CustomerController extends Controller
 
     {
         if ($request->ajax()) {
-            $data = Customer::select('id','taxid','customertype','firstname');
+            $data = Customer::select('id','taxid','customertype',DB::raw("concat(firstname,' ', lastname) as fullname"));
             return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row){
                     $btn = '
@@ -34,6 +34,9 @@ class CustomerController extends Controller
                         </a>
                     </form>';
                     return $btn;
+                })
+                ->filterColumn('fullname', function ($query, $keyword) {
+                    $query->whereRaw("CONCAT(firstname, ' ', lastname) like ?", ["%{$keyword}%"]);
                 })
                 ->rawColumns(['action'])
                 ->make(true);
