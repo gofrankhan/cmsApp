@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 use Madnest\Madzipper\Madzipper;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -115,11 +116,31 @@ class CommentAttachmentController extends Controller
     }
 
     public function DownloadFile($file_id){
-        $disk = Storage::disk('local');
-        $fs = $disk->getDriver();
-        $zipper = new Madzipper($fs, realpath(public_path('upload/file_attachments/'.$file_id)));
-        $zipper->zip($file_id.'.zip');
-        return $zipper->download();
+        $files = DB::table('attachments')->where('file_id', $file_id)->get();
+        foreach($files as $file_x){
+            $file_path = public_path('upload/file_attachments/'.$file_id.'/'.$file_x->file_name);
+            $realPath = realpath($file_path);
+            if(file_exists($realPath)){
+                chmod($realPath, 0755);
+                try{
+                    Response::download($realPath, $file_x->file_name);
+                }catch(Exception $e){
+                    $notification = array(
+                        'message' => $e,
+                        'alert-type' => 'success'
+                    );
+                    return redirect()->back()->with($notification);
+                }
+                
+            }else{
+                $notification = array(
+                    'message' => 'File do not exist', 
+                    'alert-type' => 'success'
+                );
+                return redirect()->back()->with($notification);
+            }
+        }
+
     }
 
     public function UpdateComment(Request $request){

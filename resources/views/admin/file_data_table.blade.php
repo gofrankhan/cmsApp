@@ -78,6 +78,8 @@
 
                 @php
                     $categories = App\Models\Category::all();
+                    $users = App\Models\User::all();
+                    $user_type = Auth::user()->user_type;
                 @endphp
 
                 <!-- sample modal content -->
@@ -91,6 +93,21 @@
                             <form method="post" action="{{ route('file.store')}}">
                                 @csrf
                                 <div class="modal-body">
+                                    @if($user_type == 'admin')
+                                    <div class="row">
+                                        <div>
+                                            <div class="mb-3">
+                                                <label  class="form-label">Select User</label>
+                                                <select class="form-select" id="user" name="user">
+                                                    <option value="Choose" selected>Choose...</option>
+                                                    @foreach ($users as $user)
+                                                    <option value="{{ $user->username }}" >{{ $user->username }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">

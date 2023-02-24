@@ -68,7 +68,12 @@ class FileController extends Controller
         $file_id = Invoice::max('file_id');
         $file_id += 1;
 
-        $shop_name = Auth::user()->shop_name;
+        if($request->user != null && !empty($request->user)){
+            $shop = User::select('shop_name')->where('username', $request->user)->first();
+            $shop_name = $shop->shop_name;
+        }else{
+            $shop_name = Auth::user()->shop_name;
+        }
         if(!empty($request->service) && !empty($request->taxid)){
             $file = new Invoice();
             $file->file_id = $file_id;
