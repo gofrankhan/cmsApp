@@ -26,21 +26,36 @@ class FileController extends Controller
                                     ->join('services', 'invoices.service_id', '=', 'services.id')->get();
             return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $btn = '
-                    <form action="'.route('file.delete',$row->id).'" method="Post">
-                        <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show">
-                            <i class="fas fa-eye"></i>
-                        </a>
-                        <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->file_id).'" title="Edit">
-                            <i class="fas fa-pencil-alt"></i>
-                        </a>
+                    $user_type = Auth::user()->user_type;
+                    if($user_type == 'admin'){
+                        $btn = '
+                        <form action="'.route('file.delete',$row->id).'" method="Post">
+                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->file_id).'" title="Edit">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
 
-                        <a type="submit" class="btn btn-danger btn-sm edit" href="'.route('file.delete' ,$row->id).'" title="Delete">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </a>
-                    </form>
-                    ';
-                    return $btn;
+                            <a type="submit" class="btn btn-danger btn-sm edit" href="'.route('file.delete' ,$row->id).'" title="Delete">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </form>
+                        ';
+                        return $btn;
+                    }else{
+                        $btn = '
+                        <form action="'.route('file.delete',$row->id).'" method="Post">
+                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->file_id).'" title="Edit">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                        </form>
+                        ';
+                        return $btn;
+                    }
                 })
                 ->rawColumns(['action'])
                 ->make(true);

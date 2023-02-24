@@ -21,19 +21,33 @@ class CustomerController extends Controller
             $data = Customer::select('id','taxid','customertype',DB::raw("concat(firstname,' ', lastname) as fullname"));
             return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $btn = '
-                    <form action="'.route('customer.delete',$row->id).'" method="Post">
-                        <a class="btn btn-outline-secondary btn-sm edit" href="'.route('customer.show',$row->id).'" target="_blank" title="Show">
-                            <i class="fas fa-eye"></i>
-                        </a>
-                        <a class="btn btn-outline-secondary btn-sm edit" href="'.route('customer.edit',$row->id).'" title="Edit">
-                            <i class="fas fa-pencil-alt"></i>
-                        </a>
-                        <a type="submit" class="btn btn-danger btn-sm edit" href="'.route('customer.delete' ,$row->id).'" title="Delete">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </a>
-                    </form>';
-                    return $btn;
+                    $user_type = Auth::user()->user_type;
+                    if($user_type == 'admin'){
+                        $btn = '
+                        <form action="'.route('customer.delete',$row->id).'" method="Post">
+                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('customer.show',$row->id).'" target="_blank" title="Show">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('customer.edit',$row->id).'" title="Edit">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a type="submit" class="btn btn-danger btn-sm edit" href="'.route('customer.delete' ,$row->id).'" title="Delete">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </form>';
+                        return $btn;
+                    }else{
+                        $btn = '
+                        <form action="'.route('customer.delete',$row->id).'" method="Post">
+                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('customer.show',$row->id).'" target="_blank" title="Show">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('customer.edit',$row->id).'" title="Edit">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                        </form>';
+                        return $btn;
+                    }
                 })
                 ->filterColumn('fullname', function ($query, $keyword) {
                     $query->whereRaw("CONCAT(firstname, ' ', lastname) like ?", ["%{$keyword}%"]);
