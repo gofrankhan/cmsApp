@@ -45,7 +45,7 @@
 
 <script>
   $(document).ready(function() {
-    $('#submit-all').click(function() {
+    $('#submit-admin').click(function() {
       // Get data from Modal 1
       var data1 = $('#form1').serialize();
 
@@ -54,6 +54,26 @@
 
       // Combine data from both modals
       var data = data1 + '&' + data2;
+     
+
+      // Submit the data
+      $.ajax({
+        url: '{{ route('file.store') }}',
+        method: 'POST',
+        data: data,
+        success: function(response) {
+          // Handle the response
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $('#submit-user').click(function() {
+      // Get data from Modal 2
+      var data = $('#form2').serialize();
 
       // Submit the data
       $.ajax({
@@ -236,7 +256,11 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-light waves-effect" data-bs-dismiss="modal">Cancel</button>
-                                    <button id="submit-all" type="submit" class="btn btn-primary waves-effect waves-light">Create</button>
+                                    @if($user_type == 'admin')
+                                    <button id="submit-admin" type="submit" class="btn btn-primary waves-effect waves-light">Create</button>
+                                    @else
+                                    <button id="submit-user" type="submit" class="btn btn-primary waves-effect waves-light">Create</button>
+                                    @endif
                                 </div>
                             </form>
                         </div><!-- /.modal-content -->
