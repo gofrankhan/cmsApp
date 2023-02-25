@@ -43,6 +43,31 @@
   });
 </script>
 
+<script>
+  $(document).ready(function() {
+    $('#submit-all').click(function() {
+      // Get data from Modal 1
+      var data1 = $('#form1').serialize();
+
+      // Get data from Modal 2
+      var data2 = $('#form2').serialize();
+
+      // Combine data from both modals
+      var data = data1 + '&' + data2;
+
+      // Submit the data
+      $.ajax({
+        url: '{{ route('file.store') }}',
+        method: 'POST',
+        data: data,
+        success: function(response) {
+          // Handle the response
+        }
+      });
+    });
+  });
+</script>
+
 <div class="page-content">
     <div class="container-fluid">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
@@ -54,9 +79,14 @@
                         </ol>
                     </div>
                 </div>
+                @php
+                    $user_type = Auth::user()->user_type;
+                    if($user_type == 'admin') $modealName = "#firstmodal";
+                    else $modealName = "#myModal";
+                @endphp
                 <p class="card-title-desc" >
                     <div align="right">
-                        <a href="" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#myModal">New</a>
+                        <a href="" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target={{ $modealName }}>New</a>
                     </div>
                 </p>
                 <table data-page-length='50' id="file_datatable" class="table table-bordered file_datatable">
@@ -79,21 +109,29 @@
                 @php
                     $categories = App\Models\Category::all();
                     $users = App\Models\User::all();
-                    $user_type = Auth::user()->user_type;
                 @endphp
 
                 <!-- sample modal content -->
-                <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                <div class="modal fade" id="firstmodal" aria-hidden="true" aria-labelledby="..." tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="myModalLabel">New File</h5>
+                                <h5 class="modal-title">Select User</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form method="post" action="{{ route('file.store')}}">
+                            <form action="" id="form1">
                                 @csrf
                                 <div class="modal-body">
-                                    @if($user_type == 'admin')
+                                    <div class="row">
+                                        <div>
+                                            <div class="form-check mb-3">
+                                                <input class="form-check-input" type="checkbox" id="formCheck1">
+                                                <label class="form-check-label" for="formCheck1">
+                                                    Current User
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div>
                                             <div class="mb-3">
@@ -107,7 +145,25 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @endif
+                                </div>
+                            </form>
+                            <div class="modal-footer">
+                                <!-- Toogle to second dialog -->
+                                <button class="btn btn-primary" data-bs-target="#myModal" data-bs-toggle="modal" data-bs-dismiss="modal">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="myModalLabel">New File</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="" id="form2">
+                                @csrf
+                                <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
@@ -180,7 +236,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-light waves-effect" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Create</button>
+                                    <button id="submit-all" type="submit" class="btn btn-primary waves-effect waves-light">Create</button>
                                 </div>
                             </form>
                         </div><!-- /.modal-content -->
@@ -188,6 +244,10 @@
                 </div><!-- /.modal -->
             </div><!-- end col-->
 </div>
-
+<script>
+    document.getElementById('formCheck1').onchange = function() {
+    document.getElementById('user').disabled = this.checked;
+};
+</script>
 @endsection
 
