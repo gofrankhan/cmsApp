@@ -93,7 +93,7 @@
     height: 38px;
     padding-left: 40px;
     padding-right: 20px;
-    background-color: #f1f5f7;
+    background-color: #111213;
     -webkit-box-shadow: none;
     box-shadow: none;
     border-radius: 30px
@@ -106,7 +106,7 @@
     line-height: 38px;
     left: 13px;
     top: 0;
-    color: #6c757d
+    color: #eef1f4
 }
 
 .megamenu-list li {
@@ -251,13 +251,13 @@ body[data-topbar=dark] .logo-light {
 }
 
 body[data-topbar=dark] .app-search .form-control {
-    background-color: rgba(241, 245, 247, .07);
-    color: #fff
+    background-color: rgb(220, 232, 237);
+    color: #292222
 }
 
 body[data-topbar=dark] .app-search input.form-control::-webkit-input-placeholder,
 body[data-topbar=dark] .app-search span {
-    color: rgba(255, 255, 255, .5)
+    color: rgba(23, 22, 22, .5)
 }
 
 body[data-sidebar=dark] .navbar-brand-box {

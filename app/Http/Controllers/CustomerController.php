@@ -65,6 +65,15 @@ class CustomerController extends Controller
         return view('admin.customer_new');
     }
 
+    public function CustomerSearch(Request $request){
+        $customer = DB::table('customers')->where('taxid', $request->taxidOrNameOrMobile)
+                                         ->orWhere('firstname', $request->taxidOrNameOrMobile)
+                                         ->orWhere('lastname', $request->taxidOrNameOrMobile)
+                                         ->orWhere('mobile', $request->taxidOrNameOrMobile)->get();
+       // dd($customer);
+       return response()->json($customer);
+    }
+
     /**
     * Store a newly created resource in storage.
     *

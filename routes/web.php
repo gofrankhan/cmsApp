@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function(){
     Route::get('/customer/data', [CustomerController::class, 'CustomerDataTable'])->name('customer.data');
     Route::get('/customer/new', [CustomerController::class, 'NewCustomerData'])->name('customer.new');
+    Route::get('/customer/search', [CustomerController::class, 'CustomerSearch'])->name('customer.search');
     Route::post('/customer/store', [CustomerController::class, 'StoreCustomerData'])->name('customer.store');
     Route::post('/customer/update/{id}', [CustomerController::class, 'UpdateCustomerData'])->name('customer.update');
     Route::get('/customer/edit/{id}', [CustomerController::class, 'EditCustomerData'])->name('customer.edit');
