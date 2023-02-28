@@ -18,7 +18,9 @@ class CustomerController extends Controller
 
     {
         if ($request->ajax()) {
-            $data = Customer::select('id','taxid','customertype',DB::raw("concat(firstname,' ', lastname) as fullname"));
+            $username = Auth::user()->username;
+            $data = Customer::select('id','taxid','customertype',DB::raw("concat(firstname,' ', lastname) as fullname"))
+                                        ->where('username', $username);
             return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row){
                     $user_type = Auth::user()->user_type;
