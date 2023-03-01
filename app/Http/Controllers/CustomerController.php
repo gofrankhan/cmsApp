@@ -16,11 +16,13 @@ class CustomerController extends Controller
 {
     public function CustomerDataTable(Request $request)
 
-    {
+    {                     
         if ($request->ajax()) {
-            $username = Auth::user()->username;
+            $shop_name = Auth::user()->shop_name;
             $data = Customer::select('id','taxid','customertype',DB::raw("concat(firstname,' ', lastname) as fullname"))
-                                        ->where('username', $username);
+                        ->whereIn('user_id', function($query) use ($shop_name){
+                            $query->select('id')->from('users')->where('shop_name', $shop_name);
+                        });
             return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row){
                     $user_type = Auth::user()->user_type;
@@ -104,9 +106,9 @@ class CustomerController extends Controller
             return redirect()->back()->with($notification);
         }
         
-        $username = Auth::user()->username;
+        $user_id = Auth::user()->id;
         $customer = new Customer();
-        $customer->username = $username;
+        $customer->user_id = $user_id;
         $customer->taxid = $request->taxid;
         $customer->customertype = $request->customertype;
         $customer->company = $request->company;
@@ -188,9 +190,9 @@ class CustomerController extends Controller
             'taxid' => 'required',
         ]);
         
-        $username = Auth::user()->username;
+        $user_id = Auth::user()->id;
         $customer = Customer::find($id);
-        $customer->username = $username;
+        $customer->user_id = $user_id;
         $customer->taxid = $request->taxid;
         $customer->customertype = $request->customertype;
         $customer->company = $request->company;
