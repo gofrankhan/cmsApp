@@ -5,6 +5,12 @@
 
 @php 
     $file_id =  $files[0]->file_id;
+    $status = $files[0]->status;
+    $badge_status = "";
+    if($status == 'pending')
+        $badge_status = "bg-success";
+    else
+        $badge_status = "bg-danger";
 @endphp
 
 <div class="page-content">
@@ -12,7 +18,10 @@
         <div class="row">
             <div class="col">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="card-title">File #{{ $file_id }}</h4>
+                    <div>
+                        <h4 class="card-title">File #{{ $file_id }}</h4>
+                        <span class="badge rounded-pill {{$badge_status}}">{{ $status }}</span>
+                    </div>
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Home</a></li>
