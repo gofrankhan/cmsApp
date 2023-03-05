@@ -19,14 +19,16 @@ class ClientController extends Controller
     public function ClientDataTable(): View
 
     {
+        $title = "Users";
         $users = DB::table('users')->get();
-        return view('admin.client_data_table', compact('users'));
+        return view('admin.client_data_table', compact('users', 'title'));
     }
 
     public function NewClientData(): View
 
     {
-        return view('admin.client_new');
+        $title = "New User";
+        return view('admin.client_new', compact('title'));
     }
 
     /**
@@ -37,8 +39,9 @@ class ClientController extends Controller
     */
     public function EditClientData($id): View
     {
+        $title = "Edit User";
         $user = DB::table('users')->where('id', $id)->first();
-        return view('admin.client_edit',compact('user'));
+        return view('admin.client_edit',compact('user', 'title'));
     }
 
     public function StoreClientData(Request $request): View
@@ -90,6 +93,7 @@ class ClientController extends Controller
         $user->username = $request->username;
         $user->email = $request->email;
         $user->user_type = $request->usertype;
+        $user->shop_name = $request->shop_name;
         $user->save();
 
         return $this->ClientDataTable();

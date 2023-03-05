@@ -223,7 +223,7 @@ File: Main Css File
 }
 
 body[data-topbar=dark] #page-topbar {
-  background-color: #252b3b;
+  background-color: #247698;
 }
 
 body[data-topbar=dark] .navbar-header .dropdown .show.header-item {

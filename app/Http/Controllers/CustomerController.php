@@ -15,8 +15,8 @@ use DataTables;
 class CustomerController extends Controller
 {
     public function CustomerDataTable(Request $request)
-
-    {                     
+    {        
+        $title = "Customer";              
         if ($request->ajax()) {
             $shop_name = Auth::user()->shop_name;
             $data = Customer::select('id','taxid','customertype',DB::raw("concat(firstname,' ', lastname) as fullname"))
@@ -60,13 +60,14 @@ class CustomerController extends Controller
                 ->make(true);
         }
 
-        return view('admin.customer_data_table');
+        return view('admin.customer_data_table', compact('title'));
     }
 
     public function NewCustomerData(): View
 
     {
-        return view('admin.customer_new');
+        $title = "New Customer"; 
+        return view('admin.customer_new', compact('title'));
     }
 
     public function CustomerSearch(Request $request){
@@ -138,9 +139,10 @@ class CustomerController extends Controller
     * @return \Illuminate\Http\Response
     */
     public function ShowCustomerData($id)
-    {
+    { 
+        $title = "Show Customer";
         $customer = DB::table('customers')->where('id', $id)->first();
-        return view('admin.customer_show',compact('customer'));
+        return view('admin.customer_show',compact('customer', 'title'));
     }
       /**
     * Display the specified resource.
@@ -166,8 +168,9 @@ class CustomerController extends Controller
     */
     public function EditCustomerData($id): View
     {
+        $title = "Edit Customer";
         $customer = DB::table('customers')->where('id', $id)->first();
-        return view('admin.customer_edit',compact('customer'));
+        return view('admin.customer_edit',compact('customer', 'title'));
     }
 
     /**

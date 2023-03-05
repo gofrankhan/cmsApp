@@ -25,13 +25,20 @@
                             <input class="form-control" name="name" placeholder="Name" type="text" id="name" value="{{ $user->name }}">
                         </div>
                     </div>
+                    @php
+                        $admin_selection = "selected";
+                        $user_selection = "";
+                        if(strtolower($user->user_type) == 'user') {
+                            $admin_selection = "";
+                            $user_selection = "selected";
+                        }
+                    @endphp
                     <div class="row mb-3">
                         <label for="usertype" class="col-sm-2 col-form-label">User Type</label>
                         <div class="col-sm-10">
                             <select class="form-select" name="usertype" aria-label="Default select example" id="usertype">
-                                <option selected="" hidden></option>
-                                <option value="user">User</option>
-                                <option value="admin">Admin</option>
+                                <option {{ $user_selection }} value="user">User</option>
+                                <option {{ $admin_selection }} value="admin">Admin</option>
                             </select>
                         </div>
                     </div>
@@ -45,6 +52,12 @@
                         <label for="email" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
                             <input class="form-control" name="email" placeholder="Email" type="email" id="email" value="{{ $user->email }}">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="shop_name" class="col-sm-2 col-form-label">Shop Name</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" name="shop_name" placeholder="Shop Name" type="text" id="shop_name" value="{{ $user->shop_name }}">
                         </div>
                     </div>
                     <div class="row mb-3">

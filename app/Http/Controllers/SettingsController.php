@@ -18,7 +18,8 @@ class SettingsController extends Controller
 {
     public function CreateSettings(): View
     {
-        return view('admin.add_settings');
+        $title = "Settings";
+        return view('admin.add_settings', compact('title'));
     }
 
     public function AddUploadType(Request $request)

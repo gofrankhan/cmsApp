@@ -28,11 +28,7 @@ class AuthenticatedSessionController extends Controller
         try {
             $request->authenticate();
             $request->session()->regenerate();
-            $notification = array(
-                'message' => 'User Login Successfully', 
-                'alert-type' => 'success'
-            );
-            return redirect()->intended(RouteServiceProvider::HOME)->with($notification);
+            return redirect()->intended(RouteServiceProvider::HOME);
 
         } catch (AuthenticationException $exception) {
             return redirect()->route('login')->withErrors([

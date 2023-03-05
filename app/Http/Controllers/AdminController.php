@@ -15,14 +15,16 @@ class AdminController extends Controller
 {
     public function Profile(): View
     {
+        $title = "Profile";
         $id = Auth::user()->id;
         $adminData = User::find($id);
-        return view('admin.admin_profile_view',compact('adminData'));
+        return view('admin.admin_profile_view',compact('adminData', 'title'));
     } //End Method
 
     public function ViewResetPassword(): View
     {
-        return view('admin.reset_password');
+        $title = "Reset Password";
+        return view('admin.reset_password', compact('title'));
     } //End Method
 
     public function ResetPassword(Request $request)
@@ -46,9 +48,10 @@ class AdminController extends Controller
 
     public function EditProfile(): View
     {
+        $title = "Edit Profile";
         $id = Auth::user()->id;
         $editData = User::find($id);
-        return view('admin.admin_profile_edit',compact('editData'));
+        return view('admin.admin_profile_edit',compact('editData', 'title'));
     } //End Method
 
     public function StoreProfile(Request $request)
@@ -79,7 +82,8 @@ class AdminController extends Controller
 
     public function ChangePassword(): View
     {
-        return view('admin.admin_change_password');
+        $title = "Change Password";
+        return view('admin.admin_change_password', compact('title'));
     }
 
     public function UpdatePassword(Request $request)
@@ -115,11 +119,6 @@ class AdminController extends Controller
 
         $request->session()->regenerateToken();
 
-        $notification = array(
-            'message' => 'User Logout Successfully', 
-            'alert-type' => 'success'
-        );
-
-        return Redirect::to('/login')->with($notification);
+        return Redirect::to('/login');
     }
 }

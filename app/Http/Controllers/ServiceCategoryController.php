@@ -18,8 +18,9 @@ class ServiceCategoryController extends Controller
 {
     public function CreateCategory(): View
     {
+        $title = "Settings";
         $categories = Category::all();
-        return view('admin.add_category', compact('categories'));
+        return view('admin.add_category', compact('categories', 'title'));
     }
 
     public function AddCategory(Request $request)
