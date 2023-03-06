@@ -91,6 +91,7 @@ class FileController extends Controller
             $service_id = Service::select('id')->where('service', $request->service)->first();
             $file->service_id = $service_id->id;
             $file->status = "Submitted";
+            $file->price = 0;
             $file->save();
             $notification = array(
                 'message' => 'File created successfully!', 
@@ -107,6 +108,22 @@ class FileController extends Controller
 
     }
 
+    public function UpdateFileStatusAndPrice(Request $request) : RedirectResponse
+    {
+
+        $invoice_id = Invoice::select('id')->where('file_id', $request->file_id_no)->first();
+        $invoice = Invoice::find($invoice_id->id);
+        $invoice->status = $request->file_status;
+        $invoice->price = intval($request->pagamento);
+        $invoice->save();
+
+        $notification = array(
+            'message' => 'Status & Price Updated Successfully', 
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
+
     public function CommentAttachment($file_id): View
     {
         $comments = DB::table('comments')->where('file_id', $file_id)->get();
@@ -120,7 +137,7 @@ class FileController extends Controller
         $title = "Show File";
         $comments = DB::table('comments')->where('file_id', $file_id)->get();
         $attachments = DB::table('attachments')->where('file_id', $file_id)->get();
-        $files = Invoice::select('invoices.id', 'invoices.file_id', 'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop','services.service', 'invoices.status')
+        $files = Invoice::select('invoices.id', 'invoices.price', 'invoices.file_id', 'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop','services.service', 'invoices.status')
                                     ->join('customers', 'invoices.customer_id', '=', 'customers.id')
                                     ->join('services', 'invoices.service_id', '=', 'services.id')
                                     ->where('invoices.file_id', $file_id)
@@ -133,7 +150,7 @@ class FileController extends Controller
         $title = "Edit File";
         $comments = DB::table('comments')->where('file_id', $file_id)->get();
         $attachments = DB::table('attachments')->where('file_id', $file_id)->get();
-        $files = Invoice::select('invoices.id', 'invoices.file_id', 'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop','services.service', 'invoices.status')
+        $files = Invoice::select('invoices.id', 'invoices.price', 'invoices.file_id', 'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop','services.service', 'invoices.status')
                                     ->join('customers', 'invoices.customer_id', '=', 'customers.id')
                                     ->join('services', 'invoices.service_id', '=', 'services.id')
                                     ->where('invoices.file_id', $file_id)

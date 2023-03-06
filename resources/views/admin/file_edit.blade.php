@@ -3,15 +3,36 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<script>
+  $(document).ready(function() {
+    $('#update_btn').click(function() {
+      // Get data from Modal 2
+      var data = $('#form1').serialize();
+      // Submit the data
+      $.ajax({
+        url: '{{ route('update.status.price') }}',
+        method: 'POST',
+        data: data,
+        success: function(response) {
+          // Handle the response
+        }
+      });
+    });
+  });
+</script>
 
 @php 
     $file_id =  $files[0]->file_id;
     $status = $files[0]->status;
     $badge_status = "";
-    if($status == 'pending')
-        $badge_status = "bg-success";
-    else
+    if($status == 'Submitted')
+        $badge_status = "bg-primary";
+    else if ($status == 'Pending')
+        $badge_status = "bg-warning";
+    else if ($status == 'Canceled')
         $badge_status = "bg-danger";
+    else if ($status == 'Completed')
+        $badge_status = "bg-success";
 @endphp
 
 <div class="page-content">
@@ -83,21 +104,38 @@
                         </select>
                     </div>
                     <div class="col-sm-2">
-                        <input type="button" class="form-control btn btn-primary" name="shop_btn" id="shop_btn" value="Update">
+                        <button type="submit" class="form-control btn btn-primary" name="update_btn" id="update_btn">Update</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="row mb-3">
-                    <div class="col-sm-12">
-                        <label for="pagamento" class="col-form-label">Pagamento</label>
-                        <input class="form-control" name="pagamento" placeholder="Pagamento" type="text" id="pagamento" >
+        <form action="" id="form1">
+             @csrf
+            <div class="row">
+                <div class="col">
+                    <div class="row mb-3">
+                        <div class="col-sm-12">
+                            <label for="pagamento" class="col-form-label">Pagamento</label>
+                            <input class="form-control" name="pagamento" type="text" id="pagamento" value="{{ $files[0]->price }}">
+                        </div>
+                    </div>
+                </div>
+                <input hidden name="file_id_no" value="{{ $files[0]->file_id}}">
+                <div class="col">
+                    <div class="row mb-3">
+                        <div class="col-sm-12">
+                            <label for="file_status" class="col-form-label">Update Status</label>
+                            <select class="form-select" name="file_status" id="file_status">
+                                <option selected value="" hidden></option>
+                                <option value="Pending">Pending</option>
+                                <option value="Canceled">Cancel</option>
+                                <option value="Completed">Complete</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
         <div class="row">
             <div class="col">
                 <div class="row mb-3">

@@ -92,6 +92,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/file/show/{id}', [FileController::class, 'FileShow'])->name('file.show');
     Route::get('/load/services', [ServiceCategoryController::class, 'getServices'])->name('load.services');
     Route::get('/load/customer', [CustomerController::class, 'GetCustomerInfo'])->name('customer.info');
+    Route::post('/update/status/price', [FileController::class, 'UpdateFileStatusAndPrice'])->name('update.status.price');
 });
 
 Route::middleware('auth' , 'admin')->group(function(){

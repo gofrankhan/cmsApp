@@ -7,10 +7,14 @@
     $file_id =  $files[0]->file_id;
     $status = $files[0]->status;
     $badge_status = "";
-    if($status == 'pending')
-        $badge_status = "bg-success";
-    else
+    if($status == 'Submitted')
+        $badge_status = "bg-primary";
+    else if ($status == 'Pending')
+        $badge_status = "bg-warning";
+    else if ($status == 'Canceled')
         $badge_status = "bg-danger";
+    else if ($status == 'Completed')
+        $badge_status = "bg-success";
 @endphp
 
 <div class="page-content">
@@ -92,7 +96,15 @@
                 <div class="row mb-3">
                     <div class="col-sm-12">
                         <label for="pagamento" class="col-form-label">Pagamento</label>
-                        <input class="form-control" name="pagamento" placeholder="Pagamento" type="text" id="pagamento" disabled>
+                        <input class="form-control" name="pagamento" type="text" id="pagamento" value="{{ $files[0]->price }}" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="file_status" class="col-form-label">Update Status</label>
+                        <input class="form-control" name="file_status"  type="text" id="file_status" value="{{ $files[0]->status }}" disabled>
                     </div>
                 </div>
             </div>
