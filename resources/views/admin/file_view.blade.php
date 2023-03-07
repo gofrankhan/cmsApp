@@ -11,7 +11,7 @@
         $badge_status = "bg-primary";
     else if ($status == 'Pending')
         $badge_status = "bg-warning";
-    else if ($status == 'Canceled')
+    else if ($status == 'Cancelled')
         $badge_status = "bg-danger";
     else if ($status == 'Completed')
         $badge_status = "bg-success";

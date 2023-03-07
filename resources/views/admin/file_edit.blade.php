@@ -22,14 +22,17 @@
 </script>
 
 @php 
+    $user_type = Auth::user()->user_type;
+    $is_admin = ($user_type == 'admin');
     $file_id =  $files[0]->file_id;
     $status = $files[0]->status;
     $badge_status = "";
+    $text_selected = "selected";
     if($status == 'Submitted')
         $badge_status = "bg-primary";
     else if ($status == 'Pending')
         $badge_status = "bg-warning";
-    else if ($status == 'Canceled')
+    else if ($status == 'Cancelled')
         $badge_status = "bg-danger";
     else if ($status == 'Completed')
         $badge_status = "bg-success";
@@ -104,11 +107,16 @@
                         </select>
                     </div>
                     <div class="col-sm-2">
+                        @if($is_admin)
                         <button type="submit" class="form-control btn btn-primary" name="update_btn" id="update_btn">Update</button>
+                        @else
+                        <button type="submit" class="form-control btn btn-primary" name="update_btn" id="update_btn" disabled>Update</button>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
+        @if($is_admin)
         <form action="" id="form1">
              @csrf
             <div class="row">
@@ -126,16 +134,31 @@
                         <div class="col-sm-12">
                             <label for="file_status" class="col-form-label">Update Status</label>
                             <select class="form-select" name="file_status" id="file_status">
-                                <option selected value="" hidden></option>
-                                <option value="Pending">Pending</option>
-                                <option value="Canceled">Cancel</option>
+                            @if($status == 'Pending')
+                                <option selected value="Pending">Pending</option>
+                                <option value="Cancelled">Cancel</option>
                                 <option value="Completed">Complete</option>
+                            @elseif($status == 'Cancelled')
+                                <option value="Pending">Pending</option>
+                                <option selected value="Cancelled">Cancel</option>
+                                <option value="Completed">Complete</option>
+                            @elseif($status == 'Completed')
+                                <option value="Pending">Pending</option>
+                                <option value="Cancelled">Cancel</option>
+                                <option selected value="Completed">Complete</option>
+                            @else
+                                <option selected hidden value="Submitted"></option>
+                                <option value="Pending">Pending</option>
+                                <option value="Cancelled">Cancel</option>
+                                <option value="Completed">Complete</option>
+                            @endif
                             </select>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
+        @endif
         <div class="row">
             <div class="col">
                 <div class="row mb-3">

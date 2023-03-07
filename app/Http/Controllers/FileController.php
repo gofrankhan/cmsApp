@@ -45,17 +45,28 @@ class FileController extends Controller
                         ';
                         return $btn;
                     }else{
-                        $btn = '
-                        <form action="'.route('file.delete',$row->id).'" method="Post">
-                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->file_id).'" title="Edit">
-                                <i class="fas fa-pencil-alt"></i>
-                            </a>
-                        </form>
-                        ';
-                        return $btn;
+                        if($row->status == 'Completed'){
+                            $btn = '
+                            <form action="'.route('file.delete',$row->id).'" method="Post">
+                                <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show" >
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </form>
+                            ';
+                            return $btn;
+                        }else{
+                            $btn = '
+                            <form action="'.route('file.delete',$row->id).'" method="Post">
+                                <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->file_id).'" title="Edit">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                            </form>
+                            ';
+                            return $btn;
+                        }
                     }
                 })
                 ->rawColumns(['action'])
@@ -155,6 +166,9 @@ class FileController extends Controller
                                     ->join('services', 'invoices.service_id', '=', 'services.id')
                                     ->where('invoices.file_id', $file_id)
                                     ->get();
+        $user_type = Auth::user()->user_type;
+        if($files[0]->status == "Completed" && $user_type != 'admin')
+            return redirect()->back();
         return view('admin.file_edit', compact('comments', 'attachments', 'files', 'title'));
     }
 
