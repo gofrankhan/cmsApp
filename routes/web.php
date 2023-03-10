@@ -105,4 +105,8 @@ Route::middleware('auth' , 'admin')->group(function(){
     Route::post('/store/new_password', [AdminController::class, 'ResetPassword'])->name('store.new_password');
 });
 
+Route::middleware('auth' , 'admin')->group(function(){
+    Route::get('/card/info', [DashboardController::class, 'CardInfo'])->name('card.info');
+});
+
 require __DIR__.'/auth.php';

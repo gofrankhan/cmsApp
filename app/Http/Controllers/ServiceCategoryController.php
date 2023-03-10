@@ -53,20 +53,22 @@ class ServiceCategoryController extends Controller
     {
         $services = $request->service;
         $new_category = $request->new_category;
+
         if(empty($new_category) && $request->service_category != 'create_new'){
             $new_category = $request->service_category;
         }
-
+        $count = 0;
         foreach($services as $new_service){
             $service_count = DB::table('services')
                                     ->where('category', $new_category)
                                     ->where('service', $new_service)
                                     ->get()
                                     ->count();
-            if($service_count == 0 && !empty($new_category) && !empty($new_service)){
+            if($service_count == 0 && !empty($new_category) && !empty($new_service) && !empty($request->price[$count])){
                 $service = new Service();
                 $service->category = $new_category;
                 $service->service = $new_service;
+                $service->price = $request->price[$count++];
                 $service->save();
             }
         }
@@ -96,10 +98,11 @@ class ServiceCategoryController extends Controller
                                         ->where('service', $new_service)
                                         ->get()
                                         ->count();
-                if($service_count == 0 && !empty($new_category) && !empty($new_service)){
+                if($service_count == 0 && !empty($new_category) && !empty($new_service) && !empty($request->price)){
                     $service = new Service();
                     $service->category = $new_category;
                     $service->service = $new_service;
+                    $service->price = $request->price;
                     $service->save();
                 }
             }

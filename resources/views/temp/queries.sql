@@ -9,3 +9,7 @@ SELECT `ID`, `Userid`, `ServiceId`, `BillingId`, `PostingBy`, `PostingDate` FROM
 
 
 NFRMDN77L63Z129Y
+
+
+        $last_month_income = App\Models\Invoice::whereMonth(
+               // 'updated_at', '=', Carbon::now()->subMonth()->month)->sum('price');
