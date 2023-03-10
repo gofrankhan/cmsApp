@@ -45,7 +45,7 @@ class FileController extends Controller
                         ';
                         return $btn;
                     }else{
-                        if($row->status == 'Completed'){
+                        if($row->status == 'Completed' || $row->status == 'Cancelled' ){
                             $btn = '
                             <form action="'.route('file.delete',$row->id).'" method="Post">
                                 <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show" >
@@ -167,7 +167,7 @@ class FileController extends Controller
                                     ->where('invoices.file_id', $file_id)
                                     ->get();
         $user_type = Auth::user()->user_type;
-        if($files[0]->status == "Completed" && $user_type != 'admin')
+        if(($files[0]->status == "Completed" || $files[0]->status == "Cancelled") && $user_type != 'admin')
             return redirect()->back();
         return view('admin.file_edit', compact('comments', 'attachments', 'files', 'title'));
     }
