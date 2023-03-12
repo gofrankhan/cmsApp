@@ -208,7 +208,7 @@
                                         <div>
                                             <div class="mb-3">
                                                 <label  class="form-label">Tax ID</label>
-                                                <input type="text" id="taxid" class="form-control
+                                                <input type="text" id="taxid" class="form-control"
                                                     placeholder="Tax ID" name="taxid">
                                             </div>
                                         </div>
@@ -217,7 +217,7 @@
                                         <div>
                                             <div class="mb-3">
                                                 <label  class="form-label">Customer Type</label>
-                                                <input type="text" id="customer_type" class="form-control
+                                                <input type="text" id="customer_type" class="form-control"
                                                     placeholder="Customer Type"  name="customertype">
                                             </div>
                                         </div>
@@ -226,7 +226,7 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label  class="form-label">First name</label>
-                                                <input type="text" id="first_name" class="form-control
+                                                <input type="text" id="first_name" class="form-control"
                                                     placeholder="First name" name="firstname">
                                             </div>
                                         </div>

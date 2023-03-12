@@ -18,7 +18,7 @@
             Files
         </button>
 
-        <button type="button" class="btn font-size-20 header-item waves-effect">
+        <button type="button" id="btn_movement" class="btn font-size-20 header-item waves-effect">
             Movements
         </button>
 
@@ -83,5 +83,10 @@ document.getElementById("btn_customer").addEventListener("click", function(event
 document.getElementById("btn_file").addEventListener("click", function(event) {
   event.preventDefault();
   window.location.href = '/file/data';
+});
+
+document.getElementById("btn_movement").addEventListener("click", function(event) {
+  event.preventDefault();
+  window.location.href = '/movement/data';
 });
 </script>

@@ -172,6 +172,31 @@
         });
         </script>
 
+    <script type="text/javascript">
+        $(function () {
+            var table = $('.movement_datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                order: [[0, 'desc']],
+                "columnDefs": [
+                    { "width": "10%", "targets": 7 },
+                    { "width": "7%", "targets": 1 }
+                ],
+                ajax: "{{ route('movement.data') }}",
+                columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'file_id', name: 'file_id'},
+                    {data: 'taxid', name: 'taxid'},
+                    {data: 'customer', name: 'customer'},
+                    {data: 'shop', name: 'shop'},
+                    {data: 'service', name: 'service'},
+                    {data: 'status', name: 'status'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
+            });
+        });
+        </script>
+
         <script>
         @if(Session::has('message'))
         var type = "{{ Session::get('alert-type','info') }}"
