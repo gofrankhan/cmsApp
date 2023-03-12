@@ -21,10 +21,24 @@ class FileController extends Controller
     public function FileDataTable(Request $request)
     {
         $title = "Files";
+        $shop_name = Auth::user()->shop_name;
+        $user_type = Auth::user()->user_type;
         if ($request->ajax()) {
-            $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'invoices.shop_name as shop','services.service', 'invoices.status')
-                                    ->join('customers', 'invoices.customer_id', '=', 'customers.id')
-                                    ->join('services', 'invoices.service_id', '=', 'services.id')->get();
+            if($user_type =='admin'){
+                $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
+                                    ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                                    ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                    ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                    ->get();
+            }else{
+                $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
+                                    ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                                    ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                    ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                    ->whereIn('invoices.user_id', function($query) use ($shop_name){
+                                        $query->select('id')->from('users')->where('shop_name', $shop_name);
+                                    })->get();
+                                }
             return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row){
                     $user_type = Auth::user()->user_type;
