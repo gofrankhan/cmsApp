@@ -5,6 +5,7 @@
     function submitForm(event) {
         event.preventDefault();
         var taxidOrNameOrMobile = $('#search-box').val();
+        $('#search-box').attr('disabled', 'disabled');
         $.ajax({
         url: "{{ route('customer.search') }}",
         type: "GET",
@@ -23,8 +24,9 @@
       });
     }
     function clickCloseForm(event){
+        $('#search-box').removeAttr('disabled');
         $('#search-box').val("");
-        location.reload(true)
+        location.reload(true);
     }
 </script>
 
@@ -44,7 +46,7 @@
                 <p class="card-title-desc" >
                     <div class="row mb-3">
                         <div class="col-sm-8">
-                            <form class="app-search d-none d-lg-block" onsubmit="submitForm(event)">
+                            <form class="app-search d-none d-lg-block" data-backdrop="static" data-keyboard="false" onsubmit="submitForm(event)">
                                 <div class="position-relative">
                                     <input name="search-box" id="search-box" type="text" class="form-control" placeholder="Search By Tax ID, Name or Mobile No.">
                                     <span class="ri-search-line"></span>
