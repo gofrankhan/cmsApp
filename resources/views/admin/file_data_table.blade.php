@@ -7,6 +7,14 @@
   $(document).ready(function() {
     $('#category').change(function() {
       var value = $(this).val();
+      if(value === 'Pagamento'){
+        $('#div_description').show();
+        $('#div_pay_amount').show();
+        $('#div_service').hide();
+      }else{
+        $('#div_description').hide();
+        $('#div_pay_amount').hide();
+        $('#div_service').show();
       $.ajax({
         url: "{{ route('load.services') }}",
         type: "GET",
@@ -19,6 +27,7 @@
           });
         }
       });
+    }
     });
   });
 </script>
@@ -196,11 +205,28 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-6" id='div_service'>
                                             <div class="mb-3">
                                                 <label  class="form-label">Service</label>
                                                 <select class="form-select" id="service" name="service">
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6" id='div_pay_amount'>
+                                            <div class="mb-3">
+                                                <label  class="form-label">Pay Amount</label>
+                                                <input class="form-select" type="number" id="pay_amount" name="pay_amount" 
+                                                    placeholder="Amount">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" id="div_description">
+                                        <div>
+                                            <div class="mb-3">
+                                                <label  class="form-label">Description</label>
+                                                <textarea type="text" id="description" class="form-control"
+                                                    placeholder="Descriptioin" name="description">
+                                                </textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -272,6 +298,11 @@
     document.getElementById('formCheck1').onchange = function() {
     document.getElementById('user').disabled = this.checked;
 };
+</script>
+
+<script>
+    document.getElementById('div_description').style.display = "none";
+    document.getElementById('div_pay_amount').style.display = "none";
 </script>
 @endsection
 
