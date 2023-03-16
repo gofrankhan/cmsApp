@@ -7,7 +7,7 @@
   $(document).ready(function() {
     $('#category').change(function() {
       var value = $(this).val();
-      if(value === 'Pagamento'){
+      if(value.toLowerCase() === 'pagamento'){
         $('#div_description').show();
         $('#div_pay_amount').show();
         $('#div_service').hide();

@@ -175,7 +175,8 @@ class FileController extends Controller
         }else{
             $shop_name = Auth::user()->shop_name;
         }
-        if(!empty($request->service) && !empty($request->taxid)){
+        console.log($file_id);   
+        if((!empty($request->service) || strtolower($request->category) == 'pagamento') && !empty($request->taxid)){
             $file = new Invoice();
             $file->file_id = $file_id;
             $customer_id = Customer::select('id')->where('taxid', $request->taxid)->first();
@@ -189,9 +190,16 @@ class FileController extends Controller
             $file->customer_id = $customer_id->id;
             $file->shop_name = $shop_name;
             $service_id = Service::select('id', 'price')->where('service', $request->service)->first();
-            $file->service_id = $service_id->id;
             $file->status = "Submitted";
-            $file->price = $service_id->price;
+            if(strtolower($request->category) == 'pagamento'){
+                $file->price = -$request->pay_amount;
+                $file->service_id = -1;
+                $file->description = $request->description;
+            }else{
+                $file->price = $service_id->price;
+                $file->service_id = $service_id->id;
+            }
+            
             $file->save();
             $notification = array(
                 'message' => 'File created successfully!', 
