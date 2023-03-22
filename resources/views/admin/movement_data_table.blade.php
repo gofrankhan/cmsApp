@@ -22,14 +22,11 @@
         <table data-page-length='50' id="movement_datatable" class="table table-bordered movement_datatable">
             <thead>
                 <tr>
-                    <th type="hidden">#</th>
                     <th>File ID</th>
-                    <th>Tax ID</th>
                     <th>Customer</th>
-                    <th>Shop</th>
                     <th>Service</th>
-                    <th>Status</th>
-                    <th>Actions</th>
+                    <th>Description</th>
+                    <th>Amount</th>
                 </tr>
             </thead>
         

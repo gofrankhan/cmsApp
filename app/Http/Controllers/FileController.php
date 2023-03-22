@@ -97,14 +97,14 @@ class FileController extends Controller
         $user_type = Auth::user()->user_type;
         if ($request->ajax()) {
             if($user_type =='admin'){
-                $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
+                $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
                                     ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                                     ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                                     ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
                                     ->where('invoices.status', '=', 'Completed')
                                     ->get();
             }else{
-                $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
+                $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
                                     ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                                     ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                                     ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
