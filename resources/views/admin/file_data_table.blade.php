@@ -83,7 +83,7 @@
     $('#submit-user').click(function() {
       // Get data from Modal 2
       var data = $('#form2').serialize();
-
+        alert(data);
       // Submit the data
       $.ajax({
         url: '{{ route('file.store') }}',

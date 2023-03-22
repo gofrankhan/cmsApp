@@ -15,6 +15,7 @@ use App\Models\Invoice;
 use App\Models\Customer;
 use App\Models\Service;
 use DataTables;
+use Debugbar;
 
 class FileController extends Controller
 {
@@ -109,14 +110,13 @@ class FileController extends Controller
     {
         $file_id = Invoice::max('file_id');
         $file_id += 1;
-
+        $user_id = Auth::user()->id;
         if($request->user != null && !empty($request->user)){
             $shop = User::select('shop_name')->where('username', $request->user)->first();
             $shop_name = $shop->shop_name;
         }else{
             $shop_name = Auth::user()->shop_name;
         }
-        console.log($file_id);   
         if((!empty($request->service) || strtolower($request->category) == 'pagamento') && !empty($request->taxid)){
             $file = new Invoice();
             $file->file_id = $file_id;
@@ -130,17 +130,17 @@ class FileController extends Controller
             }
             $file->customer_id = $customer_id->id;
             $file->shop_name = $shop_name;
+            $file->user_id = $user_id;
             $service_id = Service::select('id', 'price')->where('service', $request->service)->first();
             $file->status = "Submitted";
+            $file->service_id = $service_id->id;
             if(strtolower($request->category) == 'pagamento'){
                 $file->price = -$request->pay_amount;
-                $file->service_id = -1;
                 $file->description = $request->description;
             }else{
                 $file->price = $service_id->price;
-                $file->service_id = $service_id->id;
             }
-            
+            Debugbar::addMessage($file);
             $file->save();
             $notification = array(
                 'message' => 'File created successfully!', 
