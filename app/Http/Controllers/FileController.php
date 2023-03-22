@@ -93,73 +93,14 @@ class FileController extends Controller
     public function MovementDataTable(Request $request)
     {
         $title = "Movement";
-        $shop_name = Auth::user()->shop_name;
-        $user_type = Auth::user()->user_type;
         if ($request->ajax()) {
-            if($user_type =='admin'){
-                $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
-                                    ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
-                                    ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
-                                    ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
-                                    ->where('invoices.status', '=', 'Completed')
-                                    ->get();
-            }else{
-                $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
-                                    ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
-                                    ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
-                                    ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
-                                    ->where('invoices.status','=', 'Completed')
-                                    ->whereIn('invoices.user_id', function($query) use ($shop_name){
-                                        $query->select('id')->from('users')->where('shop_name', $shop_name);
-                                    })
-                                    ->get();
-                                }
-            return Datatables::of($data)->addIndexColumn()
-                ->addColumn('action', function($row){
-                    $user_type = Auth::user()->user_type;
-                    if($user_type == 'admin'){
-                        $btn = '
-                        <form action="'.route('file.delete',$row->id).'" method="Post">
-                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->file_id).'" title="Edit">
-                                <i class="fas fa-pencil-alt"></i>
-                            </a>
-
-                            <a type="submit" class="btn btn-danger btn-sm edit" href="'.route('file.delete' ,$row->id).'" title="Delete">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </form>
-                        ';
-                        return $btn;
-                    }else{
-                        if($row->status == 'Completed' || $row->status == 'Cancelled' ){
-                            $btn = '
-                            <form action="'.route('file.delete',$row->id).'" method="Post">
-                                <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show" >
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                            </form>
-                            ';
-                            return $btn;
-                        }else{
-                            $btn = '
-                            <form action="'.route('file.delete',$row->id).'" method="Post">
-                                <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                                <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->file_id).'" title="Edit">
-                                    <i class="fas fa-pencil-alt"></i>
-                                </a>
-                            </form>
-                            ';
-                            return $btn;
-                        }
-                    }
-                })
-                ->rawColumns(['action'])
-                ->make(true);
+            $data = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service')
+                                ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->where('invoices.status', '=', 'Completed')
+                                ->get();
+            return Datatables::of($data)
+            ->make(true);
         }
         return view('admin.movement_data_table', compact('title'));
     }

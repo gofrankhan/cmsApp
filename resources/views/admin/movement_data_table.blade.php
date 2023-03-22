@@ -22,9 +22,9 @@
         <table data-page-length='50' id="movement_datatable" class="table table-bordered movement_datatable">
             <thead>
                 <tr>
-                    <th>File ID</th>
-                    <th>Customer</th>
-                    <th>Service</th>
+                    <th>ID</th>
+                    <th>Customer Name</th>
+                    <th>Service Name</th>
                     <th>Description</th>
                     <th>Amount</th>
                 </tr>
