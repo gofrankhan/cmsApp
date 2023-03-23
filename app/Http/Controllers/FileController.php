@@ -131,16 +131,17 @@ class FileController extends Controller
             $file->customer_id = $customer_id->id;
             $file->shop_name = $shop_name;
             $file->user_id = $user_id;
-            $service_id = Service::select('id', 'price')->where('service', $request->service)->first();
             $file->status = "Submitted";
-            $file->service_id = $service_id->id;
             if(strtolower($request->category) == 'pagamento'){
+                $service_id = Service::select('id')->where('category', $request->category)->first();
+                $file->service_id = $service_id->id;
                 $file->price = -$request->pay_amount;
                 $file->description = $request->description;
             }else{
+                $service_id = Service::select('id', 'price')->where('service', $request->service)->first();
+                $file->service_id = $service_id->id;
                 $file->price = $service_id->price;
             }
-            Debugbar::addMessage($file);
             $file->save();
             $notification = array(
                 'message' => 'File created successfully!', 
