@@ -83,7 +83,6 @@
     $('#submit-user').click(function() {
       // Get data from Modal 2
       var data = $('#form2').serialize();
-        alert(data);
       // Submit the data
       $.ajax({
         url: '{{ route('file.store') }}',
@@ -200,7 +199,9 @@
                                                 <select class="form-select" id="category" name="category">
                                                     <option value="Choose" selected>Choose...</option>
                                                     @foreach ($categories as $category)
+                                                    @if(!(strtolower($category->category) == 'pagamento' && $user_type != 'admin'))
                                                     <option value="{{ $category->category }}" >{{ $category->category }}</option>
+                                                    @endif
                                                     @endforeach
                                                 </select>
                                             </div>
