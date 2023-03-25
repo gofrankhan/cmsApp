@@ -116,7 +116,12 @@ class FileController extends Controller
             return Datatables::of($data)
             ->make(true);
         }
-        return view('admin.movement_data_table', compact('title'));
+        $total_sum = Invoice::leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                            ->where('invoices.status', '=', 'Completed')
+                            ->whereIn('invoices.user_id', function($query) use ($shop_name){
+                                $query->select('id')->from('users')->where('shop_name', $shop_name);
+                            })->sum('invoices.price');
+        return view('admin.movement_data_table', compact('title', 'total_sum'));
     }
 
     public function FileStore(Request $request)
