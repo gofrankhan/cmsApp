@@ -97,22 +97,14 @@ class FileController extends Controller
         $shop_name = Auth::user()->shop_name;
         $user_type = Auth::user()->user_type;
         if ($request->ajax()) {
-            if($user_type =='admin'){
                 $data = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service')
-                                    ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
-                                    ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
-                                    ->where('invoices.status', '=', 'Completed')
-                                    ->get();
-            }else{
-                $data = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service')
-                                    ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
-                                    ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
-                                    ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
-                                    ->where('invoices.status', '=', 'Completed')
-                                    ->whereIn('invoices.user_id', function($query) use ($shop_name){
-                                        $query->select('id')->from('users')->where('shop_name', $shop_name);
-                                    })->get();
-            }
+                                ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                ->where('invoices.status', '=', 'Completed')
+                                ->whereIn('invoices.user_id', function($query) use ($shop_name){
+                                    $query->select('id')->from('users')->where('shop_name', $shop_name);
+                                })->get();
             return Datatables::of($data)
             ->make(true);
         }
@@ -122,6 +114,25 @@ class FileController extends Controller
                                 $query->select('id')->from('users')->where('shop_name', $shop_name);
                             })->sum('invoices.price');
         return view('admin.movement_data_table', compact('title', 'total_sum'));
+    }
+
+    public function MovementDataTableAll(Request $request)
+    {
+        $title = "Movement";
+        $shop_name = Auth::user()->shop_name;
+        $user_type = Auth::user()->user_type;
+        if ($request->ajax()) {
+            if($user_type =='admin'){
+                $data = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service')
+                                    ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                                    ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                    ->where('invoices.status', '=', 'Completed')
+                                    ->get();
+            }
+            return Datatables::of($data)
+            ->make(true);
+        }
+        return view('admin.movement_data_table_all', compact('title'));
     }
 
     public function FileStore(Request $request)

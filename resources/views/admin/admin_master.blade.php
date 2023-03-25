@@ -172,13 +172,31 @@
         });
         </script>
 
-    <script type="text/javascript">
+        <script type="text/javascript">
         $(function () {
             var table = $('.movement_datatable').DataTable({
                 processing: true,
                 serverSide: true,
                 order: [[0, 'desc']],
                 ajax: "{{ route('movement.data') }}",
+                columns: [
+                    {data: 'file_id', name: 'file_id'},
+                    {data: 'customer', name: 'customer'},
+                    {data: 'service', name: 'service'},
+                    {data: 'description', name: 'description'},
+                    {data: 'amount', name: 'amount'},
+                ]
+            });
+        });
+        </script>
+
+        <script type="text/javascript">
+        $(function () {
+            var table = $('.movement_datatable_all').DataTable({
+                processing: true,
+                serverSide: true,
+                order: [[0, 'desc']],
+                ajax: "{{ route('movement.data.all') }}",
                 columns: [
                     {data: 'file_id', name: 'file_id'},
                     {data: 'customer', name: 'customer'},

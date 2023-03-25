@@ -25,7 +25,7 @@
                 <a href="" hidden class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target=""></a>
             </div>
         </p>
-        <table data-page-length='50' id="movement_datatable" class="table table-bordered movement_datatable">
+        <table data-page-length='50' id="movement_datatable_all" class="table table-bordered movement_datatable_all">
             <thead>
                 <tr>
                     <th>ID</th>
