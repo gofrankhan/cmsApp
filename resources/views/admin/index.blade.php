@@ -132,6 +132,35 @@
                 </div><!-- end card -->
             </div><!-- end col -->
         </div><!-- end row -->
+        <table id="alternative-page-datatable" class="table dt-responsive nowrap w-100">
+            <thead>
+                <tr>
+                    <th>Shop Name</th>
+                    <th>Due</th>
+                    <th>Balance</th>
+                    <th>Transactions</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+        
+        
+            <tbody>
+                @foreach($totalInvoiceByShop as $invoice)
+            <tr>
+                <td>{{$invoice->shop_name}}</td>
+                @if($invoice->total_invoice < 0)
+                <td>{{$invoice->total_invoice}}</td>
+                <td>----</td>
+                @else
+                <td>----</td>
+                <td>{{$invoice->total_invoice}}</td>
+                @endif
+                <td></td>
+                <td>{{$invoice->count}}</td>
+            </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
     
 </div>

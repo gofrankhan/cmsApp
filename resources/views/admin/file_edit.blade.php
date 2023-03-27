@@ -50,7 +50,7 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Home</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('file.data')}}">Files</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('file.data', 'all')}}">Files</a></li>
                             <li class="breadcrumb-item active"><a href="">Edit</a></li>
                         </ol>
                     </div>
