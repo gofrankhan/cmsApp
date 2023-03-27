@@ -9,7 +9,7 @@
 <div class="page-content">
     <div class="container-fluid">
         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="card-title">Movement Informations @if($user_type == 'admin')<sub><a href="{{ route('movement.data.all')}}">View All </a></sub>@endif</h4>
+            <h4 class="card-title">Movement Informations</h4>
             @if(isset($total_sum))
             <h3 class="card-title">Payable Amount: {{ $total_sum }}</h3>
             @endif

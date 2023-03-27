@@ -82,7 +82,7 @@ document.getElementById("btn_customer").addEventListener("click", function(event
 
 document.getElementById("btn_file").addEventListener("click", function(event) {
   event.preventDefault();
-  window.location.href = '/file/data';
+  window.location.href = '/file/data/user';
 });
 
 document.getElementById("btn_movement").addEventListener("click", function(event) {

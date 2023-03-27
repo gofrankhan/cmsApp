@@ -86,8 +86,7 @@ Route::middleware('auth', 'admin')->group(function(){
 
 Route::middleware('auth')->group(function(){
     Route::post('/file/store', [FileController::class, 'FileStore'])->name('file.store');
-    Route::get('/file/data', [FileController::class, 'FileDataTable'])->name('file.data');
-    Route::get('/file/data/all', [FileController::class, 'FileDataTableAll'])->name('file.data.all');
+    Route::get('/file/data/{type}', [FileController::class, 'FileDataTable'])->name('file.data');
     Route::get('/file/edit/{id}', [FileController::class, 'FileEdit'])->name('file.edit');
     Route::get('/file/delete/{id}', [FileController::class, 'FileDelete'])->name('file.delete')->middleware('admin');
     Route::get('/file/show/{id}', [FileController::class, 'FileShow'])->name('file.show');

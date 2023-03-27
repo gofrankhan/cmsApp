@@ -96,22 +96,60 @@
   });
 </script>
 
+<script type="text/javascript">
+    $(function () {
+        var view_type = $('#view_type').val();
+        var table = $('.file_datatable').DataTable({
+            processing: true,
+            serverSide: true,
+            order: [[0, 'desc']],
+            "columnDefs": [
+                { "width": "10%", "targets": 7 },
+                { "width": "7%", "targets": 1 }
+            ],
+            ajax: "{{ route('file.data' , 'all') }}",
+            columns: [
+                {data: 'id', name: 'id'},
+                {data: 'file_id', name: 'file_id'},
+                {data: 'taxid', name: 'taxid'},
+                {data: 'customer', name: 'customer'},
+                {data: 'shop', name: 'shop'},
+                {data: 'service', name: 'service'},
+                {data: 'status', name: 'status'},
+                {data: 'action', name: 'action', orderable: false, searchable: false},
+            ]
+        });
+    });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $("#view_all a").click(function() {
+        alert('hi');
+      $('#view_type').val('all');
+      
+    });
+  });
+</script>
+
+@php
+    $user_type = Auth::user()->user_type;
+    if($user_type == 'admin') $modealName = "#firstmodal";
+    else $modealName = "#myModal";
+@endphp
+
 <div class="page-content">
     <div class="container-fluid">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="card-title">File Informations</h4>
+                    <h4 class="card-title">File Informations @if($user_type == 'admin')<sub><a href="{{ route('file.data', 'all')}}" id="view_all"> View All </a></sub>@endif</h4>
+                    <input type="hidden" id="view_type" value="all">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Home</a></li>
-                            <li class="breadcrumb-item active"><a href="{{ route('file.data')}}">Files</a></li>
+                            <li class="breadcrumb-item active"><a href="{{ route('file.data', 'user')}}">Files</a></li>
                         </ol>
                     </div>
                 </div>
-                @php
-                    $user_type = Auth::user()->user_type;
-                    if($user_type == 'admin') $modealName = "#firstmodal";
-                    else $modealName = "#myModal";
-                @endphp
                 <p class="card-title-desc" >
                     <div align="right">
                         <a href="" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target={{ $modealName }}>New</a>
