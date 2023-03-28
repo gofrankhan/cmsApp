@@ -1,12 +1,6 @@
 @extends('admin.admin_master')
 @section('admin')
 
-@php 
-        $user_count = App\Models\User::all()->count();
-        $completed_file = App\Models\Invoice::where('status', '=', 'Completed' )->count();
-        $open_file = App\Models\Invoice::whereIn('status', ['Submitted', 'Pending'] )->count();
-@endphp
-
 <div class="page-content">
     <div class="container-fluid">
         
@@ -28,13 +22,30 @@
         </div>
         <!-- end row -->
         <div class="row">
+        <div class="col-xl-2 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-grow-1">
+                                <p class="text-truncate font-size-14 mb-2">Users</p>
+                                <h4 class="mb-2">{{ $card_array['user_count'] }}</h4>
+                            </div>
+                            <div class="avatar-sm">
+                                <span class="avatar-title bg-light text-primary rounded-3">
+                                    <i class="ri-user-3-line font-size-24"></i>  
+                                </span>
+                            </div>
+                        </div>                                              
+                    </div><!-- end cardbody -->
+                </div><!-- end card -->
+            </div><!-- end col -->
             <div class="col-xl-2 col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex">
                             <div class="flex-grow-1">
                                 <p class="text-truncate font-size-14 mb-2">Shops</p>
-                                <h4 class="mb-2">{{ $user_count }}</h4>
+                                <h4 class="mb-2">{{ $card_array['shop_count'] }}</h4>
                             </div>
                             <div class="avatar-sm">
                                 <span class="avatar-title bg-light text-primary rounded-3">
@@ -51,7 +62,7 @@
                         <div class="d-flex">
                             <div class="flex-grow-1">
                                 <p class="text-truncate font-size-14 mb-2">File Completed</p>
-                                <h4 class="mb-2">{{ $completed_file }}
+                                <h4 class="mb-2">{{ $card_array['completed_file'] }}
                                 </h4>
                             </div>
                             <div class="avatar-sm">
@@ -69,7 +80,7 @@
                         <div class="d-flex">
                             <div class="flex-grow-1">
                                 <p class="text-truncate font-size-14 mb-2">Open Files</p>
-                                <h4 class="mb-2">{{ $open_file }}</h4>
+                                <h4 class="mb-2">{{ $card_array['open_file'] }}</h4>
                             </div>
                             <div class="avatar-sm">
                                 <span class="avatar-title bg-light text-success rounded-3">
@@ -85,8 +96,8 @@
                     <div class="card-body">
                         <div class="d-flex">
                             <div class="flex-grow-1">
-                                <p class="text-truncate font-size-14 mb-2">This Month Income</p>
-                                <h4 class="mb-2">1420</h4>
+                                <p class="text-truncate font-size-14 mb-2">Transactions</p>
+                                <h4 class="mb-2">{{ $card_array['transactions'] }}</h4>
                             </div>
                             <div class="avatar-sm">
                                 <span class="avatar-title bg-light text-success rounded-3">
@@ -102,29 +113,12 @@
                     <div class="card-body">
                         <div class="d-flex">
                             <div class="flex-grow-1">
-                                <p class="text-truncate font-size-14 mb-2">Last Month Income</p>
-                                <h4 class="mb-2">29670</h4>
+                                <p class="text-truncate font-size-14 mb-2">Total Paid</p>
+                                <h4 class="mb-2">{{-($card_array['total_paid']) }}</h4>
                             </div>
                             <div class="avatar-sm">
                                 <span class="avatar-title bg-light text-success rounded-3">
                                     <i class="mdi mdi-currency-btc font-size-24"></i>  
-                                </span>
-                            </div>
-                        </div>                                              
-                    </div><!-- end cardbody -->
-                </div><!-- end card -->
-            </div><!-- end col -->
-            <div class="col-xl-2 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex">
-                            <div class="flex-grow-1">
-                                <p class="text-truncate font-size-14 mb-2">Users</p>
-                                <h4 class="mb-2">29670</h4>
-                            </div>
-                            <div class="avatar-sm">
-                                <span class="avatar-title bg-light text-primary rounded-3">
-                                    <i class="ri-user-3-line font-size-24"></i>  
                                 </span>
                             </div>
                         </div>                                              
@@ -139,6 +133,7 @@
                     <th>Due</th>
                     <th>Balance</th>
                     <th>Transactions</th>
+                    <th>Paid</th>
                     <th>Count</th>
                 </tr>
             </thead>
@@ -149,12 +144,13 @@
             <tr>
                 <td>{{$invoice->shop_name}}</td>
                 @if($invoice->total_invoice < 0)
-                <td>{{$invoice->total_invoice}}</td>
+                <td>{{ -$invoice->total_invoice}}</td>
                 <td>----</td>
                 @else
                 <td>----</td>
                 <td>{{$invoice->total_invoice}}</td>
                 @endif
+                <td></td>
                 <td></td>
                 <td>{{$invoice->count}}</td>
             </tr>

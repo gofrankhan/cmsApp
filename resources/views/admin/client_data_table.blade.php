@@ -20,6 +20,7 @@
                             <th>Type</th>
                             <th>Username</th>
                             <th>Email</th>
+                            <th>Shop Name</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -32,6 +33,7 @@
                             <td>{{ $user->user_type }}</td>
                             <td>{{ $user->username }}</td>
                             <td>{{ $user->email }}</td>
+                            <td>{{ $user->shop_name }}</td>
                             <td>
                                 <form action="{{ route('client.delete',$user->id) }}" method="Post">
                                     <a class="btn btn-outline-secondary btn-sm edit" href="{{ route('client.edit' ,$user->id) }}" title="Edit">
