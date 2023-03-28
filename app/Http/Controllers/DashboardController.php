@@ -19,6 +19,9 @@ use DataTables;
 class DashboardController extends Controller
 {
     public function CreateTable(){
+
+        if(Auth::user()->user_type != 'admin')
+            return view('admin.index');
         
         $user_count = User::count();
         $shop_count = User::distinct()->count('shop_name');
@@ -30,7 +33,11 @@ class DashboardController extends Controller
         $card_array = array("user_count"=>$user_count,"shop_count"=>$shop_count, "completed_file"=>$completed_file, "open_file"=>$open_file, "transactions"=>$transactions, 'total_paid'=>$total_paid);
 
         $totalInvoiceByShop = Invoice::join('users', 'users.id', '=', 'invoices.user_id')
-                    ->select(DB::raw('users.shop_name, SUM(invoices.price) as total_invoice, COUNT(invoices.file_id) as count'))
+                    ->select(DB::raw('users.shop_name, 
+                                      SUM(invoices.price) as total_invoice, 
+                                      SUM(CASE WHEN invoices.price < 0 THEN invoices.price ELSE 0 END) AS negative_sum,
+                                      SUM(CASE WHEN invoices.price > 0 THEN invoices.price ELSE 0 END) AS positive_sum,
+                                      COUNT(invoices.file_id) as count'))
                     ->where('invoices.status', '=', 'Completed')
                     ->groupBy('users.shop_name')
                     ->get();

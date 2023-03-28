@@ -21,6 +21,7 @@
             </div>
         </div>
         <!-- end row -->
+        @if(isset($card_array))
         <div class="row">
         <div class="col-xl-2 col-md-6">
                 <div class="card">
@@ -130,8 +131,8 @@
             <thead>
                 <tr>
                     <th>Shop Name</th>
-                    <th>Due</th>
                     <th>Balance</th>
+                    <th>Due</th>
                     <th>Transactions</th>
                     <th>Paid</th>
                     <th>Count</th>
@@ -150,13 +151,14 @@
                 <td>----</td>
                 <td>{{$invoice->total_invoice}}</td>
                 @endif
-                <td></td>
-                <td></td>
+                <td>{{$invoice->positive_sum}}</td>
+                <td>{{$invoice->negative_sum}}</td>
                 <td>{{$invoice->count}}</td>
             </tr>
                 @endforeach
             </tbody>
         </table>
+        @endif
     </div>
     
 </div>
