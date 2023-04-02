@@ -191,7 +191,7 @@
                                     <div class="row">
                                         <div>
                                             <div class="form-check mb-3">
-                                                <input class="form-check-input" type="checkbox" id="formCheck1">
+                                                <input class="form-check-input" type="checkbox" id="formCheck1" checked>
                                                 <label class="form-check-label" for="formCheck1">
                                                     Current User
                                                 </label>
@@ -202,7 +202,7 @@
                                         <div>
                                             <div class="mb-3">
                                                 <label  class="form-label">Select User</label>
-                                                <select class="form-select" id="user" name="user">
+                                                <select class="form-select" id="user" name="user" disabled>
                                                     <option value="Choose" selected>Choose...</option>
                                                     @foreach ($users as $user)
                                                     <option value="{{ $user->username }}" >{{ $user->username }}</option>
@@ -334,6 +334,9 @@
             </div><!-- end col-->
 </div>
 <script>
+    $(".modal").on("hidden.bs.modal", function(){
+        $(".modal-body").html("");
+    });
     document.getElementById('formCheck1').onchange = function() {
     document.getElementById('user').disabled = this.checked;
 };
