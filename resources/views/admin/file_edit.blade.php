@@ -14,7 +14,7 @@
         method: 'POST',
         data: data,
         success: function(response) {
-          // Handle the response
+            window.location.reload();
         }
       });
     });
@@ -89,8 +89,11 @@
                     <div class="col-sm-2">
                         <label for="customer" class="col-form-label">Customer</label>
                     </div>
-                    <div class="col-sm-10">
+                    <div class="col-sm-8">
                         <input class="form-control" name="customer" placeholder="Customer" type="text" id="customer" value="{{ $files[0]->customer }}" >
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="{{route('customer.show',$files[0]->customer_id)}}">View</a>
                     </div>
                 </div>
             </div>
@@ -204,7 +207,7 @@
                                             @endphp
                                             <div class="row mb-4 text-black"><i>Created At : {{ $comment->created_at }} || By : @if($user != null) {{ $user->name }} @else Unknown User @endif || Status : Pending</i></div>
                                             <div class="card-text">
-                                                <p contentEditable="true" style="color: black">
+                                                <p style="color: black">
                                                     <b>{{ $comment->comment }}</b>
                                                 </p>
                                                 <form id="myForm2" action="{{ route('delete.comment') }}" method="post">
@@ -212,9 +215,6 @@
                                                     <div align="right">
                                                         <input type="hidden" id="comment_id" name="id" value="{{ $comment->id }}">
                                                         @if($status != 'Completed')
-                                                        <a class="btn btn-secondary btn-sm edit" href="" title="Edit">
-                                                            <i class="fas fa-pencil-alt"></i>
-                                                        </a>
                                                         <a type="submit" class="btn btn-danger btn-sm edit" onclick="document.getElementById('myForm2').submit();" title="Delete">
                                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                                         </a>

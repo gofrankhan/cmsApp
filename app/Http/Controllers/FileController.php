@@ -84,7 +84,20 @@ class FileController extends Controller
                         }
                     }
                 })
-                ->rawColumns(['action'])
+                ->addColumn('status', function($row){
+                    if($row->status == "Completed")
+                        $btn = '<div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-warning align-middle me-2"></i>'.$row->status.'</div>';
+                    else if($row->status == "Pending") 
+                        $btn = '<div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-dark align-middle me-2"></i>'.$row->status.'</div>';
+                    else if($row->status == "Submitted")
+                        $btn = '<div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2"></i>'.$row->status.'</div>';
+                    else if($row->status == "Cancelled")
+                        $btn = '<div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-danger align-middle me-2"></i>'.$row->status.'</div>';
+                    else
+                        $btn = '<div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2"></i>'.$row->status.'</div>';
+                    return $btn;
+                })
+                ->rawColumns(['action', 'status'])
                 ->make(true);
         }
         return view('admin.file_data_table', compact('title'));
@@ -188,7 +201,7 @@ class FileController extends Controller
 
     }
 
-    public function UpdateFileStatusAndPrice(Request $request) : RedirectResponse
+    public function UpdateFileStatusAndPrice(Request $request)
     {
 
         $invoice_id = Invoice::select('id')->where('file_id', $request->file_id_no)->first();
@@ -196,12 +209,8 @@ class FileController extends Controller
         $invoice->status = $request->file_status;
         $invoice->price = intval($request->pagamento);
         $invoice->save();
-
-        $notification = array(
-            'message' => 'Status & Price Updated Successfully', 
-            'alert-type' => 'success'
-        );
-        return redirect()->back()->with($notification);
+        
+        return redirect()->back();
     }
 
     public function CommentAttachment($file_id): View
@@ -217,7 +226,7 @@ class FileController extends Controller
         $title = "Show File";
         $comments = DB::table('comments')->where('file_id', $file_id)->get();
         $attachments = DB::table('attachments')->where('file_id', $file_id)->get();
-        $files = Invoice::select('invoices.id', 'invoices.price', 'invoices.file_id', 'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop','services.service', 'invoices.status')
+        $files = Invoice::select('invoices.id', 'invoices.price', 'invoices.file_id', 'invoices.customer_id', 'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop','services.service', 'invoices.status')
                                     ->join('customers', 'invoices.customer_id', '=', 'customers.id')
                                     ->join('services', 'invoices.service_id', '=', 'services.id')
                                     ->where('invoices.file_id', $file_id)
@@ -230,7 +239,7 @@ class FileController extends Controller
         $title = "Edit File";
         $comments = DB::table('comments')->where('file_id', $file_id)->get();
         $attachments = DB::table('attachments')->where('file_id', $file_id)->get();
-        $files = Invoice::select('invoices.id', 'invoices.price', 'invoices.file_id', 'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop','services.service', 'invoices.status')
+        $files = Invoice::select('invoices.id', 'invoices.price', 'invoices.file_id', 'invoices.customer_id', 'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop','services.service', 'invoices.status')
                                     ->join('customers', 'invoices.customer_id', '=', 'customers.id')
                                     ->join('services', 'invoices.service_id', '=', 'services.id')
                                     ->where('invoices.file_id', $file_id)
