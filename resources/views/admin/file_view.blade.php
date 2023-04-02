@@ -8,13 +8,13 @@
     $status = $files[0]->status;
     $badge_status = "";
     if($status == 'Submitted')
-        $badge_status = "bg-primary";
+        $badge_status = "bg-success";
     else if ($status == 'Pending')
-        $badge_status = "bg-warning";
+        $badge_status = "bg-dark";
     else if ($status == 'Cancelled')
         $badge_status = "bg-danger";
     else if ($status == 'Completed')
-        $badge_status = "bg-success";
+        $badge_status = "bg-warning";
 @endphp
 
 <div class="page-content">
