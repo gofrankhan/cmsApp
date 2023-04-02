@@ -161,12 +161,14 @@
                                                     @csrf
                                                     <div align="right">
                                                         <input type="hidden" id="comment_id" name="id" value="{{ $comment->id }}">
+                                                        @if($status != 'Completed')
                                                         <a class="btn btn-secondary btn-sm edit" href="" title="Edit">
                                                             <i class="fas fa-pencil-alt"></i>
                                                         </a>
                                                         <a type="submit" class="btn btn-danger btn-sm edit" onclick="document.getElementById('myForm2').submit();" title="Delete">
                                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                                         </a>
+                                                        @endif
                                                     </div>
                                                 </form>
                                             </div>  
@@ -240,9 +242,11 @@
                                                 <div align="right">
                                                     <input type="hidden" name="file_id" value="<?php echo $file_id; ?>">
                                                     <input type="hidden" name="file_name" value="{{ $attachment->file_name }}">
+                                                    @if($status != 'Completed')
                                                     <a type="submit" class="btn btn-danger btn-sm edit" onclick="document.getElementById('myForm').submit();" title="Delete">
                                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                                     </a>
+                                                    @endif
                                                 </div>
                                             </form>  
                                         </div>      
