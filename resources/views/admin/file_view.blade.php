@@ -21,18 +21,19 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
+                
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <div>
-                        <h4 class="card-title">File #{{ $file_id }}</h4>
-                        <span class="badge rounded-pill {{$badge_status}}">{{ $status }}</span>
-                    </div>
-                    <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Home</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('file.data', 'all')}}">Files</a></li>
-                            <li class="breadcrumb-item active"><a href="">View</a></li>
-                        </ol>
-                    </div>
+                <div>
+                    <h1>File #{{ $file_id }}</h1>
+                    <span class="badge rounded-pill {{$badge_status}}">{{ $status }}</span>
+                </div>
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('file.data', 'all')}}">Files</a></li>
+                        <li class="breadcrumb-item active"><a href="">View</a></li>
+                    </ol>
+                </div>
                 </div>
             </div>
         </div>

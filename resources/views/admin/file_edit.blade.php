@@ -44,7 +44,7 @@
             <div class="col">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                     <div>
-                        <h4 class="card-title">File #{{ $file_id }}</h4>
+                        <h1>File #{{ $file_id }}</h1>
                         <span class="badge rounded-pill {{$badge_status}}">{{ $status }}</span>
                     </div>
                     <div class="page-title-right">
