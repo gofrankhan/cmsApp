@@ -3,6 +3,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+
 <script>
   $(document).ready(function() {
     $('#category').change(function() {
@@ -100,11 +101,33 @@
     $(function () {
         var view_type = $('#view_type').val();
         var table = $('.file_datatable').DataTable({
+            initComplete: function () {
+            this.api()
+                .columns([4,5])
+                .every(function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo($(column.header()))
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
+ 
+                            column.search(val ? '^' + val + '$' : '', true, false).draw();
+                        });
+ 
+                    column
+                        .data()
+                        .unique()
+                        .sort()
+                        .each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>');
+                        });
+                });
+            },
             processing: true,
             serverSide: true,
             order: [[0, 'desc']],
             "columnDefs": [
-                { "width": "10%", "targets": 7 },
+                { "width": "16%", "targets": 7 },
                 { "width": "7%", "targets": 1 }
             ],
             ajax: "{{ route('file.data' , 'all') }}",

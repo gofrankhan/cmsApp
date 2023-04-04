@@ -109,8 +109,8 @@ class FileController extends Controller
         $title = "Movement";
         $shop_name = Auth::user()->shop_name;
         $user_type = Auth::user()->user_type;
-        if ($request->ajax()) {                $data = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat
-(customers.firstname,' ', customers.lastname) as customer"),'services.service')
+        if ($request->ajax()) {                
+            $data = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service')
                                 ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                                 ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                                 ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
