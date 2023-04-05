@@ -64,8 +64,8 @@ class CommentAttachmentController extends Controller
             $filename = str_replace(' ', '_', $filename);
             $full_path = 'upload/file_attachments/'.$request->file_id;
             if(!is_dir($full_path))
-                mkdir($full_path, 0775);
-            $file->move(public_path($full_path),$filename);
+                mkdir($full_path, 0755);
+            $file->move($full_path ,$filename);
             $attachment['file_name'] = $filename;
 
             $attachment->save();
