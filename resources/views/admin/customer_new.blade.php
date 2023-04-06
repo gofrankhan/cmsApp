@@ -91,6 +91,12 @@
                         </div>
                     </div>
                     <div class="row mb-3">
+                        <label for="email" class="col-sm-2 col-form-label">City Of Birth</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="cityofbirth" placeholder="City Of Birth" type="text" id="cityofbirth">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
                         <label for="email" class="col-sm-2 col-form-label">Citizenship</label>
                         <div class="col-sm-8">
                             <input class="form-control" name="citizenship" placeholder="Citizenship" type="text" id="citizenship">

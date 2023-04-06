@@ -123,6 +123,7 @@ class CustomerController extends Controller
         $customer->telephone = $request->telephone;
         $customer->mobile = $request->mobile;
         $customer->dateofbirth = $request->dateofbirth;
+        $customer->pob = $request->cityofbirth;
         $customer->citizenship = $request->citizenship;
         $customer->addressline1 = $request->addressline1;
         $customer->addressline2 = $request->addressline2;
@@ -209,6 +210,7 @@ class CustomerController extends Controller
         $customer->telephone = $request->telephone;
         $customer->mobile = $request->mobile;
         $customer->dateofbirth = $request->dateofbirth;
+        $customer->pob = $request->cityofbirth;
         $customer->citizenship = $request->citizenship;
         $customer->addressline1 = $request->addressline1;
         $customer->addressline2 = $request->addressline2;
