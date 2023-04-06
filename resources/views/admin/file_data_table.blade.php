@@ -103,10 +103,10 @@
         var table = $('.file_datatable').DataTable({
             initComplete: function () {
             this.api()
-                .columns([4,5])
+                .columns([4,5,7])
                 .every(function () {
                     var column = this;
-                    var select = $('<select><option value=""></option></select>')
+                    var select = $('<select><option width="10px" value=""></option></select>')
                         .appendTo($(column.header()))
                         .on('change', function () {
                             var val = $.fn.dataTable.util.escapeRegex($(this).val());
@@ -119,16 +119,16 @@
                         .unique()
                         .sort()
                         .each(function (d, j) {
-                            select.append('<option value="' + d + '">' + d + '</option>');
+                            select.append('<option width="30px">' + d + '</option>');
                         });
                 });
             },
             processing: true,
             serverSide: true,
             order: [[0, 'desc']],
-            "columnDefs": [
-                { "width": "16%", "targets": 7 },
-                { "width": "7%", "targets": 1 }
+            columnDefs: [
+                { width: 0, targets: 0 },
+                
             ],
             ajax: "{{ route('file.data' , 'all') }}",
             columns: [
@@ -138,6 +138,7 @@
                 {data: 'customer', name: 'customer'},
                 {data: 'shop', name: 'shop'},
                 {data: 'service', name: 'service'},
+                {data: 'icon', name: 'icon'},
                 {data: 'status', name: 'status'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
@@ -187,6 +188,7 @@
                             <th>Customer</th>
                             <th>Shop</th>
                             <th>Service</th>
+                            <th></th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
