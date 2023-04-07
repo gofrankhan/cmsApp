@@ -287,18 +287,13 @@
                                         <div class="card-body">
                                             <div class="row mb-4 text-black"><i>Uploaded On : {{ $attachment->created_at }} || By : @if($user != null) {{ $user->name }} @else Unknown User @endif || Status : Pending</i></div>
                                             <div class="card-text text-black"><a style="color: blue" href="{{  asset('upload/file_attachments/'.$attachment->file_id.'/'.$attachment->file_name) }}" target="_blank">{{ $attachment->file_name }}</a>
-                                            <form id="myForm" method="post" action="{{ route('delete.file') }}">
-                                                @csrf
                                                 <div align="right">
-                                                    <input type="hidden" name="file_id" value="<?php echo $file_id; ?>">
-                                                    <input type="hidden" name="file_name" value="{{ $attachment->file_name }}">
                                                     @if($status != 'Completed')
-                                                    <a type="submit" class="btn btn-danger btn-sm edit" onclick="document.getElementById('myForm').submit();" title="Delete">
+                                                    <a href="{{route('delete.file',$attachment->id )}}" type="submit" class="btn btn-danger btn-sm edit" title="Delete">
                                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                                     </a>
                                                     @endif
                                                 </div>
-                                            </form>  
                                         </div>      
                                     </div>
                                 </div>

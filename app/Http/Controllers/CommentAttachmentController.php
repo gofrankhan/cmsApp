@@ -83,13 +83,13 @@ class CommentAttachmentController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function DeleteFile(Request $request){
+    public function DeleteFile($id){
+        $file_info = DB::table('attachments')->where('id', $id)->get();
         $files = DB::table('attachments')
-                        ->where('file_id', $request->file_id)
-                        ->where('file_name', $request->file_name)
+                        ->where('id', $id)
                         ->delete();
         
-        $file = public_path('upload/file_attachments/'.$request->file_id.'/'.$request->file_name);
+        $file = ('upload/file_attachments/'.$file_info[0]->file_id.'/'.$file_info[0]->file_name);
         $realPath = realpath($file);
         if ($realPath) {
             File::delete($realPath);
