@@ -93,7 +93,7 @@
                         <input class="form-control" name="customer" placeholder="Customer" type="text" id="customer" value="{{ $files[0]->customer }}" >
                     </div>
                     <div class="col-sm-2">
-                        <a href="{{route('customer.show',$files[0]->customer_id)}}">View</a>
+                        <a href="{{route('customer.show',$files[0]->customer_id)}}" target="_blank">View</a>
                     </div>
                 </div>
             </div>

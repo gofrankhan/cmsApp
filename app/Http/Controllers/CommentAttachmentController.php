@@ -65,6 +65,13 @@ class CommentAttachmentController extends Controller
             $full_path = 'upload/file_attachments/'.$request->file_id;
             if(!is_dir($full_path))
                 mkdir($full_path, 0755);
+            if(file_exists($full_path.'/'.$filename)){
+                $notification = array(
+                    'message' => 'File already exists!', 
+                    'alert-type' => 'warning'
+                );
+                return redirect()->back()->with($notification);
+            }
             $file->move($full_path ,$filename);
             $attachment['file_name'] = $filename;
 
