@@ -120,8 +120,37 @@ class ServiceCategoryController extends Controller
         }
     }
 
+    public function UpdateServicePrice(Request $request)
+    {
+        if(!empty($request->category) && !empty($request->service) && !empty($request->price)){
+            $service = DB::table('services')
+                        ->where('category', $request->category)
+                        ->where('service', $request->service)
+                        ->update(['price' => $request->price]);
+               
+            $notification = array(
+                'message' => 'Service price updated sucessfully!', 
+                'alert-type' => 'success'
+            );
+            return redirect()->back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Please check all information inserted!', 
+                'alert-type' => 'warning'
+            );
+            return redirect()->back()->with($notification);
+        }
+    }
+
     public function getServices(Request $request){
         $data = Service::where('category', $request->value)->get();
+        return response()->json($data);
+    }
+
+    public function getServicePrice(Request $request){
+        $data = Service::where('category', $request->category)
+                 ->where('service', $request->service)
+                 ->first();
         return response()->json($data);
     }
 }

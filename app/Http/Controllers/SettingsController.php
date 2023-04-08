@@ -12,6 +12,8 @@ use Illuminate\View\View;
 use App\Models\User;
 use App\Models\File;
 use App\Models\UploadType;
+use App\Models\Category;
+use App\Models\Service;
 use DataTables;
 
 class SettingsController extends Controller
@@ -19,7 +21,8 @@ class SettingsController extends Controller
     public function CreateSettings(): View
     {
         $title = "Settings";
-        return view('admin.add_settings', compact('title'));
+        $categories = Category::all();
+        return view('admin.add_settings', compact('categories','title'));
     }
 
     public function AddUploadType(Request $request)

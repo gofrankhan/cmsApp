@@ -81,6 +81,9 @@ Route::middleware('auth', 'admin')->group(function(){
     Route::post('/add/category', [ServiceCategoryController::class, 'AddCategory'])->name('add.category');
     Route::post('/add/service', [ServiceCategoryController::class, 'AddService'])->name('add.service');
     Route::post('/add/service_category', [ServiceCategoryController::class, 'AddServiceCategory'])->name('add.service_category');
+    Route::get('/load/services', [ServiceCategoryController::class, 'getServices'])->name('load.services');
+    Route::get('/load/service/price', [ServiceCategoryController::class, 'getServicePrice'])->name('load.service.price');
+    Route::post('/update/service/price', [ServiceCategoryController::class, 'UpdateServicePrice'])->name('update.service.price');
 });
 
 Route::middleware('auth')->group(function(){
@@ -89,7 +92,6 @@ Route::middleware('auth')->group(function(){
     Route::get('/file/edit/{id}', [FileController::class, 'FileEdit'])->name('file.edit');
     Route::get('/file/delete/{id}', [FileController::class, 'FileDelete'])->name('file.delete')->middleware('admin');
     Route::get('/file/show/{id}', [FileController::class, 'FileShow'])->name('file.show');
-    Route::get('/load/services', [ServiceCategoryController::class, 'getServices'])->name('load.services');
     Route::get('/load/customer', [CustomerController::class, 'GetCustomerInfo'])->name('customer.info');
     Route::post('/update/status/price', [FileController::class, 'UpdateFileStatusAndPrice'])->name('update.status.price');
 

@@ -116,7 +116,7 @@ $(document).ready(function(){
                         <div class="row mb-3">
                             <div class="col-sm-10">
                                 <select class="form-select" name="service_category" aria-label="Default select example" id="service_category">
-                                    <option selected value="create_new">Create New Caregory</option>
+                                    <option selected value="create_new">Create New Category</option>
                                     @foreach ($categories as $category)
                                     <option value="{{ $category->category }}">{{ $category->category }}</option>
                                     @endforeach
