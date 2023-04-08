@@ -9,6 +9,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\ServiceCategoryController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BroadcastMessageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -102,6 +103,11 @@ Route::middleware('auth')->group(function(){
 Route::middleware('auth' , 'admin')->group(function(){
     Route::get('/create/settings', [SettingsController::class, 'CreateSettings'])->name('create.settings');
     Route::post('/add/upload_type', [SettingsController::class, 'AddUploadType'])->name('add.upload_type');
+});
+
+Route::middleware('auth' , 'admin')->group(function(){
+    Route::post('/delete/broadcast/message', [BroadcastMessageController::class, 'DeleteBroadcastMessage'])->name('delete.broadcast.message');
+    Route::post('/create/broadcast/message', [BroadcastMessageController::class, 'CreateBroadcastMessage'])->name('create.broadcast.message');
 });
 
 Route::middleware('auth' , 'admin')->group(function(){

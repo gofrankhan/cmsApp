@@ -3,6 +3,17 @@
 
 <div class="page-content">
     <div class="container-fluid">
+        @php
+            $broadcast_messages = Illuminate\Support\Facades\DB::table('broadcast_messages')->get();
+            $broadcast_messages_count = Illuminate\Support\Facades\DB::table('broadcast_messages')->count();
+        @endphp
+        @if(($broadcast_messages_count))
+        @foreach($broadcast_messages as $broadcast_message)
+        <div id="scroll-container">
+            <div id="scroll-text">{{$broadcast_message->message}}</div>
+        </div>
+        @endforeach
+        @endif
         @if(isset($card_array))
         <!-- start page title -->
         <div class="row">

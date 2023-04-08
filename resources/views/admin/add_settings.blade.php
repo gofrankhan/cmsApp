@@ -122,7 +122,51 @@ $(document).ready(function(){
                     </div>
                 </form>
             </div>
-            <div  class="col"></div>
+            <div  class="col">
+                <div>
+                    <div class="row mb-3">
+                        <label for="update" class="col-form-label">Broadcast Message</label>
+                    </div>
+                    @php
+                        $broadcast_messages = Illuminate\Support\Facades\DB::table('broadcast_messages')->get();
+                        $broadcast_messages_count = Illuminate\Support\Facades\DB::table('broadcast_messages')->count();
+                    @endphp
+                    @if(($broadcast_messages_count))
+                    @foreach($broadcast_messages as $broadcast_message)
+                    <div class="row mb-3" id="message_card">
+                        <div class="card bg-warning text-black-50" style="opacity: 0.75;">
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <p style="color: black">
+                                        <b>{{ $broadcast_message->message }}</b>
+                                    </p>
+                                    <form id="messageForm" action="{{ route('delete.broadcast.message')}}" method="post">
+                                        @csrf
+                                        <div align="right">
+                                            <input type="hidden" id="message_id" name="message_id" value="{{$broadcast_message->id}}">
+                                            <a type="submit" class="btn btn-danger btn-sm edit" onclick="document.getElementById('messageForm').submit();" title="Delete">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </form>
+                                </div>  
+                            </div>      
+                        </div>
+                    </div>
+                    @endforeach
+                    @else
+                    <form method="post" action="{{ route('create.broadcast.message')}}">
+                        @csrf
+                        <div class="row mb-3">
+                            <textarea id="basicpill-address-input" name="message" class="form-control" placeholder="Message" rows="4"></textarea>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="submit" class="btn btn-primary btn-rounded waves-effect waves-light" value="Save">
+                        </div>
+                    </form>
+                    @endif
+                </div>
+            </div>
         </div> 
     </div>
 </div>
