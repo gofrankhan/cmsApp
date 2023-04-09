@@ -184,16 +184,19 @@
                 </div>
             </div>
             <div class="col">
-                <form method="post" action="{{ route('upload.file')}}" enctype="multipart/form-data">
-                    @csrf
+                <form method="post" id="downloadForm" action="{{ route('download.file', $file_id )}}">
+                    @csrf 
                     <div class="row mb-3">
                         <label for="category" class="col-sm-3 col-form-label"><h3>Attachments</h3></label>
                         <div class="col-sm-1">
-                            <a class="btn btn-primary" href="{{ route('download.file', $file_id )}}" title="Download">
+                            <a class="btn btn-primary" onclick="document.getElementById('downloadForm').submit();" title="Download">
                                 <i class="fas fa-download"></i>
                             </a>
                         </div>
-                    </div>    
+                    </div>
+                </form>
+                <form method="post" action="{{ route('upload.file')}}" enctype="multipart/form-data">
+                    @csrf    
                     <div class="row mb-3">
                         <label for="upload_type" class="col-sm-2 col-form-label">Upload Type</label>
                         <div class="col-sm-10">

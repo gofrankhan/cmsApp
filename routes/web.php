@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/delete/file/{id}', [CommentAttachmentController::class, 'DeleteFile'])->name('delete.file');
     Route::post('/delete/comment', [CommentAttachmentController::class, 'DeleteComment'])->name('delete.comment');
     Route::post('/update/comment', [CommentAttachmentController::class, 'UpdateComment'])->name('update.comment');
-    Route::get('/download/file/{id}', [CommentAttachmentController::class, 'DownloadFile'])->name('download.file');
+    Route::post('/download/file/{id}', [CommentAttachmentController::class, 'DownloadFile'])->name('download.file');
 });
 
 Route::middleware('auth', 'admin')->group(function(){

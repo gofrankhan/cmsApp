@@ -15,6 +15,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use App\Models\Comment;
 use App\Models\Attachment;
+use Debugbar;
 
 class CommentAttachmentController extends Controller
 {
@@ -127,30 +128,13 @@ class CommentAttachmentController extends Controller
 
     public function DownloadFile($file_id){
         $files = DB::table('attachments')->where('file_id', $file_id)->get();
+        
         foreach($files as $file_x){
             $file_path = public_path('upload/file_attachments/'.$file_id.'/'.$file_x->file_name);
-            $realPath = realpath($file_path);
-            if(file_exists($realPath)){
-                chmod($realPath, 0755);
-                try{
-                    Response::download($realPath, $file_x->file_name);
-                }catch(Exception $e){
-                    $notification = array(
-                        'message' => $e,
-                        'alert-type' => 'success'
-                    );
-                    return redirect()->back()->with($notification);
-                }
-                
-            }else{
-                $notification = array(
-                    'message' => 'File do not exist', 
-                    'alert-type' => 'success'
-                );
-                return redirect()->back()->with($notification);
-            }
+            DebugBar::info($file_path);
+            DebugBar::info(response()->download($file_path));
         }
-
+        return redirect()->back();
     }
 
     public function UpdateComment(Request $request){
