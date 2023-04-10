@@ -90,7 +90,7 @@ $(document).ready(function(){
                     </div>
                 </form>
             </div>  
-            <div  class="col">
+            <div class="col">
                 <form method="post" action="{{ route('update.service.price') }}">
                     @csrf
                     <div id="field_wrapper1">
@@ -122,7 +122,7 @@ $(document).ready(function(){
                     </div>
                 </form>
             </div>
-            <div  class="col">
+            <div class="col">
                 <div>
                     <div class="row mb-3">
                         <label for="update" class="col-form-label">Broadcast Message</label>
@@ -168,6 +168,34 @@ $(document).ready(function(){
                 </div>
             </div>
         </div> 
+        <div class="row">
+            <div class="col-sm-4">
+                <form method="post" action="{{ route('assign.files')}}">
+                    @csrf
+                    <div class="row mb-3">
+                        <label for="assign_file" class="col-form-label">Assign File to Other Users</label>
+                    </div>
+                    <div class="row mb-3">
+                        <textarea id="basicpill-address-input" name="fileids" class="form-control" placeholder="Insert comma seperated file id's" rows="4"></textarea>
+                    </div>
+                    @php
+                        $users = App\Models\User::all();
+                    @endphp
+                    <div class="mb-3">
+                        <label  class="form-label">Select User</label>
+                        <select class="form-select" id="assign_user_id" name="assign_user_id">
+                            <option value="Choose" selected>Choose...</option>
+                            @foreach ($users as $user)
+                            <option value="{{ $user->id }}">{{ $user->username }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="submit" class="btn btn-primary btn-rounded waves-effect waves-light" value="Save">
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

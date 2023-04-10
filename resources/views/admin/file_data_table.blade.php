@@ -105,7 +105,7 @@
                 .columns([4,5,7])
                 .every(function () {
                     var column = this;
-                    var select = $('<select><option width="10px" value=""></option></select>')
+                    var select = $('<select><option style="width:120px" value=""></option></select>')
                         .appendTo($(column.header()))
                         .on('change', function () {
                             var val = $.fn.dataTable.util.escapeRegex($(this).val());
@@ -118,15 +118,28 @@
                         .unique()
                         .sort()
                         .each(function (d, j) {
-                            select.append('<option width="30px">' + d + '</option>');
+                            select.append('<option style="width:120px">' + d + '</option>');
                         });
+                });
+            this.api()
+                .columns([1,2,3])
+                .every(function () {
+                    var column = this;
+                    $('<input style="width:120px" type="text" placeholder="Search" />')
+                    .appendTo($(column.header()))
+                    .on('keyup change clear', function () {
+                        if (column.search() !== this.value) {
+                            column.search(this.value).draw();
+                        }
+                    });
                 });
             },
             processing: true,
             serverSide: true,
             order: [[0, 'desc']],
             columnDefs: [
-                { width: 0, targets: 0 },
+                { width: 2, targets: 0 },
+                { searchable: true, targets: 1 },
                 
             ],
             ajax: "{{ route('file.data' , 'all') }}",

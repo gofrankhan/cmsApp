@@ -79,12 +79,17 @@ class FileController extends Controller
                         }else{
                             $btn = '
                             <form action="'.route('file.delete',$row->id).'" method="Post">
-                                <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                                <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->file_id).'" title="Edit">
-                                    <i class="fas fa-pencil-alt"></i>
-                                </a>
+                                <div class="row">
+                                <div class="col-md-4">
+                                    <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->file_id).'" title="Edit">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                </div>
                             </form>
                             ';
                             return $btn;
@@ -270,6 +275,31 @@ class FileController extends Controller
             'message' => 'File deleted successfully', 
             'alert-type' => 'success'
         );
+        return redirect()->back()->with($notification);
+    }
+
+    public function AssignFiles(Request $request){
+
+        $fileids = preg_replace('/\s+/', '', $request->fileids);
+        $fileidsArray = explode(',', $fileids);
+        $isAllNumeric = true;
+        foreach($fileidsArray as $fileid){
+            if(!is_numeric($fileid)){
+                $isAllNumeric = false;
+            }
+        }
+        if($isAllNumeric){
+            DB::table('invoices')->whereIn('file_id', $fileidsArray)->update(['user_id' => (int)$request->assign_user_id]);
+            $notification = array(
+                'message' => 'File assigned successfully', 
+                'alert-type' => 'success'
+            );
+        }else{
+            $notification = array(
+                'message' => 'Some file id is not a number', 
+                'alert-type' => 'error'
+            );
+        }
         return redirect()->back()->with($notification);
     }
 

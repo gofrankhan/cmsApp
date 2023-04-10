@@ -82,7 +82,6 @@ Route::middleware('auth', 'admin')->group(function(){
     Route::post('/add/category', [ServiceCategoryController::class, 'AddCategory'])->name('add.category');
     Route::post('/add/service', [ServiceCategoryController::class, 'AddService'])->name('add.service');
     Route::post('/add/service_category', [ServiceCategoryController::class, 'AddServiceCategory'])->name('add.service_category');
-    Route::get('/load/services', [ServiceCategoryController::class, 'getServices'])->name('load.services');
     Route::get('/load/service/price', [ServiceCategoryController::class, 'getServicePrice'])->name('load.service.price');
     Route::post('/update/service/price', [ServiceCategoryController::class, 'UpdateServicePrice'])->name('update.service.price');
 });
@@ -98,6 +97,8 @@ Route::middleware('auth')->group(function(){
 
     Route::get('/movement/data', [FileController::class, 'MovementDataTable'])->name('movement.data');
     Route::get('/movement/data/all', [FileController::class, 'MovementDataTableAll'])->name('movement.data.all');
+    Route::get('/load/services', [ServiceCategoryController::class, 'getServices'])->name('load.services');
+    Route::post('/assign/files', [FileController::class, 'AssignFiles'])->name('assign.files');
 });
 
 Route::middleware('auth' , 'admin')->group(function(){
