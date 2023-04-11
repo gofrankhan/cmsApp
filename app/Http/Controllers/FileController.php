@@ -45,52 +45,49 @@ class FileController extends Controller
                     $user_type = Auth::user()->user_type;
                     if($user_type == 'admin'){
                         $btn = '
-                        <form action="'.route('file.delete',$row->id).'" method="Post">
-                            <div class="row">
-                            <div class="col-md-4">
-                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show">
-                                <i class="fas fa-eye"></i>
+                        <div class="dropdown float-end">
+                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="mdi mdi-dots-vertical"></i>
                             </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <!-- item-->
+                                <a href="'.route('file.show',$row->file_id).'" target="_blank" class="dropdown-item">View</a>
+                                <!-- item-->
+                                <a href="'.route('file.edit',$row->file_id).'" target="_blank" class="dropdown-item">Edit</a>
+                                <!-- item-->
+                                <a style="color:red" href="'.route('file.delete',$row->id).'" class="dropdown-item">Delete</a>
+                                <!-- item-->
                             </div>
-                            <div class="col-md-4">
-                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->file_id).'" title="Edit">
-                                <i class="fas fa-pencil-alt"></i>
-                            </a>
-                            </div>
-                            <div class="col-md-4">
-                            <a type="submit" class="btn btn-danger btn-sm edit" href="'.route('file.delete' ,$row->id).'" title="Delete">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                            </div>
-                            </div>
-                        </form>
+                        </div>
                         ';
                         return $btn;
                     }else{
                         if($row->status == 'Completed' || $row->status == 'Cancelled' ){
                             $btn = '
-                            <form action="'.route('file.delete',$row->id).'" method="Post">
-                                <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show" >
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                            </form>
+                            <div class="dropdown float-end">
+                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="mdi mdi-dots-vertical"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <!-- item-->
+                                <a href="'.route('file.show',$row->file_id).'" target="_blank" class="dropdown-item">View</a>
+                            </div>
+                        </div>
                             ';
                             return $btn;
                         }else{
                             $btn = '
-                            <form action="'.route('file.delete',$row->id).'" method="Post">
-                                <div class="row">
-                                <div class="col-md-4">
-                                    <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                </div>
-                                <div class="col-md-4">
-                                    <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->file_id).'" title="Edit">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </a>
-                                </div>
-                            </form>
+                            <div class="dropdown float-end">
+                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="mdi mdi-dots-vertical"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <!-- item-->
+                                <a href="'.route('file.show',$row->file_id).'" target="_blank" class="dropdown-item">View</a>
+                                <!-- item-->
+                                <a href="'.route('file.edit',$row->file_id).'" target="_blank" class="dropdown-item">Edit</a>
+                            </div>
+                        </div>
                             ';
                             return $btn;
                         }

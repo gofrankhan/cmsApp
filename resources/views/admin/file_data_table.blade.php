@@ -202,7 +202,7 @@
                             <th>Service</th>
                             <th></th>
                             <th>Status</th>
-                            <th>Actions</th>
+                            <th></th>
                         </tr>
                     </thead>
                 
