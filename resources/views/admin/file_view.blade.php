@@ -8,13 +8,13 @@
     $status = $files[0]->status;
     $badge_status = "";
     if($status == 'Submitted')
-        $badge_status = "bg-success";
-    else if ($status == 'Pending')
         $badge_status = "bg-dark";
+    else if ($status == 'Pending')
+        $badge_status = "bg-warning";
     else if ($status == 'Cancelled')
         $badge_status = "bg-danger";
     else if ($status == 'Completed')
-        $badge_status = "bg-warning";
+        $badge_status = "bg-success";
 @endphp
 
 <div class="page-content">
@@ -25,7 +25,7 @@
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                 <div>
                     <h1>File #{{ $file_id }}</h1>
-                    <span class="badge rounded-pill {{$badge_status}}">{{ $status }}</span>
+                    <span STYLE="font-size:18px" class="badge rounded-pill {{$badge_status}}">{{ $status }}</span>
                 </div>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">

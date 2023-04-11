@@ -98,15 +98,13 @@ class FileController extends Controller
                 })
                 ->addColumn('icon', function($row){
                     if($row->status == "Completed")
-                        $btn = '<div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-warning align-middle me-2"></i></div>';
-                    else if($row->status == "Pending") 
-                        $btn = '<div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-dark align-middle me-2"></i></div>';
-                    else if($row->status == "Submitted")
                         $btn = '<div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2"></i></div>';
+                    else if($row->status == "Pending") 
+                        $btn = '<div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-warning align-middle me-2"></i></div>';
+                    else if($row->status == "Submitted")
+                        $btn = '<div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-dark align-middle me-2"></i></div>';
                     else if($row->status == "Cancelled")
                         $btn = '<div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-danger align-middle me-2"></i></div>';
-                    else
-                        $btn = '<div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2"></i></div>';
                     return $btn;
                 })
                 ->rawColumns(['action', 'icon'])
