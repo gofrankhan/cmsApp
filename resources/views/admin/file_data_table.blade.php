@@ -102,10 +102,10 @@
         var table = $('.file_datatable').DataTable({
             initComplete: function () {
             this.api()
-                .columns([4,5,7])
+                .columns([3,4,6])
                 .every(function () {
                     var column = this;
-                    var select = $('<select><option style="width:120px" value=""></option></select>')
+                    var select = $('<select><option value=""></option></select>')
                         .appendTo($(column.header()))
                         .on('change', function () {
                             var val = $.fn.dataTable.util.escapeRegex($(this).val());
@@ -118,14 +118,14 @@
                         .unique()
                         .sort()
                         .each(function (d, j) {
-                            select.append('<option style="width:120px">' + d + '</option>');
+                            select.append('<option>' + d + '</option>');
                         });
                 });
             this.api()
-                .columns([1,2,3])
+                .columns([0,1,2])
                 .every(function () {
                     var column = this;
-                    $('<input style="width:120px" type="text" placeholder="Search" />')
+                    $('<br><input style="width:100px" type="text" placeholder="Search" />')
                     .appendTo($(column.header()))
                     .on('keyup change clear', function () {
                         if (column.search() !== this.value) {
@@ -137,14 +137,8 @@
             processing: true,
             serverSide: true,
             order: [[0, 'desc']],
-            columnDefs: [
-                { width: 2, targets: 0 },
-                { searchable: true, targets: 1 },
-                
-            ],
             ajax: "{{ route('file.data' , 'all') }}",
             columns: [
-                {data: 'id', name: 'id'},
                 {data: 'file_id', name: 'file_id'},
                 {data: 'taxid', name: 'taxid'},
                 {data: 'customer', name: 'customer'},
@@ -194,7 +188,6 @@
                 <table data-page-length='50' id="file_datatable" class="table table-bordered file_datatable">
                     <thead>
                         <tr>
-                            <th type="hidden">#</th>
                             <th>File ID</th>
                             <th>Tax ID</th>
                             <th>Customer</th>

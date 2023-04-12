@@ -104,7 +104,11 @@ class FileController extends Controller
                         $btn = '<div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-danger align-middle me-2"></i></div>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'icon'])
+                ->addColumn('id', function($row){
+                    $btn = '<label style="display:none">$row->id</label>';
+                    return $btn;
+                })
+                ->rawColumns(['action', 'icon', 'id'])
                 ->make(true);
         }
         return view('admin.file_data_table', compact('title'));
