@@ -101,15 +101,34 @@
         var view_type = $('#view_type').val();
         var table = $('.file_datatable').DataTable({
             initComplete: function () {
+            serverSide: false,
             this.api()
-                .columns([3,4,6])
+                .columns([3,4])
                 .every(function () {
                     var column = this;
-                    var select = $('<select><option value=""></option></select>')
+                    var select = $('<br><select style="width:200px"><option value=""></option></select>')
                         .appendTo($(column.header()))
                         .on('change', function () {
                             var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                            column.search(val ? '^' + val + '$' : '', true, false).draw();
+                        });
  
+                    column
+                        .data()
+                        .unique()
+                        .sort()
+                        .each(function (d, j) {
+                            select.append('<option>' + d + '</option>');
+                        });
+                });
+            this.api()
+                .columns([6])
+                .every(function () {
+                    var column = this;
+                    var select = $('<br><select style="width:100px"><option value=""></option></select>')
+                        .appendTo($(column.header()))
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
                             column.search(val ? '^' + val + '$' : '', true, false).draw();
                         });
  
@@ -125,7 +144,7 @@
                 .columns([0,1,2])
                 .every(function () {
                     var column = this;
-                    $('<br><input style="width:100px" type="text" placeholder="Search" />')
+                    $('<br><input style="width:150px" type="text" placeholder="Search" />')
                     .appendTo($(column.header()))
                     .on('keyup change clear', function () {
                         if (column.search() !== this.value) {
@@ -135,8 +154,19 @@
                 });
             },
             processing: true,
-            serverSide: true,
+            serverSide: false,
             order: [[0, 'desc']],
+            columnDefs: [
+                    { width: "150px", targets: 0 },
+                    { width: "150px", targets: 1 },
+                    { width: "150px", targets: 2 },
+                    { width: "200px", targets: 3 },
+                    { width: "200px", targets: 4 },
+                    { width: "0px", targets: 5 },
+                    { width: "100px", targets: 6 },
+                    { width: "100px", targets: 7 }
+            ],
+            autoWidth: false,
             ajax: "{{ route('file.data' , 'all') }}",
             columns: [
                 {data: 'file_id', name: 'file_id'},
@@ -195,7 +225,7 @@
                             <th>Service</th>
                             <th></th>
                             <th>Status</th>
-                            <th></th>
+                            <th style="width:150px">Actions</th>
                         </tr>
                     </thead>
                 

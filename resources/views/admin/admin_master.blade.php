@@ -39,7 +39,7 @@
 
     </head>
 
-    <body data-topbar="dark" data-layout="horizontal" data-layout-size="boxed">
+    <body data-topbar="dark" data-layout="horizontal">
     
     <!-- <body data-layout="horizontal" data-topbar="dark"> -->
 
@@ -131,9 +131,10 @@
                 "columnDefs": [
                     { "width": "15%", "targets": 0 },
                     { "width": "15%", "targets": 1 },
-                    { "width": "30%", "targets": 2 },
-                    { "width": "30%", "targets": 3 },
-                    { "width": "10%", "targets": 4 }
+                    { "width": "20%", "targets": 2 },
+                    { "width": "20%", "targets": 3 },
+                    { "width": "20%", "targets": 4 },
+                    { "width": "10%", "targets": 5 }
                 ],
                 ajax: "{{ route('customer.data') }}",
                 columns: [
@@ -141,6 +142,7 @@
                     {data: 'customertype', name: 'customertype'},
                     {data: 'taxid', name: 'taxid'},
                     {data: 'fullname', name: 'fullname'},
+                    {data: 'mobile', name: 'mobile'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });

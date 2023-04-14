@@ -495,7 +495,7 @@ body[data-layout=horizontal] .footer {
 }
 
 .vertical-menu {
-  width: 240px;
+  width: 140px;
   z-index: 1001;
   background: #252b3b;
   bottom: 0;
@@ -507,7 +507,7 @@ body[data-layout=horizontal] .footer {
 }
 
 .main-content {
-  margin-right: 240px;
+  margin-right: 140px;
   overflow: hidden;
 }
 
@@ -2007,7 +2007,7 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
   position: relative;
   display: block;
   height: 100%;
-  /* Required for horizontal native scrollbar to not appear if parent is taller than natural height */
+  /* Required for native scrollbar to not appear if parent is taller than natural height */
   width: auto;
   visibility: visible;
   overflow: auto;

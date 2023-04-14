@@ -68,6 +68,7 @@
                             <th>Type</th>
                             <th>Tax ID</th>
                             <th>Name</th>
+                            <th>Mobile No</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
