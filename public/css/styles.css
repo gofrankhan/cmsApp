@@ -19,7 +19,7 @@
 #scroll-container {
     border: 0px solid red;
     border-radius: 5px;
-    font-size: 24px;
+    font-size: 18px;
     overflow: hidden;
 }
 
@@ -68,3 +68,4 @@
         -webkit-transform: translateX(-100%);
         transform: translateX(-100%);
     }
+}
