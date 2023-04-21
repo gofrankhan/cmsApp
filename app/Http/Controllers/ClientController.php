@@ -50,7 +50,7 @@ class ClientController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:'.User::class],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'usertype' => ['required', 'string', 'max:255', Rule::in(['admin','user'])],
+            'usertype' => ['required', 'string', 'max:255', Rule::in(['admin','user','lawyer'])],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -85,7 +85,7 @@ class ClientController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
-            'usertype' => ['required', 'string', 'max:255', Rule::in(['admin','user'])],
+            'usertype' => ['required', 'string', 'max:255', Rule::in(['admin','user', 'lawyer'])],
         ]);
 
         $user = User::find($id);

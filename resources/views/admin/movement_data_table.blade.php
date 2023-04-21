@@ -10,11 +10,13 @@
     <div class="container-fluid">
         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
             <h4 class="card-title">Movement Informations @if($user_type == 'admin')<sub><a href="{{ route('movement.data.all')}}">View All </a></sub>@endif</h4>
+            @if($user_type != 'lawyer')
             @if(isset($total_sum))
             @if($total_sum < 0)
             <h3 class="card-title">Current Balance: {{ -$total_sum }}</h3>
             @else
             <h3 class="card-title">Payable Amount: {{ $total_sum }}</h3>
+            @endif
             @endif
             @endif
             <div class="page-title-right">

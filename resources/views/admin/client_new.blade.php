@@ -46,6 +46,7 @@
                                 <option selected="" hidden></option>
                                 <option value="user">User</option>
                                 <option value="admin">Admin</option>
+                                <option value="lawyer">Lawyer</option>
                             </select>
                         </div>
                     </div>

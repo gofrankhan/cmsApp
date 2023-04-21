@@ -24,6 +24,7 @@ class FileController extends Controller
         $title = "Files";
         $shop_name = Auth::user()->shop_name;
         $user_type = Auth::user()->user_type;
+        $user_id = Auth::user()->id;
         if ($request->ajax()) {
             if($user_type =='admin' && $view_type == 'all'){
                 $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
@@ -31,7 +32,8 @@ class FileController extends Controller
                                     ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                                     ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
                                     ->get();
-            }else{
+            }
+            else if ($user_type =='user'){
                 $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
                                     ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                                     ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
@@ -39,7 +41,15 @@ class FileController extends Controller
                                     ->whereIn('invoices.user_id', function($query) use ($shop_name){
                                         $query->select('id')->from('users')->where('shop_name', $shop_name);
                                     })->get();
-                                }
+            }
+            else if ($user_type =='lawyer'){
+                $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
+                                    ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                                    ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                    ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                    ->where('invoices.user_id', $user_id)
+                                    ->get();
+            }
             return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row){
                     $user_type = Auth::user()->user_type;
@@ -107,8 +117,20 @@ class FileController extends Controller
         $title = "Movement";
         $shop_name = Auth::user()->shop_name;
         $user_type = Auth::user()->user_type;
-        if ($request->ajax()) {                
-            $data = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service')
+        $user_id = Auth::user()->id;
+        if ($request->ajax()) {    
+            if($user_type == 'lawyer') {
+                $data = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service')
+                                ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                ->where('invoices.status', '=', 'Completed')
+                                ->where('invoices.user_id', $user_id)
+                                ->get();
+                    return Datatables::of($data)
+                    ->make(true);
+            } else{
+                $data = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service')
                                 ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                                 ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                                 ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
@@ -116,8 +138,10 @@ class FileController extends Controller
                                 ->whereIn('invoices.user_id', function($query) use ($shop_name){
                                     $query->select('id')->from('users')->where('shop_name', $shop_name);
                                 })->get();
-            return Datatables::of($data)
-            ->make(true);
+                    return Datatables::of($data)
+                    ->make(true);
+            }       
+            
         }
         $total_sum = Invoice::leftjoin('users', 'invoices.user_id', '=', 'users.id')
                             ->where('invoices.status', '=', 'Completed')

@@ -26,11 +26,17 @@
                         </div>
                     </div>
                     @php
-                        $admin_selection = "selected";
+                        $admin_selection = "";
                         $user_selection = "";
-                        if(strtolower($user->user_type) == 'user') {
-                            $admin_selection = "";
+                        $lawyer_selection = "";
+                        if(strtolower($user->user_type) == 'user'){
                             $user_selection = "selected";
+                        }
+                        if(strtolower($user->user_type) == 'admin'){
+                            $admin_selection = "selected";
+                        }
+                        if(strtolower($user->user_type) == 'lawyer'){
+                            $lawyer_selection = "selected";
                         }
                     @endphp
                     <div class="row mb-3">
@@ -39,6 +45,7 @@
                             <select class="form-select" name="usertype" aria-label="Default select example" id="usertype">
                                 <option {{ $user_selection }} value="user">User</option>
                                 <option {{ $admin_selection }} value="admin">Admin</option>
+                                <option {{ $lawyer_selection }} value="lawyer">Lawyer</option>
                             </select>
                         </div>
                     </div>

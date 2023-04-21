@@ -1,7 +1,9 @@
 <header id="page-topbar" data-layout="horizontal">
 <div class="navbar-header">
     <div class="d-flex">
-
+        @php
+            $user_type = Auth::user()->user_type;
+        @endphp
         <button type="button" style="width:30px" id="btn_csn_services" class="btn font-size-20 header-item waves-effect">
            
         </button>
@@ -9,11 +11,11 @@
         <button type="button" id="btn_bashboard" class="btn font-size-20 header-item waves-effect">
             PC Point
         </button>
-
+        @if($user_type != 'lawyer')
         <button type="button" id="btn_customer" class="btn font-size-20 header-item waves-effect">
             Customers
         </button>
-
+        @endif
         <button type="button" id="btn_file" class="btn font-size-20 header-item waves-effect">
             Files
         </button>
@@ -25,9 +27,6 @@
     </div>
 
     <div class="d-flex">
-        @php
-            $user_type = Auth::user()->user_type;
-        @endphp
         @if($user_type == 'admin')
         <div class="dropdown d-inline-block user-dropdown">
             <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
@@ -76,10 +75,10 @@ document.getElementById("btn_bashboard").addEventListener("click", function(even
   window.location.href = '/dashboard';
 });
 
-document.getElementById("btn_customer").addEventListener("click", function(event) {
-  event.preventDefault();
-  window.location.href = '/customer/data';
-});
+// document.getElementById("btn_customer").addEventListener("click", function(event) {
+//   event.preventDefault();
+//   window.location.href = '/customer/data';
+// });
 
 document.getElementById("btn_file").addEventListener("click", function(event) {
   event.preventDefault();
@@ -89,5 +88,12 @@ document.getElementById("btn_file").addEventListener("click", function(event) {
 document.getElementById("btn_movement").addEventListener("click", function(event) {
   event.preventDefault();
   window.location.href = '/movement/data';
+});
+
+$(document).ready(function() {
+    $('#btn_customer').click(function(event) {
+        event.preventDefault();
+        window.location.href = '/customer/data';
+    });
 });
 </script>
