@@ -1,3 +1,14 @@
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('#btn_customer').click(function() {
+        window.location.href = '/customer/data';
+    });
+});
+</script>
+
 <header id="page-topbar" data-layout="horizontal">
 <div class="navbar-header">
     <div class="d-flex">
@@ -88,12 +99,5 @@ document.getElementById("btn_file").addEventListener("click", function(event) {
 document.getElementById("btn_movement").addEventListener("click", function(event) {
   event.preventDefault();
   window.location.href = '/movement/data';
-});
-
-$(document).ready(function() {
-    $('#btn_customer').click(function(event) {
-        event.preventDefault();
-        window.location.href = '/customer/data';
-    });
 });
 </script>

@@ -70,7 +70,7 @@ class FileController extends Controller
                         </div>';
                         return $btn;
                     }else{
-                        if($row->status == 'Completed' || $row->status == 'Cancelled' ){
+                        if($row->status == 'Completed' || $row->status == 'Cancelled' || $user_type == 'lawyer' ){
                             $btn = '
                             <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show">
                                 <i class="fas fa-eye"></i>
