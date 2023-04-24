@@ -58,20 +58,23 @@
             </div>
         </div>
         <div class="row bottom-space"></div>
-        <div class="row">
-            <div class="col">
-                <div align="right" class="mb-3">
-                    <button class="col-sm-2 btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        Print    <i class="mdi mdi-chevron-down"></i>
+        <div class="row mb-3">
+            <div class="col-sm-8"></div>
+            <div class="col-sm-2">
+                <div class="dropdown ">
+                    <button class="form-control btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Prints <i class="mdi mdi-chevron-down"></i>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="#">Action</a>
                         <a class="dropdown-item" href="#">Another action</a>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
-                    <input class="col-sm-2 btn btn-primary" href="" title="Submit" value="Submit">
-                </div>    
-            </div>
+                </div>
+            </div> 
+            <div class="col-sm-2">
+                <button type="button" class="form-control btn btn-primary">Submit</button> 
+            </div>  
         </div>
         <div class="row">
             <div class="col">

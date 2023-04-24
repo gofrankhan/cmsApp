@@ -9,6 +9,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\ServiceCategoryController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\BroadcastMessageController;
 use Illuminate\Support\Facades\Route;
 
@@ -118,6 +119,10 @@ Route::middleware('auth' , 'admin')->group(function(){
 
 Route::middleware('auth' , 'admin')->group(function(){
     Route::get('/card/info', [DashboardController::class, 'CardInfo'])->name('card.info');
+});
+
+Route::middleware('auth' , 'admin')->group(function(){
+    Route::get('/generate/pdf', [PDFController::class, 'generatePDF'])->name('generate.pdf');
 });
 
 require __DIR__.'/auth.php';
