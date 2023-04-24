@@ -72,6 +72,9 @@
         data: data,
         success: function(response) {
           // Handle the response
+          if(response.status == 'success'){
+            $('.file_datatable').load(location.href+' .table');
+          }
         }
       });
     });
@@ -90,6 +93,9 @@
         data: data,
         success: function(response) {
           // Handle the response
+          if(response.status == 'success'){
+            $('.file_datatable').load(location.href+' .table');
+          }
         }
       });
     });
@@ -100,8 +106,33 @@
     $(function () {
         var view_type = $('#view_type').val();
         var table = $('.file_datatable').DataTable({
-            initComplete: function () {
+            processing: true,
             serverSide: false,
+            order: [[0, 'desc']],
+            columnDefs: [
+                    { width: "150px", targets: 0 },
+                    { width: "150px", targets: 1 },
+                    { width: "150px", targets: 2 },
+                    { width: "200px", targets: 3 },
+                    { width: "200px", targets: 4 },
+                    { width: "0px", targets: 5 },
+                    { width: "100px", targets: 6 },
+                    { width: "100px", targets: 7 }
+            ],
+            autoWidth: false,
+            ajax: "{{ route('file.data' , 'all') }}",
+            columns: [
+                {data: 'file_id', name: 'file_id'},
+                {data: 'taxid', name: 'taxid'},
+                {data: 'customer', name: 'customer'},
+                {data: 'shop', name: 'shop'},
+                {data: 'service', name: 'service'},
+                {data: 'icon', name: 'icon'},
+                {data: 'status', name: 'status'},
+                {data: 'action', name: 'action', orderable: false, searchable: false},
+            ],
+            initComplete: function () {
+            serverSide: true,
             this.api()
                 .columns([3,4])
                 .every(function () {
@@ -153,31 +184,6 @@
                     });
                 });
             },
-            processing: true,
-            serverSide: false,
-            order: [[0, 'desc']],
-            columnDefs: [
-                    { width: "150px", targets: 0 },
-                    { width: "150px", targets: 1 },
-                    { width: "150px", targets: 2 },
-                    { width: "200px", targets: 3 },
-                    { width: "200px", targets: 4 },
-                    { width: "0px", targets: 5 },
-                    { width: "100px", targets: 6 },
-                    { width: "100px", targets: 7 }
-            ],
-            autoWidth: false,
-            ajax: "{{ route('file.data' , 'all') }}",
-            columns: [
-                {data: 'file_id', name: 'file_id'},
-                {data: 'taxid', name: 'taxid'},
-                {data: 'customer', name: 'customer'},
-                {data: 'shop', name: 'shop'},
-                {data: 'service', name: 'service'},
-                {data: 'icon', name: 'icon'},
-                {data: 'status', name: 'status'},
-                {data: 'action', name: 'action', orderable: false, searchable: false},
-            ]
         });
     });
 </script>
