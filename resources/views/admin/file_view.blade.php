@@ -46,9 +46,15 @@
                         Prints <i class="mdi mdi-chevron-down"></i>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        @if($files[0]->service == 'ARCHIVIO DSU' || $files[0]->service == 'ARCHIVIO DSU CORRENTE' )
+                        <a class="dropdown-item" href="{{ route ('delega.dsu', $files[0]->customer_id)}}">DELEGA DSU</a>
+                        @endif
+                        @if($files[0]->service == 'ARCHIVIO 730')
+                        <a class="dropdown-item" href="#">DELEGA 730</a>
+                        @endif
+                        <a class="dropdown-item" href="#">Anagrafica Cliente</a>
+                        <a class="dropdown-item" href="#">Lettera Di Benvenuto</a>
+                        <a class="dropdown-item" href="#">Ricevuta di Pagamento</a>
                     </div>
                 </div>
             </div> 
