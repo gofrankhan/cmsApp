@@ -45,8 +45,8 @@ class PDFController extends Controller
             'customer' => $customer
         ]; 
             
-        $pdf = PDF::loadView('admin.PDF.delegaDSU_PDF', $data);
-     
-        return $pdf->download('Delega_DSU.pdf');
+         $pdf = PDF::loadView('admin.PDF.delegaDSU_PDF', $data);
+         return $pdf->download('Delega_DSU.pdf');
+        //return view('admin.PDF.delegaDSU_PDF', compact('customer'));
     }
 }

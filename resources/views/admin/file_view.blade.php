@@ -47,7 +47,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         @if($files[0]->service == 'ARCHIVIO DSU' || $files[0]->service == 'ARCHIVIO DSU CORRENTE' )
-                        <a class="dropdown-item" href="{{ route ('delega.dsu', $files[0]->customer_id)}}">DELEGA DSU</a>
+                        <a class="dropdown-item" href="{{ route ('delega.dsu', $files[0]->customer_id)}}" target="_blank">DELEGA DSU</a>
                         @endif
                         @if($files[0]->service == 'ARCHIVIO 730')
                         <a class="dropdown-item" href="#">DELEGA 730</a>
