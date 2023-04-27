@@ -96,7 +96,7 @@ p, table {
     </table>
     <table>
         <tr>
-            <td style="width:45px;"><td>
+            <td style="width:50px;"><td>
             <td style="width:700px;">necessari al calcolo dell’indicatore acquisiti dagli archivi amministrativi di INPS ed Agenzia delle Entrate;</td>
         </tr>
     </table>
@@ -110,7 +110,7 @@ p, table {
     </table>
     <table>
         <tr>
-            <td style="width:45px;"><td>
+            <td style="width:50px;"><td>
             <td style="width:700px;">DSU, presentata/e dallo stesso dichiarante e/o attestazioni riportanti l’ISEE, già calcolato;<td>
         </tr>
     </table>
@@ -124,14 +124,14 @@ p, table {
     </table>
     <table>
         <tr>
-            <td style="width:45px;"><td>
+            <td style="width:50px;"><td>
             <td style="width:700px;">_____________________________________, riferita ad altro nucleo familiare indispensabile ai fini del</td>
         </tr>
     </table>
     <table>
         <tr>
-            <td style="width:45px;"><td>
-            <td style="width:600px;">calcolo dell’ISEE ____________________________________________ (c.d. componente aggiuntiva);</td>
+            <td style="width:50px;"><td>
+            <td style="width:700px;">calcolo dell’ISEE ____________________________________________ (c.d. componente aggiuntiva);</td>
         </tr>
     </table>
     <table>
@@ -139,7 +139,13 @@ p, table {
             <td style="width:10px;"><td>
             <td style="width:15px;">7.<td>
             <td style="width:20px;"><input type="checkbox"><td>
-            <td style="width:600px;">Richiesta all’INPS di oscuramento della DSU successivamente al rilascio dell’attestazione riportante<br>l’ISEE;</td>
+            <td style="width:700px;">Richiesta all’INPS di oscuramento della DSU successivamente al rilascio dell’attestazione riportante</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td style="width:50px;"><td>
+            <td style="width:700px;">l’ISEE;</td>
         </tr>
     </table>
     </div>
