@@ -48,4 +48,18 @@ class PDFController extends Controller
          $pdf = PDF::loadView('admin.PDF.delegaDSU_PDF', $data);
          return $pdf->download('Delega_DSU.pdf');
     }
+
+    public function Delega730_PDF($id)
+    {
+        $customer = DB::table('customers')->where('id', $id)->first();
+  
+        $data = [
+            'title' => 'Mandato al CAF',
+            'date' => date('m/d/Y'),
+            'customer' => $customer
+        ]; 
+            
+         $pdf = PDF::loadView('admin.PDF.delega730_PDF', $data);
+         return $pdf->download('Delega_730.pdf');
+    }
 }

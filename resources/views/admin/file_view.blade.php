@@ -50,7 +50,7 @@
                         <a class="dropdown-item" href="{{ route ('delega.dsu', $files[0]->customer_id)}}" target="_blank">DELEGA DSU</a>
                         @endif
                         @if($files[0]->service == 'ARCHIVIO 730')
-                        <a class="dropdown-item" href="#">DELEGA 730</a>
+                        <a class="dropdown-item" href="{{ route ('delega.730', $files[0]->customer_id)}}" target="_blank">DELEGA 730</a>
                         @endif
                         <a class="dropdown-item" href="#">Anagrafica Cliente</a>
                         <a class="dropdown-item" href="#">Lettera Di Benvenuto</a>

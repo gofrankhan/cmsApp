@@ -19,7 +19,7 @@ p, table {
 <body>
     <div>
     <p><u>MODELLO A</u></p>
-    <h4 align="center">Mandato al CAF</h4>
+    <h6 align="center">Mandato al CAF</h6>
     <p align="center">(da compilare a cura del dichiarante della DSU, ai sensi del D.P.C.M. n. 159/2013, oppure del componente<br>
          nella sola ipotesi di sottoscrizione del modulo integrativo ai sensi dell’art. 3 del D.M.<br>
          del 7 novembre 2014).</p>

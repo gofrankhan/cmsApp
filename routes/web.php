@@ -124,6 +124,7 @@ Route::middleware('auth' , 'admin')->group(function(){
 Route::middleware('auth' , 'admin')->group(function(){
     Route::get('/generate/pdf', [PDFController::class, 'generatePDF'])->name('generate.pdf');
     Route::get('/delega/dsu/{id}', [PDFController::class, 'DelegaDSU_PDF'])->name('delega.dsu');
+    Route::get('/delega/730/{id}', [PDFController::class, 'Delega730_PDF'])->name('delega.730');
 });
 
 require __DIR__.'/auth.php';
