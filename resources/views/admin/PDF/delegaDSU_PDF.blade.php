@@ -23,7 +23,6 @@ p, table {
     <p align="center">(da compilare a cura del dichiarante della DSU, ai sensi del D.P.C.M. n. 159/2013, oppure del componente<br>
          nella sola ipotesi di sottoscrizione del modulo integrativo ai sensi dell’art. 3 del D.M.<br>
          del 7 novembre 2014).</p>
-    <br>
     <table>
         <tr>
             <td style="width:115px;">Il/La sottoscritto/a<td>
@@ -54,7 +53,6 @@ p, table {
     </table>
     <br>
     <p align="center">CONFERISCE MANDATO</p>
-    <br>
     <table>
         <tr>
             <td style="width:45px;">al CAF<td>
@@ -148,6 +146,59 @@ p, table {
             <td style="width:700px;">l’ISEE;</td>
         </tr>
     </table>
+    <br>
+    <table>
+        <tr>
+            <td style="width:40px;">Data<td>
+            <td style="width:240px; border-bottom: 1px solid black;">{{ $date }}</td>
+        </tr>
+    </table>
+    <br>
+    <table>
+        <tr>
+            <td style="width:100px;">In allegato:<td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td style="width:10px;"><td>
+            <td style="width:15px;"><td>
+            <td style="width:20px;"><input type="checkbox" checked><td>
+            <td style="width:700px;">copia di un valido documento d’identità del mandante (in tutte le ipotesi descritte dal n. 1 al n. 7).</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td style="width:10px;"><td>
+            <td style="width:15px;"><td>
+            <td style="width:20px;"><input type="checkbox"><td>
+            <td style="width:700px;">originale della dichiarazione all’INPS di non aver utilizzato la DSU al fine di ottenere una prestazione</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td style="width:40px;"><td>
+            <td style="width:700px;">sociale agevolata (solo nell’ipotesi descritta al n. 7).</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td style="width:550px;"><td>
+            <td style="width:100px;">IL MANDANTE</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td style="width:500px;"><td>
+            <td style="width:200px; border-bottom: 1px solid black;">X</td>
+        </tr>
+    </table>
+    <br>
+    <p>
+    N.B.: il componente che, ai sensi dell’art. 3, comma 1, del D.M. 7 novembre 2014, sottoscrive il modulo 
+    integrativo, al fine di autocertificare le componenti non auto-dichiarate per le quali rilevi inesattezze che lo 
+    riguardano, può barrare solo le caselle 1, 2, 3.
+    </p>
     </div>
 </body>
 </html>
