@@ -5,7 +5,7 @@
 <style>
 div.main {
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   margin-right: 5px;
   margin-left: 5px;
 }
@@ -122,23 +122,73 @@ p, table {
                 <td style="width:20px;"><input type="checkbox"><td>
                 <td style="width:230px; font-size: 12px;"><b>REVOCA DELEGA</b><td>
             </tr>
-        </table>
+      </table>
         <br>
         <table>
             <tr>
                 <p style="font-size: 12px;"><b>Al Centro di Assistenza Fiscale CAF UCI SRL - Cod. Fisc./P.Iva 04656741008 - numero di iscrizione all’albo <br> CAF 37 - con sede in ROMA (RM) in VIA IN LUCINA, 10 Cap 00186 - Codice fiscale del responsabile <br>dell’assistenza fiscale del CAF VLNFST67H10H501I</b></p>
             </tr>
         </table>
-        <br>
         <table>
             <tr>
                 <td style="width:700px; font-size:12px;">All’accesso e alla consultazione della propria dichiarazione dei redditi precompilata e degli altri dati che l’Agenzia<td>
             </tr>
-            </table>
+        </table>
         <table>
             <tr>
                 <td style="width:560px; font-size: 12px;">delle Entrate mette a disposizione ai fini della compilazione della dichiarazione relativa all’anno d’imposta</td>
                 <td style="width:30px;height:10px;border:1px solid #000;padding-left:2px;padding-right:2px;font-size:10px;">2022</td>
+            </tr>
+        </table>
+        <br>
+        <table>
+            <tr>
+                <td style="width:560px; font-size: 12px;">AUTORIZZA ad accedere all’archivio INPS:</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="width:20px;"><input type="checkbox" checked><td>
+                <td style="width:630px; font-size: 12px;"><b>CERTIFICAZIONE UNICA INPS  2023  REDDITI 2022</b><td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="width:20px;"><input type="checkbox" checked><td>
+                <td style="width:630px; font-size: 12px;"><b>MATRICOLA RED  2023  E MATRICOLA RED SOLLECITO ANNI PRECEDENTI</b><td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="width:20px;"><input type="checkbox" checked><td>
+                <td style="width:630px; font-size: 12px;"><b>MATRICOLA INVCIV  2023  E MATRICOLA INVCIV SOLLECITO ANNI PRECEDENTI</b><td>
+            </tr>
+        </table>
+        <br>
+        <table>
+            <tr>
+                <td style="width:320px;">Luogo e data<td>
+                <td style="width:100px; font-size: 12px;"><td>
+                <td style="width:320px;">Firma (per esteso e leggibile)<td>
+            </tr>
+        </table>
+        <br>
+        <table>
+            <tr>
+                <td style="width:320px; border-bottom: 1px solid black;">ROMA, 14/04/2023<td>
+                <td style="width:100px; font-size: 12px;"><td>
+                <td style="width:320px; border-bottom: 1px solid black;"><td>
+            </tr>
+        </table>
+        <br>
+        <table>
+            <tr>
+               <td style="font-size: 12px;">- La delega può essere revocata in ogni momento presentando questo modello.</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size: 12px;">- Si allega fotocopia del documento di identità del delegante/revocante.</td> 
             </tr>
         </table>
     </div>
