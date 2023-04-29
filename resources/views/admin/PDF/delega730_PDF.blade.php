@@ -191,6 +191,33 @@ p, table {
                <td style="font-size: 12px;">- Si allega fotocopia del documento di identità del delegante/revocante.</td> 
             </tr>
         </table>
+        <br>
+        <table>
+            <tr>
+               <td style="width:720px; font-size:12px; text-align:center;"><b>INFORMATIVA EX ARTICOLO 13 DEL D. LGS. 196 / 2003<b></td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;"><b>1. Tipologia dei dati<b></td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:9px; width:320px; border-bottom: 1px solid black;"><b>CAF UCI SRL- NAZIONALE<b></td> 
+               <td style="font-size:10px;text-align:justify;">tratterà  i  dati  personali,  comuni  ed  eventualmente  sensibili,  funzionali</td> 
+            </tr>
+        </table>
+        <table>
+            <tr> 
+               <td style="font-size:10px;text-align:justify;">all’accesso, consultazione e conservazione della dichiarazione dei redditi precompilata, messa a disposizione dall’Agenzia delle entrate, e di tutti i dati</td> 
+            </tr>
+        </table>
+        <table>
+            <tr> 
+               <td style="font-size:10px;text-align:justify;">da questa resi disponibili per la compilazione della dichiarazione per l’anno d’imposta cui si riferisce la delega</td> 
+            </tr>
+        </table>
     </div>
   </body>
 </html>
