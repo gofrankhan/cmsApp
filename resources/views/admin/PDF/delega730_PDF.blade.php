@@ -218,6 +218,55 @@ p, table {
                <td style="font-size:10px;text-align:justify;">da questa resi disponibili per la compilazione della dichiarazione per l’anno d’imposta cui si riferisce la delega</td> 
             </tr>
         </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;"><b>2. Finalità del trattamento<b></td> 
+            </tr>
+        </table>
+        
+        <table>
+            <tr>
+                <td style="font-size:10px; width:190px; text-align:justify;">Il trattamento dei dati personali operato da</td> 
+               <td style="font-size:9px; width:320px; border-bottom: 1px solid black;"><b>CAF UCI SRL- NAZIONALE<b></td> 
+               <td style="font-size:10px; text-align:justify;"> è finalizzato all’accesso, consultazione</td> 
+            </tr>
+        </table>
+        <table>
+            <tr> 
+               <td style="font-size:10px;text-align:justify;">e conservazione della dichiarazione dei redditi precompilata, messa a disposizione dall’Agenzia delle entrate, e di tutti i dati da questa resi disponibili</td> 
+            </tr>
+        </table>
+        <table>
+            <tr> 
+               <td style="font-size:10px;text-align:justify;">per la compilazione della dichiarazione per l’anno d’imposta cui si riferisce la delega</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;"><b>3. Modalità del trattamento<b></td> 
+            </tr>
+        </table>
+        
+        <table>
+            <tr>
+               <td style="font-size:10px; text-align:justify;"> I dati personali verranno trattati sia manualmente che elettronicamente e saranno conservati sia in un archivio cartaceo sia nella banca dati elettronica a </td> 
+            </tr>
+        </table>
+        <table>
+            <tr> 
+               <td style="font-size:10px;text-align:justify;">tal  uopo  predisposta  per  adempiere  agli  obblighi  e  alle  finalità  sopra  indicate.  I  dati  così  archiviati  saranno  trattati  utilizzando  le  misure  di  sicurezza</td> 
+            </tr>
+        </table>
+        <table>
+            <tr> 
+               <td style="font-size:10px;text-align:justify;">prescritte dal D. Lgs. 196/03, in modo da ridurne al minimo i rischi di distruzione o perdita, di accesso non autorizzato o di trattamento non conforme</td> 
+            </tr>
+        </table>
+        <table>
+            <tr> 
+               <td style="font-size:10px;text-align:justify;">alle finalità della raccolta</td> 
+            </tr>
+        </table>
     </div>
   </body>
 </html>
