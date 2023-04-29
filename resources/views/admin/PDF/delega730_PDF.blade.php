@@ -167,17 +167,17 @@ p, table {
         <br>
         <table>
             <tr>
-                <td style="width:320px;">Luogo e data<td>
+                <td style="width:290px;">Luogo e data<td>
                 <td style="width:100px; font-size: 12px;"><td>
-                <td style="width:320px;">Firma (per esteso e leggibile)<td>
+                <td style="width:290px;">Firma (per esteso e leggibile)<td>
             </tr>
         </table>
         <br>
         <table>
             <tr>
-                <td style="width:320px; border-bottom: 1px solid black;">ROMA, 14/04/2023<td>
+                <td style="width:290px; border-bottom: 1px solid black;">ROMA, 14/04/2023<td>
                 <td style="width:100px; font-size: 12px;"><td>
-                <td style="width:320px; border-bottom: 1px solid black;"><td>
+                <td style="width:290px; border-bottom: 1px solid black;"><td>
             </tr>
         </table>
         <br>
@@ -226,7 +226,7 @@ p, table {
         
         <table>
             <tr>
-                <td style="font-size:10px; width:190px; text-align:justify;">Il trattamento dei dati personali operato da</td> 
+               <td style="font-size:10px; width:190px; text-align:justify;">Il trattamento dei dati personali operato da</td> 
                <td style="font-size:9px; width:320px; border-bottom: 1px solid black;"><b>CAF UCI SRL- NAZIONALE<b></td> 
                <td style="font-size:10px; text-align:justify;"> è finalizzato all’accesso, consultazione</td> 
             </tr>
@@ -265,6 +265,244 @@ p, table {
         <table>
             <tr> 
                <td style="font-size:10px;text-align:justify;">alle finalità della raccolta</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;"><b>4. Ambito di comunicazione dei dati<b></td> 
+            </tr>
+        </table>
+        <table>
+            <tr> 
+               <td style="font-size:10px;text-align:justify;">In relazione alle finalità sopra indicate i dati personali potranno essere comunicati alle seguenti categorie di soggetti:</td> 
+            </tr>
+        </table>
+        <table>
+            <tr> 
+               <td style="width:5;"></td> 
+               <td style="width:5;"></td> 
+               <td style="font-size:10px; width:290px;text-align:justify;">centri servizi e professionisti che operano in nome e per conto di</td> 
+               <td style="font-size:9px; width:380px; border-bottom: 1px solid black;"><b>CAF UCI SRL- NAZIONALE<b></td> 
+            </tr>
+        </table>
+        <table>
+            <tr> 
+               <td style="width:5;"></td> 
+               <td style="width:5;"></td> 
+               <td style="font-size:10px; width:670px;text-align:justify;">regolarmente nominati responsabili del trattamento.</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;"><b>5. Obbligo di conferire i dati<b></td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;">I dati strettamente necessari per realizzare la finalità di cui sopra sono quelli richiesti per il rilascio della relativa delega.</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;"><b>6. Diritti dell’interessato<b></td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;">In relazione al trattamento dei dati personali, il sottoscritto può esercitare, anche a mezzo delega o procura a persona fisica o associazione, i diritti ricono-</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;">sciutigli dall’art. 7 del D.Lgs. 196/2003, riportato in calce alla presente informativa rivolgendosi al titolare del trattamento</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;"><b>7. Titolare del trattamento <b></td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;width:150px;">Titolare del trattamento dei dati è </td> 
+               <td style="font-size:9px; width:530px; border-bottom: 1px solid black;"><b>CAF UCI SRL- NAZIONALE</b></td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;width:85px;">con sede legale in</td> 
+               <td style="font-size:9px; width:595px; border-bottom: 1px solid black;"><b>ROMA,VIA IN LUCINA10</b></td> 
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+               <td style="font-size:9px; width:680px; border-bottom: 1px solid black;">.</td> 
+            </tr>
+        </table>
+        <br>
+        <table>
+            <tr>
+               <td style="width:720px; font-size:12px; text-align:center;"><b>Art. 7. D. Lgs. 196/2003 “Diritto di accesso ai dati personali ed altri diritti”<b></td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;width:10px">1.</td>  
+               <td style="font-size:10px;">L'interessato  ha  diritto  di  ottenere  la  conferma  dell'esistenza  o  meno  di  dati  personali  che  lo  riguardano,  anche  se  non  ancora  registrati,  e  la  loro </td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="font-size:10px;width:10px"></td> 
+               <td style="font-size:10px;">comunicazione in forma intelligibile.</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;width:10px">2.</td>  
+               <td style="font-size:10px;"> L'interessato ha diritto di ottenere l'indicazione:</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;width:20px"></td> 
+               <td style="font-size:10px;width:10px">a)</td>  
+               <td style="font-size:10px;">dell'origine dei dati personali;</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="font-size:10px;width:20px"></td> 
+               <td style="font-size:10px;width:10px">b)</td>  
+               <td style="font-size:10px;">delle finalità e modalità del trattamento;</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="font-size:10px;width:20px"></td> 
+               <td style="font-size:10px;width:10px">c)</td>  
+               <td style="font-size:10px;">della logica applicata in caso di trattamento effettuato con l'ausilio di strumenti elettronici;</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="font-size:10px;width:20px"></td> 
+               <td style="font-size:10px;width:10px">d)</td>  
+               <td style="font-size:10px;">degli estremi identificativi del titolare, dei responsabili e del rappresentante designato ai sensi dell'articolo 5, comma 2;</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="font-size:10px;width:20px"></td> 
+               <td style="font-size:10px;width:10px">e)</td>  
+               <td style="font-size:10px;">dei soggetti o delle categorie di soggetti ai quali i dati personali possono essere comunicati o che possono venirne a conoscenza in qualità di</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="font-size:10px;width:20px"></td> 
+               <td style="font-size:10px;width:10px"></td>  
+               <td style="font-size:10px;">rappresentante designato nel territorio dello Stato, di responsabili o incaricati</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;width:10px">3.</td>  
+               <td style="font-size:10px;"> L'interessato ha diritto di ottenere:</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;width:20px"></td> 
+               <td style="font-size:10px;width:10px">a)</td>  
+               <td style="font-size:10px;">l'aggiornamento, la rettificazione ovvero, quando vi ha interesse, l'integrazione dei dati;</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="font-size:10px;width:20px"></td> 
+               <td style="font-size:10px;width:10px">b)</td>  
+               <td style="font-size:10px;">la cancellazione, la trasformazione in forma anonima o il blocco dei dati trattati in violazione di legge, compresi quelli di cui non è necessaria la</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;width:20px"></td> 
+               <td style="font-size:10px;width:10px"></td>  
+               <td style="font-size:10px;">conservazione in relazione agli scopi per i quali i dati sono stati raccolti o successivamente trattati;</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="font-size:10px;width:20px"></td> 
+               <td style="font-size:10px;width:10px">c)</td>  
+               <td style="font-size:10px;">l'attestazione che le operazioni di cui alle lettere a) e b) sono state portate a conoscenza, anche per quanto riguarda il loro contenuto, di coloro ai </td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;width:20px"></td> 
+               <td style="font-size:10px;width:10px"></td>  
+               <td style="font-size:10px;">quali  i  dati  sono  stati  comunicati  o  diffusi,  eccettuato  il  caso  in  cui  tale  adempimento  si  rivela  impossibile  o  comporta  un  impiego  di  mezzi</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;width:20px"></td> 
+               <td style="font-size:10px;width:10px"></td>  
+               <td style="font-size:10px;">manifestamente sproporzionato rispetto al diritto tutelato.</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;width:10px">4.</td>  
+               <td style="font-size:10px;">L'interessato ha diritto di opporsi, in tutto o in parte:</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="font-size:10px;width:20px"></td> 
+               <td style="font-size:10px;width:10px">a)</td>  
+               <td style="font-size:10px;"> per motivi legittimi al trattamento dei dati personali che lo riguardano, ancorché pertinenti allo scopo della raccolta;</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="font-size:10px;width:20px"></td> 
+               <td style="font-size:10px;width:10px">b)</td>  
+               <td style="font-size:10px;"> al trattamento di dati personali che lo riguardano a fini di invio di materiale pubblicitario o di vendita diretta o per il compimento di ricerche di</td> 
+            </tr>
+        </table>
+        <table>
+            <tr>
+               <td style="font-size:10px;width:20px"></td> 
+               <td style="font-size:10px;width:10px"></td>  
+               <td style="font-size:10px;">mercato o di comunicazione commerciale.</td> 
+            </tr>
+        </table>
+        <br>
+        <table>
+            <tr>
+               <td style="width:720px; font-size:12px; text-align:center;"><b>CONSENSO AL TRATTAMENTODEI DATI PERSONALI<b></td> 
+            </tr>
+        </table>
+        <p style="font-size:10px;">
+            Presto il mio consenso al trattamento dei dati sensibili nei limiti delle operazioni strettamente necessarie per lo svolgimento della delega conferita, dichiarate nell’informativa ex articolo 13 del D. Lgs. 196/2003 
+        </p>
+        <table>
+            <tr>
+                <td style="width:290px;font-size:10px;">Luogo e data<td>
+                <td style="width:100px; font-size: 12px;"><td>
+                <td style="width:290px;font-size:10px;">Firma (per esteso e leggibile)<td>
+            </tr>
+        </table>
+        <br>
+        <table>
+            <tr>
+                <td style="width:290px; border-bottom: 1px solid black;font-size:10px;">ROMA, 14/04/2023<td>
+                <td style="width:100px; font-size: 12px;"><td>
+                <td style="width:290px; border-bottom: 1px solid black;"><td>
             </tr>
         </table>
     </div>
