@@ -39,11 +39,17 @@ p, table {
               <td style="width:6px;">(<td>
               <td style="width:30px; border-bottom: 1px solid black; text-align:center">EE</td>
               <td style="width:6px;">)<td>
-              <td style="width:30px; border-bottom: 1px solid black; text-align:center">01</td>
+                @php
+                $time=strtotime($customer->dateofbirth);
+                $date1=date("d",$time);
+                $month1=date("m",$time);
+                $year1=date("Y",$time);
+                @endphp
+              <td style="width:30px; border-bottom: 1px solid black; text-align:center">{{ $date1 }}</td>
               <td style="width:6px;">/<td>
-              <td style="width:30px; border-bottom: 1px solid black; text-align:center">09</td>
+              <td style="width:30px; border-bottom: 1px solid black; text-align:center">{{ $month1 }}</td>
               <td style="width:6px;">/<td>
-              <td style="width:50px; border-bottom: 1px solid black; text-align:center">1989</td>
+              <td style="width:50px; border-bottom: 1px solid black; text-align:center">{{ $year1 }}</td>
           </tr>
       </table>
       <table>
