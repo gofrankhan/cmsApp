@@ -46,7 +46,7 @@ class PDFController extends Controller
         ]; 
             
          $pdf = PDF::loadView('admin.PDF.delegaDSU_PDF', $data);
-         return $pdf->download('Delega_DSU.pdf');
+         return $pdf->stream('Delega_DSU.pdf');
     }
 
     public function Delega730_PDF($id)
@@ -60,6 +60,6 @@ class PDFController extends Controller
         ]; 
             
          $pdf = PDF::loadView('admin.PDF.delega730_PDF', $data);
-         return $pdf->download('Delega_730.pdf');
+         return $pdf->stream('Delega_730.pdf');
     }
 }
