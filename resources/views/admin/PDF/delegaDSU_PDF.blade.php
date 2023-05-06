@@ -67,7 +67,7 @@ p, table {
                 $address1 = join(" ", $words);
             @endphp
             @if($customer->addressline2 == '-')
-            <td style="width:635px; border-bottom: 1px solid black;">{{ $customer->addressline1}}</td>
+            <td style="width:635px; border-bottom: 1px solid black;">{{ $address1}}</td>
             @else
             <td style="width:635px; border-bottom: 1px solid black;">{{ $address1." " .$customer->addressline2 }}</td>
             @endif

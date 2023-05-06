@@ -57,17 +57,26 @@ p, table {
               <td style="width:135px;">Residenza: Comune<td>
               <td style="width:405px; border-bottom: 1px solid black;">{{ $customer->city }}</td>
               <td style="width:30px;">Prov<td>
-              <td style="width:30px; border-bottom: 1px solid black; text-align:center"></td>
+              <td style="width:30px; border-bottom: 1px solid black; text-align:center">{{ $customer->region[0].$customer->region[1] }}</td>
               <td style="width:32px;">CAP<td>
-              <td style="width:50px; border-bottom: 1px solid black; text-align:center"></td>
+              <td style="width:50px; border-bottom: 1px solid black; text-align:center">{{ $customer->postcode }}</td>
           </tr>
       </table>
       <table>
           <tr>
-              <td style="width:55px;">Indirizzo<td>
-              <td style="width:492px; border-bottom: 1px solid black;">{{ $customer->addressline1." " .$customer->addressline2  }}</td>
-              <td style="width:90px;">Numero civico<td>
-              <td style="width:50px; border-bottom: 1px solid black; text-align:center"></td>
+            <td style="width:55px;">Indirizzo<td>
+            @php
+                $words = explode(' ', $customer->addressline1);
+                $last_word = array_pop($words);
+                $address1 = join(" ", $words);
+            @endphp
+            @if($customer->addressline2 == '-')
+            <td style="width:492px; border-bottom: 1px solid black;">{{ $address1}}</td>
+            @else
+            <td style="width:492px; border-bottom: 1px solid black;">{{ $address1." " .$customer->addressline2 }}</td>
+            @endif
+            <td style="width:90px;">Numero civico<td>
+            <td style="width:50px; border-bottom: 1px solid black; text-align:center">{{ $last_word }}</td>
           </tr>
       </table>
       <br>
@@ -143,7 +152,7 @@ p, table {
         <table>
             <tr>
                 <td style="width:560px; font-size: 12px;">delle Entrate mette a disposizione ai fini della compilazione della dichiarazione relativa all’anno d’imposta</td>
-                <td style="width:30px;height:10px;border:1px solid #000;padding-left:2px;padding-right:2px;font-size:10px;">2022</td>
+                <td style="width:30px;height:10px;border:1px solid #000;padding-left:2px;padding-right:2px;font-size:10px;">{{ date("Y")-1 }}</td>
             </tr>
         </table>
         <br>
@@ -155,19 +164,19 @@ p, table {
         <table>
             <tr>
                 <td style="width:20px;"><input type="checkbox" checked><td>
-                <td style="width:630px; font-size: 12px;"><b>CERTIFICAZIONE UNICA INPS  2023  REDDITI 2022</b><td>
+                <td style="width:630px; font-size: 12px;"><b>CERTIFICAZIONE UNICA INPS  {{ date("Y") }}  REDDITI {{ date("Y")-1 }}</b><td>
             </tr>
         </table>
         <table>
             <tr>
                 <td style="width:20px;"><input type="checkbox" checked><td>
-                <td style="width:630px; font-size: 12px;"><b>MATRICOLA RED  2023  E MATRICOLA RED SOLLECITO ANNI PRECEDENTI</b><td>
+                <td style="width:630px; font-size: 12px;"><b>MATRICOLA RED  {{ date("Y") }}  E MATRICOLA RED SOLLECITO ANNI PRECEDENTI</b><td>
             </tr>
         </table>
         <table>
             <tr>
                 <td style="width:20px;"><input type="checkbox" checked><td>
-                <td style="width:630px; font-size: 12px;"><b>MATRICOLA INVCIV  2023  E MATRICOLA INVCIV SOLLECITO ANNI PRECEDENTI</b><td>
+                <td style="width:630px; font-size: 12px;"><b>MATRICOLA INVCIV  {{ date("Y") }}  E MATRICOLA INVCIV SOLLECITO ANNI PRECEDENTI</b><td>
             </tr>
         </table>
         <br>
@@ -181,7 +190,7 @@ p, table {
         <br>
         <table>
             <tr>
-                <td style="width:290px; border-bottom: 1px solid black;">ROMA, 14/04/2023<td>
+                <td style="width:290px; border-bottom: 1px solid black;">{{ $customer->city}}, {{date("d/m/Y")}}<td>
                 <td style="width:100px; font-size: 12px;"><td>
                 <td style="width:290px; border-bottom: 1px solid black;"><td>
             </tr>
@@ -506,7 +515,7 @@ p, table {
         <br>
         <table>
             <tr>
-                <td style="width:290px; border-bottom: 1px solid black;font-size:10px;">ROMA, 14/04/2023<td>
+                <td style="width:290px; border-bottom: 1px solid black;font-size:10px;">{{ $customer->city}}, {{date("d/m/Y")}}<td>
                 <td style="width:100px; font-size: 12px;"><td>
                 <td style="width:290px; border-bottom: 1px solid black;"><td>
             </tr>
