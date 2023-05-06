@@ -34,7 +34,20 @@ p, table {
             <td style="width:56px;">nato/a a<td>
             <td style="width:240px; border-bottom: 1px solid black;">{{ $customer->citizenship }}</td>
             <td style="width:8px;">il<td>
-            <td style="width:130px; border-bottom: 1px solid black;">{{ $customer->dateofbirth }}</td>
+            @php
+                if($customer->dateofbirth == '0000-00-00')
+                {
+                    $date1="00";
+                    $month1="00";
+                    $year1="0000";
+                }else{
+                    $time=strtotime($customer->dateofbirth);
+                    $date1=date("d",$time);
+                    $month1=date("m",$time);
+                    $year1=date("Y",$time);
+                }
+            @endphp
+            <td style="width:130px; border-bottom: 1px solid black;">{{ $date1."/".$month1."/".$year1; }}</td>
             <td style="width:24px;">C.F.<td>
             <td style="width:200px; border-bottom: 1px solid black;">{{ $customer->taxid }}</td>
         </tr>
@@ -48,7 +61,18 @@ p, table {
     <table>
         <tr>
             <td style="width:0px;"><td>
-            <td style="width:675px; border-bottom: 1px solid black;">{{ $customer->addressline1." " .$customer->addressline2 }}</td>
+            @php
+                $words = explode(' ', $customer->addressline1);
+                $last_word = array_pop($words);
+                $address1 = join(" ", $words);
+            @endphp
+            @if($customer->addressline2 == '-')
+            <td style="width:635px; border-bottom: 1px solid black;">{{ $customer->addressline1}}</td>
+            @else
+            <td style="width:635px; border-bottom: 1px solid black;">{{ $address1." " .$customer->addressline2 }}</td>
+            @endif
+            <td style="width:9px;">n.</td>
+            <td style="width:24px; border-bottom: 1px solid black;">{{ $last_word }}</td>
         </tr>
     </table>
     <br>
@@ -150,7 +174,10 @@ p, table {
     <table>
         <tr>
             <td style="width:40px;">Data<td>
-            <td style="width:240px; border-bottom: 1px solid black;">{{ $date }}</td>
+            @php
+                $date_today = date("d/m/Y");
+            @endphp
+            <td style="width:240px; border-bottom: 1px solid black;">{{ $date_today }}</td>
         </tr>
     </table>
     <br>
