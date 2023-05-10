@@ -69,3 +69,11 @@
         transform: translateX(-100%);
     }
 }
+
+table {
+    width: 100%;
+}
+
+td {
+    height: 40px;
+}

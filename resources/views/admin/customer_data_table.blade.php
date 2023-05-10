@@ -61,16 +61,40 @@
                         </div>
                     </div>
                 </p>
-                <table data-page-length='50' id="customer_datatable">
+                <table data-page-length='50' id="customer_datatable" class="table-bordered" style="width:100%">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Type</th>
-                            <th>Tax ID</th>
-                            <th>Name</th>
-                            <th>Mobile No</th>
-                            <th>Actions</th>
+                            <th style="width:10%">ID</th>
+                            <th style="width:10%">Type</th>
+                            <th style="width:20%">Tax ID</th>
+                            <th style="width:30%">Name</th>
+                            <th style="width:15%">Mobile No</th>
+                            <th style="width:15%">Actions</th>
                         </tr>
+                        @foreach($data as $r)
+                        <tr>
+                            <td>{{$r->id}}</td>
+                            <td>{{$r->customertype}}</td>
+                            <td>{{$r->taxid}}</td>
+                            <td>{{$r->fullname}}</td>
+                            <td>{{$r->mobile}}</td>
+                            <td>
+                                <div style="width:150px" class="row">
+                                    <form action="{{ route('customer.delete',$r->id)}}" method="Post">
+                                        <a class="btn btn-outline-secondary btn-sm edit" href="{{route('customer.show',$r->id)}}" target="_blank" title="Show">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a class="btn btn-outline-secondary btn-sm edit" href="{{route('customer.edit',$r->id)}}" title="Edit">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </a>
+                                        <a type="submit" class="btn btn-danger btn-sm edit" href="{{route('customer.delete' ,$r->id)}}" title="Delete">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
                     </thead>
                 
                     <tbody></tbody>
