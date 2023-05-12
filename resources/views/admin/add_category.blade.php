@@ -22,8 +22,15 @@ $(document).ready(function(){
     var maxField1 = 10; //Input fields increment limitation
     var addButton1 = $('#add_button1'); //Add button selector
     var wrapper1 = $('#field_wrapper1'); //Input field wrapper
-    var fieldHTML1 = '<div class="row mb-3"><div class="col-sm-8"><input class="form-control" name="category[]" placeholder="Category Name" type="text" id="category" ></div><div class="col-sm-2">
-    <input  type="submit" id="remove_button1" class="btn btn-rounded btn-sm btn-outline-danger waves-effect waves-light" value="-"></div></div>'; //New input field html 
+    var fieldHTML1 = 
+        '<div class="row mb-3">'+
+            '<div class="col-sm-10">'+
+                '<input class="form-control" name="category[]" placeholder="Category Name" type="text" id="category" >'+
+            '</div>'+
+            '<div class="col-sm-2">'+
+                '<input  type="submit" id="remove_button1" class="btn btn-rounded btn-sm btn-outline-danger waves-effect waves-light" value="-">'+
+            '</div>'+
+        '</div>'; //New input field html 
     var x = 1; //Initial field counter is 1
     
     //Once add button is clicked
@@ -50,17 +57,17 @@ $(document).ready(function(){
     var addButton2 = $('#add_button2'); //Add button selector
     var wrapper2 = $('#field_wrapper2'); //Input field wrapper
     var fieldHTML2 = 
-    '<div class="row mb-3">'+
-        '<div class="col-sm-7">'+
-            '<input class="form-control" name="service[]" placeholder="Service Name" type="text" id="service" >'+
-        '</div>'+
-        '<div class="col-sm-3">'+
-            '<input class="form-control" name="price[]" placeholder="price" type="number" id="price" >'+
-        '</div>'+
-        '<div class="col-sm-2">'+
-            '<input  type="submit" id="remove_button2" class="btn btn-rounded btn-sm btn-outline-danger waves-effect waves-light" value="-">'+
-        '</div>'+
-    '</div>'; //New input field html 
+        '<div class="row mb-3">'+
+            '<div class="col-sm-7">'+
+                '<input class="form-control" name="service[]" placeholder="Service Name" type="text" id="service" >'+
+            '</div>'+
+            '<div class="col-sm-3">'+
+                '<input class="form-control" name="price[]" placeholder="price" type="number" id="price" >'+
+            '</div>'+
+            '<div class="col-sm-2">'+
+                '<input  type="submit" id="remove_button2" class="btn btn-rounded btn-sm btn-outline-danger waves-effect waves-light" value="-">'+
+            '</div>'+
+        '</div>'; //New input field html 
     var x = 1; //Initial field counter is 1
     
     //Once add button is clicked
