@@ -96,7 +96,6 @@
                         </tr>
                         @endforeach
                     </thead>
-                
                     <tbody></tbody>
                 </table>
                 <nav aria-label="Page navigation example">
