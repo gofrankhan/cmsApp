@@ -91,6 +91,7 @@ class FileController extends Controller
                     }
                 })
                 ->addColumn('icon', function($row){
+                    $btn = "";
                     if($row->status == "Completed")
                         $btn = '<div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2"></i></div>';
                     else if($row->status == "Pending") 
@@ -221,6 +222,15 @@ class FileController extends Controller
             return redirect()->back()->with($notification);
         }
 
+    }
+
+    public function UpdateService(Request $request){
+        $invoice_id = Invoice::select('id')->where('file_id', $request->file_id_no)->first();
+        $invoice = Invoice::find($invoice_id->id);
+        $service_id = Service::select('id')->where('service', $request->service2)->first();
+        $invoice->service_id = intval($service_id->id);
+        $invoice->save();
+        return redirect()->back();
     }
 
     public function UpdateFileStatusAndPrice(Request $request)

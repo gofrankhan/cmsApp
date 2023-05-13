@@ -127,43 +127,45 @@
             @endphp
             <div class="modal fade" id="editservice" aria-hidden="true" aria-labelledby="..." tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Update Service</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form action="" id="form1">
-                            @csrf
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div>
-                                        <div class="mb-3">
-                                            <label  class="form-label">Select Category</label>
-                                            <select class="form-select" id="category" name="category">
-                                                <option value="Choose" selected>Choose...</option>
-                                                @foreach ($categories as $category)
-                                                    <option value="{{ $category->category }}" >{{ $category->category }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row" id="div_service">
-                                    <div>
-                                        <div class="mb-3">
-                                            <label  class="form-label">Select Service</label>
-                                            <select class="form-select" id="service2" name="service2">
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+                    <form action="{{ route('update.service')}}" id="form2" method="post">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Update Service</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                        </form>
-                        <div class="modal-footer">
-                            <!-- Toogle to second dialog -->
-                            <button id="update_service" type="submit" class="btn btn-primary waves-effect waves-light">Update</button>
+                                @csrf
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div>
+                                            <div class="mb-3">
+                                                <label  class="form-label">Select Category</label>
+                                                <select class="form-select" id="category" name="category">
+                                                    <option value="Choose" selected>Choose...</option>
+                                                    @foreach ($categories as $category)
+                                                        <option value="{{ $category->category }}" >{{ $category->category }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="file_id_no" value="{{ $file_id }}">
+                                    <div class="row" id="div_service">
+                                        <div>
+                                            <div class="mb-3">
+                                                <label  class="form-label">Select Service</label>
+                                                <select class="form-select" id="service2" name="service2">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            <div class="modal-footer">
+                                <!-- Toogle to second dialog -->
+                                <button id="update_service" type="submit" class="btn btn-primary waves-effect waves-light">Update</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="col">
