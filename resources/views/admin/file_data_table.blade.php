@@ -219,7 +219,7 @@
                 @if($user_type != 'lawyer')
                 <p class="card-title-desc" >
                     <div align="right">
-                        <a href="" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target={{ $modealName }}>New</a>
+                        <a href="" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="{{ $modealName }}">New</a>
                     </div>
                 </p>
                 @endif

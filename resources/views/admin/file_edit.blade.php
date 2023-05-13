@@ -21,6 +21,31 @@
   });
 </script>
 
+<script>
+  $(document).ready(function() {
+    $('#category').change(function() {
+      var value = $(this).val();
+      if(value.toLowerCase() === 'pagamento'){
+        $('#div_service').hide();
+      }else{
+        $('#div_service').show();
+      $.ajax({
+        url: "{{ route('load.services') }}",
+        type: "GET",
+        data: { value: value },
+        success: function(data) {
+          $("#service2").empty();
+          $("#service2").append("<option value=''>Select a service</option>");
+          $.each(data, function(index, item) {
+            $("#service2").append("<option value='" + item.service + "'>" + item.service + "</option>");
+          });
+        }
+      });
+    }
+    });
+  });
+</script>
+
 @php 
     $user_type = Auth::user()->user_type;
     $is_admin = ($user_type == 'admin');
@@ -67,10 +92,10 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         @if($files[0]->service == 'ARCHIVIO DSU' || $files[0]->service == 'ARCHIVIO DSU CORRENTE' )
-                        <a class="dropdown-item" href="#">DELEGA DSU</a>
+                        <a class="dropdown-item" href="{{ route ('delega.dsu', $files[0]->customer_id)}}" target="_blank">DELEGA DSU</a>
                         @endif
                         @if($files[0]->service == 'ARCHIVIO 730')
-                        <a class="dropdown-item" href="#">DELEGA 730</a>
+                        <a class="dropdown-item" href="{{ route ('delega.730', $files[0]->customer_id)}}" target="_blank">DELEGA 730</a>
                         @endif
                         <a class="dropdown-item" href="#">Anagrafica Cliente</a>
                         <a class="dropdown-item" href="#">Lettera Di Benvenuto</a>
@@ -88,8 +113,56 @@
                     <div class="col-sm-2">
                         <label for="service" class="col-form-label">Service</label>
                     </div>
-                    <div class="col-sm-10">
+                    <div class="col-sm-8">
                         <input class="form-control" name="service" placeholder="Service" type="text" id="service" value="{{ $files[0]->service }}">
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#editservice">Edit</a>
+                    </div>
+                </div>
+            </div>
+            <!-- sample modal content -->
+            @php
+                $categories = App\Models\Category::all();
+            @endphp
+            <div class="modal fade" id="editservice" aria-hidden="true" aria-labelledby="..." tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Update Service</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="" id="form1">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div>
+                                        <div class="mb-3">
+                                            <label  class="form-label">Select Category</label>
+                                            <select class="form-select" id="category" name="category">
+                                                <option value="Choose" selected>Choose...</option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->category }}" >{{ $category->category }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" id="div_service">
+                                    <div>
+                                        <div class="mb-3">
+                                            <label  class="form-label">Select Service</label>
+                                            <select class="form-select" id="service2" name="service2">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="modal-footer">
+                            <!-- Toogle to second dialog -->
+                            <button id="update_service" type="submit" class="btn btn-primary waves-effect waves-light">Update</button>
+                        </div>
                     </div>
                 </div>
             </div>
