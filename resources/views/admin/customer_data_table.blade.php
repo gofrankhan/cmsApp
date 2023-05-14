@@ -61,24 +61,28 @@
                         </div>
                     </div>
                 </p>
-                <table data-page-length='50' id="customer_datatable" class="table-bordered" style="width:100%">
+            </div>
+            <div class="col-12" align="right">
+                <table id="customer_datatable" class="table-bordered">
                     <thead>
                         <tr>
                             <th style="width:10%">ID</th>
                             <th style="width:10%">Type</th>
-                            <th style="width:20%">Tax ID</th>
-                            <th style="width:30%">Name</th>
-                            <th style="width:15%">Mobile No</th>
-                            <th style="width:15%">Actions</th>
+                            <th style="width:25%">Tax ID</th>
+                            <th style="width:35%">Name</th>
+                            <th style="width:20%">Mobile No</th>
+                            <th style="width:2%">Actions</th>
                         </tr>
+                    </thead>
+                    <tbody>
                         @foreach($data as $r)
                         <tr>
-                            <td>{{$r->id}}</td>
-                            <td>{{$r->customertype}}</td>
-                            <td>{{$r->taxid}}</td>
-                            <td>{{$r->fullname}}</td>
-                            <td>{{$r->mobile}}</td>
-                            <td>
+                            <td style="width:10%">{{$r->id}}</td>
+                            <td style="width:10%">{{$r->customertype}}</td>
+                            <td style="width:25%">{{$r->taxid}}</td>
+                            <td style="width:35%">{{$r->fullname}}</td>
+                            <td style="width:20%">{{$r->mobile}}</td>
+                            <td style="width:2%">
                                 <div style="width:150px" class="row">
                                     <form action="{{ route('customer.delete',$r->id)}}" method="Post">
                                         <a class="btn btn-outline-secondary btn-sm edit" href="{{route('customer.show',$r->id)}}" target="_blank" title="Show">
@@ -95,22 +99,11 @@
                             </td>
                         </tr>
                         @endforeach
-                    </thead>
-                    <tbody></tbody>
+                    </tbody>
                 </table>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
+                <div class="d-flex justify-content-center">
+                    {!! $data->links() !!}
+                </div>
             </div><!-- end col-->
         </div>
         <!-- end row-->

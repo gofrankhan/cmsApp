@@ -20,12 +20,12 @@ class CustomerController extends Controller
             $shop_name = Auth::user()->shop_name;
             $user_type = Auth::user()->user_type;
             if($user_type == 'admin'){
-                $data = Customer::select('id','taxid','customertype',DB::raw("concat(firstname,' ', lastname) as fullname"), 'mobile')->paginate(25);
+                $data = Customer::select('id','taxid','customertype',DB::raw("concat(firstname,' ', lastname) as fullname"), 'mobile')->paginate(50);
             }else{
                 $data = Customer::select('id','taxid','customertype',DB::raw("concat(firstname,' ', lastname) as fullname"), 'mobile')
                         ->whereIn('user_id', function($query) use ($shop_name){
                             $query->select('id')->from('users')->where('shop_name', $shop_name);
-                        })->get();
+                        })->paginate(50);
             }
         return view('admin.customer_data_table', compact('title', 'data'));
     }
