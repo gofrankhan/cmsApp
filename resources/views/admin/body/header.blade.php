@@ -93,7 +93,7 @@ document.getElementById("btn_bashboard").addEventListener("click", function(even
 
 document.getElementById("btn_file").addEventListener("click", function(event) {
   event.preventDefault();
-  window.location.href = '/file/data/user';
+  window.location.href = '/file/data/all';
 });
 
 document.getElementById("btn_movement").addEventListener("click", function(event) {

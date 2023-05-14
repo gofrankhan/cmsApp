@@ -102,92 +102,6 @@
   });
 </script>
 
-<script type="text/javascript">
-    $(function () {
-        var view_type = $('#view_type').val();
-        var table = $('.file_datatable').DataTable({
-            processing: true,
-            serverSide: false,
-            order: [[0, 'desc']],
-            columnDefs: [
-                    { width: "150px", targets: 0 },
-                    { width: "150px", targets: 1 },
-                    { width: "150px", targets: 2 },
-                    { width: "200px", targets: 3 },
-                    { width: "200px", targets: 4 },
-                    { width: "0px", targets: 5 },
-                    { width: "100px", targets: 6 },
-                    { width: "100px", targets: 7 }
-            ],
-            autoWidth: false,
-            ajax: "{{ route('file.data' , 'all') }}",
-            columns: [
-                {data: 'file_id', name: 'file_id'},
-                {data: 'taxid', name: 'taxid'},
-                {data: 'customer', name: 'customer'},
-                {data: 'shop', name: 'shop'},
-                {data: 'service', name: 'service'},
-                {data: 'icon', name: 'icon'},
-                {data: 'status', name: 'status'},
-                {data: 'action', name: 'action', orderable: false, searchable: false},
-            ],
-            initComplete: function () {
-            serverSide: true,
-            this.api()
-                .columns([3,4])
-                .every(function () {
-                    var column = this;
-                    var select = $('<br><select style="width:200px"><option value=""></option></select>')
-                        .appendTo($(column.header()))
-                        .on('change', function () {
-                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                            column.search(val ? '^' + val + '$' : '', true, false).draw();
-                        });
- 
-                    column
-                        .data()
-                        .unique()
-                        .sort()
-                        .each(function (d, j) {
-                            select.append('<option>' + d + '</option>');
-                        });
-                });
-            this.api()
-                .columns([6])
-                .every(function () {
-                    var column = this;
-                    var select = $('<br><select style="width:100px"><option value=""></option></select>')
-                        .appendTo($(column.header()))
-                        .on('change', function () {
-                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                            column.search(val ? '^' + val + '$' : '', true, false).draw();
-                        });
- 
-                    column
-                        .data()
-                        .unique()
-                        .sort()
-                        .each(function (d, j) {
-                            select.append('<option>' + d + '</option>');
-                        });
-                });
-            this.api()
-                .columns([0,1,2])
-                .every(function () {
-                    var column = this;
-                    $('<br><input style="width:150px" type="text" placeholder="Search" />')
-                    .appendTo($(column.header()))
-                    .on('keyup change clear', function () {
-                        if (column.search() !== this.value) {
-                            column.search(this.value).draw();
-                        }
-                    });
-                });
-            },
-        });
-    });
-</script>
-
 <script>
   $(document).ready(function() {
     $("#view_all a").click(function() {
@@ -226,20 +140,73 @@
                 <table data-page-length='50' id="file_datatable" class="table table-bordered file_datatable">
                     <thead>
                         <tr>
-                            <th>File ID</th>
-                            <th>Tax ID</th>
-                            <th>Customer</th>
-                            <th>Shop</th>
-                            <th>Service</th>
-                            <th></th>
-                            <th>Status</th>
-                            <th style="width:150px">Actions</th>
+                            <th style="width:5%">File ID</th>
+                            <th style="width:20%">Tax ID</th>
+                            <th style="width:20%">Customer</th>
+                            <th style="width:20%">Shop</th>
+                            <th style="width:25%">Service</th>
+                            <th style="width:2%"></th>
+                            <th style="width:5%">Status</th>
+                            <th style="width:3%">Actions</th>
                         </tr>
                     </thead>
-                
-                    <tbody></tbody>
+                    <tbody>
+                        @foreach($data as $r)
+                        <tr>
+                            <td style="width:5%">{{ $r->file_id }}</td>
+                            <td style="width:20%">{{ $r->taxid }}</td>
+                            <td style="width:20%">{{ $r->customer }}</td>
+                            <td style="width:20%">{{ $r->shop }}</td>
+                            <td style="width:25%">{{ $r->service }}</td>
+                            <td style="width:2%">
+                                @if($r->status == "Completed")
+                                    <div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2"></i></div>
+                                @elseif($r->status == "Pending") 
+                                    <div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-warning align-middle me-2"></i></div>
+                                @elseif($r->status == "Submitted")
+                                    <div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-dark align-middle me-2"></i></div>
+                                @elseif($r->status == "Cancelled")
+                                    <div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-danger align-middle me-2"></i></div>
+                                @endif
+                            </td>
+                            <td style="width:5%">{{ $r->status }}</td>
+                            <td style="width:3%">
+                                @if($user_type == 'admin')
+                                    <div style="width:150px" class="row">
+                                        <form action="{{ route('customer.delete',$r->id) }}" method="post">
+                                            <a class="btn btn-outline-secondary btn-sm edit" href="{{ route('file.show',$r->file_id) }}" target="_blank" title="Show">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a class="btn btn-outline-secondary btn-sm edit" href="{{ route('file.edit',$r->file_id) }}" title="Edit">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </a>
+                                            <a type="submit" class="btn btn-danger btn-sm edit" href="{{ route('file.delete' ,$r->id) }}" title="Delete">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </form>
+                                    </div>
+                                @else
+                                    @if($r->status == 'Completed' || $r->status == 'Cancelled' || $user_type == 'lawyer' )
+                                        <a class="btn btn-outline-secondary btn-sm edit" href="{{ route('file.show',$r->file_id) }}" target="_blank" title="Show">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    @else
+                                        <a class="btn btn-outline-secondary btn-sm edit" href="{{ route('file.show',$r->file_id) }}" target="_blank" title="Show">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a class="btn btn-outline-secondary btn-sm edit" href="{{ route('file.edit',$r->file_id) }}" title="Edit">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </a>
+                                    @endif
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
                 </table>
-
+                <div class="d-flex justify-content-center">
+                    {!! $data->links() !!}
+                </div>
                 @php
                     $categories = App\Models\Category::all();
                     $users = App\Models\User::all();

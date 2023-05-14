@@ -25,90 +25,31 @@ class FileController extends Controller
         $shop_name = Auth::user()->shop_name;
         $user_type = Auth::user()->user_type;
         $user_id = Auth::user()->id;
-        if ($request->ajax()) {
-            if($user_type =='admin' && $view_type == 'all'){
-                $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
-                                    ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
-                                    ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
-                                    ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
-                                    ->get();
-            }
-            else if ($user_type =='user'){
-                $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
-                                    ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
-                                    ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
-                                    ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
-                                    ->whereIn('invoices.user_id', function($query) use ($shop_name){
-                                        $query->select('id')->from('users')->where('shop_name', $shop_name);
-                                    })->get();
-            }
-            else if ($user_type =='lawyer'){
-                $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
-                                    ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
-                                    ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
-                                    ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
-                                    ->where('invoices.user_id', $user_id)
-                                    ->get();
-            }
-            return Datatables::of($data)->addIndexColumn()
-                ->addColumn('action', function($row){
-                    $user_type = Auth::user()->user_type;
-                    if($user_type == 'admin'){
-                        $btn = '
-                        <div style="width:150px" class="row">
-                        <form action="'.route('customer.delete',$row->id).'" method="Post">
-                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->file_id).'" title="Edit">
-                                <i class="fas fa-pencil-alt"></i>
-                            </a>
-                            <a type="submit" class="btn btn-danger btn-sm edit" href="'.route('file.delete' ,$row->id).'" title="Delete">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </form>
-                        </div>';
-                        return $btn;
-                    }else{
-                        if($row->status == 'Completed' || $row->status == 'Cancelled' || $user_type == 'lawyer' ){
-                            $btn = '
-                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            ';
-                            return $btn;
-                        }else{
-                            $btn = '
-                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->file_id).'" title="Edit">
-                                <i class="fas fa-pencil-alt"></i>
-                            </a>
-                            ';
-                            return $btn;
-                        }
-                    }
-                })
-                ->addColumn('icon', function($row){
-                    if($row->status == "Completed")
-                        $btn = '<div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2"></i></div>';
-                    else if($row->status == "Pending") 
-                        $btn = '<div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-warning align-middle me-2"></i></div>';
-                    else if($row->status == "Submitted")
-                        $btn = '<div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-dark align-middle me-2"></i></div>';
-                    else if($row->status == "Cancelled")
-                        $btn = '<div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-danger align-middle me-2"></i></div>';
-                    return $btn;
-                })
-                ->addColumn('id', function($row){
-                    $btn = '<label style="display:none">$row->id</label>';
-                    return $btn;
-                })
-                ->rawColumns(['action', 'icon', 'id'])
-                ->make(true);
+        if($user_type =='admin' && $view_type == 'all'){
+            $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
+                                ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                ->paginate(50);
         }
-        return view('admin.file_data_table', compact('title'));
+        else if ($user_type =='user'){
+            $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
+                                ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                ->whereIn('invoices.user_id', function($query) use ($shop_name){
+                                    $query->select('id')->from('users')->where('shop_name', $shop_name);
+                                })->paginate(50);
+        }
+        else if ($user_type =='lawyer'){
+            $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
+                                ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                ->where('invoices.user_id', $user_id)
+                                ->paginate(50);
+        }
+        return view('admin.file_data_table', compact('title', 'data'));
     }
 
     
