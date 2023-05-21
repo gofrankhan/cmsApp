@@ -132,7 +132,7 @@ class FileController extends Controller
                                 ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                                 ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
                                 ->where('invoices.status', '=', 'Completed')
-                                ->where('invoices.user_id', $user_id)
+                                ->where('invoices.lawyer_id', $user_id)
                                 ->get();
                     return Datatables::of($data)
                     ->make(true);

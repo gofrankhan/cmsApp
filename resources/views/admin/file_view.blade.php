@@ -6,6 +6,7 @@
 @php 
     $file_id =  $files[0]->file_id;
     $status = $files[0]->status;
+    $user_type = Auth::user()->user_type;
     $badge_status = "";
     if($status == 'Submitted')
         $badge_status = "bg-dark";
@@ -107,6 +108,7 @@
             </div>
         </div>
         <div class="row">
+            @if($user_type != 'lawyer')
             <div class="col">
                 <div class="row mb-3">
                     <div class="col-sm-12">
@@ -115,7 +117,7 @@
                     </div>
                 </div>
             </div>
-            @if($files[0]->lawyer_id != "")
+            @else
             <div class="col">
                 <div class="row mb-3">
                     <div class="col-sm-12">
