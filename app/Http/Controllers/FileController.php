@@ -246,6 +246,7 @@ class FileController extends Controller
         $invoice = Invoice::find($invoice_id->id);
         $invoice->status = $request->file_status;
         $invoice->price = intval($request->pagamento);
+        $invoice->lawyer_price = intval($request->pagamento_lawyer);
         $invoice->save();
         
         return redirect()->back();
@@ -264,7 +265,9 @@ class FileController extends Controller
         $title = "Show File";
         $comments = DB::table('comments')->where('file_id', $file_id)->get();
         $attachments = DB::table('attachments')->where('file_id', $file_id)->get();
-        $files = Invoice::select('invoices.id', 'invoices.price', 'invoices.file_id', 'invoices.customer_id', 'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop','services.service', 'invoices.status')
+        $files = Invoice::select('invoices.id', 'invoices.price', 'invoices.file_id', 'invoices.customer_id', 
+                                'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop',
+                                'services.service', 'invoices.status', 'invoices.lawyer_id', 'invoices.lawyer_price')
                                     ->join('customers', 'invoices.customer_id', '=', 'customers.id')
                                     ->join('services', 'invoices.service_id', '=', 'services.id')
                                     ->where('invoices.file_id', $file_id)
@@ -277,7 +280,9 @@ class FileController extends Controller
         $title = "Edit File";
         $comments = DB::table('comments')->where('file_id', $file_id)->get();
         $attachments = DB::table('attachments')->where('file_id', $file_id)->get();
-        $files = Invoice::select('invoices.id', 'invoices.price', 'invoices.file_id', 'invoices.customer_id', 'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop','services.service', 'invoices.status')
+        $files = Invoice::select('invoices.id', 'invoices.price', 'invoices.file_id', 'invoices.customer_id', 
+                                'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop',
+                                'services.service', 'invoices.status', 'invoices.lawyer_id', 'invoices.lawyer_price')
                                     ->join('customers', 'invoices.customer_id', '=', 'customers.id')
                                     ->join('services', 'invoices.service_id', '=', 'services.id')
                                     ->where('invoices.file_id', $file_id)

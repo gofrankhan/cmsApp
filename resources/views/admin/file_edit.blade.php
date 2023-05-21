@@ -215,6 +215,7 @@
                         </div>
                     </div>
                 </div>
+                @if($files[0]->lawyer_id != "")
                 <div class="col">
                     <div class="row mb-3">
                         <div class="col-sm-12">
@@ -223,6 +224,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
                 <input hidden name="file_id_no" value="{{ $files[0]->file_id}}">
                 <div class="col">
                     <div class="row mb-3">

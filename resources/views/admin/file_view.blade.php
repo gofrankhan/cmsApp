@@ -115,6 +115,16 @@
                     </div>
                 </div>
             </div>
+            @if($files[0]->lawyer_id != "")
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="pagamento" class="col-form-label">Pagamento [Lawyer]</label>
+                        <input class="form-control" name="pagamento_lawyer" type="text" id="pagamento_lawyer" value="{{ $files[0]->lawyer_price }}" disabled>
+                    </div>
+                </div>
+            </div>
+            @endif
             <div class="col">
                 <div class="row mb-3">
                     <div class="col-sm-12">
