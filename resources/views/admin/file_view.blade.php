@@ -108,7 +108,7 @@
             </div>
         </div>
         <div class="row">
-            @if($user_type != 'lawyer')
+            @if($user_type == 'user' || $user_type == 'admin')
             <div class="col">
                 <div class="row mb-3">
                     <div class="col-sm-12">
@@ -117,7 +117,8 @@
                     </div>
                 </div>
             </div>
-            @else
+            @endif
+            @if($user_type == 'lawyer' || $user_type == 'admin')
             <div class="col">
                 <div class="row mb-3">
                     <div class="col-sm-12">
