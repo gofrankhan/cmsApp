@@ -215,6 +215,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="col">
+                    <div class="row mb-3">
+                        <div class="col-sm-12">
+                            <label for="pagamento" class="col-form-label">Pagamento [Lawyer]</label>
+                            <input class="form-control" name="pagamento_lawyer" type="text" id="pagamento_lawyer" value="{{ $files[0]->lawyer_price }}">
+                        </div>
+                    </div>
+                </div>
                 <input hidden name="file_id_no" value="{{ $files[0]->file_id}}">
                 <div class="col">
                     <div class="row mb-3">

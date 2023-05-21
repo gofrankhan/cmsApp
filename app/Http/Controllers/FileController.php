@@ -27,14 +27,18 @@ class FileController extends Controller
         $user_id = Auth::user()->id;
         if ($request->ajax()) {
             if($user_type =='admin' && $view_type == 'all'){
-                $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
+                $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', 
+                                        DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),
+                                        'users.shop_name as shop','services.service', 'invoices.status', 'invoices.lawyer_id', 'invoices.lawyer_price')
                                     ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                                     ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                                     ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
                                     ->get();
             }
             else if ($user_type =='user'){
-                $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
+                $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', 
+                                        DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),
+                                        'users.shop_name as shop','services.service', 'invoices.status')
                                     ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                                     ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                                     ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
@@ -43,11 +47,13 @@ class FileController extends Controller
                                     })->get();
             }
             else if ($user_type =='lawyer'){
-                $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
+                $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', 
+                                        DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),
+                                        'users.shop_name as shop','services.service', 'invoices.status', 'invoices.lawyer_id', 'invoices.lawyer_price')
                                     ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                                     ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                                     ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
-                                    ->where('invoices.user_id', $user_id)
+                                    ->where('invoices.lawyer_id', '=', $user_id)
                                     ->get();
             }
             return Datatables::of($data)->addIndexColumn()
@@ -309,7 +315,11 @@ class FileController extends Controller
             }
         }
         if($isAllNumeric){
-            DB::table('invoices')->whereIn('file_id', $fileidsArray)->update(['user_id' => (int)$request->assign_user_id]);
+            $user_type = User::select('user_type')->where('id', $request->assign_user_id)->first();
+            if($user_type->user_type == 'lawyer')
+                DB::table('invoices')->whereIn('file_id', $fileidsArray)->update(['lawyer_id' => (int)$request->assign_user_id]);
+            else
+                DB::table('invoices')->whereIn('file_id', $fileidsArray)->update(['user_id' => (int)$request->assign_user_id]);
             $notification = array(
                 'message' => 'File assigned successfully', 
                 'alert-type' => 'success'
