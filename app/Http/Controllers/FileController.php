@@ -76,7 +76,7 @@ class FileController extends Controller
                         </div>';
                         return $btn;
                     }else{
-                        if($row->status == 'Completed' || $row->status == 'Cancelled' || $user_type == 'lawyer' ){
+                        if($row->status == 'Completed' || $row->status == 'Cancelled' ){
                             $btn = '
                             <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show">
                                 <i class="fas fa-eye"></i>
@@ -203,11 +203,13 @@ class FileController extends Controller
             $file->customer_id = $customer_id->id;
             $file->shop_name = $shop_name;
             $file->user_id = $user_id;
+            $file->lawyer_id = $user_id;
             $file->status = "Submitted";
             if(strtolower($request->category) == 'pagamento'){
                 $service_id = Service::select('id')->where('category', $request->category)->first();
                 $file->service_id = $service_id->id;
                 $file->price = -$request->pay_amount;
+                $file->lawyer_price = -$request->pay_amount;
                 $file->description = $request->description;
             }else{
                 $service_id = Service::select('id', 'price')->where('service', $request->service)->first();
