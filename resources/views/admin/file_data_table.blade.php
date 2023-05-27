@@ -200,7 +200,7 @@
 
 @php
     $user_type = Auth::user()->user_type;
-    if($user_type == 'admin') $modealName = "#firstmodal";
+    if($user_type == 'admin' || $user_type == 'lawyer') $modealName = "#firstmodal";
     else $modealName = "#myModal";
 @endphp
 
@@ -216,13 +216,11 @@
                         </ol>
                     </div>
                 </div>
-                @if($user_type != 'lawyer')
                 <p class="card-title-desc" >
                     <div align="right">
                         <a href="" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="{{ $modealName }}">New</a>
                     </div>
                 </p>
-                @endif
                 <table data-page-length='50' id="file_datatable" class="table table-bordered file_datatable">
                     <thead>
                         <tr>
@@ -305,7 +303,7 @@
                                                 <select class="form-select" id="category" name="category">
                                                     <option value="Choose" selected>Choose...</option>
                                                     @foreach ($categories as $category)
-                                                    @if(!(strtolower($category->category) == 'pagamento' && $user_type != 'admin'))
+                                                    @if(!(strtolower($category->category) == 'pagamento' && !($user_type == 'admin' || $user_type == 'lawyer')))
                                                     <option value="{{ $category->category }}" >{{ $category->category }}</option>
                                                     @endif
                                                     @endforeach

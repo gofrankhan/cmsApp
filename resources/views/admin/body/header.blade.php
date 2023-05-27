@@ -22,11 +22,9 @@ $(document).ready(function() {
         <button type="button" id="btn_bashboard" class="btn font-size-20 header-item waves-effect">
             PC Point
         </button>
-        @if($user_type != 'lawyer')
         <button type="button" id="btn_customer" class="btn font-size-20 header-item waves-effect">
             Customers
         </button>
-        @endif
         <button type="button" id="btn_file" class="btn font-size-20 header-item waves-effect">
             Files
         </button>
