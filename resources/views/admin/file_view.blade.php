@@ -189,7 +189,7 @@
                                                     @csrf
                                                     <div align="right">
                                                         <input type="hidden" id="comment_id" name="id" value="{{ $comment->id }}">
-                                                        @if($status != 'Completed')
+                                                        @if($user_type == 'admin')
                                                         <a type="submit" class="btn btn-danger btn-sm edit" onclick="document.getElementById('myForm2').submit();" title="Delete">
                                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                                         </a>
@@ -266,7 +266,7 @@
                                             <div class="row mb-4 text-black"><i>Uploaded On : {{ $attachment->created_at }} || By : @if($user != null)  {{ $user->name }} @else Unknown User @endif  || Status : Pending</i></div>
                                             <div class="card-text text-black"><a style="color: blue" href="{{  asset('upload/file_attachments/'.$attachment->file_id.'/'.$attachment->file_name) }}" target="_blank">{{ $attachment->file_name }}</a>
                                                 <div align="right">
-                                                    @if($status != 'Completed')
+                                                    @if($status == 'Submitted' || $user_type == 'admin')
                                                     <a href="{{route('delete.file',$attachment->id )}}" type="submit" class="btn btn-danger btn-sm edit" title="Delete">
                                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                                     </a>
