@@ -15,6 +15,7 @@ use App\Models\Invoice;
 use App\Models\Customer;
 use App\Models\Service;
 use DataTables;
+use Debugbar;
 
 
 class FileController extends Controller
@@ -192,12 +193,25 @@ class FileController extends Controller
         $file_id = Invoice::max('file_id');
         $file_id += 1;
         $user_id = Auth::user()->id;
+        $user_type = Auth::user()->user_type;
+        $shop_name = Auth::user()->shop_name;
+        $lawyer_id = null;
+        if($user_type == 'lawyer')
+            $lawyer_id = $user_id;
+        
         if($request->user != null && !empty($request->user)){
-            $shop = User::select('id','shop_name')->where('username', $request->user)->first();
-            $shop_name = $shop->shop_name;
-            $user_id = $shop->id;
-        }else{
-            $shop_name = Auth::user()->shop_name;
+            $user_info = User::select('id','shop_name', 'user_type')->where('username', $request->user)->first();
+            if($user_type == 'lawyer'){
+                $lawyer_id = $user_id;
+                $shop_name = $user_info->shop_name;
+                $user_id = $user_info->id;
+            }else{
+                $user_type_1 = $user_info->user_type;
+                if($user_type_1 == 'lawyer')
+                    $lawyer_id = $user_info->id;
+                $shop_name = $user_info->shop_name;
+                $user_id = $user_info->id;
+            }
         }
         if((!empty($request->service) || strtolower($request->category) == 'pagamento') && !empty($request->taxid)){
             $file = new Invoice();
@@ -213,7 +227,8 @@ class FileController extends Controller
             $file->customer_id = $customer_id->id;
             $file->shop_name = $shop_name;
             $file->user_id = $user_id;
-            $file->lawyer_id = $user_id;
+            $file->lawyer_id = $lawyer_id;
+            
             $file->status = "Submitted";
             if(strtolower($request->category) == 'pagamento'){
                 $service_id = Service::select('id')->where('category', $request->category)->first();

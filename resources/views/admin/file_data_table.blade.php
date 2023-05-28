@@ -387,7 +387,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-light waves-effect" data-bs-dismiss="modal">Cancel</button>
-                                    @if($user_type == 'admin')
+                                    @if($user_type != 'user')
                                     <button id="submit-admin" type="submit" class="btn btn-primary waves-effect waves-light">Create</button>
                                     @else
                                     <button id="submit-user" type="submit" class="btn btn-primary waves-effect waves-light">Create</button>
