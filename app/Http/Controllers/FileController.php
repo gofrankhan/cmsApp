@@ -136,6 +136,7 @@ class FileController extends Controller
                                 ->get();
                     return Datatables::of($data)
                     ->make(true);
+                
             } else{
                 $data = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service')
                                 ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
@@ -150,11 +151,20 @@ class FileController extends Controller
             }       
             
         }
-        $total_sum = Invoice::leftjoin('users', 'invoices.user_id', '=', 'users.id')
-                            ->where('invoices.status', '=', 'Completed')
-                            ->whereIn('invoices.user_id', function($query) use ($shop_name){
-                                $query->select('id')->from('users')->where('shop_name', $shop_name);
-                            })->sum('invoices.price');
+
+        if($user_type == 'lawyer') {
+            $total_sum = Invoice::leftjoin('users', 'invoices.lawyer_id', '=', 'users.id')
+                        ->where('invoices.status', '=', 'Completed')
+                        ->where('invoices.lawyer_id', $user_id)
+                        ->sum('invoices.lawyer_price');
+        } else {
+            $total_sum = Invoice::leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                ->where('invoices.status', '=', 'Completed')
+                ->whereIn('invoices.user_id', function($query) use ($shop_name){
+                    $query->select('id')->from('users')->where('shop_name', $shop_name);
+                })->sum('invoices.price');
+        }
+
         return view('admin.movement_data_table', compact('title', 'total_sum'));
     }
 
