@@ -25,6 +25,7 @@ class FileController extends Controller
         $shop_name = Auth::user()->shop_name;
         $user_type = Auth::user()->user_type;
         $user_id = Auth::user()->id;
+        $data = null;
         if($user_type =='admin' && $view_type == 'all'){
             $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
                                 ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
