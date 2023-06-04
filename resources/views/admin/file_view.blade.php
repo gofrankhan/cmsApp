@@ -53,6 +53,10 @@
                         @if($files[0]->service == 'ARCHIVIO 730')
                         <a class="dropdown-item" href="{{ route ('delega.730', $files[0]->customer_id)}}" target="_blank">DELEGA 730</a>
                         @endif
+                        @if($files[0]->service == 'DICHIARAZIONE REDDITI PF')
+                        <a class="dropdown-item" href="{{ route ('auto.red.imp', $files[0]->customer_id)}}" target="_blank">Autocertificazione redditi impresa</a>
+                        <a class="dropdown-item" href="{{ route ('del.tra.dis', $files[0]->customer_id)}}" target="_blank">Delega Trasmissione Dichiarazione dei Redditi</a>
+                        @endif
                         <a class="dropdown-item" href="#">Anagrafica Cliente</a>
                         <a class="dropdown-item" href="#">Lettera Di Benvenuto</a>
                         <a class="dropdown-item" href="#">Ricevuta di Pagamento</a>
