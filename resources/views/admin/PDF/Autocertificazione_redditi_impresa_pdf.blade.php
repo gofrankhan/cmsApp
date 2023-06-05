@@ -17,10 +17,56 @@ p, table {
         <div align="center" padding="0px">
             <img  src="{{ public_path('backend/assets/images/PCPoint_Logo.png') }}" height="100" width="500" alt="">
         </div>  
-        <p align="center">VIA FLAVIO STILCIONE 11, 00175, ROMA (RM)</p>
-        <h6 align="center">Tel- 06 8788 0399, email- <u>cafpcpoint@yahoo.com</u>, pec- <u>cafpcpoint@pec.it</u></h6>
+        <p align="center">VIA FLAVIO STILCIONE 11, 00175, ROMA (RM)<br>
+        Tel- 06 8788 0399, email- <u>cafpcpoint@yahoo.com</u>, pec- <u>cafpcpoint@pec.it</u></p>
+        <h5><b>AUTOCERTIFICAZIONE DEL REDDITO DI LAVORO AUTONOMO</b></h5>
+
+        <table>
+            <tr>
+                <td style="width:115px;">Il/La sottoscritto/a<td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="width:56px;">nato a<td>
+                <td style="width:240px;"></td>
+                <td style="width:8px;">il<td>
+                <td style="width:200px;"></td>
+                <td style="width:85px;">e residente a<td>
+                <td style="width:55px;"></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="width:56px;">in via<td>
+                <td style="width:400px;"></td>
+                <td style="width:16px;">n<sup>o</sup><td>
+                <td style="width:100px;"></td>
+                <td style="width:85px;">prov<td>
+                <td style="width:55px;"></td>
+            </tr>
+        </table>
         <br>
-        <p align="center"><b>AUTOCERTIFICAZIONE DEL REDDITO DI LAVORO AUTONOMO</b></p>
+        <table>
+            <tr>
+                <td>consapevole delle sanzioni penali previste dall’art. 76 del D.P.R. 28.12.2000 n. 445 per le ipotesi di<td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>falsità in atti e dichiarazioni mendaci e della decadenza dei benefici prevista dall’art. 75 del<td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>medesimo<td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>D.P.R. nel caso di dichiarazioni non veritiere<td>
+            </tr>
+        </table>
     </div>
 </body>
 </html>
