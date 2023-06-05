@@ -6,14 +6,14 @@ define("DOMPDF_ENABLE_REMOTE", false);
 <head>
 <style>
 p, table {
-  font-size: 14px;
+  font-size: 15px;
 }
 </style>
     <title>Autocertificazione redditi impresa pdf</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <div>
+    <div class="abcdx">
         <div align="center" padding="0px">
             <img  src="{{ public_path('backend/assets/images/PCPoint_Logo.png') }}" height="100" width="500" alt="">
         </div>  
@@ -23,7 +23,7 @@ p, table {
 
         <table>
             <tr>
-                <td style="width:115px;">Il/La sottoscritto/a<td>
+                <td style="width:145px;">Il/La sottoscritto/a<td>
             </tr>
         </table>
         <table>
@@ -31,8 +31,8 @@ p, table {
                 <td style="width:56px;">nato a<td>
                 <td style="width:240px;"></td>
                 <td style="width:8px;">il<td>
-                <td style="width:200px;"></td>
-                <td style="width:85px;">e residente a<td>
+                <td style="width:180px;"></td>
+                <td style="width:105px;">e residente a<td>
                 <td style="width:55px;"></td>
             </tr>
         </table>
@@ -65,6 +65,47 @@ p, table {
         <table>
             <tr>
                 <td>D.P.R. nel caso di dichiarazioni non veritiere<td>
+            </tr>
+        </table>
+        <br><p style="font-size:20px" align="center">DICHIARA<br>
+        <table>
+            <tr>
+                <td>sotto la propria responsabilità e in data odierna:<td>
+            </tr>
+        </table>
+        <br>
+        <table>
+            <tr>
+                <td>- di esercitare la seguente attività (tipo di attività):<td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>n° P.IVA/C.F.<td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="width:80px;"></td>
+                <td>di essere iscritta presso la C.C.I.A.A (nel caso di ditte individuali):<td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="width:80px;"></td>
+                <td>- N° iscrizione<td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="width:80px;"></td>
+                <td>- Data di iscrizione<td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="width:80px;"></td>
+                <td>- Comune della camera di commercio di<td>
             </tr>
         </table>
     </div>
