@@ -62,4 +62,32 @@ class PDFController extends Controller
          $pdf = PDF::loadView('admin.PDF.delega730_PDF', $data);
          return $pdf->stream('Delega_730.pdf');
     }
+
+    public function Autocertificazione_redditi_impresa_pdf($id)
+    {
+        $customer = DB::table('customers')->where('id', $id)->first();
+  
+        $data = [
+            'title' => 'Mandato al CAF',
+            'date' => date('m/d/Y'),
+            'customer' => $customer
+        ]; 
+            
+         $pdf = PDF::loadView('admin.PDF.Autocertificazione_redditi_impresa_pdf', $data);
+         return $pdf->stream('Autocertificazione_redditi_impresa.pdf');
+    }
+
+    public function Delega_Trasmissione_Dichiarazione_dei_Redditi_pdf($id)
+    {
+        $customer = DB::table('customers')->where('id', $id)->first();
+  
+        $data = [
+            'title' => 'Mandato al CAF',
+            'date' => date('m/d/Y'),
+            'customer' => $customer
+        ]; 
+            
+         $pdf = PDF::loadView('admin.PDF.Delega_Trasmissione_Dichiarazione_dei_Redditi_pdf', $data);
+         return $pdf->stream('Delega_Trasmissione_Dichiarazione_dei_Redditi.pdf');
+    }
 }
