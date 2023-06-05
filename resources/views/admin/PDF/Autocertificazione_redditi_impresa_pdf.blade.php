@@ -18,7 +18,7 @@ p, table {
             <img  src="{{ public_path('backend/assets/images/PCPoint_Logo.png') }}" height="100" width="500" alt="">
         </div>  
         <p align="center">VIA FLAVIO STILCIONE 11, 00175, ROMA (RM)<br>
-        Tel- 06 8788 0399, email- <u>cafpcpoint@yahoo.com</u>, pec- <u>cafpcpoint@pec.it</u></p>
+        Tel- 06 8788 0399, email- <u>cafpcpoint@yahoo.com</u>, pec- <u>cafpcpoint@pec.it</u></p><br>
         <h5><b>AUTOCERTIFICAZIONE DEL REDDITO DI LAVORO AUTONOMO</b></h5>
 
         <table>
@@ -106,6 +106,68 @@ p, table {
             <tr>
                 <td style="width:80px;"></td>
                 <td>- Comune della camera di commercio di<td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>di essere iscritto/a presso il seguente albo professionale (nel caso di professionisti):<td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="width:200px;"></td>
+                <td>del comune di<td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="width:80px;"></td>
+                <td>- N° iscrizione<td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="width:80px;"></td>
+                <td>- Data di iscrizione<td>
+            </tr>
+        </table>
+        <br>
+        <table>
+            <tr>
+                <td style="width:250px;">- di aver percepito durante l’anno</td>
+                <td style="width:100px;"><td>
+                <td style="width:220px;">un reddito annuo netto  di euro</td>
+                <td style="width:5px;"><td>
+                <td style="width:10px;">&euro;<td>
+            </tr>
+        </table>
+        <br>
+        <table>
+            <tr>
+                <td>Autorizzo il trattamento dei miei dati personali ai sensi del D.lgs. 196 del 30 giugno 2003.<td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <table>
+            <tr>
+                <td style="width:175px; text-align:center;">ROMA - </td>
+                <td style="width:300px;"></td>
+                <td style="width:175px;"></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="width:175px; border-bottom: 1px solid black;"></td>
+                <td style="width:300px;"></td>
+                <td style="width:175px; border-bottom: 1px solid black;"></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="width:175px;text-align:center;">(LUOGO E DATA)</td>
+                <td style="width:300px;"></td>
+                <td style="width:175px;text-align:center;">(FIRMA) </td>
             </tr>
         </table>
     </div>
