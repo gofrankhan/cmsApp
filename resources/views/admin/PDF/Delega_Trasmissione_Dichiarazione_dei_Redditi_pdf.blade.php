@@ -18,6 +18,10 @@ table, td, tr {
     font-size : 10px;
 }
 
+table.small9, td, tr {
+    font-size : 9px;
+}
+
 </style>
     <title>Delega Trasmissione Dichiarazione dei Redditi pdf</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -34,26 +38,26 @@ table, td, tr {
 
         <table>
             <tr>
-                <td style="width:95px;">La/Il sottoscritta/o<td>
-                <td style="width:170px; border-bottom: 0.5px solid black;"></td>
-                <td style="width:43px;"> nata/o il<td>
-                <td style="width:150px; border-bottom: 0.5px solid black;"></td>
-                <td style="width:69px;"> odice fiscale<td>
-                <td style="width:160px; border-bottom: 0.5px solid black;"></td>
+                <td style="width:79px;">La/Il sottoscritta/o<td>
+                <td style="width:200px; border-bottom: 0.5px solid black;"></td>
+                <td style="width:38px;"> nata/o il<td>
+                <td style="width:120px; border-bottom: 0.5px solid black;"></td>
+                <td style="width:61px;"> codice fiscale<td>
+                <td style="width:200px; border-bottom: 0.5px solid black;"></td>
             </tr>
         </table>
         <table style="padding-top:10px">
             <tr>
-                <td style="width:71px;">tel. Cellulare:<td>
-                <td style="width:140px; border-bottom: 0.2px solid black;"></td>
-                <td style="width:60px;">residente a<td>
-                <td style="width:70px; border-bottom: 0.2px solid black;"></td>
-                <td style="width:70px;"> in Via/Piazza<td>
-                <td style="width:150px; border-bottom: 0.2px solid black;"></td>
+                <td style="width:61px;">tel. Cellulare:<td>
+                <td style="width:140px; border-bottom: 0.5px solid black;"></td>
+                <td style="width:50px;">residente a<td>
+                <td style="width:70px; border-bottom: 0.5px solid black;"></td>
+                <td style="width:60px;"> in Via/Piazza<td>
+                <td style="width:200px; border-bottom: 0.5px solid black;"></td>
                 <td style="width:20px;">Prov.<td>
-                <td style="width:30px; border-bottom: 0.2px solid black;"></td>
+                <td style="width:30px; border-bottom: 0.5px solid black;"></td>
                 <td style="width:20px;">CAP<td>
-                <td style="width:30px; border-bottom: 0.2px solid black;"></td>
+                <td style="width:30px; border-bottom: 0.5px solid black;"></td>
             </tr>
         </table>
         <br>
@@ -70,6 +74,26 @@ table, td, tr {
                 <td>RIF</td>
                 <td style="width:60px;"></td>
                 <td>per il dichiarante con codice fiscale: </td>
+            </tr>
+        </table>
+        <br>
+        <table>
+            <tr>
+                <td>Luogo e data ROMA ___/___/______</td>
+                <td style="width:414px;"></td>
+                <td>Firma______________________</td>
+            </tr>
+        </table>
+        <br>
+        <p align="center" style="font-size:12px;">DICHIARAZIONE DI CONSENSO AL TRATTAMENTO DEI DATI SENSIBILI</p>
+        <table class="small9">
+            <tr>
+                <td style="width:64px;">lo sottoscritto/a<td>
+                <td style="width:200px; border-bottom: 0.5px solid black;"></td>
+                <td style="width:38px;"> nato/a il<td>
+                <td style="width:120px; border-bottom: 0.5px solid black;"></td>
+                <td style="width:61px;"> codice fiscale<td>
+                <td style="width:210px; border-bottom: 0.5px solid black;"></td>
             </tr>
         </table>
     </div>
