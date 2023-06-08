@@ -19,7 +19,7 @@ table, td, tr {
 }
 
 table.small9, td, tr {
-    font-size : 9px;
+    font-size : 9.5px;
 }
 
 </style>
@@ -94,6 +94,21 @@ table.small9, td, tr {
                 <td style="width:120px; border-bottom: 0.5px solid black;"></td>
                 <td style="width:61px;"> codice fiscale<td>
                 <td style="width:210px; border-bottom: 0.5px solid black;"></td>
+            </tr>
+        </table>
+        <table class="small9">
+            <tr>
+                <td>dichiaro di avere ricevuto le informazioni di cui all'art. 13 del D.lgs. 196/2003 in particolare riguardo ai diritti da me riconosciuti dalla legge ex art. 7 D.lgs.<td>
+            </tr>
+        </table>
+        <table class="small9">
+            <tr>
+                <td>196/2003, acconsento al trattamento dei miei dati personali e sensibili, con le modalità e per le finalità indicate nella informativa stessa, comunque, strettamente<td>
+            </tr>
+        </table>
+        <table class="small9">
+            <tr>
+                <td>connesse e strumentali alla gestione dell'attività di "Servizi di studi legali" del caf pc point.<td>
             </tr>
         </table>
     </div>
