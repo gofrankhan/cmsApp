@@ -111,6 +111,63 @@ table.small9, td, tr {
                 <td>connesse e strumentali alla gestione dell'attività di "Servizi di studi legali" del caf pc point.<td>
             </tr>
         </table>
+        <br>
+        <table>
+            <tr>
+                <td style="font-size : 12px;"><b>ai sensi e per gli effetti degli artt. 13 e 23 del D. L.gs. n. 196/2003, con la sottoscrizione del presente modulo, al</b><td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="font-size : 12px;"><b>trattamento dei dati personali secondo le modalità e nei limiti di cui all’informativa allegata.</b><td>
+            </tr>
+        </table>
+        <br>
+        <p align="center" style="font-size:12px;">INFORMATIVA EX ART.13 D.LGS. 196/2003</p>
+        <p align="left" style="font-size:9.5px;">
+            Gentile Signora/e, desideriamo informarla che il D.lgs. n. 196 del 30 giugno 2003 ("Codice in materia di protezione dei dati
+            personali"), prevede la tutela delle persone e di altri soggetti rispetto al trattamento dei dati personali. Secondo la
+            normativa indicata, tale trattamento sarà improntato ai principi di correttezza, liceità e trasparenza e di tutela della
+            Sua riservatezza e dei Suoi diritti. Ai sensi dell'art.13 d.lgs.196/2003 il  CHAKRABORTY NIBASH è tenuto a fornirle alcune
+            informazioni relative all'utilizzo dei dati personali e sensibili da Lei forniti o comunque dallo stesso acquisiti anche
+            in futuro, nel corso della durata dei servizi connessi all'attività del CHAKRABORTY NIBASH. 1. FINALITA' E MODALITA' DEL
+            TRATTAMENTO CUI SONO DESTINATI I DATI. Il trattamento dei dati da Lei forniti avviene mediante strumenti manuali,
+            informatici e telematici. I dati saranno trattati nel rispetto delle regole di riservatezza e sicurezza previsti dalla
+            legge ed avranno il solo fine di consentire la raccolta dei documenti di supporto necessaria all'attività professionale
+            da parte del  CHAKRABORTY NIBASH. Il trattamento dei dati potrebbe riguardare anche categorie di dati definiti 
+            "sensibili" da Lei forniti. 2. NATURA OBBLIGATORIA DEL CONFERIMENTO DEI DATI E CONSEGUENZE DI UN EVENTUALE 
+            RIFIUTO DI RISPONDERE. I dati da Lei conferiti hanno natura obbligatoria per poter effettuare le operazioni 
+            di cui al punto 1. La mancata accettazione ed autorizzazione all'utilizzo dei dati comporta l'impossibilità 
+            per il  CHAKRABORTY NIBASH di procedere alla fornitura del servizio. 3. AMBITO DI COMUNICAZIONE E DIFFUSIONE. 
+            I Suoi dati potranno essere comunicati al personale dipendente incaricato del trattamento per finalità funzionali 
+            all'attività del  CHAKRABORTY NIBASH. Si informa, inoltre, che i dati necessari per l'attività professionale saranno 
+            raccolti da aziende, collaboratori e professionisti connesse alla  CHAKRABORTY NIBASH. 4. DIRITTI DELL'INTERESSATO. 
+            L'art.7 del d.lgs.196/2003 Le attribuisce, in quanto soggetto interessato, i seguenti diritti: a) ottenere la conferma 
+            dell'esistenza dei Suoi dati personali, anche se non ancora registrati e la loro comunicazione in forma intelligibile. 
+            b) l'indicazione dell'origine dei dati personali, della finalità e modalità del loro trattamento; della 
+            logica applicata in caso di trattamento effettuato con l'ausilio di strumenti elettronici; degli estremi 
+            identificativi del titolare, del responsabile e dei soggetti o categorie di soggetti ai quali i dati possono 
+            essere comunicati o che possono venirne a conoscenza in qualità di responsabile o incaricato. c) ottenere 
+            l'aggiornamento, la rettifica o l'integrazione dei dati; la loro cancellazione, la trasformazione in forma anonima o il 
+            blocco dei dati trattati in violazione di legge; l'attestazione che tali operazioni sono state portate a conoscenza 
+            degli eventuali soggetti cui i dati sono stati comunicati o diffusi. d) opporsi al trattamento dei Suoi dati personali 
+            in presenza di giustificati motivi o nel caso in cui gli stessi siano utilizzati per fini diversi da quelli elencati al 
+            punto 1. e) il  CHAKRABORTY NIBASH non si assume alcuna responsabilità in ordine alla veridicità dei dati personali 
+            inseriti e ricevuti dall'interessato che, s'intende, ne rimane responsabile unico. 5. ESTREMI IDENTIFICATIVI DEL 
+            TITOLARE E' titolare del trattamento dei Suoi dati, secondo quanto previsto dal D. Lgs. n. 196 del 2003, il  
+            CHAKRABORTY NIBASH. Avendo ricevuto l'informativa sul trattamento dei dati personali ex art. 13 del d.lgs. n. 
+            196/2003 - acconsento inoltre al trattamento ed alla comunicazione dei dati personali ad aziende connesse direttamente 
+            o indirettamente, dei miei dati a fini promozionali, di informazione commerciale, ricerche di mercato, offerte di 
+            prodotti e servizi.
+        </p>
+        <br>
+        <table>
+            <tr>
+                <td>Luogo e data ROMA ___/___/______</td>
+                <td style="width:414px;"></td>
+                <td>Firma______________________</td>
+            </tr>
+        </table>
     </div>
 </body>
 </html>
