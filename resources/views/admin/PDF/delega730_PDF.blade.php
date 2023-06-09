@@ -57,7 +57,7 @@ p, table {
               <td style="width:135px;">Residenza: Comune<td>
               <td style="width:405px; border-bottom: 1px solid black;">{{ $customer->city }}</td>
               <td style="width:30px;">Prov<td>
-              <td style="width:30px; border-bottom: 1px solid black; text-align:center">{{ $customer->region[0].$customer->region[1] }}</td>
+              <td style="width:30px; border-bottom: 1px solid black; text-align:center">@if(!empty($customer->region)){{ $customer->region[0].$customer->region[1] }}@endif</td>
               <td style="width:32px;">CAP<td>
               <td style="width:50px; border-bottom: 1px solid black; text-align:center">{{ $customer->postcode }}</td>
           </tr>

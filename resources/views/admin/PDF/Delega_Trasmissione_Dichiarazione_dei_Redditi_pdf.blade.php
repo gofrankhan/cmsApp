@@ -49,15 +49,15 @@ table.small9, td, tr {
         <table style="padding-top:10px">
             <tr>
                 <td style="width:61px;">tel. Cellulare:<td>
-                <td style="width:140px; border-bottom: 0.5px solid black;"></td>
+                <td style="width:140px; border-bottom: 0.5px solid black;">{{ $customer->mobile }}</td>
                 <td style="width:50px;">residente a<td>
-                <td style="width:70px; border-bottom: 0.5px solid black;"></td>
+                <td style="width:70px; border-bottom: 0.5px solid black;">{{ $customer->city }}</td>
                 <td style="width:60px;"> in Via/Piazza<td>
-                <td style="width:200px; border-bottom: 0.5px solid black;"></td>
+                <td style="width:200px; border-bottom: 0.5px solid black;">{{ $customer->addressline1 }}</td>
                 <td style="width:20px;">Prov.<td>
-                <td style="width:30px; border-bottom: 0.5px solid black;"></td>
+                <td style="width:30px; border-bottom: 0.5px solid black;">@if(!empty($customer->region)){{ $customer->region[0].$customer->region[1] }}@endif</td>
                 <td style="width:20px;">CAP<td>
-                <td style="width:30px; border-bottom: 0.5px solid black;"></td>
+                <td style="width:30px; border-bottom: 0.5px solid black;">{{ $customer->postcode }}</td>
             </tr>
         </table>
         <br>
