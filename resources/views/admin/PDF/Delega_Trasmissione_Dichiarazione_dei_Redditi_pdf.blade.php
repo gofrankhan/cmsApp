@@ -39,11 +39,11 @@ table.small9, td, tr {
         <table>
             <tr>
                 <td style="width:79px;">La/Il sottoscritta/o<td>
-                <td style="width:200px; border-bottom: 0.5px solid black;"></td>
+                <td style="width:200px; border-bottom: 0.5px solid black;">{{ $customer->firstname." ".$customer->lastname }}</td>
                 <td style="width:38px;"> nata/o il<td>
-                <td style="width:120px; border-bottom: 0.5px solid black;"></td>
+                <td style="width:120px; border-bottom: 0.5px solid black;">{{ $customer->citizenship }}</td>
                 <td style="width:61px;"> codice fiscale<td>
-                <td style="width:200px; border-bottom: 0.5px solid black;"></td>
+                <td style="width:200px; border-bottom: 0.5px solid black;">{{ $customer->taxid }}</td>
             </tr>
         </table>
         <table style="padding-top:10px">
