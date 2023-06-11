@@ -23,27 +23,51 @@ p, table {
 
         <table>
             <tr>
-                <td style="width:145px;">Il/La sottoscritto/a<td>
+                <td style="width:140px;">Il/La sottoscritto/a   </td>    
+                <td>{{ $customer->firstname." ".$customer->lastname }}<td>
+                
             </tr>
         </table>
         <table>
             <tr>
                 <td style="width:56px;">nato a<td>
-                <td style="width:240px;"></td>
+                <td style="width:240px;">{{ $customer->citizenship }}</td>
+                @php
+                    if($customer->dateofbirth == '0000-00-00')
+                    {
+                        $date1="00";
+                        $month1="00";
+                        $year1="0000";
+                    }else{
+                        $time=strtotime($customer->dateofbirth);
+                        $date1=date("d",$time);
+                        $month1=date("m",$time);
+                        $year1=date("Y",$time);
+                    }
+                @endphp
                 <td style="width:8px;">il<td>
-                <td style="width:180px;"></td>
+                <td style="width:180px;">{{ $date1."/".$month1."/".$year1; }}</td>
                 <td style="width:105px;">e residente a<td>
-                <td style="width:55px;"></td>
+                <td style="width:55px;">{{ $customer->city }}</td>
             </tr>
         </table>
         <table>
             <tr>
                 <td style="width:56px;">in via<td>
-                <td style="width:400px;"></td>
+                @php
+                    $words = explode(' ', $customer->addressline1);
+                    $last_word = array_pop($words);
+                    $address1 = join(" ", $words);
+                @endphp
+                @if($customer->addressline2 == '-')
+                <td style="width:400px;">{{ $address1}}</td>
+                @else
+                <td style="width:400px;">{{ $address1." " .$customer->addressline2 }}</td>
+                @endif
                 <td style="width:16px;">n<sup>o</sup><td>
-                <td style="width:100px;"></td>
-                <td style="width:85px;">prov<td>
-                <td style="width:55px;"></td>
+                <td style="width:100px;">{{ $last_word }}</td>
+                <td style="width:35px;">prov<td>
+                <td style="width:15px;">@if(!empty($customer->region)){{ $customer->region[0].$customer->region[1] }}@endif</td>
             </tr>
         </table>
         <br>
