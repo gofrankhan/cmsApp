@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Models\User;
 use App\Models\Customer;
 use DataTables;
+use Debugbar;
 
 class CustomerController extends Controller
 {
@@ -20,7 +21,25 @@ class CustomerController extends Controller
         $shop_name = Auth::user()->shop_name;
         $user_type = Auth::user()->user_type;
         if($user_type == 'admin'){
-            $data = Customer::select('id','taxid','customertype',DB::raw("concat(firstname,' ', lastname) as fullname"), 'mobile')->paginate(50);
+            if(($request->searchText)){
+                $search_text = explode(" ", $request->searchText);
+                Debugbar::info($search_text);
+                
+                $data = Customer::select('id','taxid','customertype',DB::raw("concat(firstname,' ', lastname) as fullname"), 'mobile')
+                ->where(function ($query) use ($search_text){
+                    foreach($search_text as $search){
+                        $query->orWhere('id', 'like', '%' . $search . '%')
+                                ->orWhere('taxid', 'like', '%' . $search . '%')
+                                ->orWhere('customertype', 'like', '%' . $search . '%')
+                                ->orWhere('firstname', 'like', '%' . $search . '%')
+                                ->orWhere('lastname', 'like', '%' . $search . '%')
+                                ->orWhere('mobile', 'like', '%' . $search . '%');
+                    }
+                })
+                ->paginate(50);
+            }else{
+                $data = Customer::select('id','taxid','customertype',DB::raw("concat(firstname,' ', lastname) as fullname"), 'mobile')->paginate(50);
+            }
         }else{
             $data = Customer::select('id','taxid','customertype',DB::raw("concat(firstname,' ', lastname) as fullname"), 'mobile')
                     ->whereIn('user_id', function($query) use ($shop_name){
@@ -28,6 +47,41 @@ class CustomerController extends Controller
                     })->paginate(50);
         }
         return view('admin.customer_data_table', compact('title', 'data'));
+    }
+
+    public function CustomerDataTableSearch(Request $request)
+    {        
+        $title = "Customer";              
+        $shop_name = Auth::user()->shop_name;
+        $user_type = Auth::user()->user_type;
+        $search_text = explode(" ", $request->searchText);
+        Debugbar::info($search_text);
+        if($user_type == 'admin'){
+            $data = Customer::select('id','taxid','customertype',DB::raw("concat(firstname,' ', lastname) as fullname"), 'mobile')
+            ->where(function ($query) use ($search_text){
+                foreach($search_text as $search){
+                    $query->orWhere('id', 'like', '%' . $search . '%')
+                            ->orWhere('taxid', 'like', '%' . $search . '%')
+                            ->orWhere('customertype', 'like', '%' . $search . '%')
+                            ->orWhere('firstname', 'like', '%' . $search . '%')
+                            ->orWhere('lastname', 'like', '%' . $search . '%')
+                            ->orWhere('mobile', 'like', '%' . $search . '%');
+                }
+            })
+            ->paginate(50);
+            //dd('$data');
+        $data = DB::table('customers')->where('taxid', $request->searchText)
+                                        ->orWhere('firstname', $request->searchText)
+                                        ->orWhere('lastname', $request->searchText)
+                                        ->orWhere('mobile', $request->searchText)->paginate(20);
+        }else{
+            $data = Customer::select('id','taxid','customertype',DB::raw("concat(firstname,' ', lastname) as fullname"), 'mobile')
+
+                    ->whereIn('user_id', function($query) use ($shop_name){
+                        $query->select('id')->from('users')->where('shop_name', $shop_name);
+                    })->paginate(50);
+        }
+        return redirect()->back();
     }
 
     public function NewCustomerData(): View

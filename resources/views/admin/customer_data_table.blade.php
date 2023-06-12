@@ -3,9 +3,17 @@
 
 <script>
     function submitForm(event) {
+        var searchText = $('#search-box').val();
+        $.ajax({
+        url: "{{ route('customer.data') }}",
+        type: "GET",
+        data: { searchText : searchText }
+      });
+    }
+    function submitFormTNM(event) {
         event.preventDefault();
-        var taxidOrNameOrMobile = $('#search-box').val();
-        $('#search-box').attr('disabled', 'disabled');
+        var taxidOrNameOrMobile = $('#search-box-tnm').val();
+        $('#search-box-tnm').attr('disabled', 'disabled');
         $.ajax({
         url: "{{ route('customer.search') }}",
         type: "GET",
@@ -24,8 +32,8 @@
       });
     }
     function clickCloseForm(event){
-        $('#search-box').removeAttr('disabled');
-        $('#search-box').val("");
+        $('#search-box-tnm').removeAttr('disabled');
+        $('#search-box-tnm').val("");
         location.reload(true);
     }
 </script>
@@ -45,10 +53,19 @@
                 </div>
                 <p class="card-title-desc" >
                     <div class="row mb-3">
-                        <div class="col-sm-8">
+                        
+                    <div class="col-sm-4">
                             <form class="app-search d-none d-lg-block" data-backdrop="static" data-keyboard="false" onsubmit="submitForm(event)">
                                 <div class="position-relative">
-                                    <input name="search-box" id="search-box" type="text" class="form-control" placeholder="Search By Tax ID, Name or Mobile No.">
+                                    <input name="search-box" id="search-box" type="text" class="form-control" placeholder="Search...">
+                                    <span class="ri-search-line"></span>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-4">
+                            <form class="app-search d-none d-lg-block" data-backdrop="static" data-keyboard="false" onsubmit="submitFormTNM(event)">
+                                <div class="position-relative">
+                                    <input name="search-box-tnm" id="search-box-tnm" type="text" class="form-control" placeholder="Search By Tax ID, Name or Mobile No.">
                                     <span class="ri-search-line"></span>
                                 </div>
                             </form>
@@ -112,7 +129,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Search Result</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button onclick="clickCloseForm(event)" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="" id="form1">
                         @csrf
