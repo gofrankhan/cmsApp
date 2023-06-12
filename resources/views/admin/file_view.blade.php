@@ -141,6 +141,60 @@
                 </div>
             </div>
         </div>
+        @if($files[0]->service == 'DICHIARAZIONE REDDITI PF')
+        <form action="{{ route('update.service')}}" id="formPDF" method="post">
+            <div class="row">
+                <label class="col-form-label">Delega Trasmissione Dichiarazione dei Redditi</label>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="row mb-3">
+                        <div class="col-sm-12">
+                            <label for="anno" class="col-form-label">ANNO</label>
+                            <input class="form-control" name="anno" type="text" id="anno" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row mb-3">
+                        <div class="col-sm-12">
+                            <label for="pagamento" class="col-form-label">RIF</label>
+                            <input class="form-control" name="rif" type="text" id="rif" value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-form-label">Autocertificazione redditi impresa</label>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="row mb-3">
+                        <div class="col-sm-12">
+                            <label for="registration_no" class="col-form-label">N° iscrizione</label>
+                            <input class="form-control" name="registration_no" type="text" id="registration_no" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row mb-3">
+                        <div class="col-sm-12">
+                            <label for="registration_date" class="col-form-label">Data di iscrizione</label>
+                            <input class="form-control" name="registration_date" type="date" id="registration_date" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row mb-3">
+                        <div class="col-sm-12">
+                            <label for="common_chamber_of_commerce" class="col-form-label">Comune della camera di commercio</label>
+                            <input class="form-control" name="common_chamber_of_commerce" type="text" id="common_chamber_of_commerce" value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        @endif
         <div class="row">
             <div class="col">
                 <div class="row mb-3">
