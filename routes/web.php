@@ -128,6 +128,8 @@ Route::middleware('auth' , 'admin')->group(function(){
     Route::get('/delega/730/{id}', [PDFController::class, 'Delega730_PDF'])->name('delega.730');
     Route::get('/auto/red/imp/{id}', [PDFController::class, 'Autocertificazione_redditi_impresa_pdf'])->name('auto.red.imp');
     Route::get('/del/tra/dis/{id}', [PDFController::class, 'Delega_Trasmissione_Dichiarazione_dei_Redditi_pdf'])->name('del.tra.dis');
+
+    Route::get('/dichiarazione/redditi', [PDFController::class, 'DICHIARAZIONE_REDDITI_PF'])->name('dichiarazione.redditi');
 });
 
 require __DIR__.'/auth.php';

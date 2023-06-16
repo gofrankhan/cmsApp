@@ -3,6 +3,24 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<script>
+  $(document).ready(function() {
+    $('#update_btn').click(function() {
+      // Get data from Modal 2
+      var data = $('#form1').serialize();
+      // Submit the data
+      $.ajax({
+        url: '{{ route('update.status.price') }}',
+        method: 'POST',
+        data: data,
+        success: function(response) {
+            window.location.reload();
+        }
+      });
+    });
+  });
+</script>
+
 @php 
     $file_id =  $files[0]->file_id;
     $status = $files[0]->status;
@@ -54,7 +72,7 @@
                         <a class="dropdown-item" href="{{ route ('delega.730', $files[0]->customer_id)}}" target="_blank">DELEGA 730</a>
                         @endif
                         @if($files[0]->service == 'DICHIARAZIONE REDDITI PF')
-                        <a class="dropdown-item" href="{{ route ('auto.red.imp', $files[0]->id)}}" target="_blank">Autocertificazione redditi impresa</a>
+                        <a class="dropdown-item" href="{{ route ('dichiarazione.redditi', $files[0]->id)}}" target="_blank">Autocertificazione redditi impresa</a>
                         <a class="dropdown-item" href="{{ route ('del.tra.dis', $files[0]->id)}}" target="_blank">Delega Trasmissione Dichiarazione dei Redditi</a>
                         @endif
                         <a class="dropdown-item" href="#">Anagrafica Cliente</a>
@@ -142,7 +160,8 @@
             </div>
         </div>
         @if($files[0]->service == 'DICHIARAZIONE REDDITI PF')
-        <form action="{{ route('update.service')}}" id="formPDF" method="post">
+        <form action="{{ route('dichiarazione.redditi')}}" id="formPDF_dichiarazione_redditi" method="post">
+            @csrf
             <div class="row">
                 <label class="col-form-label">Delega Trasmissione Dichiarazione dei Redditi</label>
             </div>

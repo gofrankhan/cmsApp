@@ -96,4 +96,8 @@ class PDFController extends Controller
          $pdf = PDF::loadView('admin.PDF.Delega_Trasmissione_Dichiarazione_dei_Redditi_pdf', $data);
          return $pdf->stream('Delega_Trasmissione_Dichiarazione_dei_Redditi.pdf');
     }
+
+    public function DICHIARAZIONE_REDDITI_PF(Request $request, $id){
+        Delega_Trasmissione_Dichiarazione_dei_Redditi_pdf($request, $id);
+    }
 }
