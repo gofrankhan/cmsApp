@@ -13,7 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('pdfdatas', function (Blueprint $table) {
+            $table->id();
+            $table->string('file_id');
+            $table->string('field_name');
+            $table->string('field_value');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('pdfdatas');
     }
 };
