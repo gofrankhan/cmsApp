@@ -269,7 +269,7 @@
                         <div class="col-sm-12">
                             <label for="anno" class="col-form-label">ANNO</label>
                             
-                            <input class="form-control" name="anno" type="text" id="anno" value="{{$pdfdata['anno'][0]->field_value}}">
+                            <input class="form-control" name="anno" type="text" id="anno" value="@if(!empty($pdfdata['anno'][0]->field_value)){{$pdfdata['anno'][0]->field_value}}@endif">
                         </div>
                     </div>
                 </div>
@@ -277,7 +277,7 @@
                     <div class="row mb-3">
                         <div class="col-sm-12">
                             <label for="rif" class="col-form-label">RIF</label>
-                            <input class="form-control" name="rif" type="text" id="rif" value="{{$pdfdata['rif'][0]->field_value}}">
+                            <input class="form-control" name="rif" type="text" id="rif" value="@if(!empty($pdfdata['rif'][0]->field_value)){{$pdfdata['rif'][0]->field_value}}@endif">
                         </div>
                     </div>
                 </div>
@@ -290,7 +290,7 @@
                     <div class="row mb-3">
                         <div class="col-sm-12">
                             <label for="registration_no" class="col-form-label">N° iscrizione</label>
-                            <input class="form-control" name="registration_no" type="text" id="registration_no" value="{{$pdfdata['registration_no'][0]->field_value}}">
+                            <input class="form-control" name="registration_no" type="text" id="registration_no" value="@if(!empty($pdfdata['registration_no'][0]->field_value)){{$pdfdata['registration_no'][0]->field_value}}@endif">
                         </div>
                     </div>
                 </div>
@@ -298,7 +298,7 @@
                     <div class="row mb-3">
                         <div class="col-sm-12">
                             <label for="registration_date" class="col-form-label">Data di iscrizione</label>
-                            <input class="form-control" name="registration_date" type="date" id="registration_date" value="{{$pdfdata['registration_date'][0]->field_value}}">
+                            <input class="form-control" name="registration_date" type="date" id="registration_date" value="@if(!empty($pdfdata['registration_date'][0]->field_value)){{$pdfdata['registration_date'][0]->field_value}}@endif">
                         </div>
                     </div>
                 </div>
@@ -306,7 +306,7 @@
                     <div class="row mb-3">
                         <div class="col-sm-12">
                             <label for="common_chamber_of_commerce" class="col-form-label">Comune della camera di commercio</label>
-                            <input class="form-control" name="common_chamber_of_commerce" type="text" id="common_chamber_of_commerce" value="{{$pdfdata['common_chamber_of_commerce'][0]->field_value}}">
+                            <input class="form-control" name="common_chamber_of_commerce" type="text" id="common_chamber_of_commerce" value="@if(!empty($pdfdata['common_chamber_of_commerce'][0]->field_value)){{$pdfdata['common_chamber_of_commerce'][0]->field_value}}@endif">
                         </div>
                     </div>
                 </div>
