@@ -278,39 +278,69 @@ class FileController extends Controller
         $invoice->save();
         
         if($request->anno != ""){
-            $pdfdata = new Pdfdata();
-            $pdfdata->file_id = $request->file_id_no;
-            $pdfdata->field_name = "anno";
-            $pdfdata->field_value= $request->anno;
-            $pdfdata->save();
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'anno');
+            if(!is_null($recored_exist)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'anno')
+                        ->update(['field_value' => $request->anno]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "anno";
+                $pdfdata->field_value= $request->anno;
+                $pdfdata->save();
+            }
         }
         if($request->rif != ""){
-            $pdfdata = new Pdfdata();
-            $pdfdata->file_id = $request->file_id_no;
-            $pdfdata->field_name = "rif";
-            $pdfdata->field_value= $request->rif;
-            $pdfdata->save();
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'rif');
+            if(!is_null($recored_exist)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'rif')
+                        ->update(['field_value' => $request->rif]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "rif";
+                $pdfdata->field_value= $request->rif;
+                $pdfdata->save();
+            }
         }
         if($request->registration_no != ""){
-            $pdfdata = new Pdfdata();
-            $pdfdata->file_id = $request->file_id_no;
-            $pdfdata->field_name = "registration_no";
-            $pdfdata->field_value= $request->registration_no;
-            $pdfdata->save();
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'registration_no');
+            if(!is_null($recored_exist)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'registration_no')
+                        ->update(['field_value' => $request->registration_no]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "registration_no";
+                $pdfdata->field_value= $request->registration_no;
+                $pdfdata->save();
+            }
         }
         if($request->registration_date != ""){
-            $pdfdata = new Pdfdata();
-            $pdfdata->file_id = $request->file_id_no;
-            $pdfdata->field_name = "registration_date";
-            $pdfdata->field_value= $request->registration_date;
-            $pdfdata->save();
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'registration_date');
+            if(!is_null($recored_exist)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'registration_date')
+                        ->update(['field_value' => $request->registration_date]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "registration_date";
+                $pdfdata->field_value= $request->registration_date;
+                $pdfdata->save();
+            }
         }
         if($request->common_chamber_of_commerce != ""){
-            $pdfdata = new Pdfdata();
-            $pdfdata->file_id = $request->file_id_no;
-            $pdfdata->field_name = "common_chamber_of_commerce";
-            $pdfdata->field_value= $request->common_chamber_of_commerce;
-            $pdfdata->save();
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'common_chamber_of_commerce');
+            if(!is_null($recored_exist)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'common_chamber_of_commerce')
+                        ->update(['field_value' => $request->common_chamber_of_commerce]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "common_chamber_of_commerce";
+                $pdfdata->field_value= $request->common_chamber_of_commerce;
+                $pdfdata->save();
+            }
         }
         return redirect()->back();
     }
