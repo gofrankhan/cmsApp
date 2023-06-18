@@ -118,18 +118,21 @@ p, table {
             <tr>
                 <td style="width:80px;"></td>
                 <td>- N° iscrizione<td>
+                <td>{{$pdfdata['registration_no'][0]->field_value}}</td>
             </tr>
         </table>
         <table>
             <tr>
                 <td style="width:80px;"></td>
                 <td>- Data di iscrizione<td>
+                <td>{{$pdfdata['registration_date'][0]->field_value}}</td>
             </tr>
         </table>
         <table>
             <tr>
                 <td style="width:80px;"></td>
                 <td>- Comune della camera di commercio di<td>
+                <td>{{$pdfdata['common_chamber_of_commerce'][0]->field_value}}</td>
             </tr>
         </table>
         <table>
@@ -147,12 +150,14 @@ p, table {
             <tr>
                 <td style="width:80px;"></td>
                 <td>- N° iscrizione<td>
+                <td>{{$pdfdata['registration_no'][0]->field_value}}</td>
             </tr>
         </table>
         <table>
             <tr>
                 <td style="width:80px;"></td>
                 <td>- Data di iscrizione<td>
+                <td>{{$pdfdata['registration_date'][0]->field_value}}</td>
             </tr>
         </table>
         <br>

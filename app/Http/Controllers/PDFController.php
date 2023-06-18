@@ -14,6 +14,7 @@ use App\Models\File;
 use App\Models\Invoice;
 use App\Models\Customer;
 use App\Models\Service;
+use App\Models\Pdfdata;
 use DataTables;
 use PDF;
 
@@ -65,15 +66,23 @@ class PDFController extends Controller
 
     public function Autocertificazione_redditi_impresa_pdf($id)
     {
-        $ids = Invoice::select('customer_id', 'user_id')->where('id', $id)->first();
+        $ids = Invoice::select('customer_id', 'user_id', 'file_id')->where('id', $id)->first();
         $user = DB::table('users')->where('id', $ids->user_id)->first();
         $customer = DB::table('customers')->where('id', $ids->customer_id)->first();
+
+        $pdfdata['anno'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'anno')->get();
+        $pdfdata['rif'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'rif')->get();
+        
+        $pdfdata['registration_no'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'registration_no')->get();
+        $pdfdata['registration_date'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'registration_date')->get();
+        $pdfdata['common_chamber_of_commerce'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'common_chamber_of_commerce')->get();
   
         $data = [
             'title' => 'Mandato al CAF',
             'date' => date('m/d/Y'),
             'customer' => $customer,
-            'user' => $user
+            'user' => $user,
+            'pdfdata' => $pdfdata
         ]; 
             
          $pdf = PDF::loadView('admin.PDF.Autocertificazione_redditi_impresa_pdf', $data);
@@ -82,22 +91,27 @@ class PDFController extends Controller
 
     public function Delega_Trasmissione_Dichiarazione_dei_Redditi_pdf($id)
     {
-        $ids = Invoice::select('customer_id', 'user_id')->where('id', $id)->first();
+        $ids = Invoice::select('customer_id', 'user_id', 'file_id')->where('id', $id)->first();
         $user = DB::table('users')->where('id', $ids->user_id)->first();
         $customer = DB::table('customers')->where('id', $ids->customer_id)->first();
+
+        $pdfdata['anno'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'anno')->get();
+        $pdfdata['rif'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'rif')->get();
+        
+        $pdfdata['registration_no'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'registration_no')->get();
+        $pdfdata['registration_date'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'registration_date')->get();
+        $pdfdata['common_chamber_of_commerce'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'common_chamber_of_commerce')->get();
   
         $data = [
             'title' => 'Mandato al CAF',
             'date' => date('m/d/Y'),
             'customer' => $customer,
-            'user' => $user
+            'user' => $user,
+            'pdfdata' => $pdfdata
         ]; 
             
          $pdf = PDF::loadView('admin.PDF.Delega_Trasmissione_Dichiarazione_dei_Redditi_pdf', $data);
          return $pdf->stream('Delega_Trasmissione_Dichiarazione_dei_Redditi.pdf');
     }
 
-    public function DICHIARAZIONE_REDDITI_PF(Request $request, $id){
-        Delega_Trasmissione_Dichiarazione_dei_Redditi_pdf($request, $id);
-    }
 }

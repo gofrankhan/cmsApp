@@ -70,9 +70,9 @@ table.small9, td, tr {
         <table>
             <tr>
                 <td>ichiarazione dei redditi per il l'anno fiscale ANNO</td>
-                <td style="width:40px;"></td>
+                <td style="width:40px;">{{$pdfdata['anno'][0]->field_value}}</td>
                 <td>RIF</td>
-                <td style="width:60px;"></td>
+                <td style="width:60px;">{{$pdfdata['rif'][0]->field_value}}</td>
                 <td>per il dichiarante con codice fiscale: </td>
             </tr>
         </table>
