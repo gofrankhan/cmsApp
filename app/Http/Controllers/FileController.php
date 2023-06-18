@@ -14,6 +14,7 @@ use App\Models\File;
 use App\Models\Invoice;
 use App\Models\Customer;
 use App\Models\Service;
+use App\Models\Pdfdata;
 use DataTables;
 use Debugbar;
 
@@ -276,6 +277,41 @@ class FileController extends Controller
         $invoice->lawyer_price = intval($request->pagamento_lawyer);
         $invoice->save();
         
+        if($request->anno != ""){
+            $pdfdata = new Pdfdata();
+            $pdfdata->file_id = $request->file_id_no;
+            $pdfdata->field_name = "anno";
+            $pdfdata->field_value= $request->anno;
+            $pdfdata->save();
+        }
+        if($request->rif != ""){
+            $pdfdata = new Pdfdata();
+            $pdfdata->file_id = $request->file_id_no;
+            $pdfdata->field_name = "rif";
+            $pdfdata->field_value= $request->rif;
+            $pdfdata->save();
+        }
+        if($request->registration_no != ""){
+            $pdfdata = new Pdfdata();
+            $pdfdata->file_id = $request->file_id_no;
+            $pdfdata->field_name = "registration_no";
+            $pdfdata->field_value= $request->registration_no;
+            $pdfdata->save();
+        }
+        if($request->registration_date != ""){
+            $pdfdata = new Pdfdata();
+            $pdfdata->file_id = $request->file_id_no;
+            $pdfdata->field_name = "registration_date";
+            $pdfdata->field_value= $request->registration_date;
+            $pdfdata->save();
+        }
+        if($request->common_chamber_of_commerce != ""){
+            $pdfdata = new Pdfdata();
+            $pdfdata->file_id = $request->file_id_no;
+            $pdfdata->field_name = "common_chamber_of_commerce";
+            $pdfdata->field_value= $request->common_chamber_of_commerce;
+            $pdfdata->save();
+        }
         return redirect()->back();
     }
 
@@ -299,7 +335,12 @@ class FileController extends Controller
                                     ->join('services', 'invoices.service_id', '=', 'services.id')
                                     ->where('invoices.file_id', $file_id)
                                     ->get();
-        return view('admin.file_view', compact('comments', 'attachments', 'files', 'title'));
+        $pdfdata['anno'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'anno')->get();
+        $pdfdata['rif'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'rif')->get();
+        $pdfdata['registration_no'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'registration_no')->get();
+        $pdfdata['registration_date'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'registration_date')->get();
+        $pdfdata['common_chamber_of_commerce'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'common_chamber_of_commerce')->get();
+        return view('admin.file_view', compact('comments', 'attachments', 'files', 'pdfdata', 'title'));
     }
 
     public function FileEdit($file_id)
@@ -314,10 +355,15 @@ class FileController extends Controller
                                     ->join('services', 'invoices.service_id', '=', 'services.id')
                                     ->where('invoices.file_id', $file_id)
                                     ->get();
+        $pdfdata['anno'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'anno')->get();
+        $pdfdata['rif'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'rif')->get();
+        $pdfdata['registration_no'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'registration_no')->get();
+        $pdfdata['registration_date'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'registration_date')->get();
+        $pdfdata['common_chamber_of_commerce'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'common_chamber_of_commerce')->get();
         $user_type = Auth::user()->user_type;
         if(($files[0]->status == "Completed" || $files[0]->status == "Cancelled") && $user_type != 'admin')
             return redirect()->back();
-        return view('admin.file_edit', compact('comments', 'attachments', 'files', 'title'));
+        return view('admin.file_edit', compact('comments', 'attachments', 'files', 'pdfdata' , 'title'));
     }
 
       /**
