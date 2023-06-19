@@ -279,7 +279,7 @@ class FileController extends Controller
         
         if($request->anno != ""){
             $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'anno');
-            if(!is_null($recored_exist)){
+            if(($recored_exist->count()> 0)){
                 Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'anno')
                         ->update(['field_value' => $request->anno]);
             }else{
@@ -292,7 +292,7 @@ class FileController extends Controller
         }
         if($request->rif != ""){
             $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'rif');
-            if(!is_null($recored_exist)){
+            if(($recored_exist->count()> 0)){
                 Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'rif')
                         ->update(['field_value' => $request->rif]);
             }else{
@@ -305,7 +305,7 @@ class FileController extends Controller
         }
         if($request->registration_no != ""){
             $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'registration_no');
-            if(!is_null($recored_exist)){
+            if(($recored_exist->count()> 0)){
                 Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'registration_no')
                         ->update(['field_value' => $request->registration_no]);
             }else{
@@ -318,7 +318,7 @@ class FileController extends Controller
         }
         if($request->registration_date != ""){
             $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'registration_date');
-            if(!is_null($recored_exist)){
+            if(($recored_exist->count()> 0)){
                 Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'registration_date')
                         ->update(['field_value' => $request->registration_date]);
             }else{
@@ -331,7 +331,7 @@ class FileController extends Controller
         }
         if($request->common_chamber_of_commerce != ""){
             $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'common_chamber_of_commerce');
-            if(!is_null($recored_exist)){
+            if(($recored_exist->count()> 0)){
                 Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'common_chamber_of_commerce')
                         ->update(['field_value' => $request->common_chamber_of_commerce]);
             }else{
