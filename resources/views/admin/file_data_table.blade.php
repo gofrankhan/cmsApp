@@ -175,13 +175,6 @@
                 .columns([0,1,2])
                 .every(function () {
                     var column = this;
-                    $('<br><input style="width:150px" type="text" placeholder="Search" />')
-                    .appendTo($(column.header()))
-                    .on('keyup change clear', function () {
-                        if (column.search() !== this.value) {
-                            column.search(this.value).draw();
-                        }
-                    });
                 });
             },
         });
