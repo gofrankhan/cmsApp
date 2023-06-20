@@ -64,14 +64,14 @@ class FileController extends Controller
                     if($user_type == 'admin'){
                         $btn = '
                         <div style="width:150px" class="row">
-                        <form action="'.route('customer.delete',$row->id).'" method="Post">
+                        <form>
                             <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show">
                                 <i class="fas fa-eye"></i>
                             </a>
                             <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->file_id).'" title="Edit">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
-                            <a type="submit" class="btn btn-danger btn-sm edit" href="'.route('file.delete' ,$row->id).'" title="Delete">
+                            <a type="submit" class="btn btn-danger btn-sm edit" data-id="{{'. $row->id.' }}" title="Delete">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
                         </form>
@@ -409,7 +409,8 @@ class FileController extends Controller
             'message' => 'File deleted successfully', 
             'alert-type' => 'success'
         );
-        return redirect()->back()->with($notification);
+        //return redirect()->back()->with($notification);
+        return response()->json(['success' => true]);
     }
 
     public function AssignFiles(Request $request){
