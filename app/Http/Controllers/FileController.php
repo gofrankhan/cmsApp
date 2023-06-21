@@ -68,7 +68,7 @@ class FileController extends Controller
                             <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show">
                                 <i class="fas fa-eye"></i>
                             </a>
-                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->file_id).'" title="Edit">
+                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->file_id).'"target="_blank" title="Edit">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
                             <a type="submit" class="btn btn-danger btn-sm edit" data-id="'. $row->id.'" title="Delete">
@@ -90,7 +90,7 @@ class FileController extends Controller
                             <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.show',$row->file_id).'" target="_blank" title="Show">
                                 <i class="fas fa-eye"></i>
                             </a>
-                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->file_id).'" title="Edit">
+                            <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->file_id).'" target="_blank" title="Edit">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
                             ';
@@ -247,13 +247,13 @@ class FileController extends Controller
                 'message' => 'File created successfully!', 
                 'alert-type' => 'success'
             );
-            return redirect()->back()->with($notification);
+            return response()->json(['success' => true]);
         }else{
             $notification = array(
                 'message' => 'No Service or Tax ID found', 
                 'alert-type' => 'error'
             );
-            return redirect()->back()->with($notification);
+            return response()->json(['error' => true]);
         }
 
     }
