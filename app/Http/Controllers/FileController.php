@@ -71,7 +71,7 @@ class FileController extends Controller
                             <a class="btn btn-outline-secondary btn-sm edit" href="'.route('file.edit',$row->file_id).'" title="Edit">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
-                            <a type="submit" class="btn btn-danger btn-sm edit" data-id="{{'. $row->id.' }}" title="Delete">
+                            <a type="submit" class="btn btn-danger btn-sm edit" data-id="'. $row->id.'" title="Delete">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
                         </form>
