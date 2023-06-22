@@ -196,6 +196,33 @@
 <script>
     $(document).ready(function() {
         // Listen for click events on the delete icon/button
+        $('#file_datatable').on('click', 'btn btn-primary waves-effect waves-light', function(e) {
+            e.preventDefault();
+
+            var itemId = $(this).data('id');
+
+            // Send an AJAX request to delete the row
+            $.ajax({
+                url: '/file/delete/' + itemId,
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    // Row deleted successfully, remove it from the table
+                    $('.file_datatable').find('a[data-id="' + itemId + '"]').closest('tr').remove();
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
+<!-- AJAX script -->
+<script>
+    $(document).ready(function() {
+        // Listen for click events on the delete icon/button
         $('#file_datatable').on('click', '.btn.btn-danger.btn-sm.edit', function(e) {
             e.preventDefault();
 
