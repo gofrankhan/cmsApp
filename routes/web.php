@@ -94,6 +94,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/file/delete/{id}', [FileController::class, 'FileDelete'])->name('file.delete')->middleware('admin');
     Route::post('/update/service', [FileController::class, 'UpdateService'])->name('update.service');
     Route::get('/file/show/{id}', [FileController::class, 'FileShow'])->name('file.show');
+    Route::post('/get/filter/value', [FileController::class, 'GetFilterValue'])->name('get.filter.value');
     Route::get('/load/customer', [CustomerController::class, 'GetCustomerInfo'])->name('customer.info');
     Route::post('/update/status/price', [FileController::class, 'UpdateFileStatusAndPrice'])->name('update.status.price');
 

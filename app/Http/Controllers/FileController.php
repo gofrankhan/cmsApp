@@ -442,4 +442,17 @@ class FileController extends Controller
         return redirect()->back()->with($notification);
     }
 
+    public function GetFilterValue(Request $request){
+        $selectedValue = $request->input('value');
+        if($selectedValue == "shop"){
+
+        }else if($selectedValue == "service"){
+            $data = Service::select('service', $selectedValue)->distinct()->get();
+        }else if($selectedValue == "status"){
+
+        }
+
+        return response()->json($data);
+    }
+
 }
