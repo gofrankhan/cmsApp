@@ -1,6 +1,8 @@
 @extends('admin.admin_master')
 @section('admin')
 
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -223,7 +225,11 @@
 $(document).ready(function() {
   $('#select_filter_type').change(function() {
     var selectedValue = $(this).val();
-
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $.ajax({
       url: '/get/filter/value',
       type: 'POST',
@@ -232,7 +238,13 @@ $(document).ready(function() {
         $("#show_filter_list").empty();
           $("#show_filter_list").append("<option value=''>Select a service</option>");
           $.each(data, function(index, item) {
-            $("#show_filter_list").append("<option value='" + item.service + "'>" + item.service + "</option>");
+            if(item.shop_name)
+                $("#show_filter_list").append("<option value='" + item.shop_name + "'>" + item.shop_name + "</option>");
+            else if(item.service)
+                $("#show_filter_list").append("<option value='" + item.service + "'>" + item.service + "</option>");
+            else if(item.status){
+                $("#show_filter_list").append("<option value='" + item.status + "'>" + item.status + "</option>");
+            }
           });
       },
       error: function(xhr) {
@@ -266,22 +278,24 @@ $(document).ready(function() {
                         <a href="" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="{{ $modealName }}">New</a>
                     </div>
                 </p>
-                <div class="row">
-                    <div style="padding:15px" class="col-md-2">
-                        <select style="width:200px" id="select_filter_type">
-                            <option value="" selected>---Select Filter Type---</option>
-                            <option value="shop">Shop Name</option>
-                            <option value="service">Service Type</option>
-                            <option value="status">Status</option>
-                        </select>
+                <form action="" id="formFilter">
+                    @csrf
+                    <div class="row">
+                        <div style="padding:15px" class="col-md-2">
+                            <select style="width:200px" id="select_filter_type">
+                                <option value="" selected>---Select Filter Type---</option>
+                                <option value="shop">Shop Name</option>
+                                <option value="service">Service Type</option>
+                                <option value="status">Status</option>
+                            </select>
+                        </div>
+                        <div style="padding:15px" class="col-md-2">
+                            <select style="width:200px" id="show_filter_list">
+                                <option value="" selected>---Select---</option>
+                            </select>
+                        </div>
                     </div>
-                    <div style="padding:15px" class="col-md-2">
-                        <select style="width:200px" id="show_filter_list">
-                            <option value="" selected>---Select---</option>
-                        </select>
-                    </div>
-                </div>
-                
+                </form>
                 <table data-page-length='50' id="file_datatable" class="table table-bordered file_datatable">
                     <thead>
                         <tr>

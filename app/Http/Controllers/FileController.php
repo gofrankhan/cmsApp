@@ -445,11 +445,11 @@ class FileController extends Controller
     public function GetFilterValue(Request $request){
         $selectedValue = $request->input('value');
         if($selectedValue == "shop"){
-
+            $data = User::select('shop_name')->distinct()->get();
         }else if($selectedValue == "service"){
-            $data = Service::select('service', $selectedValue)->distinct()->get();
+            $data = Service::select('service')->distinct()->get();
         }else if($selectedValue == "status"){
-
+            $data = Invoice::select('status')->distinct()->get();
         }
 
         return response()->json($data);
