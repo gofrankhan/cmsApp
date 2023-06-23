@@ -73,9 +73,9 @@
         data: data,
         success: function(response) {
           // Handle the response
-          if(response.status == 'success'){
-            $('.file_datatable').load(location.href+' .table');
-          }
+        //   if(response.status == 'success'){
+        //     $('.file_datatable').load(location.href+' .table');
+        //   }
         }
       });
     });
@@ -94,9 +94,9 @@
         data: data,
         success: function(response) {
           // Handle the response
-          if(response.status == 'success'){
-            $('.file_datatable').load(location.href+' .table');
-          }
+        //   if(response.status == 'success'){
+        //     $('.file_datatable').load(location.href+' .table');
+        //   }
         }
       });
     });
@@ -190,33 +190,6 @@
       
     });
   });
-</script>
-
-<!-- AJAX script -->
-<script>
-    $(document).ready(function() {
-        // Listen for click events on the delete icon/button
-        $('#file_datatable').on('click', 'btn btn-primary waves-effect waves-light', function(e) {
-            e.preventDefault();
-
-            var itemId = $(this).data('id');
-
-            // Send an AJAX request to delete the row
-            $.ajax({
-                url: '/file/delete/' + itemId,
-                type: 'GET',
-                dataType: 'json',
-                success: function(response) {
-                    // Row deleted successfully, remove it from the table
-                    $('.file_datatable').find('a[data-id="' + itemId + '"]').closest('tr').remove();
-                },
-                error: function(xhr, status, error) {
-                    // Handle error response
-                    console.error(xhr.responseText);
-                }
-            });
-        });
-    });
 </script>
 
 <!-- AJAX script -->
