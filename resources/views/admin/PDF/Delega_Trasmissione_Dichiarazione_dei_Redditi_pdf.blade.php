@@ -26,10 +26,13 @@ table.small9, td, tr {
     <title>Delega Trasmissione Dichiarazione dei Redditi pdf</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+@php
+    $date_today = date("d/m/Y");
+@endphp
 <body>
     <div class="nwew23">   
         <div align="center">
-            <img  src="{{ asset('backend/assets/images/PCPoint_Logo.png') }}" height="100" width="500"  alt="">
+            <img  src="{{ public_path('backend/assets/images/PCPoint_Logo.png') }}" height="100" width="500"  alt="">
         </div>  
         </div>
         <p align="center" style="font-size:12px;">VIA FLAVIO STILCIONE 11, 00175, ROMA (RM)<br>
@@ -74,12 +77,14 @@ table.small9, td, tr {
                 <td>RIF</td>
                 <td style="width:60px;">{{$pdfdata['rif'][0]->field_value}}</td>
                 <td>per il dichiarante con codice fiscale: </td>
+                <td >{{ $customer->taxid }}</td>
             </tr>
         </table>
         <br>
         <table>
             <tr>
-                <td>Luogo e data ROMA ___/___/______</td>
+                <td>Luogo e data ROMA</td>
+                <td style="width:50px; border-bottom: 0.5px solid black;">{{ $date_today}}</td>
                 <td style="width:414px;"></td>
                 <td>Firma______________________</td>
             </tr>
@@ -163,7 +168,8 @@ table.small9, td, tr {
         <br>
         <table>
             <tr>
-                <td>Luogo e data ROMA ___/___/______</td>
+                <td>Luogo e data ROMA</td>
+                <td style="width:50px; border-bottom: 0.5px solid black;">{{ $date_today}}</td>
                 <td style="width:414px;"></td>
                 <td>Firma______________________</td>
             </tr>
