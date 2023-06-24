@@ -38,13 +38,25 @@ table.small9, td, tr {
         <p align="center" style="font-size:12px;">VIA FLAVIO STILCIONE 11, 00175, ROMA (RM)<br>
         Tel- 06 8788 0399, email- <u>cafpcpoint@yahoo.com</u>, pec- <u>cafpcpoint@pec.it</p>
         <p align="center"><b>DELEGA TRASMISSIONE DICHIARAZIONE DEI REDDITI</b></p>
-
+        @php
+            if($customer->dateofbirth == '0000-00-00')
+            {
+                $date1="00";
+                $month1="00";
+                $year1="0000";
+            }else{
+                $time=strtotime($customer->dateofbirth);
+                $date1=date("d",$time);
+                $month1=date("m",$time);
+                $year1=date("Y",$time);
+            }
+        @endphp
         <table>
             <tr>
                 <td style="width:79px;">La/Il sottoscritta/o<td>
                 <td style="width:200px; border-bottom: 0.5px solid black;">{{ $customer->firstname." ".$customer->lastname }}</td>
                 <td style="width:38px;"> nata/o il<td>
-                <td style="width:120px; border-bottom: 0.5px solid black;">{{ $customer->citizenship }}</td>
+                <td style="width:120px; border-bottom: 0.5px solid black;">{{ $date1."/".$month1."/".$year1; }}</td>
                 <td style="width:61px;"> codice fiscale<td>
                 <td style="width:200px; border-bottom: 0.5px solid black;">{{ $customer->taxid }}</td>
             </tr>
