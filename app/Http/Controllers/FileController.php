@@ -342,6 +342,136 @@ class FileController extends Controller
                 $pdfdata->save();
             }
         }
+        if($request->indirizzo != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'indirizzo');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'indirizzo')
+                        ->update(['field_value' => $request->indirizzo]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "indirizzo";
+                $pdfdata->field_value= $request->indirizzo;
+                $pdfdata->save();
+            }
+        }
+        if($request->civico != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'civico');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'civico')
+                        ->update(['field_value' => $request->civico]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "civico";
+                $pdfdata->field_value= $request->civico;
+                $pdfdata->save();
+            }
+        }
+        if($request->cap != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'cap');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'cap')
+                        ->update(['field_value' => $request->cap]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "cap";
+                $pdfdata->field_value= $request->cap;
+                $pdfdata->save();
+            }
+        }
+        if($request->citta != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'citta');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'citta')
+                        ->update(['field_value' => $request->citta]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "citta";
+                $pdfdata->field_value= $request->citta;
+                $pdfdata->save();
+            }
+        }
+        if($request->provincia != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'provincia');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'provincia')
+                        ->update(['field_value' => $request->provincia]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "provincia";
+                $pdfdata->field_value= $request->provincia;
+                $pdfdata->save();
+            }
+        }
+        if($request->partita_iva != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'partita_iva');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'partita_iva')
+                        ->update(['field_value' => $request->partita_iva]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "partita_iva";
+                $pdfdata->field_value= $request->partita_iva;
+                $pdfdata->save();
+            }
+        }
+        if($request->codice_fiscale != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'codice_fiscale');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'codice_fiscale')
+                        ->update(['field_value' => $request->codice_fiscale]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "codice_fiscale";
+                $pdfdata->field_value= $request->codice_fiscale;
+                $pdfdata->save();
+            }
+        }
+        if($request->codice_ateco != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'codice_ateco');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'codice_ateco')
+                        ->update(['field_value' => $request->codice_ateco]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "codice_ateco";
+                $pdfdata->field_value= $request->codice_ateco;
+                $pdfdata->save();
+            }
+        }
+        if($request->tipo_attivita != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'tipo_attivita');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'tipo_attivita')
+                        ->update(['field_value' => $request->tipo_attivita]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "tipo_attivita";
+                $pdfdata->field_value= $request->tipo_attivita;
+                $pdfdata->save();
+            }
+        }
+        if($request->reddito != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'reddito');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'reddito')
+                        ->update(['field_value' => $request->reddito]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "reddito";
+                $pdfdata->field_value= $request->reddito;
+                $pdfdata->save();
+            }
+        }
         return redirect()->back();
     }
 
@@ -370,6 +500,16 @@ class FileController extends Controller
         $pdfdata['registration_no'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'registration_no')->get();
         $pdfdata['registration_date'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'registration_date')->get();
         $pdfdata['common_chamber_of_commerce'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'common_chamber_of_commerce')->get();
+        $pdfdata['indirizzo'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'indirizzo')->get();
+        $pdfdata['civico'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'civico')->get();
+        $pdfdata['cap'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'cap')->get();
+        $pdfdata['citta'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'citta')->get();
+        $pdfdata['provincia'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'provincia')->get();
+        $pdfdata['partita_iva'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'partita_iva')->get();
+        $pdfdata['codice_fiscale'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'codice_fiscale')->get();
+        $pdfdata['codice_ateco'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'codice_ateco')->get();
+        $pdfdata['tipo_attivita'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'tipo_attivita')->get();
+        $pdfdata['reddito'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'reddito')->get();
         return view('admin.file_view', compact('comments', 'attachments', 'files', 'pdfdata', 'title'));
     }
 
@@ -390,6 +530,16 @@ class FileController extends Controller
         $pdfdata['registration_no'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'registration_no')->get();
         $pdfdata['registration_date'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'registration_date')->get();
         $pdfdata['common_chamber_of_commerce'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'common_chamber_of_commerce')->get();
+        $pdfdata['indirizzo'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'indirizzo')->get();
+        $pdfdata['civico'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'civico')->get();
+        $pdfdata['cap'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'cap')->get();
+        $pdfdata['citta'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'citta')->get();
+        $pdfdata['provincia'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'provincia')->get();
+        $pdfdata['partita_iva'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'partita_iva')->get();
+        $pdfdata['codice_fiscale'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'codice_fiscale')->get();
+        $pdfdata['codice_ateco'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'codice_ateco')->get();
+        $pdfdata['tipo_attivita'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'tipo_attivita')->get();
+        $pdfdata['reddito'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'reddito')->get();
         $user_type = Auth::user()->user_type;
         if(($files[0]->status == "Completed" || $files[0]->status == "Cancelled") && $user_type != 'admin')
             return redirect()->back();
