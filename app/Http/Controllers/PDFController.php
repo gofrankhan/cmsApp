@@ -76,7 +76,18 @@ class PDFController extends Controller
         $pdfdata['registration_no'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'registration_no')->get();
         $pdfdata['registration_date'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'registration_date')->get();
         $pdfdata['common_chamber_of_commerce'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'common_chamber_of_commerce')->get();
-  
+        
+        $pdfdata['indirizzo'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'indirizzo')->get();
+        $pdfdata['civico'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'civico')->get();
+        $pdfdata['cap'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'cap')->get();
+        $pdfdata['citta'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'citta')->get();
+        $pdfdata['provincia'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'provincia')->get();
+        $pdfdata['partita_iva'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'partita_iva')->get();
+        $pdfdata['codice_fiscale'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'codice_fiscale')->get();
+        $pdfdata['codice_ateco'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'codice_ateco')->get();
+        $pdfdata['tipo_attivita'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'tipo_attivita')->get();
+        $pdfdata['reddito'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'reddito')->get();
+
         $data = [
             'title' => 'Mandato al CAF',
             'date' => date('m/d/Y'),

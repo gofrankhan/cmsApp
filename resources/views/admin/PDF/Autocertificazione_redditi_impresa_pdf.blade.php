@@ -100,7 +100,7 @@ p, table {
         <br>
         <table>
             <tr>
-                <td>- di esercitare la seguente attività (tipo di attività):<td>
+                <td>- di esercitare la seguente attività (tipo di attività): {{$pdfdata['codice_ateco'][0]->field_value}} - {{$pdfdata['tipo_attivita'][0]->field_value}}<td>
             </tr>
         </table>
         <table>
