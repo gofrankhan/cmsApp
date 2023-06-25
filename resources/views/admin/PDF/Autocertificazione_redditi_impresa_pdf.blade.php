@@ -6,7 +6,7 @@ define("DOMPDF_ENABLE_REMOTE", false);
 <head>
 <style>
 p, table {
-  font-size: 15px;
+  font-size: 14px;
 }
 </style>
     <title>Autocertificazione redditi impresa pdf</title>
@@ -100,44 +100,56 @@ p, table {
         <br>
         <table>
             <tr>
-                <td>- di esercitare la seguente attività (tipo di attività): {{$pdfdata['codice_ateco'][0]->field_value}} - {{$pdfdata['tipo_attivita'][0]->field_value}}<td>
+                <td>- di esercitare la seguente attività (tipo di attività): <b>@if(!empty($pdfdata['codice_ateco'][0]->field_value)){{$pdfdata['codice_ateco'][0]->field_value}}@endif - @if(!empty($pdfdata['tipo_attivita'][0]->field_value)){{$pdfdata['tipo_attivita'][0]->field_value}}@endif</b><td>
             </tr>
         </table>
         <table>
             <tr>
-                <td>n° P.IVA/C.F.<td>
+                <td>- di essere titolare della partita iva n° <b>@if(!empty($pdfdata['partita_iva'][0]->field_value)){{$pdfdata['partita_iva'][0]->field_value}}@endif
+                    </b> e codice fiscale <b>@if(!empty($pdfdata['codice_fiscale'][0]->field_value)){{$pdfdata['codice_fiscale'][0]->field_value}}@endif
+                    </b>  con sede legale in <b>@if(!empty($pdfdata['indirizzo'][0]->field_value)){{$pdfdata['indirizzo'][0]->field_value}}@endif</b>
+                     civico <b>@if(!empty($pdfdata['civico'][0]->field_value)){{$pdfdata['civico'][0]->field_value}}@endif</b>
+                      a <b>@if(!empty($pdfdata['citta'][0]->field_value)){{$pdfdata['citta'][0]->field_value}}@endif</b> provincia 
+                      <b>@if(!empty($pdfdata['provincia'][0]->field_value)){{$pdfdata['provincia'][0]->field_value}}@endif</b> e cap 
+                      <b>@if(!empty($pdfdata['cap'][0]->field_value)){{$pdfdata['cap'][0]->field_value}}@endif</b><td>
             </tr>
         </table>
         <table>
             <tr>
-                <td style="width:80px;"></td>
-                <td>di essere iscritta presso la C.C.I.A.A (nel caso di ditte individuali):<td>
+                <td>- di essere iscritta presso la C.C.I.A.A (nel caso di ditte individuali):<td>
             </tr>
         </table>
         <table>
             <tr>
                 <td style="width:80px;"></td>
                 <td>- N° iscrizione<td>
-                <td>{{$pdfdata['registration_no'][0]->field_value}}</td>
+                <td><b>@if(!empty($pdfdata['registration_no'][0]->field_value)){{$pdfdata['registration_no'][0]->field_value}}@endif</b></td>
             </tr>
         </table>
         <table>
             <tr>
                 <td style="width:80px;"></td>
                 <td>- Data di iscrizione<td>
-                <td>{{$pdfdata['registration_date'][0]->field_value}}</td>
+                @php
+                   if(!empty($pdfdata['registration_date'][0]->field_value))
+                        $time=strtotime($pdfdata['registration_date'][0]->field_value);
+                        $date1=date("d",$time);
+                        $month1=date("m",$time);
+                        $year1=date("Y",$time);
+                @endphp
+                <td><b>{{ $date1."/".$month1."/".$year1; }}</b></td>
             </tr>
         </table>
         <table>
             <tr>
                 <td style="width:80px;"></td>
                 <td>- Comune della camera di commercio di<td>
-                <td>{{$pdfdata['common_chamber_of_commerce'][0]->field_value}}</td>
+                <td><b>@if(!empty($pdfdata['common_chamber_of_commerce'][0]->field_value)){{$pdfdata['common_chamber_of_commerce'][0]->field_value}}@endif</b></td>
             </tr>
         </table>
         <table>
             <tr>
-                <td>di essere iscritto/a presso il seguente albo professionale (nel caso di professionisti):<td>
+                <td>- di essere iscritto/a presso il seguente albo professionale (nel caso di professionisti):<td>
             </tr>
         </table>
         <table>
@@ -150,24 +162,22 @@ p, table {
             <tr>
                 <td style="width:80px;"></td>
                 <td>- N° iscrizione<td>
-                <td>{{$pdfdata['registration_no'][0]->field_value}}</td>
+                <td><b>@if(!empty($pdfdata['registration_no'][0]->field_value)){{$pdfdata['registration_no'][0]->field_value}}@endif</b></td>
             </tr>
         </table>
         <table>
             <tr>
                 <td style="width:80px;"></td>
                 <td>- Data di iscrizione<td>
-                <td>{{$pdfdata['registration_date'][0]->field_value}}</td>
+                <td><b>{{ $date1."/".$month1."/".$year1; }}</b></td>
             </tr>
         </table>
         <br>
         <table>
             <tr>
-                <td style="width:250px;">- di aver percepito durante l’anno</td>
-                <td style="width:100px;"><td>
-                <td style="width:220px;">un reddito annuo netto  di euro</td>
-                <td style="width:5px;"><td>
-                <td style="width:10px;">&euro;<td>
+                <td>- di aver percepito durante lʼanno <b>@if(!empty($pdfdata['anno'][0]->field_value)){{$pdfdata['anno'][0]->field_value}}@endif RIF @if(!empty($pdfdata['rif'][0]->field_value)){{$pdfdata['rif'][0]->field_value}}@endif</b>
+                un reddito annuo netto  di euro <b>@if(!empty($pdfdata['reddito'][0]->field_value)){{$pdfdata['reddito'][0]->field_value}}@endif
+                <td>
             </tr>
         </table>
         <br>
