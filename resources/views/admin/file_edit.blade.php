@@ -407,7 +407,6 @@
                     </div>
                 </div>
             </div>
-        </form>
         @endif
         <div class="row">
             <div class="col">
