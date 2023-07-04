@@ -43,7 +43,9 @@ class FileController_simple extends Controller
                                 ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
                                 ->whereIn('invoices.user_id', function($query) use ($shop_name){
                                     $query->select('id')->from('users')->where('shop_name', $shop_name);
-                                })->paginate(50);
+                                })
+                                ->orderByDesc('file_id')
+                                ->paginate(50);
         }
         else if ($user_type =='lawyer'){
             $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
@@ -51,6 +53,7 @@ class FileController_simple extends Controller
                                 ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                                 ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
                                 ->where('invoices.user_id', $user_id)
+                                ->orderByDesc('file_id')
                                 ->paginate(50);
         }
 

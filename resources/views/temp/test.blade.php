@@ -23,3 +23,8 @@
         </div>
     </form>
 </x-guest-layout>
+
+
+<div id="pagination" class="d-flex justify-content-center">
+    {!! $data->links() !!}
+</div>

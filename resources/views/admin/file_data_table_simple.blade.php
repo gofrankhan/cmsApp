@@ -6,6 +6,111 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- <script>
+$(document).ready(function() {
+  $('#search-box').keyup(function() {
+    var searchText = $(this).val().toLowerCase();
+    $('#file_datatable tbody tr').each(function() {
+      var rowText = $(this).text().toLowerCase();
+      if (rowText.indexOf(searchText) === -1) {
+        $(this).hide();
+      } else {
+        $(this).show();
+      }
+    });
+  });
+});
+</script>
+
+<script>
+$(document).ready(function() {
+  $('#show_filter_list').change(function() {
+    var filterType = $('#select_filter_type').val();
+    var selectedValue = $(this).val();
+    $('#file_datatable tbody tr').each(function() {
+      if(filterType === "shop")
+        var rowValue = $(this).find('td:nth-child(4)').text(); //index 4 is for shop)
+      if(filterType === "service")
+        var rowValue = $(this).find('td:nth-child(5)').text(); //index 4 is for service)
+      if(filterType === "status")
+        var rowValue = $(this).find('td:nth-child(7)').text(); //index 7 is for shop)
+      if (selectedValue === '' || rowValue === selectedValue) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  });
+});
+</script> -->
+<script>
+$(document).ready(function() {
+  var itemsPerPage = 10; // Number of items to display per page
+    
+  // Pagination initialization
+  function initPagination(totalItems) {
+    var totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    $('#pagination').twbsPagination({
+      totalPages: totalPages,
+      visiblePages: 5,
+      onPageClick: function(event, page) {
+        displayTableRows(page);
+      }
+    });
+  }
+
+  // Function to display table rows based on the current page
+  function displayTableRows(page) {
+    var startIndex = (page - 1) * itemsPerPage;
+    var endIndex = startIndex + itemsPerPage;
+
+    $('#file_datatable tbody tr').hide(); // Hide all table rows
+
+    // Show table rows within the range of the current page
+    $('#file_datatable tbody tr').slice(startIndex, endIndex).show();
+  }
+
+  // Search functionality
+  $('#search-box').keyup(function() {
+    alert("suru");
+    var searchText = $(this).val().toLowerCase();
+    filterTable(searchText, $('#show_filter_list').val());
+  });
+
+  // Filter functionality
+  $('#show_filter_list').change(function() {
+    var filterText = $(this).val();
+    filterTable($('#search-box').val().toLowerCase(), filterText);
+  });
+
+  // Function to filter and display table rows based on search and filter criteria
+  function filterTable(searchText, filterText) {
+    $('#file_datatable tbody tr').hide(); // Hide all table rows
+
+    $('#file_datatable tbody tr').each(function() {
+      var rowText = $(this).text().toLowerCase();
+      var filterValue = $(this).find('td:nth-child(4)').text(); // Assuming the filter column is the second column (index 1)
+
+      if ((searchText === '' || rowText.indexOf(searchText) !== -1) &&
+          (filterText === 'all' || filterValue === filterText)) {
+        $(this).show();
+      }
+    });
+
+    var visibleRows = $('#file_datatable tbody tr:visible').length;
+    $('#pagination').twbsPagination('destroy'); // Destroy previous pagination
+    initPagination(visibleRows); // Initialize pagination with the filtered row count
+    displayTableRows(1); // Display first page of filtered rows
+  }
+
+  // Initialize pagination on page load
+  var totalRows = $('#file_datatable tbody tr').length;
+  initPagination(totalRows);
+  displayTableRows(1); // Display first page of table rows
+});
+<script>
+
 <script>
   $(document).ready(function() {
     $('#category').change(function() {
@@ -202,6 +307,13 @@ $(document).ready(function() {
                 <form action="" id="formFilter">
                     @csrf
                     <div class="row">
+                        <div class="col-sm-3">
+                            <form class="app-search d-none d-lg-block" data-backdrop="static" data-keyboard="false" onsubmit="submitForm(event)">
+                                <div class="position-relative">
+                                    <input name="search-box" id="search-box" type="text" class="form-control" placeholder="Search...">
+                                </div>
+                            </form>
+                        </div>
                         <div style="padding:15px" class="col-md-2">
                             <select style="width:200px" id="select_filter_type">
                                 <option value="" selected>---Select Filter Type---</option>
@@ -285,10 +397,10 @@ $(document).ready(function() {
                         @endforeach
                     </tbody>
                 </table>
-                <div class="d-flex justify-content-center">
+                <div id="pagination" class="d-flex justify-content-center">
                     {!! $data->links() !!}
                 </div>
-
+                
                 @php
                     $categories = App\Models\Category::all();
                     $users = App\Models\User::all();
