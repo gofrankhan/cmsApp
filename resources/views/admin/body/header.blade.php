@@ -98,7 +98,7 @@ document.getElementById("btn_file").addEventListener("click", function(event) {
 
 document.getElementById("btn_simple").addEventListener("click", function(event) {
   event.preventDefault();
-  window.location.href = '/file/data/simple/user';
+  window.location.href = '/file/data/simple/all';
 });
 
 document.getElementById("btn_movement").addEventListener("click", function(event) {
