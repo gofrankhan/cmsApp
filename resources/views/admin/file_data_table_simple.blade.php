@@ -7,6 +7,38 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+$(document).ready(function() {
+  // Get the datatable and dropdown elements
+  var dataTable = null;
+
+  // Initialize the datatable
+  function initializeDataTable() {
+    if (dataTable) {
+      // Destroy the existing datatable
+      dataTable.destroy();
+    }
+
+    dataTable = $('#file_datatable').DataTable();
+  }
+  var filterDropdown = $('#show_filter_list');
+
+  // Add event listener to the dropdown
+  filterDropdown.on('change', function() {
+    var selectedValue = $(this).val();
+    // Clear existing datatable filters
+    dataTable.search('').columns().search('').draw();
+
+    if (selectedValue) {
+      // Apply new filter to the datatable
+      dataTable.column(4).search(selectedValue).draw();
+    }
+  });
+  // Initialize the datatable on page load
+  initializeDataTable();
+});
+</script>
+
+<script>
   $(document).ready(function() {
     $('#category').change(function() {
       var value = $(this).val();
