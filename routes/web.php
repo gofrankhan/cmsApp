@@ -6,6 +6,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CommentAttachmentController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\FileController_simple;
 use App\Http\Controllers\ServiceCategoryController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\DashboardController;
@@ -102,6 +103,23 @@ Route::middleware('auth')->group(function(){
     Route::get('/movement/data/all', [FileController::class, 'MovementDataTableAll'])->name('movement.data.all');
     Route::get('/load/services', [ServiceCategoryController::class, 'getServices'])->name('load.services');
     Route::post('/assign/files', [FileController::class, 'AssignFiles'])->name('assign.files');
+});
+
+Route::middleware('auth')->group(function(){
+    Route::post('/file/store/simple', [FileController_simple::class, 'FileStore'])->name('file.store.simple');
+    Route::get('/file/data/simple/{type}', [FileController_simple::class, 'FileDataTable_simple'])->name('file.data.simple');
+    Route::get('/file/edit/simple/{id}', [FileController_simple::class, 'FileEdit'])->name('file.edit.simple');
+    Route::get('/file/delete/simple/{id}', [FileController_simple::class, 'FileDelete'])->name('file.delete.simple')->middleware('admin');
+    Route::post('/update/service/simple', [FileController_simple::class, 'UpdateService'])->name('update.service.simple');
+    Route::get('/file/show/simple/{id}', [FileController_simple::class, 'FileShow'])->name('file.show.simple');
+    Route::post('/get/filter/value/simple', [FileController_simple::class, 'GetFilterValue'])->name('get.filter.value.simple');
+    Route::get('/load/customer/simple', [FileController_simple::class, 'GetCustomerInfo'])->name('customer.info.simple');
+    Route::post('/update/status/price/simple', [FileController_simple::class, 'UpdateFileStatusAndPrice'])->name('update.status.price.simple');
+
+    Route::get('/movement/data/simple', [FileController_simple::class, 'MovementDataTable'])->name('movement.data.simple');
+    Route::get('/movement/data/all/simple', [FileController_simple::class, 'MovementDataTableAll'])->name('movement.data.all.simple');
+    Route::get('/load/services/simple', [ServiceCategoryController::class, 'getServices'])->name('load.services.simple');
+    Route::post('/assign/files/simple', [FileController_simple::class, 'AssignFiles'])->name('assign.files.simple');
 });
 
 Route::middleware('auth' , 'admin')->group(function(){

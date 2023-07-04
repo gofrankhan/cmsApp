@@ -110,8 +110,9 @@
         var view_type = $('#view_type').val();
         var table = $('.file_datatable').DataTable({
             processing: true,
-            serverSide: true,
+            serverSide: false,
             paging: true,
+            pageLength: 50,
             order: [[0, 'desc']],
             columnDefs: [
                     { width: "150px", targets: 0 },
@@ -136,7 +137,7 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ],
             initComplete: function () {
-            serverSide: true,
+            serverSide: false,
             this.api()
                 .columns([3,4])
                 .every(function () {

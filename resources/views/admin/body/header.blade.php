@@ -28,7 +28,9 @@ $(document).ready(function() {
         <button type="button" id="btn_file" class="btn font-size-20 header-item waves-effect">
             Files
         </button>
-
+        <button type="button" id="btn_simple" class="btn font-size-20 header-item waves-effect">
+            Simple
+        </button>
         <button type="button" id="btn_movement" class="btn font-size-20 header-item waves-effect">
             Movements
         </button>
@@ -92,6 +94,11 @@ document.getElementById("btn_bashboard").addEventListener("click", function(even
 document.getElementById("btn_file").addEventListener("click", function(event) {
   event.preventDefault();
   window.location.href = '/file/data/user';
+});
+
+document.getElementById("btn_simple").addEventListener("click", function(event) {
+  event.preventDefault();
+  window.location.href = '/file/data/simple/user';
 });
 
 document.getElementById("btn_movement").addEventListener("click", function(event) {

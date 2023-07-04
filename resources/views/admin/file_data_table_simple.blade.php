@@ -7,38 +7,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-$(document).ready(function() {
-  // Get the datatable and dropdown elements
-  var dataTable = null;
-
-  // Initialize the datatable
-  function initializeDataTable() {
-    if (dataTable) {
-      // Destroy the existing datatable
-      dataTable.destroy();
-    }
-
-    dataTable = $('#file_datatable').DataTable();
-  }
-  var filterDropdown = $('#show_filter_list');
-
-  // Add event listener to the dropdown
-  filterDropdown.on('change', function() {
-    var selectedValue = $(this).val();
-    // Clear existing datatable filters
-    dataTable.search('').columns().search('').draw();
-
-    if (selectedValue) {
-      // Apply new filter to the datatable
-      dataTable.column(4).search(selectedValue).draw();
-    }
-  });
-  // Initialize the datatable on page load
-  initializeDataTable();
-});
-</script>
-
-<script>
   $(document).ready(function() {
     $('#category').change(function() {
       var value = $(this).val();
@@ -135,86 +103,6 @@ $(document).ready(function() {
       });
     });
   });
-</script>
-
-<script type="text/javascript">
-    $(function () {
-        var view_type = $('#view_type').val();
-        var table = $('.file_datatable').DataTable({
-            processing: true,
-            serverSide: true,
-            paging: true,
-            order: [[0, 'desc']],
-            columnDefs: [
-                    { width: "150px", targets: 0 },
-                    { width: "150px", targets: 1 },
-                    { width: "150px", targets: 2 },
-                    { width: "200px", targets: 3 },
-                    { width: "200px", targets: 4 },
-                    { width: "0px", targets: 5 },
-                    { width: "100px", targets: 6 },
-                    { width: "100px", targets: 7 }
-            ],
-            autoWidth: false,
-            ajax: "{{ route('file.data' , 'all') }}",
-            columns: [
-                {data: 'file_id', name: 'file_id'},
-                {data: 'taxid', name: 'taxid'},
-                {data: 'customer', name: 'customer'},
-                {data: 'shop', name: 'shop'},
-                {data: 'service', name: 'service'},
-                {data: 'icon', name: 'icon'},
-                {data: 'status', name: 'status'},
-                {data: 'action', name: 'action', orderable: false, searchable: false},
-            ],
-            initComplete: function () {
-            serverSide: true,
-            this.api()
-                .columns([3,4])
-                .every(function () {
-                    var column = this;
-                    var select = $('<br><select style="width:200px"><option value=""></option></select>')
-                        .appendTo($(column.header()))
-                        .on('change', function () {
-                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                            column.search(val ? '^' + val + '$' : '', true, false).draw();
-                        });
- 
-                    column
-                        .data()
-                        .unique()
-                        .sort()
-                        .each(function (d, j) {
-                            select.append('<option>' + d + '</option>');
-                        });
-                });
-            this.api()
-                .columns([6])
-                .every(function () {
-                    var column = this;
-                    var select = $('<br><select style="width:100px"><option value=""></option></select>')
-                        .appendTo($(column.header()))
-                        .on('change', function () {
-                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                            column.search(val ? '^' + val + '$' : '', true, false).draw();
-                        });
- 
-                    column
-                        .data()
-                        .unique()
-                        .sort()
-                        .each(function (d, j) {
-                            select.append('<option>' + d + '</option>');
-                        });
-                });
-            this.api()
-                .columns([0,1,2])
-                .every(function () {
-                    var column = this;
-                });
-            },
-        });
-    });
 </script>
 
 <script>
@@ -329,7 +217,8 @@ $(document).ready(function() {
                         </div>
                     </div>
                 </form>
-                <table id="file_datatable" class="table table-bordered file_datatable">
+
+                <table class="table">
                     <thead>
                         <tr>
                             <th>File ID</th>
@@ -342,8 +231,20 @@ $(document).ready(function() {
                             <th style="width:150px">Actions</th>
                         </tr>
                     </thead>
-                
-                    <tbody></tbody>
+                    <tbody>
+                        @foreach($data1 as $row)
+                        <tr>
+                            <td>{{$row->file_id}}</td>
+                            <td>{{$row->taxid}}</td>
+                            <td>{{$row->customer}}</td>
+                            <td>{{$row->shop}}</td>
+                            <td>{{$row->service}}</td>
+                            <td></td>
+                            <td>{{$row->status}}</td>
+                            <td style="width:150px">Actions</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
                 </table>
 
                 @php

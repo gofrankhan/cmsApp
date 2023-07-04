@@ -19,8 +19,51 @@ use DataTables;
 use Debugbar;
 
 
-class FileController extends Controller
+class FileController_simple extends Controller
 {
+    public function FileDataTable_simple(Request $request, $view_type)
+    {
+        $title = "Files";
+        $shop_name = Auth::user()->shop_name;
+        $user_type = Auth::user()->user_type;
+        $user_id = Auth::user()->id;
+        if($user_type =='admin' && $view_type == 'all'){
+            $data1 = DB::table('invoices')
+                                ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                ->select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', 
+                                DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),
+                                'users.shop_name as shop','services.service', 'invoices.status', 'invoices.lawyer_id', 'invoices.lawyer_price')
+                                ->paginate(50);
+        }
+        else if ($user_type =='user'){
+            $data1 = DB::table('invoices')
+                                ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                ->whereIn('invoices.user_id', function($query) use ($shop_name){
+                                    $query->select('id')->from('users')->where('shop_name', $shop_name);
+                                })
+                                ->select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', 
+                                    DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),
+                                'users.shop_name as shop','services.service', 'invoices.status')
+                            ->paginate(50);
+        }
+        else if ($user_type =='lawyer'){
+            $data1 = DB::table('invoices')
+                                ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                ->where('invoices.lawyer_id', '=', $user_id)
+                                ->select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', 
+                                    DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),
+                                    'users.shop_name as shop','services.service', 'invoices.status', 'invoices.lawyer_id', 'invoices.lawyer_price')
+                                ->paginate(50);
+        }
+
+        return view('admin.file_data_table_simple', compact('data1', 'title'));
+    }
     public function FileDataTable(Request $request, $view_type)
     {
         $title = "Files";
@@ -121,7 +164,7 @@ class FileController extends Controller
                 ->rawColumns(['action', 'icon', 'id'])
                 ->make(true);
         }
-        return view('admin.file_data_table', compact('title'));
+        return view('admin.file_data_table_simple', compact('title'));
     }
 
     
