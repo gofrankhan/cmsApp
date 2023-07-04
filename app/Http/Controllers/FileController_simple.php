@@ -33,6 +33,7 @@ class FileController_simple extends Controller
                                 ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                                 ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                                 ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                ->orderByDesc('file_id')
                                 ->paginate(50);
         }
         else if ($user_type =='user'){
