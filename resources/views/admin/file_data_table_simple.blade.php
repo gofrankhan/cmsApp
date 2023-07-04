@@ -232,7 +232,7 @@ $(document).ready(function() {
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($data1 as $row)
+                        @foreach($data as $row)
                         <tr>
                             <td>{{$row->file_id}}</td>
                             <td>{{$row->taxid}}</td>
