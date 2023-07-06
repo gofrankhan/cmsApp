@@ -10,16 +10,35 @@
 $(document).ready(function() {
   $('#search-box').keyup(function() {
     var searchText = $(this).val().toLowerCase();
-    $('#file_datatable tbody tr').each(function() {
-      var rowText = $(this).text().toLowerCase();
-      if (rowText.indexOf(searchText) === -1) {
-        $(this).hide();
-      } else {
-        $(this).show();
-      }
+    $.ajax({
+        url: "{{ route('load.table.search') }}",
+        type: "GET",
+        data: { search_text: searchText },
+        success: function(data) {
+          $("#tableBody").empty();
+
+          // Loop through the response and add new rows to the table
+          $.each(data, function(index, item) {
+            var row = $("<tr>");
+            // Create table cells and populate them with data
+            var cell1 = $("<td>").text(item.file_id);
+            var cell2 = $("<td>").text(item.taxid);
+            var cell3 = $("<td>").text(item.customer);
+            var cell4 = $("<td>").text(item.shop);
+            var cell5 = $("<td>").text(item.service);
+            var cell6 = $("<td>").text("");
+            var cell7 = $("<td>").text(item.status);
+            // Add more cells as needed
+
+            // Append the cells to the row
+            row.append(cell1, cell2, cell3, cell4, cell5, cell6, cell7);
+            // Append the row to the table body
+            $("#tableBody").append(row);
+          });
+        }
+      });
     });
   });
-});
 </script>
 
 <script>
@@ -276,7 +295,7 @@ $(document).ready(function() {
                             <th style="width:3%">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id='tableBody'>
                         @foreach($data as $r)
                         <tr>
                             <td style="width:5%">{{ $r->file_id }}</td>

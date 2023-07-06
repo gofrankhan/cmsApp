@@ -108,6 +108,7 @@ Route::middleware('auth')->group(function(){
 Route::middleware('auth')->group(function(){
     Route::post('/file/store/simple', [FileController_simple::class, 'FileStore'])->name('file.store.simple');
     Route::get('/file/data/simple/{type}', [FileController_simple::class, 'FileDataTable_simple'])->name('file.data.simple');
+    Route::get('/load/table/search', [FileController_simple::class, 'LoadTableSearch_simple'])->name('load.table.search');
     Route::get('/file/edit/simple/{id}', [FileController_simple::class, 'FileEdit'])->name('file.edit.simple');
     Route::get('/file/delete/simple/{id}', [FileController_simple::class, 'FileDelete'])->name('file.delete.simple')->middleware('admin');
     Route::post('/update/service/simple', [FileController_simple::class, 'UpdateService'])->name('update.service.simple');

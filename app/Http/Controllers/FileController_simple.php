@@ -59,6 +59,53 @@ class FileController_simple extends Controller
 
         return view('admin.file_data_table_simple', compact('data', 'title'));
     }
+
+    public function LoadTableSearch_simple(Request $request)
+    {
+        $title = "Files";
+        $shop_name = Auth::user()->shop_name;
+        $user_type = Auth::user()->user_type;
+        $user_id = Auth::user()->id;
+        $data = null;
+        if($user_type =='admin'){
+            $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
+                                ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                ->where('file_id', 'like', '%'.$request->search_text.'%')
+                                ->orWhere('taxid', 'like', '%'.$request->search_text.'%')
+                                ->orWhere('customers.firstname', 'like', '%'.$request->search_text.'%')
+                                ->orWhere('customers.lastname', 'like', '%'.$request->search_text.'%')
+                                ->orWhere('users.shop_name', 'like', '%'.$request->search_text.'%')
+                                ->orWhere('services.service', 'like', '%'.$request->search_text.'%')
+                                ->orWhere('status', 'like', '%'.$request->search_text.'%')
+                                ->orderByDesc('file_id')
+                                ->get();
+        }
+        else if ($user_type =='user'){
+            $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
+                                ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                ->whereIn('invoices.user_id', function($query) use ($shop_name){
+                                    $query->select('id')->from('users')->where('shop_name', $shop_name);
+                                })
+                                ->orderByDesc('file_id')
+                                ->get();
+        }
+        else if ($user_type =='lawyer'){
+            $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
+                                ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                ->where('invoices.user_id', $user_id)
+                                ->orderByDesc('file_id')
+                                ->get();
+        }
+        Debugbar::addMessage($data);
+        return response()->json($data);
+    }
+
     public function FileDataTable(Request $request, $view_type)
     {
         $title = "Files";
