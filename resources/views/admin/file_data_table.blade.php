@@ -110,9 +110,6 @@
         var view_type = $('#view_type').val();
         var table = $('.file_datatable').DataTable({
             processing: true,
-            serverSide: false,
-            paging: true,
-            pageLength: 50,
             order: [[0, 'desc']],
             columnDefs: [
                     { width: "150px", targets: 0 },
@@ -135,53 +132,7 @@
                 {data: 'icon', name: 'icon'},
                 {data: 'status', name: 'status'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
-            ],
-            initComplete: function () {
-            serverSide: false,
-            this.api()
-                .columns([3,4])
-                .every(function () {
-                    var column = this;
-                    var select = $('<br><select style="width:200px"><option value=""></option></select>')
-                        .appendTo($(column.header()))
-                        .on('change', function () {
-                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                            column.search(val ? '^' + val + '$' : '', true, false).draw();
-                        });
- 
-                    column
-                        .data()
-                        .unique()
-                        .sort()
-                        .each(function (d, j) {
-                            select.append('<option>' + d + '</option>');
-                        });
-                });
-            this.api()
-                .columns([6])
-                .every(function () {
-                    var column = this;
-                    var select = $('<br><select style="width:100px"><option value=""></option></select>')
-                        .appendTo($(column.header()))
-                        .on('change', function () {
-                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                            column.search(val ? '^' + val + '$' : '', true, false).draw();
-                        });
- 
-                    column
-                        .data()
-                        .unique()
-                        .sort()
-                        .each(function (d, j) {
-                            select.append('<option>' + d + '</option>');
-                        });
-                });
-            this.api()
-                .columns([0,1,2])
-                .every(function () {
-                    var column = this;
-                });
-            },
+            ]
         });
     });
 </script>
@@ -280,25 +231,7 @@ $(document).ready(function() {
                         <a href="" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="{{ $modealName }}">New</a>
                     </div>
                 </p>
-                <form action="" id="formFilter">
-                    @csrf
-                    <div class="row">
-                        <div style="padding:15px" class="col-md-2">
-                            <select style="width:200px" id="select_filter_type">
-                                <option value="" selected>---Select Filter Type---</option>
-                                <option value="shop">Shop Name</option>
-                                <option value="service">Service Type</option>
-                                <option value="status">Status</option>
-                            </select>
-                        </div>
-                        <div style="padding:15px" class="col-md-2">
-                            <select style="width:200px" id="show_filter_list">
-                                <option value="" selected>---Select---</option>
-                            </select>
-                        </div>
-                    </div>
-                </form>
-                <table id="file_datatable" class="table table-bordered file_datatable">
+                <table data-page-length='50' id="file_datatable" class="table table-bordered file_datatable">
                     <thead>
                         <tr>
                             <th>File ID</th>

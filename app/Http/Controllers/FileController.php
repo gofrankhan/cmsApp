@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\User;
 use App\Models\File;
 use App\Models\Invoice;
@@ -29,37 +30,37 @@ class FileController extends Controller
         $user_id = Auth::user()->id;
         if ($request->ajax()) {
             if($user_type =='admin' && $view_type == 'all'){
-                $data = DB::table('invoices')
+                $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', 
+                                    DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),
+                                    'users.shop_name as shop','services.service', 'invoices.status', 'invoices.lawyer_id', 'invoices.lawyer_price')
                                     ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                                     ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                                     ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
-                                    ->select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', 
-                                    DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),
-                                    'users.shop_name as shop','services.service', 'invoices.status', 'invoices.lawyer_id', 'invoices.lawyer_price')
+                                    ->orderByDesc('file_id')
                                     ->get();
             }
             else if ($user_type =='user'){
-                $data = DB::table('invoices')
+                $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', 
+                                    DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),
+                                    'users.shop_name as shop','services.service', 'invoices.status')
                                     ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                                     ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                                     ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
                                     ->whereIn('invoices.user_id', function($query) use ($shop_name){
                                         $query->select('id')->from('users')->where('shop_name', $shop_name);
                                     })
-                                    ->select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', 
-                                        DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),
-                                        'users.shop_name as shop','services.service', 'invoices.status')
+                                    ->orderByDesc('file_id')
                                     ->get();
             }
             else if ($user_type =='lawyer'){
-                $data = DB::table('invoices')
+                $data = nvoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', 
+                                DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),
+                                'users.shop_name as shop','services.service', 'invoices.status', 'invoices.lawyer_id', 'invoices.lawyer_price')
                                     ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                                     ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                                     ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
                                     ->where('invoices.lawyer_id', '=', $user_id)
-                                    ->select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', 
-                                        DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),
-                                        'users.shop_name as shop','services.service', 'invoices.status', 'invoices.lawyer_id', 'invoices.lawyer_price')
+                                    ->orderByDesc('file_id')
                                     ->get();
             }
             return Datatables::of($data)->addIndexColumn()
