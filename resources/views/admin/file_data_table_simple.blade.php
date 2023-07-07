@@ -26,12 +26,20 @@ $(document).ready(function() {
             var cell3 = $("<td>").text(item.customer);
             var cell4 = $("<td>").text(item.shop);
             var cell5 = $("<td>").text(item.service);
-            var cell6 = $("<td>").text("");
+            if(item.status == "Completed")
+                var cell6 = $("<td>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2'></i></div>");
+            if(item.status == "Pending")
+                var cell6 = $("<td>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-warning align-middle me-2'></i></div>");
+            if(item.status == "Submitted")
+                var cell6 = $("<td>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-dark align-middle me-2'></i></div>");
+            if(item.status == "Cancelled")
+                var cell6 = $("<td>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-danger align-middle me-2'></i></div>");
             var cell7 = $("<td>").text(item.status);
+            var cell8 = $("<td>").text(item.status);
             // Add more cells as needed
 
             // Append the cells to the row
-            row.append(cell1, cell2, cell3, cell4, cell5, cell6, cell7);
+            row.append(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8);
             // Append the row to the table body
             $("#tableBody").append(row);
           });
@@ -201,28 +209,18 @@ $(document).ready(function() {
 
 <script>
 $(document).ready(function() {
-  $('#select_filter_type').change(function() {
-    var selectedValue = $(this).val();
+  $('#select_shop_name').click(function() {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
     $.ajax({
-      url: '/get/filter/value',
+      url: '/get/shop/name',
       type: 'POST',
-      data: { value: selectedValue },
       success: function(data) {
-        $("#show_filter_list").empty();
-          $("#show_filter_list").append("<option value=''>Select a service</option>");
           $.each(data, function(index, item) {
-            if(item.shop_name)
-                $("#show_filter_list").append("<option value='" + item.shop_name + "'>" + item.shop_name + "</option>");
-            else if(item.service)
-                $("#show_filter_list").append("<option value='" + item.service + "'>" + item.service + "</option>");
-            else if(item.status){
-                $("#show_filter_list").append("<option value='" + item.status + "'>" + item.status + "</option>");
-            }
+            $("#select_shop_name").append("<option value='" + item.shop_name + "'>" + item.shop_name + "</option>");
           });
       },
       error: function(xhr) {
@@ -267,16 +265,28 @@ $(document).ready(function() {
                             </form>
                         </div>
                         <div style="padding:15px" class="col-md-2">
-                            <select style="width:200px" id="select_filter_type">
-                                <option value="" selected>---Select Filter Type---</option>
-                                <option value="shop">Shop Name</option>
-                                <option value="service">Service Type</option>
-                                <option value="status">Status</option>
+                            <select style="width:200px" id="select_shop_name">
+                                <option value="" selected>---Select Shop Name---</option>
+                                @foreach($shops as $shop)
+                                    <option value="{{ $shop->shop_name }}">{{ $shop->shop_name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div style="padding:15px" class="col-md-2">
-                            <select style="width:200px" id="show_filter_list">
-                                <option value="" selected>---Select---</option>
+                            <select style="width:200px" id="select_service_type">
+                                <option value="" selected>---Select Service Type---</option>
+                                @foreach($services as $service)
+                                    <option value="{{ $service->service }}">{{ $service->service }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div style="padding:15px" class="col-md-2">
+                            <select style="width:200px" id="select_status">
+                                <option value="" selected>---Select Status---</option>
+                                <option value="submitted">Submitted</option>
+                                <option value="completed">Completed</option>
+                                <option value="pending">Pending</option>
+                                <option value="cancelled">Cancelled</option>
                             </select>
                         </div>
                     </div>

@@ -110,6 +110,7 @@
         var view_type = $('#view_type').val();
         var table = $('.file_datatable').DataTable({
             processing: true,
+            serverSide: true,
             order: [[0, 'desc']],
             columnDefs: [
                     { width: "150px", targets: 0 },

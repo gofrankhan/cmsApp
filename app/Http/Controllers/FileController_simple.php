@@ -56,8 +56,14 @@ class FileController_simple extends Controller
                                 ->orderByDesc('file_id')
                                 ->paginate(50);
         }
+        $services = Invoice::select('invoices.service_id as service_id', 'services.service')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->distinct()
+                                ->orderByDesc('file_id')
+                                ->get();
 
-        return view('admin.file_data_table_simple', compact('data', 'title'));
+        $shops = User::select('shop_name')->distinct()->get();
+        return view('admin.file_data_table_simple', compact('data', 'title', 'shops', 'services'));
     }
 
     public function LoadTableSearch_simple(Request $request)
@@ -206,6 +212,7 @@ class FileController_simple extends Controller
                 ->rawColumns(['action', 'icon', 'id'])
                 ->make(true);
         }
+        
         return view('admin.file_data_table_simple', compact('title'));
     }
 
@@ -681,16 +688,13 @@ class FileController_simple extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function GetFilterValue(Request $request){
-        $selectedValue = $request->input('value');
-        if($selectedValue == "shop"){
-            $data = User::select('shop_name')->distinct()->get();
-        }else if($selectedValue == "service"){
-            $data = Service::select('service')->distinct()->get();
-        }else if($selectedValue == "status"){
-            $data = Invoice::select('status')->distinct()->get();
-        }
+    public function GetShopNameList(Request $request){
+        $data = User::select('shop_name')->distinct()->get();
+        return response()->json($data);
+    }
 
+    public function GetServiceTypeList(Request $request){
+        $data = Service::select('service')->distinct()->get();
         return response()->json($data);
     }
 

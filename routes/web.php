@@ -95,7 +95,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/file/delete/{id}', [FileController::class, 'FileDelete'])->name('file.delete')->middleware('admin');
     Route::post('/update/service', [FileController::class, 'UpdateService'])->name('update.service');
     Route::get('/file/show/{id}', [FileController::class, 'FileShow'])->name('file.show');
-    Route::post('/get/filter/value', [FileController::class, 'GetFilterValue'])->name('get.filter.value');
+    Route::post('/get/shop/name', [FileController::class, 'GetShopNameList'])->name('get.shop.name');
     Route::get('/load/customer', [CustomerController::class, 'GetCustomerInfo'])->name('customer.info');
     Route::post('/update/status/price', [FileController::class, 'UpdateFileStatusAndPrice'])->name('update.status.price');
 
@@ -113,7 +113,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/file/delete/simple/{id}', [FileController_simple::class, 'FileDelete'])->name('file.delete.simple')->middleware('admin');
     Route::post('/update/service/simple', [FileController_simple::class, 'UpdateService'])->name('update.service.simple');
     Route::get('/file/show/simple/{id}', [FileController_simple::class, 'FileShow'])->name('file.show.simple');
-    Route::post('/get/filter/value/simple', [FileController_simple::class, 'GetFilterValue'])->name('get.filter.value.simple');
+    Route::post('/get/shop/name', [FileController::class, 'GetShopNameList'])->name('get.shop.name');
     Route::get('/load/customer/simple', [FileController_simple::class, 'GetCustomerInfo'])->name('customer.info.simple');
     Route::post('/update/status/price/simple', [FileController_simple::class, 'UpdateFileStatusAndPrice'])->name('update.status.price.simple');
 
