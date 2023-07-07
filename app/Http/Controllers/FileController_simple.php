@@ -74,19 +74,30 @@ class FileController_simple extends Controller
         $user_id = Auth::user()->id;
         $data = null;
         if($user_type =='admin'){
-            $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
+            $query = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
                                 ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                                 ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                                 ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
-                                ->where('file_id', 'like', '%'.$request->search_text.'%')
-                                ->orWhere('taxid', 'like', '%'.$request->search_text.'%')
-                                ->orWhere('customers.firstname', 'like', '%'.$request->search_text.'%')
-                                ->orWhere('customers.lastname', 'like', '%'.$request->search_text.'%')
-                                ->orWhere('users.shop_name', 'like', '%'.$request->search_text.'%')
-                                ->orWhere('services.service', 'like', '%'.$request->search_text.'%')
-                                ->orWhere('status', 'like', '%'.$request->search_text.'%')
-                                ->orderByDesc('file_id')
-                                ->get();
+                                ->orderByDesc('file_id');
+            if(!empty($request->search_text)){
+                $query->where('file_id', 'like', '%'.$request->search_text.'%')
+                ->orWhere('taxid', 'like', '%'.$request->search_text.'%')
+                ->orWhere('customers.firstname', 'like', '%'.$request->search_text.'%')
+                ->orWhere('customers.lastname', 'like', '%'.$request->search_text.'%')
+                ->orWhere('users.shop_name', 'like', '%'.$request->search_text.'%')
+                ->orWhere('services.service', 'like', '%'.$request->search_text.'%')
+                ->orWhere('status', 'like', '%'.$request->search_text.'%');
+            }
+            if(!empty($request->shop_name)) {
+                $query->where('users.shop_name', $request->shop_name);
+            }
+            if(!empty($request->service_type)) {
+                $query->where('services.service', $request->service_type);
+            }
+            if(!empty($request->status)) {
+                $query->where('invoices.status', $request->status);
+            }
+            $data = $query->get();
         }
         else if ($user_type =='user'){
             $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')

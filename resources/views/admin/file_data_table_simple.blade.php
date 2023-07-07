@@ -8,49 +8,6 @@
 
 <script>
 $(document).ready(function() {
-  $('#search-box').keyup(function() {
-    var searchText = $(this).val().toLowerCase();
-    $.ajax({
-        url: "{{ route('load.table.search') }}",
-        type: "GET",
-        data: { search_text: searchText },
-        success: function(data) {
-          $("#tableBody").empty();
-
-          // Loop through the response and add new rows to the table
-          $.each(data, function(index, item) {
-            var row = $("<tr>");
-            // Create table cells and populate them with data
-            var cell1 = $("<td>").text(item.file_id);
-            var cell2 = $("<td>").text(item.taxid);
-            var cell3 = $("<td>").text(item.customer);
-            var cell4 = $("<td>").text(item.shop);
-            var cell5 = $("<td>").text(item.service);
-            if(item.status == "Completed")
-                var cell6 = $("<td>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2'></i></div>");
-            if(item.status == "Pending")
-                var cell6 = $("<td>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-warning align-middle me-2'></i></div>");
-            if(item.status == "Submitted")
-                var cell6 = $("<td>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-dark align-middle me-2'></i></div>");
-            if(item.status == "Cancelled")
-                var cell6 = $("<td>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-danger align-middle me-2'></i></div>");
-            var cell7 = $("<td>").text(item.status);
-            var cell8 = $("<td>").text(item.status);
-            // Add more cells as needed
-
-            // Append the cells to the row
-            row.append(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8);
-            // Append the row to the table body
-            $("#tableBody").append(row);
-          });
-        }
-      });
-    });
-  });
-</script>
-
-<script>
-$(document).ready(function() {
   $('#show_filter_list').change(function() {
     var filterType = $('#select_filter_type').val();
     var selectedValue = $(this).val();
@@ -207,30 +164,6 @@ $(document).ready(function() {
     });
 </script>
 
-<script>
-$(document).ready(function() {
-  $('#select_shop_name').click(function() {
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.ajax({
-      url: '/get/shop/name',
-      type: 'POST',
-      success: function(data) {
-          $.each(data, function(index, item) {
-            $("#select_shop_name").append("<option value='" + item.shop_name + "'>" + item.shop_name + "</option>");
-          });
-      },
-      error: function(xhr) {
-        console.log(xhr.responseText);
-      }
-    });
-  });
-});
-</script>
-
 @php
     $user_type = Auth::user()->user_type;
     if($user_type == 'admin' || $user_type == 'lawyer') $modealName = "#firstmodal";
@@ -265,10 +198,15 @@ $(document).ready(function() {
                             </form>
                         </div>
                         <div style="padding:15px" class="col-md-2">
+                            
+                        </div>
+                        <div style="padding:15px" class="col-md-2">
                             <select style="width:200px" id="select_shop_name">
                                 <option value="" selected>---Select Shop Name---</option>
                                 @foreach($shops as $shop)
+                                    @if($shop->shop_name != "")
                                     <option value="{{ $shop->shop_name }}">{{ $shop->shop_name }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -276,7 +214,9 @@ $(document).ready(function() {
                             <select style="width:200px" id="select_service_type">
                                 <option value="" selected>---Select Service Type---</option>
                                 @foreach($services as $service)
+                                    @if($service->service != "")
                                     <option value="{{ $service->service }}">{{ $service->service }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -332,7 +272,7 @@ $(document).ready(function() {
                                             <a class="btn btn-outline-secondary btn-sm edit" href="{{ route('file.show',$r->file_id) }}" target="_blank" title="Show">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a class="btn btn-outline-secondary btn-sm edit" href="{{ route('file.edit',$r->file_id) }}" title="Edit">
+                                            <a class="btn btn-outline-secondary btn-sm edit" href="{{ route('file.edit',$r->file_id) }}" target="_blank" title="Edit">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
                                             <a type="submit" class="btn btn-danger btn-sm edit" href="{{ route('file.delete' ,$r->id) }}" title="Delete">
@@ -536,6 +476,83 @@ $(document).ready(function() {
 <script>
     document.getElementById('div_description').style.display = "none";
     document.getElementById('div_pay_amount').style.display = "none";
+</script>
+
+<script>
+    function searchAndFilter(){
+    var searchText = $('#search-box').val().toLowerCase();
+    var shopName = $('#select_shop_name').val();
+    var serviceType = $('#select_service_type').val();
+    var status = $('#select_status').val();
+    $.ajax({
+        url: "{{ route('load.table.search') }}",
+        type: "GET",
+        data: { search_text: searchText, shop_name : shopName, service_type : serviceType, status : status },
+        success: function(data) {
+          $("#tableBody").empty();
+
+          // Loop through the response and add new rows to the table
+          $.each(data, function(index, item) {
+            var row = $("<tr>");
+            // Create table cells and populate them with data
+            var cell1 = $("<td>").text(item.file_id);
+            var cell2 = $("<td>").text(item.taxid);
+            var cell3 = $("<td>").text(item.customer);
+            var cell4 = $("<td>").text(item.shop);
+            var cell5 = $("<td>").text(item.service);
+            if(item.status == "Completed")
+                var cell6 = $("<td>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2'></i></div>");
+            if(item.status == "Pending")
+                var cell6 = $("<td>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-warning align-middle me-2'></i></div>");
+            if(item.status == "Submitted")
+                var cell6 = $("<td>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-dark align-middle me-2'></i></div>");
+            if(item.status == "Cancelled")
+                var cell6 = $("<td>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-danger align-middle me-2'></i></div>");
+            var cell7 = $("<td>").text(item.status);
+            var cell8 = $("<td>").html(
+                '<div style="width:150px" class="row">'+
+                    "<div>"+
+                        "<a class='btn btn-outline-secondary btn-sm edit' target='_blank' title='Show'>"+
+                            "<i class='fas fa-eye'></i>"+
+                        "</a>"+
+                    "</div>"+
+                    "<div>"+
+                    "<a class='btn btn-outline-secondary btn-sm edit' target='_blank' title='Show'>"+
+                        "<i class='fas fa-pencil-alt'></i>"+
+                    "</a>"+
+                    "</div>"+
+                    "<div>"+
+                    "<a class='btn btn-danger btn-sm edit' target='_blank' title='Show'>"+
+                        "<i class='fas fa-trash'></i>"+
+                    "</a>"+
+                    "</div>"+
+                "</div>"
+            );
+            // Add more cells as needed
+
+            // Append the cells to the row
+            row.append(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8);
+            // Append the row to the table body
+            $("#tableBody").append(row);
+          });
+        }
+      });
+    }
+
+
+    $("#search-box").on("keyup", function() {
+        searchAndFilter();
+    });
+    $("#select_shop_name").on("change", function() {
+        searchAndFilter();
+    });
+    $("#select_service_type").on("change", function() {
+        searchAndFilter();
+    });
+    $("#select_status").on("change", function() {
+        searchAndFilter();
+    });
+
 </script>
 @endsection
 

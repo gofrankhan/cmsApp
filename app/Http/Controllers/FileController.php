@@ -37,7 +37,7 @@ class FileController extends Controller
                                     ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                                     ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
                                     ->orderByDesc('file_id')
-                                    ->paginate(50);
+                                    ->get();
             }
             else if ($user_type =='user'){
                 $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', 
@@ -50,7 +50,7 @@ class FileController extends Controller
                                         $query->select('id')->from('users')->where('shop_name', $shop_name);
                                     })
                                     ->orderByDesc('file_id')
-                                    ->paginate(50);
+                                    ->get();
             }
             else if ($user_type =='lawyer'){
                 $data = nvoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', 
@@ -61,7 +61,7 @@ class FileController extends Controller
                                     ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
                                     ->where('invoices.lawyer_id', '=', $user_id)
                                     ->orderByDesc('file_id')
-                                    ->paginate(50);
+                                    ->get();
             }
             return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row){
