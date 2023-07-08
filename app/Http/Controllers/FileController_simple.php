@@ -659,15 +659,15 @@ class FileController_simple extends Controller
     * @param  \App\company  $company
     * @return \Illuminate\Http\Response
     */
-    public function FileDelete($id)
+    public function FileDelete($file_id)
     {
-        DB::table('invoices')->where('id', $id)->delete();
+        DB::table('invoices')->where('file_id', $file_id)->delete();
         $notification = array(
             'message' => 'File deleted successfully', 
             'alert-type' => 'success'
         );
         //return redirect()->back()->with($notification);
-        return response()->json(['success' => true]);
+        return response()->json();
     }
 
     public function AssignFiles(Request $request){

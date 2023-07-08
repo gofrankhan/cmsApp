@@ -164,7 +164,7 @@
                 dataType: 'json',
                 success: function(response) {
                     // Row deleted successfully, remove it from the table
-                    $('.file_datatable').find('a[data-id="' + itemId + '"]').closest('tr').remove();
+                    $(this).closest('tr')remove();
                 },
                 error: function(xhr, status, error) {
                     // Handle error response

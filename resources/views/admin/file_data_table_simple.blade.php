@@ -143,17 +143,16 @@ $(document).ready(function() {
         // Listen for click events on the delete icon/button
         $('#file_datatable').on('click', '.btn.btn-danger.btn-sm.edit', function(e) {
             e.preventDefault();
-
-            var itemId = $(this).data('id');
-
+            var currentRow=$(this).closest("tr");
+            var file_id=currentRow.find("td:eq(0)").text();
             // Send an AJAX request to delete the row
             $.ajax({
-                url: '/file/delete/' + itemId,
+                url: '/file/delete/simple/' + file_id,
                 type: 'GET',
                 dataType: 'json',
                 success: function(response) {
                     // Row deleted successfully, remove it from the table
-                    $('.file_datatable').find('a[data-id="' + itemId + '"]').closest('tr').remove();
+                    $('.file_datatable').find('a[data-file_id="' + file_id + '"]').closest('tr').remove();
                 },
                 error: function(xhr, status, error) {
                     // Handle error response
@@ -275,7 +274,7 @@ $(document).ready(function() {
                                             <a class="btn btn-outline-secondary btn-sm edit" href="{{ route('file.edit',$r->file_id) }}" target="_blank" title="Edit">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <a type="submit" class="btn btn-danger btn-sm edit" href="{{ route('file.delete' ,$r->id) }}" title="Delete">
+                                            <a type="submit" class="btn btn-danger btn-sm edit" href="{{ route('file.delete' ,$r->file_id) }}" title="Delete">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                             </a>
                                         </form>
@@ -495,33 +494,33 @@ $(document).ready(function() {
           $.each(data, function(index, item) {
             var row = $("<tr>");
             // Create table cells and populate them with data
-            var cell1 = $("<td>").text(item.file_id);
-            var cell2 = $("<td>").text(item.taxid);
-            var cell3 = $("<td>").text(item.customer);
-            var cell4 = $("<td>").text(item.shop);
-            var cell5 = $("<td>").text(item.service);
+            var cell1 = $("<td style='width:5%'>").text(item.file_id);
+            var cell2 = $("<td style='width:20%'>").text(item.taxid);
+            var cell3 = $("<td style='width:15%'>").text(item.customer);
+            var cell4 = $("<td style='width:15%'>").text(item.shop);
+            var cell5 = $("<td style='width:20%'>").text(item.service);
             if(item.status == "Completed")
-                var cell6 = $("<td>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2'></i></div>");
+                var cell6 = $("<td style='width:2%'>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2'></i></div>");
             if(item.status == "Pending")
-                var cell6 = $("<td>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-warning align-middle me-2'></i></div>");
+                var cell6 = $("<td style='width:2%'>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-warning align-middle me-2'></i></div>");
             if(item.status == "Submitted")
-                var cell6 = $("<td>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-dark align-middle me-2'></i></div>");
+                var cell6 = $("<td style='width:2%'>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-dark align-middle me-2'></i></div>");
             if(item.status == "Cancelled")
-                var cell6 = $("<td>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-danger align-middle me-2'></i></div>");
-            var cell7 = $("<td>").text(item.status);
-            var cell8 = $("<td>").html(
-                '<div style="width:150px" class="row">'+
-                    "<div>"+
+                var cell6 = $("<td style='width:2%'>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-danger align-middle me-2'></i></div>");
+            var cell7 = $("<td style='width:5%'>").text(item.status);
+            var cell8 = $("<td style='width:3%'>").html(
+                '<div style="width:100px" class="row">'+
+                    '<div class="col-md-4">'+
                         "<a class='btn btn-outline-secondary btn-sm edit' target='_blank' title='Show'>"+
                             "<i class='fas fa-eye'></i>"+
                         "</a>"+
                     "</div>"+
-                    "<div>"+
+                    '<div class="col-md-4">'+
                     "<a class='btn btn-outline-secondary btn-sm edit' target='_blank' title='Show'>"+
                         "<i class='fas fa-pencil-alt'></i>"+
                     "</a>"+
                     "</div>"+
-                    "<div>"+
+                    '<div class="col-md-4">'+
                     "<a class='btn btn-danger btn-sm edit' target='_blank' title='Show'>"+
                         "<i class='fas fa-trash'></i>"+
                     "</a>"+
