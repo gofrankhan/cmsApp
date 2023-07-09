@@ -152,7 +152,8 @@ $(document).ready(function() {
                 dataType: 'json',
                 success: function(response) {
                     // Row deleted successfully, remove it from the table
-                    $('.file_datatable').find('a[data-file_id="' + file_id + '"]').closest('tr').remove();
+                    currentRow.remove()
+                    //$('#file_datatable').find('td[data-id="' + itemId + '"]').remove();
                 },
                 error: function(xhr, status, error) {
                     // Handle error response
@@ -234,6 +235,7 @@ $(document).ready(function() {
                 <table data-page-length='50' id="file_datatable" class="table table-bordered file_datatable">
                     <thead>
                         <tr>
+                            <th style="width:5%">#</th>
                             <th style="width:5%">File ID</th>
                             <th style="width:20%">Tax ID</th>
                             <th style="width:20%">Customer</th>
@@ -247,8 +249,9 @@ $(document).ready(function() {
                     <tbody id='tableBody'>
                         @foreach($data as $r)
                         <tr>
-                            <td style="width:5%">{{ $r->file_id }}</td>
-                            <td style="width:20%">{{ $r->taxid }}</td>
+                            <td style="width:3%">{{ $r->id }}</td>
+                            <td style="width:4%">{{ $r->file_id }}</td>
+                            <td style="width:18%">{{ $r->taxid }}</td>
                             <td style="width:20%">{{ $r->customer }}</td>
                             <td style="width:20%">{{ $r->shop }}</td>
                             <td style="width:25%">{{ $r->service }}</td>
