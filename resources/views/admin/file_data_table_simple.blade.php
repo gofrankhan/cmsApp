@@ -152,7 +152,7 @@ $(document).ready(function() {
                 dataType: 'json',
                 success: function(response) {
                     // Row deleted successfully, remove it from the table
-                    currentRow.remove()
+                    currentRow.remove();
                     //$('#file_datatable').find('td[data-id="' + itemId + '"]').remove();
                 },
                 error: function(xhr, status, error) {
@@ -163,6 +163,31 @@ $(document).ready(function() {
         });
     });
 </script>
+
+<!-- AJAX script -->
+<!-- <script>
+    $(document).ready(function() {
+        // Listen for click events on the delete icon/button
+        $('#file_datatable').on('click', '.btn.btn-outline-secondary.btn-sm', function(e) {
+            e.preventDefault();
+            var currentRow=$(this).closest("tr");
+            var file_id=currentRow.find("td:eq(0)").text();
+            // Send an AJAX request to delete the row
+            $.ajax({
+                url: '/file/show/simple/' + file_id,
+                type: 'GET',
+                success: function(response) {
+                    // Row deleted successfully, remove it from the table
+                    //$('#file_datatable').find('td[data-id="' + itemId + '"]').remove();
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script> -->
 
 @php
     $user_type = Auth::user()->user_type;
@@ -235,7 +260,6 @@ $(document).ready(function() {
                 <table data-page-length='50' id="file_datatable" class="table table-bordered file_datatable">
                     <thead>
                         <tr>
-                            <th style="width:5%">#</th>
                             <th style="width:5%">File ID</th>
                             <th style="width:20%">Tax ID</th>
                             <th style="width:20%">Customer</th>
@@ -249,9 +273,8 @@ $(document).ready(function() {
                     <tbody id='tableBody'>
                         @foreach($data as $r)
                         <tr>
-                            <td style="width:3%">{{ $r->id }}</td>
-                            <td style="width:4%">{{ $r->file_id }}</td>
-                            <td style="width:18%">{{ $r->taxid }}</td>
+                            <td style="width:5%">{{ $r->file_id }}</td>
+                            <td style="width:20%">{{ $r->taxid }}</td>
                             <td style="width:20%">{{ $r->customer }}</td>
                             <td style="width:20%">{{ $r->shop }}</td>
                             <td style="width:25%">{{ $r->service }}</td>
@@ -497,7 +520,8 @@ $(document).ready(function() {
           $.each(data, function(index, item) {
             var row = $("<tr>");
             // Create table cells and populate them with data
-            var cell1 = $("<td style='width:5%'>").text(item.file_id);
+            var correntFileID = item.file_id;
+            var cell1 = $("<td style='width:5%'>").text(correntFileID);
             var cell2 = $("<td style='width:20%'>").text(item.taxid);
             var cell3 = $("<td style='width:15%'>").text(item.customer);
             var cell4 = $("<td style='width:15%'>").text(item.shop);
@@ -511,25 +535,25 @@ $(document).ready(function() {
             if(item.status == "Cancelled")
                 var cell6 = $("<td style='width:2%'>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-danger align-middle me-2'></i></div>");
             var cell7 = $("<td style='width:5%'>").text(item.status);
-            var cell8 = $("<td style='width:3%'>").html(
+            var htmlContent = 
                 '<div style="width:100px" class="row">'+
                     '<div class="col-md-4">'+
-                        "<a class='btn btn-outline-secondary btn-sm edit' target='_blank' title='Show'>"+
+                        '<a class="btn btn-outline-secondary btn-sm edit" href="/file/show/' +item.file_id+ '" target="_blank" title="Show">'+
                             "<i class='fas fa-eye'></i>"+
                         "</a>"+
                     "</div>"+
                     '<div class="col-md-4">'+
-                    "<a class='btn btn-outline-secondary btn-sm edit' target='_blank' title='Show'>"+
-                        "<i class='fas fa-pencil-alt'></i>"+
-                    "</a>"+
+                        '<a class="btn btn-outline-secondary btn-sm" href="/file/edit/' +item.file_id+ '" target="_blank" title="Show">'+
+                            "<i class='fas fa-pencil-alt'></i>"+
+                        "</a>"+
                     "</div>"+
                     '<div class="col-md-4">'+
-                    "<a class='btn btn-danger btn-sm edit' target='_blank' title='Show'>"+
-                        "<i class='fas fa-trash'></i>"+
-                    "</a>"+
+                        "<a class='btn btn-danger btn-sm edit' target='_blank' title='Show'>"+
+                            "<i class='fas fa-trash'></i>"+
+                        "</a>"+
                     "</div>"+
-                "</div>"
-            );
+                "</div>";
+            var cell8 = $("<td style='width:3%'>").html(htmlContent);
             // Add more cells as needed
 
             // Append the cells to the row
