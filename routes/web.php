@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CustomerController_simple;
 use App\Http\Controllers\CommentAttachmentController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FileController;
@@ -49,6 +50,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function(){
     Route::get('/customer/data', [CustomerController::class, 'CustomerDataTable'])->name('customer.data');
+    Route::get('/customer/data/simple', [CustomerController_simple::class, 'CustomerDataTable_simple'])->name('customer.data.simple');
+    Route::get('/load/customer/table/search', [CustomerController_simple::class, 'LoadCustomerTableSearch_simple'])->name('load.customer.table.search');
     Route::get('/customer/new', [CustomerController::class, 'NewCustomerData'])->name('customer.new');
     Route::get('/customer/search', [CustomerController::class, 'CustomerSearch'])->name('customer.search');
     Route::post('/customer/store', [CustomerController::class, 'StoreCustomerData'])->name('customer.store');

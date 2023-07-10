@@ -7,6 +7,12 @@ $(document).ready(function() {
         window.location.href = '/customer/data';
     });
 });
+
+$(document).ready(function() {
+    $('#btn_customer_simple').click(function() {
+        window.location.href = '/customer/data/simple';
+    });
+});
 </script>
 
 <header id="page-topbar" data-layout="horizontal">
@@ -25,11 +31,14 @@ $(document).ready(function() {
         <button type="button" id="btn_customer" class="btn font-size-20 header-item waves-effect">
             Customers
         </button>
+        <button type="button" id="btn_customer_simple" class="btn font-size-20 header-item waves-effect">
+            Customers_Simple
+        </button>
         <button type="button" id="btn_file" class="btn font-size-20 header-item waves-effect">
             Files
         </button>
-        <button type="button" id="btn_simple" class="btn font-size-20 header-item waves-effect">
-            Simple
+        <button type="button" id="btn_file_simple" class="btn font-size-20 header-item waves-effect">
+            File_Simple
         </button>
         <button type="button" id="btn_movement" class="btn font-size-20 header-item waves-effect">
             Movements
@@ -96,7 +105,7 @@ document.getElementById("btn_file").addEventListener("click", function(event) {
   window.location.href = '/file/data/user';
 });
 
-document.getElementById("btn_simple").addEventListener("click", function(event) {
+document.getElementById("btn_file_simple").addEventListener("click", function(event) {
   event.preventDefault();
   window.location.href = '/file/data/simple/all';
 });

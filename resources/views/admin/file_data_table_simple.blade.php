@@ -164,31 +164,6 @@ $(document).ready(function() {
     });
 </script>
 
-<!-- AJAX script -->
-<!-- <script>
-    $(document).ready(function() {
-        // Listen for click events on the delete icon/button
-        $('#file_datatable').on('click', '.btn.btn-outline-secondary.btn-sm', function(e) {
-            e.preventDefault();
-            var currentRow=$(this).closest("tr");
-            var file_id=currentRow.find("td:eq(0)").text();
-            // Send an AJAX request to delete the row
-            $.ajax({
-                url: '/file/show/simple/' + file_id,
-                type: 'GET',
-                success: function(response) {
-                    // Row deleted successfully, remove it from the table
-                    //$('#file_datatable').find('td[data-id="' + itemId + '"]').remove();
-                },
-                error: function(xhr, status, error) {
-                    // Handle error response
-                    console.error(xhr.responseText);
-                }
-            });
-        });
-    });
-</script> -->
-
 @php
     $user_type = Auth::user()->user_type;
     if($user_type == 'admin' || $user_type == 'lawyer') $modealName = "#firstmodal";
