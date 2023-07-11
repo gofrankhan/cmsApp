@@ -296,6 +296,23 @@ class FileController_simple extends Controller
         return view('admin.movement_data_table_all', compact('title'));
     }
 
+    public function MovementDataTableAll_simple(Request $request)
+    {
+        $title = "Movement";
+        $shop_name = Auth::user()->shop_name;
+        $user_type = Auth::user()->user_type;
+        $data = null;
+        if($user_type =='admin'){
+            $data = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service')
+                                ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->where('invoices.status', '=', 'Completed')
+                                ->orderByDesc('file_id')
+                                ->paginate(50);
+        }
+        return view('admin.movement_data_table_all_simple', compact('title', 'data'));
+    }
+
     public function FileStore(Request $request)
     {
         $file_id = Invoice::max('file_id');

@@ -135,6 +135,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div id="pagination" class="d-flex justify-content-center">
+            {!! $data->links() !!}
+        </div>
         <!-- end row-->
         <div class="modal fade" id="listmodal" aria-hidden="true" aria-labelledby="..." tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">

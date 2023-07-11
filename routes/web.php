@@ -104,6 +104,7 @@ Route::middleware('auth')->group(function(){
 
     Route::get('/movement/data', [FileController::class, 'MovementDataTable'])->name('movement.data');
     Route::get('/movement/data/all', [FileController::class, 'MovementDataTableAll'])->name('movement.data.all');
+    Route::get('/movement/data/all/simple', [FileController_simple::class, 'MovementDataTableAll'])->name('movement.data.all');
     Route::get('/load/services', [ServiceCategoryController::class, 'getServices'])->name('load.services');
     Route::post('/assign/files', [FileController::class, 'AssignFiles'])->name('assign.files');
 });
@@ -121,7 +122,7 @@ Route::middleware('auth')->group(function(){
     Route::post('/update/status/price/simple', [FileController_simple::class, 'UpdateFileStatusAndPrice'])->name('update.status.price.simple');
 
     Route::get('/movement/data/simple', [FileController_simple::class, 'MovementDataTable'])->name('movement.data.simple');
-    Route::get('/movement/data/all/simple', [FileController_simple::class, 'MovementDataTableAll'])->name('movement.data.all.simple');
+    Route::get('/movement/data/all/simple', [FileController_simple::class, 'MovementDataTableAll_simple'])->name('movement.data.all.simple');
     Route::get('/load/services/simple', [ServiceCategoryController::class, 'getServices'])->name('load.services.simple');
     Route::post('/assign/files/simple', [FileController_simple::class, 'AssignFiles'])->name('assign.files.simple');
 });
