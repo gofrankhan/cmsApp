@@ -28,19 +28,19 @@ $(document).ready(function() {
         <button type="button" id="btn_bashboard" class="btn font-size-20 header-item waves-effect">
             PC Point
         </button>
-        <button type="button" id="btn_customer" class="btn font-size-20 header-item waves-effect">
+        <button type="button" id="btn_customer" class="btn font-size-20 header-item waves-effect" hidden>
             Customers
         </button>
         <button type="button" id="btn_customer_simple" class="btn font-size-20 header-item waves-effect">
             Customers_Simple
         </button>
-        <button type="button" id="btn_file" class="btn font-size-20 header-item waves-effect">
+        <button type="button" id="btn_file" class="btn font-size-20 header-item waves-effect" hidden>
             Files
         </button>
         <button type="button" id="btn_file_simple" class="btn font-size-20 header-item waves-effect">
             File_Simple
         </button>
-        <button type="button" id="btn_movement" class="btn font-size-20 header-item waves-effect">
+        <button type="button" id="btn_movement" class="btn font-size-20 header-item waves-effect" hidden>
             Movements
         </button>
         <button type="button" id="btn_movement_simple" class="btn font-size-20 header-item waves-effect">
