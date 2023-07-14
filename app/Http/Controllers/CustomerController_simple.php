@@ -59,6 +59,6 @@ class CustomerController_simple extends Controller
             }
             $data = $query->get();
             Debugbar::addMessage($data);
-        return view('admin.customer_data_table_simple', compact('title', 'data'));
+            return response()->json($data);
     }
 }

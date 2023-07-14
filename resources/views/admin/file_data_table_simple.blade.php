@@ -490,7 +490,6 @@ $(document).ready(function() {
         data: { search_text: searchText, shop_name : shopName, service_type : serviceType, status : status },
         success: function(data) {
           $("#tableBody").empty();
-
           // Loop through the response and add new rows to the table
           $.each(data, function(index, item) {
             var row = $("<tr>");

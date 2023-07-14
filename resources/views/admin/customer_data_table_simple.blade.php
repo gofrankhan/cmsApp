@@ -135,9 +135,6 @@
                 @endforeach
             </tbody>
         </table>
-        <div id="pagination" class="d-flex justify-content-center">
-            {!! $data->links() !!}
-        </div>
         <!-- end row-->
         <div class="modal fade" id="listmodal" aria-hidden="true" aria-labelledby="..." tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
@@ -178,7 +175,23 @@ $(document).ready(function() {
         type: "GET",
         data: { search_text: searchText},
         success: function(data) {
-            alert(data);
+            $("#tableBody").empty();
+            // Loop through the response and add new rows to the table
+            $.each(data, function(index, item) {
+            var row = $("<tr>");
+            // Create table cells and populate them with data
+            var cell1 = $("<td style='width:10%'>").text(item.id);
+            var cell2 = $("<td style='width:20%'>").text(item.customertype);
+            var cell3 = $("<td style='width:20%'>").text(item.taxid);
+            var cell4 = $("<td style='width:25%'>").text(item.fullname);
+            var cell5 = $("<td style='width:25%'>").text(item.mobile);
+            // Add more cells as needed
+
+            // Append the cells to the row
+            row.append(cell1, cell2, cell3, cell4, cell5);
+            // Append the row to the table body
+            $("#tableBody").append(row);
+          });
         }
         });
     });
