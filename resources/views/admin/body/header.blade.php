@@ -110,7 +110,7 @@ document.getElementById("btn_file").addEventListener("click", function(event) {
 
 document.getElementById("btn_file_simple").addEventListener("click", function(event) {
   event.preventDefault();
-  window.location.href = '/file/data/simple/all';
+  window.location.href = '/file/data/simple/user';
 });
 
 document.getElementById("btn_movement").addEventListener("click", function(event) {
