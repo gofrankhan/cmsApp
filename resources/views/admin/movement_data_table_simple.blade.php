@@ -9,7 +9,7 @@
 <div class="page-content">
     <div class="container-fluid">
         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="card-title">Movement Informations @if($user_type == 'admin')<sub><a href="{{ route('movement.data.all')}}">View All </a></sub>@endif</h4>
+            <h4 class="card-title">Movement Informations @if($user_type == 'admin')<sub><a href="{{ route('movement.data.all.simple')}}">View All </a></sub>@endif</h4>
             @if(isset($total_sum))
             @if($total_sum < 0)
             <h3 class="card-title">Current Balance: {{ -$total_sum }}</h3>
@@ -20,7 +20,7 @@
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a href="{{ route('movement.data')}}">Movement</a></li>
+                    <li class="breadcrumb-item active"><a href="{{ route('movement.data.simple')}}">Movement</a></li>
                 </ol>
             </div>
         </div>
@@ -29,19 +29,34 @@
                 <a href="" hidden class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target=""></a>
             </div>
         </p>
-        <table data-page-length='50' id="movement_datatable" class="table table-bordered movement_datatable">
+        <table id="movement_datatable_simple" class="table table-bordered movement_datatablel_simple">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Customer Name</th>
-                    <th>Service Name</th>
-                    <th>Description</th>
-                    <th>Amount</th>
+                    <th style="width:10%">ID</th>
+                    <th style="width:25%">Customer Name</th>
+                    <th style="width:25%">Service Name</th>
+                    <th style="width:25%">Description</th>
+                    <th></th>
+                    <th style="width:15%">Amount</th>
                 </tr>
             </thead>
         
-            <tbody></tbody>
+            <tbody>
+                @foreach($data as $r)
+                <tr>
+                    <td style="width:10%">{{$r->file_id}}</td>
+                    <td style="width:25%">{{$r->customer}}</td>
+                    <td style="width:25%">{{$r->service}}</td>
+                    <td style="width:25%">{{$r->description}}</td>
+                    <td></td>
+                    <td style="width:15% text-align:left" >{{$r->amount}}</td>
+                </tr>
+                @endforeach
+            </tbody>
         </table>
+        <div id="pagination" class="d-flex justify-content-center">
+            {!! $data->links() !!}
+        </div>
     </div><!-- end col-->
 </div>
 @endsection

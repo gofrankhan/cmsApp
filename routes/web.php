@@ -121,7 +121,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/load/customer/simple', [FileController_simple::class, 'GetCustomerInfo'])->name('customer.info.simple');
     Route::post('/update/status/price/simple', [FileController_simple::class, 'UpdateFileStatusAndPrice'])->name('update.status.price.simple');
 
-    Route::get('/movement/data/simple', [FileController_simple::class, 'MovementDataTable'])->name('movement.data.simple');
+    Route::get('/movement/data/simple', [FileController_simple::class, 'MovementDataTable_simple'])->name('movement.data.simple');
     Route::get('/movement/data/all/simple', [FileController_simple::class, 'MovementDataTableAll_simple'])->name('movement.data.all.simple');
     Route::get('/load/services/simple', [ServiceCategoryController::class, 'getServices'])->name('load.services.simple');
     Route::post('/assign/files/simple', [FileController_simple::class, 'AssignFiles'])->name('assign.files.simple');

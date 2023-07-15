@@ -25,27 +25,27 @@
                 <a href="" hidden class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target=""></a>
             </div>
         </p>
-        <table data-page-length='50' id="movement_datatable_all" class="table table-bordered movement_datatable_all">
+        <table data-page-length='50' id="movement_datatable_all_simple" class="table table-bordered movement_datatable_all_simple">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Customer Name</th>
-                    <th>Service Name</th>
-                    <th>Description</th>
-                    <th><th>
-                    <th>Amount</th>
+                    <th style="width:10%">ID</th>
+                    <th style="width:25%">Customer Name</th>
+                    <th style="width:25%">Service Name</th>
+                    <th style="width:25%">Description</th>
+                    <th></th>
+                    <th style="width:15%">Amount</th>
                 </tr>
             </thead>
         
             <tbody>
                 @foreach($data as $r)
                 <tr>
-                    <td>{{$r->file_id}}</td>
-                    <td>{{$r->customer}}</td>
-                    <td>{{$r->service}}</td>
-                    <td>{{$r->description}}</td>
+                    <td style="width:10%">{{$r->file_id}}</td>
+                    <td style="width:25%">{{$r->customer}}</td>
+                    <td style="width:25%">{{$r->service}}</td>
+                    <td style="width:25%">{{$r->description}}</td>
                     <td></td>
-                    <td>{{$r->amount}}</td>
+                    <td style="width:15% text-align:left" >{{$r->amount}}</td>
                 </tr>
                 @endforeach
             </tbody>

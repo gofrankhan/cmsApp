@@ -120,6 +120,6 @@ document.getElementById("btn_movement").addEventListener("click", function(event
 
 document.getElementById("btn_movement_simple").addEventListener("click", function(event) {
   event.preventDefault();
-  window.location.href = '/movement/data/all/simple';
+  window.location.href = '/movement/data/simple';
 });
 </script>
