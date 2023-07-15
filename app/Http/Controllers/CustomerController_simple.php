@@ -39,16 +39,10 @@ class CustomerController_simple extends Controller
         $title = "Customer";              
         $shop_name = Auth::user()->shop_name;
         $user_type = Auth::user()->user_type;
-        if($user_type == 'admin'){
-            $query = Customer::select('id','taxid','customertype',DB::raw("concat(firstname,' ', lastname) as fullname"), 'mobile')
-            ->orderByDesc('id');
-        }else{
-            $query = Customer::select('id','taxid','customertype',DB::raw("concat(firstname,' ', lastname) as fullname"), 'mobile')
-                    ->whereIn('user_id', function($query) use ($shop_name){
-                        $query->select('id')->from('users')->where('shop_name', $shop_name);
-                    })
-                    ->orderByDesc('id');
-        }
+        
+        $query = Customer::select('id','taxid','customertype',DB::raw("concat(firstname,' ', lastname) as fullname"), 'mobile')
+        ->orderByDesc('id');
+
         if(!empty($request->search_text)){
             $query->where('id', 'like', '%'.$request->search_text.'%')
             ->orWhere('taxid', 'like', '%'.$request->search_text.'%')
@@ -56,9 +50,16 @@ class CustomerController_simple extends Controller
             ->orWhere('lastname', 'like', '%'.$request->search_text.'%')
             ->orWhere('mobile', 'like', '%'.$request->search_text.'%')
             ->orWhere('customertype', 'like', '%'.$request->search_text.'%');
-            }
-            $data = $query->get();
-            Debugbar::addMessage($data);
-            return response()->json($data);
+        }
+
+        if($user_type != 'admin'){
+            $query->whereIn('user_id', function($query) use ($shop_name){
+                $query->select('id')->from('users')->where('shop_name', $shop_name);
+            });
+            
+        }
+        $data = $query->get();
+        Debugbar::addMessage($data);
+        return response()->json($data);
     }
 }

@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <a type="submit" class="btn btn-outline-secondary btn-sm edit" href="{{ route('customer.edit' ,$r->id) }}" title="Delete">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                        <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                                     </a>
                                 </div>
                                 <div class="col-md-4">
@@ -135,6 +135,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div id="pagination" class="d-flex justify-content-center">
+            {!! $data->links() !!}
+        </div>
         <!-- end row-->
         <div class="modal fade" id="listmodal" aria-hidden="true" aria-labelledby="..." tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
@@ -186,9 +189,27 @@ $(document).ready(function() {
             var cell4 = $("<td style='width:25%'>").text(item.fullname);
             var cell5 = $("<td style='width:25%'>").text(item.mobile);
             // Add more cells as needed
-
+            var htmlContent = 
+                '<div style="width:100px" class="row">'+
+                    '<div class="col-md-4">'+
+                        '<a class="btn btn-outline-secondary btn-sm edit" href="/customer/show/' +item.id+ '" target="_blank" title="Show">'+
+                            "<i class='fas fa-eye'></i>"+
+                        "</a>"+
+                    "</div>"+
+                    '<div class="col-md-4">'+
+                        '<a class="btn btn-outline-secondary btn-sm" href="/customer/edit/' +item.id+ '" target="_blank" title="Show">'+
+                            "<i class='fas fa-pencil-alt'></i>"+
+                        "</a>"+
+                    "</div>"+
+                    '<div class="col-md-4">'+
+                        '<a class="btn btn-danger btn-sm edit" href="/customer/delete/' +item.id+ '" target="_blank" title="Show">'+
+                            "<i class='fas fa-trash'></i>"+
+                        "</a>"+
+                    "</div>"+
+                "</div>";
+            var cell6 = $("<td style='width:3%'>").html(htmlContent);
             // Append the cells to the row
-            row.append(cell1, cell2, cell3, cell4, cell5);
+            row.append(cell1, cell2, cell3, cell4, cell5, cell6);
             // Append the row to the table body
             $("#tableBody").append(row);
           });
