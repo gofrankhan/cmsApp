@@ -32,19 +32,19 @@ $(document).ready(function() {
             Customers
         </button>
         <button type="button" id="btn_customer_simple" class="btn font-size-20 header-item waves-effect">
-            Customers_Simple
+            Customers
         </button>
         <button type="button" id="btn_file" class="btn font-size-20 header-item waves-effect" hidden>
             Files
         </button>
         <button type="button" id="btn_file_simple" class="btn font-size-20 header-item waves-effect">
-            File_Simple
+            File
         </button>
         <button type="button" id="btn_movement" class="btn font-size-20 header-item waves-effect" hidden>
             Movements
         </button>
         <button type="button" id="btn_movement_simple" class="btn font-size-20 header-item waves-effect">
-            Movements_Simple
+            Movements
         </button>
 
     </div>

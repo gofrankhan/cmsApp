@@ -173,7 +173,7 @@ $(document).ready(function() {
 <div class="page-content">
     <div class="container-fluid">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="card-title">File Informations @if($user_type == 'admin')<sub><a href="{{ route('file.data', 'all')}}" id="view_all"> View All </a></sub>@endif</h4>
+                    <h4 class="card-title">File Informations @if($user_type == 'admin')<sub><a href="{{ route('file.data.simple', 'all')}}" id="view_all"> View All </a></sub>@endif</h4>
                     <input type="hidden" id="view_type" value="all">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
