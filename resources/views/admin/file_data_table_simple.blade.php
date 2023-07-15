@@ -495,9 +495,10 @@ $(document).ready(function() {
         type: "GET",
         data: { search_text: searchText, shop_name : shopName, service_type : serviceType, status : status },
         success: function(data) {
+           var user_type = (data[data.length - 1]);
           $("#tableBody").empty();
           // Loop through the response and add new rows to the table
-          $.each(data, function(index, item) {
+          $.each(data[0], function(index, item) {
             var row = $("<tr>");
             // Create table cells and populate them with data
             var correntFileID = item.file_id;
@@ -515,7 +516,7 @@ $(document).ready(function() {
             if(item.status == "Cancelled")
                 var cell6 = $("<td style='width:2%'>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-danger align-middle me-2'></i></div>");
             var cell7 = $("<td style='width:5%'>").text(item.status);
-            var htmlContent = 
+            var htmlContentAdmin = 
                 '<div style="width:100px" class="row">'+
                     '<div class="col-md-4">'+
                         '<a class="btn btn-outline-secondary btn-sm edit" href="/file/show/' +item.file_id+ '" target="_blank" title="Show">'+
@@ -533,7 +534,37 @@ $(document).ready(function() {
                         "</a>"+
                     "</div>"+
                 "</div>";
-            var cell8 = $("<td style='width:3%'>").html(htmlContent);
+            var htmlContentUser = 
+                '<div style="width:100px" class="row">'+
+                    '<div class="col-md-4">'+
+                        '<a class="btn btn-outline-secondary btn-sm edit" href="/file/show/' +item.file_id+ '" target="_blank" title="Show">'+
+                            "<i class='fas fa-eye'></i>"+
+                        "</a>"+
+                    "</div>"+
+                    '<div class="col-md-4">'+
+                        '<a class="btn btn-outline-secondary btn-sm" href="/file/edit/' +item.file_id+ '" target="_blank" title="Show">'+
+                            "<i class='fas fa-pencil-alt'></i>"+
+                        "</a>"+
+                    "</div>"+
+                "</div>";
+            var htmlContentViewOnly = 
+                '<div style="width:100px" class="row">'+
+                    '<div class="col-md-4">'+
+                        '<a class="btn btn-outline-secondary btn-sm edit" href="/file/show/' +item.file_id+ '" target="_blank" title="Show">'+
+                            "<i class='fas fa-eye'></i>"+
+                        "</a>"+
+                    "</div>"+
+                "</div>";
+            if(user_type == "admin")
+                var cell8 = $("<td style='width:3%'>").html(htmlContentAdmin);
+            else{
+                if(item.status == "Completed" || item.status == "Cancelled" || user_type == "lawyer"){
+                    var cell8 = $("<td style='width:3%'>").html(htmlContentViewOnly);
+                }else{
+                    var cell8 = $("<td style='width:3%'>").html(htmlContentUser);
+                }
+            }
+                
             // Add more cells as needed
 
             // Append the cells to the row
