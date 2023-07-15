@@ -30,6 +30,34 @@
     }
 </script>
 
+
+<!-- AJAX script -->
+<script>
+    $(document).ready(function() {
+        // Listen for click events on the delete icon/button
+        $('#customer_datatable').on('click', '.btn.btn-danger.btn-sm.edit', function(e) {
+            e.preventDefault();
+            var currentRow=$(this).closest("tr");
+            var _id=currentRow.find("td:eq(0)").text();
+            // Send an AJAX request to delete the row
+            $.ajax({
+                url: '/customer/delete/' + _id,
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    // Row deleted successfully, remove it from the table
+                    currentRow.remove();
+                    //$('#file_datatable').find('td[data-id="' + itemId + '"]').remove();
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
 @php
     $user_type = Auth::user()->user_type;
 @endphp
