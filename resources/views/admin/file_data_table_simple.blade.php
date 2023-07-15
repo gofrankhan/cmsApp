@@ -286,12 +286,18 @@ $(document).ready(function() {
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     @else
-                                        <a class="btn btn-outline-secondary btn-sm edit" href="{{ route('file.show',$r->file_id) }}" target="_blank" title="Show">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        <a class="btn btn-outline-secondary btn-sm edit" href="{{ route('file.edit',$r->file_id) }}" title="Edit">
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </a>
+                                        <div style="width:150px" class="row">
+                                            <div class="col-sm-3">
+                                                <a class="btn btn-outline-secondary btn-sm edit" href="{{ route('file.show',$r->file_id) }}" target="_blank" title="Show">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <a class="btn btn-outline-secondary btn-sm edit" href="{{ route('file.edit',$r->file_id) }}" title="Edit">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </a>
+                                            </div>
+                                        </div>
                                     @endif
                                 @endif
                             </td>
