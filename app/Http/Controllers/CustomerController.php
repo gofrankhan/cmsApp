@@ -135,7 +135,7 @@ class CustomerController extends Controller
             'message' => 'Customer data added successfully', 
             'alert-type' => 'success'
         );
-        return redirect()->route('customer.data')->with($notification);
+        return redirect()->route('customer.data.simple')->with($notification);
     }
 
     /**

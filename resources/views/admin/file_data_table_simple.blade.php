@@ -178,7 +178,7 @@ $(document).ready(function() {
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Home</a></li>
-                            <li class="breadcrumb-item active"><a href="{{ route('file.data', 'user')}}">Files</a></li>
+                            <li class="breadcrumb-item active"><a href="{{ route('file.data.simple', 'user')}}">Files</a></li>
                         </ol>
                     </div>
                 </div>

@@ -60,6 +60,6 @@ class CustomerController_simple extends Controller
         }
         $data = $query->get();
         Debugbar::addMessage($data);
-        return response()->json($data);
+        return response()->json([$data, $user_type]);
     }
 }

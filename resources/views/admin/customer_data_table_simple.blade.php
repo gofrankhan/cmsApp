@@ -43,7 +43,7 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Home</a></li>
-                            <li class="breadcrumb-item active"><a href="{{ route('customer.data')}}">Customers</a></li>
+                            <li class="breadcrumb-item active"><a href="{{ route('customer.data.simple')}}">Customers</a></li>
                         </ol>
                     </div>
                 </div>
@@ -180,7 +180,8 @@ $(document).ready(function() {
         success: function(data) {
             $("#tableBody").empty();
             // Loop through the response and add new rows to the table
-            $.each(data, function(index, item) {
+            var user_type = data[data.length - 1];
+            $.each(data[0], function(index, item) {
             var row = $("<tr>");
             // Create table cells and populate them with data
             var cell1 = $("<td style='width:10%'>").text(item.id);
@@ -188,8 +189,9 @@ $(document).ready(function() {
             var cell3 = $("<td style='width:20%'>").text(item.taxid);
             var cell4 = $("<td style='width:25%'>").text(item.fullname);
             var cell5 = $("<td style='width:25%'>").text(item.mobile);
+            var cell6 = $("<td style='width:0%'>").text("");
             // Add more cells as needed
-            var htmlContent = 
+            var htmlContentAdmin = 
                 '<div style="width:100px" class="row">'+
                     '<div class="col-md-4">'+
                         '<a class="btn btn-outline-secondary btn-sm edit" href="/customer/show/' +item.id+ '" target="_blank" title="Show">'+
@@ -207,9 +209,25 @@ $(document).ready(function() {
                         "</a>"+
                     "</div>"+
                 "</div>";
-            var cell6 = $("<td style='width:3%'>").html(htmlContent);
+            var htmlContentUser = 
+                '<div style="width:100px" class="row">'+
+                    '<div class="col-md-4">'+
+                        '<a class="btn btn-outline-secondary btn-sm edit" href="/customer/show/' +item.id+ '" target="_blank" title="Show">'+
+                            "<i class='fas fa-eye'></i>"+
+                        "</a>"+
+                    "</div>"+
+                    '<div class="col-md-4">'+
+                        '<a class="btn btn-outline-secondary btn-sm" href="/customer/edit/' +item.id+ '" target="_blank" title="Show">'+
+                            "<i class='fas fa-pencil-alt'></i>"+
+                        "</a>"+
+                    "</div>"+
+                "</div>";
+            if(user_type == "admin")
+                var cell7 = $("<td style='width:3%'>").html(htmlContentAdmin);
+            else
+                var cell7 = $("<td style='width:3%'>").html(htmlContentUser);
             // Append the cells to the row
-            row.append(cell1, cell2, cell3, cell4, cell5, cell6);
+            row.append(cell1, cell2, cell3, cell4, cell5, cell6, cell7);
             // Append the row to the table body
             $("#tableBody").append(row);
           });

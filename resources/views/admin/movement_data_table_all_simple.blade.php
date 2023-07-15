@@ -16,7 +16,7 @@
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a href="{{ route('movement.data')}}">Movement</a></li>
+                    <li class="breadcrumb-item active"><a href="{{ route('movement.data.simple')}}">Movement</a></li>
                 </ol>
             </div>
         </div>
