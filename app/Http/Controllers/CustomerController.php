@@ -222,7 +222,7 @@ class CustomerController extends Controller
             'message' => 'Customer data updated successfully', 
             'alert-type' => 'success'
         );
-        return redirect()->route('customer.data')->with($notification);
+        return redirect()->route('customer.data.simple')->with($notification);
     }
 
     public function GetCustomerInfo(Request $request){

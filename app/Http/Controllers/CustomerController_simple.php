@@ -43,13 +43,16 @@ class CustomerController_simple extends Controller
         $query = Customer::select('id','taxid','customertype',DB::raw("concat(firstname,' ', lastname) as fullname"), 'mobile')
         ->orderByDesc('id');
 
+        $searchText = $request->search_text;
         if(!empty($request->search_text)){
-            $query->where('id', 'like', '%'.$request->search_text.'%')
-            ->orWhere('taxid', 'like', '%'.$request->search_text.'%')
-            ->orWhere('firstname', 'like', '%'.$request->search_text.'%')
-            ->orWhere('lastname', 'like', '%'.$request->search_text.'%')
-            ->orWhere('mobile', 'like', '%'.$request->search_text.'%')
-            ->orWhere('customertype', 'like', '%'.$request->search_text.'%');
+            $query->where(function ($innerQuery) use ($searchText) {
+                $innerQuery->where('id', 'like', '%'.$searchText.'%')
+            ->orWhere('taxid', 'like', '%'.$searchText.'%')
+            ->orWhere('firstname', 'like', '%'.$searchText.'%')
+            ->orWhere('lastname', 'like', '%'.$searchText.'%')
+            ->orWhere('mobile', 'like', '%'.$searchText.'%')
+            ->orWhere('customertype', 'like', '%'.$searchText.'%');
+            });
         }
 
         if($user_type != 'admin'){

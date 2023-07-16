@@ -98,14 +98,17 @@ class FileController_simple extends Controller
                                 ->where('invoices.user_id', $user_id)
                                 ->orderByDesc('file_id');
         }
+        $searchText = $request->search_text;
         if(!empty($request->search_text)){
-            $query->where('file_id', 'like', '%'.$request->search_text.'%')
-            ->orWhere('taxid', 'like', '%'.$request->search_text.'%')
-            ->orWhere('customers.firstname', 'like', '%'.$request->search_text.'%')
-            ->orWhere('customers.lastname', 'like', '%'.$request->search_text.'%')
-            ->orWhere('users.shop_name', 'like', '%'.$request->search_text.'%')
-            ->orWhere('services.service', 'like', '%'.$request->search_text.'%')
-            ->orWhere('status', 'like', '%'.$request->search_text.'%');
+            $query->where(function ($innerQuery) use ($searchText) {
+                $innerQuery->where('file_id', 'like', '%'.$searchText.'%')
+            ->orWhere('taxid', 'like', '%'.$searchText.'%')
+            ->orWhere('customers.firstname', 'like', '%'.$searchText.'%')
+            ->orWhere('customers.lastname', 'like', '%'.$searchText.'%')
+            ->orWhere('users.shop_name', 'like', '%'.$searchText.'%')
+            ->orWhere('services.service', 'like', '%'.$searchText.'%')
+            ->orWhere('status', 'like', '%'.$searchText.'%');
+            });
         }
         if(!empty($request->shop_name)) {
             $query->where('users.shop_name', $request->shop_name);

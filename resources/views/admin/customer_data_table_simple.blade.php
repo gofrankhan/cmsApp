@@ -35,7 +35,7 @@
 <script>
     $(document).ready(function() {
         // Listen for click events on the delete icon/button
-        $('#customer_datatable').on('click', '.btn.btn-danger.btn-sm.edit', function(e) {
+        $('#customer_datatable_simple').on('click', '.btn.btn-danger.btn-sm.edit', function(e) {
             e.preventDefault();
             var currentRow=$(this).closest("tr");
             var _id=currentRow.find("td:eq(0)").text();
@@ -103,7 +103,7 @@
                 </p>
             </div><!-- end col-->
         </div>
-        <table data-page-length='50' id="customer_datatable" class="table table-bordered customer_datatable">
+        <table data-page-length='50' id="customer_datatable_simple" class="table table-bordered customer_datatable_simple">
             <thead>
                 <tr>
                     <th>ID</th>
