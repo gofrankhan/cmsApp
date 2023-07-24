@@ -103,7 +103,11 @@ class ClientController extends Controller
     {
         $customer = DB::table('users')->where('id', $id)->delete();
         
-        return $this->ClientDataTable();
+        $notification = array(
+            'message' => 'Customer data deleted successfully', 
+            'alert-type' => 'success'
+        );
+        return response()->json();
     }
 
 }

@@ -1,6 +1,37 @@
 @extends('admin.admin_master')
 @section('admin')
 
+<!-- AJAX script -->
+<script>
+    $(document).ready(function() {
+        // Listen for click events on the delete icon/button
+        $('#alternative-page-datatable').on('click', '.btn.btn-danger.btn-sm.edit', function(e) {
+            e.preventDefault();
+            var result = confirm("Want to delete?");
+            if (result) {
+                //Logic to delete the item
+                var currentRow=$(this).closest("tr");
+                var _id=currentRow.find("td:eq(0)").text();
+                // Send an AJAX request to delete the row
+                $.ajax({
+                    url: '/client/delete/' + _id,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response) {
+                        // Row deleted successfully, remove it from the table
+                        currentRow.remove();
+                        //$('#file_datatable').find('td[data-id="' + itemId + '"]').remove();
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error response
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+        });
+    });
+</script>
+
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
@@ -16,6 +47,7 @@
                 <table id="alternative-page-datatable" class="table dt-responsive nowrap w-100">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Type</th>
                             <th>Username</th>
@@ -29,22 +61,19 @@
                     <tbody>
                         @foreach ($users as $user)
                         <tr>
+                            <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->user_type }}</td>
                             <td>{{ $user->username }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->shop_name }}</td>
                             <td>
-                                <form action="{{ route('client.delete',$user->id) }}" method="Post">
                                     <a class="btn btn-outline-secondary btn-sm edit" href="{{ route('client.edit' ,$user->id) }}" title="Edit">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                    @csrf
-                                    @method('DELETE')
                                     <a type="submit" class="btn btn-danger btn-sm edit" href="{{ route('client.delete' ,$user->id) }}" title="Delete">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </a>
-                                </form>
                             </td>
                         </tr>
                         @endforeach
