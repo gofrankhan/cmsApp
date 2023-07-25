@@ -51,6 +51,7 @@ class CommentAttachmentController extends Controller
         return redirect()->back()->with($notification);
     }
 
+
     public function UploadFile(Request $request)
     {
         $attachment = new Attachment();
