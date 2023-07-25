@@ -340,7 +340,17 @@ class FileController_simple extends Controller
                 })->sum('invoices.price');
         }
 
-        return view('admin.movement_data_table_simple', compact('title', 'total_sum', 'data'));
+        $services = Invoice::select('invoices.service_id as service_id', 'services.service')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->where('invoices.status', '=', 'Completed')
+                                ->whereIn('invoices.user_id', function($query) use ($shop_name){
+                                    $query->select('id')->from('users')->where('shop_name', $shop_name);
+                                })
+                                ->distinct()
+                                ->orderByDesc('file_id')
+                                ->get();
+
+        return view('admin.movement_data_table_simple', compact('title', 'total_sum', 'data', 'services'));
     }
 
     public function MovementDataTableAll_simple(Request $request)
@@ -356,7 +366,13 @@ class FileController_simple extends Controller
                                 ->orderByDesc('file_id')
                                 ->paginate(50);
         }
-        return view('admin.movement_data_table_all_simple', compact('title', 'data'));
+        $services = Invoice::select('invoices.service_id as service_id', 'services.service')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->where('invoices.status', '=', 'Completed')
+                                ->distinct()
+                                ->orderByDesc('file_id')
+                                ->get();
+        return view('admin.movement_data_table_all_simple', compact('title', 'data', 'services'));
     }
 
     public function FileStore(Request $request)

@@ -25,6 +25,16 @@
                 <a href="" hidden class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target=""></a>
             </div>
         </p>
+        <div style="padding:15px" class="col-md-2">
+            <select style="width:200px" id="select_service_type">
+                <option value="" selected>---Filter Service Type---</option>
+                @foreach($services as $service)
+                    @if($service->service != "")
+                    <option value="{{ $service->service }}">{{ $service->service }}</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
         <table data-page-length='50' id="movement_datatable_all_simple" class="table table-bordered movement_datatable_all_simple">
             <thead>
                 <tr>
