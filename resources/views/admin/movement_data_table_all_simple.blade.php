@@ -86,13 +86,14 @@
                     var cell2 = $("<td style='width:25%'>").text(item.customer);
                     var cell3 = $("<td style='width:25%'>").text(item.service);
                     var cell4 = $("<td style='width:25%'>").text(item.description);
-                    var cell5 = $("<td style='width:15%'>").text(item.amount);
+                    var cell5 = $("<td style='width:0%'>").text("");
+                    var cell6 = $("<td style='width:15% text-align:left'>").text(item.amount);
                     
                         
                     // Add more cells as needed
 
                     // Append the cells to the row
-                    row.append(cell1, cell2, cell3, cell4, cell5);
+                    row.append(cell1, cell2, cell3, cell4, cell5, cell6);
                     // Append the row to the table body
                     $("#tableBody").append(row);
                 });
