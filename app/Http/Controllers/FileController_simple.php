@@ -124,6 +124,49 @@ class FileController_simple extends Controller
         return response()->json([$data, $user_type]);
     }
 
+    public function MovementFilterService_simple(Request $request){
+
+        $shop_name = Auth::user()->shop_name;
+        $user_type = Auth::user()->user_type;
+        $user_id = Auth::user()->id;
+        $query = null;
+        if($user_type == 'lawyer') {
+            $query = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.lawyer_price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service')
+                            ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                            ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                            ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                            ->where('invoices.status', '=', 'Completed')
+                            ->where('invoices.lawyer_id', $user_id)
+                            ->orderByDesc('file_id');
+            
+        } else if (!$request->all_data){
+            $query = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service')
+                            ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                            ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                            ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                            ->where('invoices.status', '=', 'Completed')
+                            ->whereIn('invoices.user_id', function($query) use ($shop_name){
+                                $query->select('id')->from('users')->where('shop_name', $shop_name);
+                            })
+                            ->orderByDesc('file_id');
+        }else if($request->all_data){
+            $query = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service')
+                            ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                            ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                            ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                            ->where('invoices.status', '=', 'Completed')
+                            ->orderByDesc('file_id');
+        }
+
+        if(!empty($request->service_type)) {
+            $query->where('services.service', $request->service_type);
+        }
+
+        $data = $query->get();
+        Debugbar::addMessage($data);
+        return response()->json($data);
+    }
+
     public function FileDataTable(Request $request, $view_type)
     {
         $title = "Files";

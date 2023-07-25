@@ -69,5 +69,45 @@
         </div>
     </div><!-- end col-->
 </div>
+
+
+<script>
+
+    function FilterServiceType(){
+
+        var serviceType = $('#select_service_type').val();
+        $.ajax({
+            url: "{{ route('movement.filter.service') }}",
+            type: "GET",
+            data: { service_type : serviceType, all_data : false },
+            success: function(data) {
+            $("#tableBody").empty();
+            // Loop through the response and add new rows to the table
+                $.each(data, function(index, item) {
+                    var row = $("<tr>");
+                    // Create table cells and populate them with data
+                    var cell1 = $("<td style='width:10%'>").text(item.file_id);
+                    var cell2 = $("<td style='width:25%'>").text(item.customer);
+                    var cell3 = $("<td style='width:25%'>").text(item.service);
+                    var cell4 = $("<td style='width:25%'>").text(item.description);
+                    var cell5 = $("<td style='width:15%'>").text(item.amount);
+                    
+                        
+                    // Add more cells as needed
+
+                    // Append the cells to the row
+                    row.append(cell1, cell2, cell3, cell4, cell5);
+                    // Append the row to the table body
+                    $("#tableBody").append(row);
+                });
+            }
+        });
+    }
+
+    $("#select_service_type").on("change", function() {
+        FilterServiceType();
+    });
+</script>
+
 @endsection
 
