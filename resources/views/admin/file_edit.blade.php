@@ -258,8 +258,7 @@
                     </div>
                 </div>
             </div>
-        @endif
-        @if($files[0]->service == 'DICHIARAZIONE REDDITI PF')
+            @if($files[0]->service == 'DICHIARAZIONE REDDITI PF')
             <div class="row">
                 <label class="col-form-label">Sede Legale</label>
             </div>
@@ -406,17 +405,9 @@
                     </div>
                 </div>
             </div>
+            @endif
+        </form>
         @endif
-        <div class="row">
-            <div class="col">
-                <div class="row mb-3">
-                    <div class="col-sm-12">
-                        <label for="ARCHIVIO DSU" class="col-form-label">ARCHIVIO DSU</label>
-                        <input class="form-control" name="ARCHIVIO DSU" placeholder="ARCHIVIO DSU" type="text" id="ARCHIVIO DSU" >
-                    </div>
-                </div>
-            </div>
-        </div>
         <br><br><br>
         <div class="row">
             <div class="col">

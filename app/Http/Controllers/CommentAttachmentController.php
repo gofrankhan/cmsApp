@@ -30,7 +30,7 @@ class CommentAttachmentController extends Controller
     {
         if(empty($request->comment)){
             $notification = array(
-                'message' => 'Comment is empty! Not Saved!', 
+                'message' => 'Comment is empty! Not saved!', 
                 'alert-type' => 'error'
             );
             return redirect()->back()->with($notification);
