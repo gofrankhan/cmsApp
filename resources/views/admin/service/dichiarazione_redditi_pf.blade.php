@@ -146,27 +146,3 @@
                 </div>
             </div>
         @endif
-
-        <div class="row">
-            <div class="col">
-                <div class="row mb-3">
-                    <div class="col-sm-12">
-                        <label for="ARCHIVIO DSU" class="col-form-label">ARCHIVIO DSU</label>
-                        <input class="form-control" name="ARCHIVIO DSU" placeholder="ARCHIVIO DSU" type="text" id="ARCHIVIO DSU" disabled>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-       
-        <div class="row">
-            <div class="col">
-                <div class="row mb-3">
-                    <div class="col-sm-12">
-                        <label for="ARCHIVIO DSU" class="col-form-label">ARCHIVIO DSU</label>
-                        <input class="form-control" name="ARCHIVIO DSU" placeholder="ARCHIVIO DSU" type="text" id="ARCHIVIO DSU" >
-                    </div>
-                </div>
-            </div>
-        </div>

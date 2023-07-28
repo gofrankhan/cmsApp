@@ -746,6 +746,7 @@ class FileController_simple extends Controller
     {
         $title = "Edit File";
         $comments = DB::table('comments')->where('file_id', $file_id)->get();
+        Debugbar::addMessage($comments);
         $attachments = DB::table('attachments')->where('file_id', $file_id)->get();
         $files = Invoice::select('invoices.id', 'invoices.price', 'invoices.file_id', 'invoices.customer_id', 
                                 'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop',
