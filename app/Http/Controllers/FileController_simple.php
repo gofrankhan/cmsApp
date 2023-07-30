@@ -331,6 +331,7 @@ class FileController_simple extends Controller
                 $data = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service')
                                     ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                                     ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                    ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
                                     ->where('invoices.status', '=', 'Completed')
                                     ->get();
             }
@@ -405,6 +406,7 @@ class FileController_simple extends Controller
             $data = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service', 'users.shop_name as shop')
                                 ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                                 ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
                                 ->where('invoices.status', '=', 'Completed')
                                 ->orderByDesc('file_id')
                                 ->paginate(50);

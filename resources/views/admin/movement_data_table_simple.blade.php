@@ -46,6 +46,7 @@
                     <th style="width:25%">Customer Name</th>
                     <th style="width:25%">Service Name</th>
                     <th style="width:25%">Description</th>
+                    <th style="width:25%">Shop Name</th>
                     <th></th>
                     <th style="width:15%">Amount</th>
                 </tr>
@@ -55,9 +56,10 @@
                 @foreach($data as $r)
                 <tr>
                     <td style="width:10%">{{$r->file_id}}</td>
-                    <td style="width:25%">{{$r->customer}}</td>
-                    <td style="width:25%">{{$r->service}}</td>
-                    <td style="width:25%">{{$r->description}}</td>
+                    <td style="width:20%">{{$r->customer}}</td>
+                    <td style="width:20%">{{$r->service}}</td>
+                    <td style="width:20%">{{$r->description}}</td>
+                    <td style="width:20%">{{$r->shop}}</td>
                     <td></td>
                     <td style="width:15% text-align:left" >{{$r->amount}}</td>
                 </tr>
@@ -87,9 +89,10 @@
                     var row = $("<tr>");
                     // Create table cells and populate them with data
                     var cell1 = $("<td style='width:10%'>").text(item.file_id);
-                    var cell2 = $("<td style='width:25%'>").text(item.customer);
-                    var cell3 = $("<td style='width:25%'>").text(item.service);
-                    var cell4 = $("<td style='width:25%'>").text(item.description);
+                    var cell2 = $("<td style='width:20%'>").text(item.customer);
+                    var cell3 = $("<td style='width:20%'>").text(item.service);
+                    var cell4 = $("<td style='width:20%'>").text(item.description);
+                    var cell4 = $("<td style='width:20%'>").text(item.shop);
                     var cell5 = $("<td style='width:15%'>").text(item.amount);
                     
                         
