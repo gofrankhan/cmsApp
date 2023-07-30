@@ -131,7 +131,7 @@ class FileController_simple extends Controller
         $user_id = Auth::user()->id;
         $query = null;
         if($user_type == 'lawyer') {
-            $query = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.lawyer_price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service')
+            $query = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.lawyer_price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"), 'users.shop_name as shop', 'services.service')
                             ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                             ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                             ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
@@ -140,7 +140,7 @@ class FileController_simple extends Controller
                             ->orderByDesc('file_id');
             
         } else if (!$request->all_data){
-            $query = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service')
+            $query = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service', 'users.shop_name as shop')
                             ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                             ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                             ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
@@ -150,7 +150,7 @@ class FileController_simple extends Controller
                             })
                             ->orderByDesc('file_id');
         }else if($request->all_data){
-            $query = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service')
+            $query = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service', 'users.shop_name as shop')
                             ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                             ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                             ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
@@ -348,7 +348,7 @@ class FileController_simple extends Controller
         $user_id = Auth::user()->id;  
         $data = null;
         if($user_type == 'lawyer') {
-            $data = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.lawyer_price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service')
+            $data = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.lawyer_price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service', 'users.shop_name as shop')
                             ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                             ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                             ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
@@ -358,7 +358,7 @@ class FileController_simple extends Controller
                             ->paginate(50);
             
         } else{
-            $data = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service')
+            $data = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service' , 'users.shop_name as shop')
                             ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                             ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                             ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
@@ -402,7 +402,7 @@ class FileController_simple extends Controller
         $shop_name = Auth::user()->shop_name;
         $user_type = Auth::user()->user_type;
         if($user_type =='admin'){
-            $data = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service')
+            $data = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service', 'users.shop_name as shop')
                                 ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                                 ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                                 ->where('invoices.status', '=', 'Completed')
