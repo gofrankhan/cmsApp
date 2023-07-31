@@ -35,6 +35,16 @@
                 @endforeach
             </select>
         </div>
+        <div style="padding:15px" class="col-md-2">
+            <select style="width:200px" id="select_shop_name">
+                <option value="" selected>---Select Shop Name---</option>
+                @foreach($shops as $shop)
+                    @if($shop->shop_name != "")
+                    <option value="{{ $shop->shop_name }}">{{ $shop->shop_name }}</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
         <table data-page-length='50' id="movement_datatable_all_simple" class="table table-bordered movement_datatable_all_simple">
             <thead>
                 <tr>

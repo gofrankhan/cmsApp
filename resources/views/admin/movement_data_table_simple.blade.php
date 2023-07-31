@@ -34,6 +34,16 @@
                 @endforeach
             </select>
         </div>
+        <div style="padding:15px" class="col-md-2">
+            <select style="width:200px" id="select_shop_name">
+                <option value="" selected>---Select Shop Name---</option>
+                @foreach($shops as $shop)
+                    @if($shop->shop_name != "")
+                    <option value="{{ $shop->shop_name }}">{{ $shop->shop_name }}</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
         <p class="card-title-desc" >
             <div align="right">
                 <a href="" hidden class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target=""></a>
