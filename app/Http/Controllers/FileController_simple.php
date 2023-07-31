@@ -62,7 +62,12 @@ class FileController_simple extends Controller
                                 ->orderByDesc('file_id')
                                 ->get();
 
-        $shops = User::select('shop_name')->distinct()->get();
+        $shops = Invoice::select('invoices.user_id as user_id', 'users.shop_name')
+                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                ->distinct()
+                                ->get();
+
+        //$shops = User::select('shop_name')->distinct()->get();
         return view('admin.file_data_table_simple', compact('data', 'title', 'shops', 'services'));
     }
 
@@ -393,8 +398,16 @@ class FileController_simple extends Controller
                                 ->distinct()
                                 ->orderByDesc('file_id')
                                 ->get();
+        $shops = Invoice::select('invoices.user_id as user_id', 'users.shop_name')
+                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                ->where('invoices.status', '=', 'Completed')
+                                ->whereIn('invoices.user_id', function($query) use ($shop_name){
+                                    $query->select('id')->from('users')->where('shop_name', $shop_name);
+                                })
+                                ->distinct()
+                                ->get();
 
-        return view('admin.movement_data_table_simple', compact('title', 'total_sum', 'data', 'services'));
+        return view('admin.movement_data_table_simple', compact('title', 'total_sum', 'data', 'shops', 'services'));
     }
 
     public function MovementDataTableAll_simple(Request $request)
@@ -417,7 +430,11 @@ class FileController_simple extends Controller
                                 ->distinct()
                                 ->orderByDesc('file_id')
                                 ->get();
-        return view('admin.movement_data_table_all_simple', compact('title', 'data', 'services'));
+        $shops = Invoice::select('invoices.user_id as user_id', 'users.shop_name')
+                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                ->distinct()
+                                ->get();
+        return view('admin.movement_data_table_all_simple', compact('title', 'data', 'shops', 'services'));
     }
 
     public function FileStore(Request $request)
