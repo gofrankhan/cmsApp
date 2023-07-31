@@ -25,25 +25,27 @@
                 <a href="" hidden class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target=""></a>
             </div>
         </p>
-        <div style="padding:15px" class="col-md-2">
-            <select style="width:200px" id="select_service_type">
-                <option value="" selected>---Filter Service Type---</option>
-                @foreach($services as $service)
-                    @if($service->service != "")
-                    <option value="{{ $service->service }}">{{ $service->service }}</option>
-                    @endif
-                @endforeach
-            </select>
-        </div>
-        <div style="padding:15px" class="col-md-2">
-            <select style="width:200px" id="select_shop_name">
-                <option value="" selected>---Select Shop Name---</option>
-                @foreach($shops as $shop)
-                    @if($shop->shop_name != "")
-                    <option value="{{ $shop->shop_name }}">{{ $shop->shop_name }}</option>
-                    @endif
-                @endforeach
-            </select>
+        <div class="row">
+            <div style="padding:15px" class="col-md-2">
+                <select style="width:200px" id="select_service_type">
+                    <option value="" selected>---Filter Service Type---</option>
+                    @foreach($services as $service)
+                        @if($service->service != "")
+                        <option value="{{ $service->service }}">{{ $service->service }}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+            <div style="padding:15px" class="col-md-2">
+                <select style="width:200px" id="select_shop_name">
+                    <option value="" selected>---Select Shop Name---</option>
+                    @foreach($shops as $shop)
+                        @if($shop->shop_name != "")
+                        <option value="{{ $shop->shop_name }}">{{ $shop->shop_name }}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
         </div>
         <table data-page-length='50' id="movement_datatable_all_simple" class="table table-bordered movement_datatable_all_simple">
             <thead>
@@ -95,17 +97,18 @@
                     var row = $("<tr>");
                     // Create table cells and populate them with data
                     var cell1 = $("<td style='width:10%'>").text(item.file_id);
-                    var cell2 = $("<td style='width:25%'>").text(item.customer);
-                    var cell3 = $("<td style='width:25%'>").text(item.service);
-                    var cell4 = $("<td style='width:25%'>").text(item.description);
-                    var cell5 = $("<td style='width:0%'>").text("");
-                    var cell6 = $("<td style='width:15% text-align:left'>").text(item.amount);
+                    var cell2 = $("<td style='width:20%'>").text(item.customer);
+                    var cell3 = $("<td style='width:20%'>").text(item.service);
+                    var cell4 = $("<td style='width:20%'>").text(item.description);
+                    var cell5 = $("<td style='width:20%'>").text(item.shop);
+                    var cell6 = $("<td style='width:0%'>").text("");
+                    var cell7 = $("<td style='width:15% text-align:left'>").text(item.amount);
                     
                         
                     // Add more cells as needed
 
                     // Append the cells to the row
-                    row.append(cell1, cell2, cell3, cell4, cell5, cell6);
+                    row.append(cell1, cell2, cell3, cell4, cell5, cell6, cell7);
                     // Append the row to the table body
                     $("#tableBody").append(row);
                 });

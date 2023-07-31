@@ -24,25 +24,27 @@
                 </ol>
             </div>
         </div>
-        <div style="padding:15px" class="col-md-2">
-            <select style="width:200px" id="select_service_type">
-                <option value="" selected>---Filter Service Type---</option>
-                @foreach($services as $service)
-                    @if($service->service != "")
-                    <option value="{{ $service->service }}">{{ $service->service }}</option>
-                    @endif
-                @endforeach
-            </select>
-        </div>
-        <div style="padding:15px" class="col-md-2">
-            <select style="width:200px" id="select_shop_name">
-                <option value="" selected>---Select Shop Name---</option>
-                @foreach($shops as $shop)
-                    @if($shop->shop_name != "")
-                    <option value="{{ $shop->shop_name }}">{{ $shop->shop_name }}</option>
-                    @endif
-                @endforeach
-            </select>
+        <div class="row">
+            <div style="padding:15px" class="col-md-2">
+                <select style="width:200px" id="select_service_type">
+                    <option value="" selected>---Filter Service Type---</option>
+                    @foreach($services as $service)
+                        @if($service->service != "")
+                        <option value="{{ $service->service }}">{{ $service->service }}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+            <div style="padding:15px" class="col-md-2">
+                <select style="width:200px" id="select_shop_name">
+                    <option value="" selected>---Select Shop Name---</option>
+                    @foreach($shops as $shop)
+                        @if($shop->shop_name != "")
+                        <option value="{{ $shop->shop_name }}">{{ $shop->shop_name }}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
         </div>
         <p class="card-title-desc" >
             <div align="right">
