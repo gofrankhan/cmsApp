@@ -167,6 +167,10 @@ class FileController_simple extends Controller
             $query->where('services.service', $request->service_type);
         }
 
+        if(!empty($request->shop_name)) {
+            $query->where('users.shop_name', $request->shop_name);
+        }
+
         $data = $query->get();
         Debugbar::addMessage($data);
         return response()->json($data);

@@ -86,10 +86,13 @@
     function FilterServiceType(){
 
         var serviceType = $('#select_service_type').val();
+        var shopName = $('#select_shop_name').val();
+
+        alert(shopName);
         $.ajax({
             url: "{{ route('movement.filter.service') }}",
             type: "GET",
-            data: { service_type : serviceType, all_data : true },
+            data: { service_type : serviceType, shop_name : shopName,  all_data : true },
             success: function(data) {
             $("#tableBody").empty();
             // Loop through the response and add new rows to the table
@@ -118,6 +121,9 @@
 
 
     $("#select_service_type").on("change", function() {
+        FilterServiceType();
+    });
+    $("#select_shop_name").on("change", function() {
         FilterServiceType();
     });
 </script>
