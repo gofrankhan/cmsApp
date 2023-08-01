@@ -144,7 +144,7 @@ class FileController_simple extends Controller
                             ->where('invoices.lawyer_id', $user_id)
                             ->orderByDesc('file_id');
             
-        } else if (!$request->all_data){
+        }else if ($request->all_data == 'false'){
             $query = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service', 'users.shop_name as shop')
                             ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                             ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
@@ -154,7 +154,7 @@ class FileController_simple extends Controller
                                 $query->select('id')->from('users')->where('shop_name', $shop_name);
                             })
                             ->orderByDesc('file_id');
-        }else if($request->all_data){
+        }else if($request->all_data == 'true'){
             $query = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service', 'users.shop_name as shop')
                             ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                             ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
@@ -172,7 +172,6 @@ class FileController_simple extends Controller
         }
 
         $data = $query->get();
-        Debugbar::addMessage($data);
         return response()->json($data);
     }
 

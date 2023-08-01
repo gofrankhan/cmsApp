@@ -54,7 +54,7 @@
                 </tr>
             </thead>
         
-            <tbody>
+            <tbody id="tableBody">
                 @foreach($data as $r)
                 <tr>
                     <td style="width:10%">{{$r->file_id}}</td>
@@ -94,14 +94,15 @@
                     var cell2 = $("<td style='width:20%'>").text(item.customer);
                     var cell3 = $("<td style='width:20%'>").text(item.service);
                     var cell4 = $("<td style='width:20%'>").text(item.description);
-                    var cell4 = $("<td style='width:20%'>").text(item.shop);
-                    var cell5 = $("<td style='width:15%'>").text(item.amount);
+                    var cell5 = $("<td style='width:20%'>").text(item.shop);
+                    var cell6 = $("<td style='width:0%'>").text("");
+                    var cell7 = $("<td style='width:15%'>").text(item.amount);
                     
                         
                     // Add more cells as needed
 
                     // Append the cells to the row
-                    row.append(cell1, cell2, cell3, cell4, cell5);
+                    row.append(cell1, cell2, cell3, cell4, cell5, cell6, cell7);
                     // Append the row to the table body
                     $("#tableBody").append(row);
                 });

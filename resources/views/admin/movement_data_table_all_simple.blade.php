@@ -87,8 +87,6 @@
 
         var serviceType = $('#select_service_type').val();
         var shopName = $('#select_shop_name').val();
-
-        alert(shopName);
         $.ajax({
             url: "{{ route('movement.filter.service') }}",
             type: "GET",
