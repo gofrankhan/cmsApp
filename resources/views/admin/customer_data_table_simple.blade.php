@@ -167,6 +167,7 @@
                 @endforeach
             </tbody>
         </table>
+        Showing {{($data->currentPage()-1)* $data->perPage()+($data->total() ? 1:0)}} to {{($data->currentPage()-1)*$data->perPage()+count($data)}}  of  {{$data->total()}}  Results
         <div id="pagination" class="d-flex justify-content-center">
             {!! $data->links() !!}
         </div>
