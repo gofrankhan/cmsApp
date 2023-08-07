@@ -40,8 +40,8 @@ class FileController_simple extends Controller
             $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
                                 ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                                 ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
-                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
-                                ->where('invoices.user_id', $user_id)
+                                ->leftjoin('users', 'invoices.lawyer_id', '=', 'users.id')
+                                ->where('invoices.lawyer_id', $user_id)
                                 ->orderByDesc('file_id')
                                 ->paginate(50);
         }
@@ -99,8 +99,8 @@ class FileController_simple extends Controller
             $query = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
                                 ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                                 ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
-                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
-                                ->where('invoices.user_id', $user_id)
+                                ->leftjoin('users', 'invoices.lawyer_id', '=', 'users.id')
+                                ->where('invoices.lawyer_id', $user_id)
                                 ->orderByDesc('file_id');
         }
         $searchText = $request->search_text;
@@ -139,7 +139,7 @@ class FileController_simple extends Controller
             $query = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.lawyer_price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"), 'users.shop_name as shop', 'services.service')
                             ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                             ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
-                            ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                            ->leftjoin('users', 'invoices.lawyer_id', '=', 'users.id')
                             ->where('invoices.status', '=', 'Completed')
                             ->where('invoices.lawyer_id', $user_id)
                             ->orderByDesc('file_id');
@@ -360,7 +360,7 @@ class FileController_simple extends Controller
             $data = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.lawyer_price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'services.service', 'users.shop_name as shop')
                             ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
                             ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
-                            ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                            ->leftjoin('users', 'invoices.lawyer_id', '=', 'users.id')
                             ->where('invoices.status', '=', 'Completed')
                             ->where('invoices.lawyer_id', $user_id)
                             ->orderByDesc('file_id')
@@ -392,7 +392,16 @@ class FileController_simple extends Controller
                 })->sum('invoices.price');
         }
 
-        $services = Invoice::select('invoices.service_id as service_id', 'services.service')
+        if($user_type == 'lawyer'){
+            $services = Invoice::select('invoices.service_id as service_id', 'services.service')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->where('invoices.status', '=', 'Completed')
+                                ->where('invoices.lawyer_id', $user_id)
+                                ->distinct()
+                                ->orderByDesc('file_id')
+                                ->get();
+        }else{
+            $services = Invoice::select('invoices.service_id as service_id', 'services.service')
                                 ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
                                 ->where('invoices.status', '=', 'Completed')
                                 ->whereIn('invoices.user_id', function($query) use ($shop_name){
@@ -401,6 +410,8 @@ class FileController_simple extends Controller
                                 ->distinct()
                                 ->orderByDesc('file_id')
                                 ->get();
+        }
+        
         $shops = Invoice::select('invoices.user_id as user_id', 'users.shop_name')
                                 ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
                                 ->where('invoices.status', '=', 'Completed')
