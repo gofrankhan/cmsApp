@@ -65,6 +65,18 @@
                         Prints <i class="mdi mdi-chevron-down"></i>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @if($files[0]->service == 'IMMIGRAZIONE' || $files[0]->service == 'FLUSSI 2023' )
+                        <a class="dropdown-item" href="{{ route ('flussi1', $files[0]->customer_id)}}" target="_blank">Privacy e GDPR</a>
+                        <a class="dropdown-item" href="{{ route ('flussi2', $files[0]->customer_id)}}" target="_blank">Mandato Flussi</a>
+                        <a class="dropdown-item" href="{{ route ('flussi3', $files[0]->customer_id)}}" target="_blank">Delega Domanda Flussi</a>
+                        <a class="dropdown-item" href="{{ route ('flussi4', $files[0]->customer_id)}}" target="_blank">Impegno Ospitalità lavoratore Flussi</a>
+                        <a class="dropdown-item" href="{{ route ('flussi5', $files[0]->customer_id)}}" target="_blank">Impegno certificato idoneita Alloggiativa</a>
+                        <a class="dropdown-item" href="{{ route ('flussi6', $files[0]->customer_id)}}" target="_blank">Impegno DURC</a>
+                        <a class="dropdown-item" href="{{ route ('flussi7', $files[0]->customer_id)}}" target="_blank">Impegno Documentoo Asseverazione</a>
+                        <a class="dropdown-item" href="{{ route ('flussi8', $files[0]->customer_id)}}" target="_blank">Autodichiarazione previdenziale e Fisacale</a>
+                        <a class="dropdown-item" href="{{ route ('flussi9', $files[0]->customer_id)}}" target="_blank">Proposta del Contratto di soggiorno</a>
+                        <a class="dropdown-item" href="{{ route ('flussi10', $files[0]->customer_id)}}" target="_blank">Dichiarazione Centri per l'impiego</a>
+                        @endif
                         @if($files[0]->service == 'ARCHIVIO DSU' || $files[0]->service == 'ARCHIVIO DSU CORRENTE' )
                         <a class="dropdown-item" href="{{ route ('delega.dsu', $files[0]->customer_id)}}" target="_blank">DELEGA DSU</a>
                         @endif

@@ -149,6 +149,16 @@ Route::middleware('auth' , 'admin')->group(function(){
 });
 
 Route::middleware('auth' , 'admin')->group(function(){
+    Route::get('/flussi1/pdf', [PDFController::class, 'flussi1'])->name('flussi1');
+    Route::get('/flussi2/pdf', [PDFController::class, 'flussi2'])->name('flussi2');
+    Route::get('/flussi3/pdf', [PDFController::class, 'flussi3'])->name('flussi3');
+    Route::get('/flussi4/pdf', [PDFController::class, 'flussi4'])->name('flussi4');
+    Route::get('/flussi5/pdf', [PDFController::class, 'flussi5'])->name('flussi5');
+    Route::get('/flussi6/pdf', [PDFController::class, 'flussi6'])->name('flussi6');
+    Route::get('/flussi7/pdf', [PDFController::class, 'flussi7'])->name('flussi7');
+    Route::get('/flussi8/pdf', [PDFController::class, 'flussi8'])->name('flussi8');
+    Route::get('/flussi9/pdf', [PDFController::class, 'flussi9'])->name('flussi9');
+    Route::get('/flussi10/pdf', [PDFController::class, 'flussi10'])->name('flussi10');
     Route::get('/generate/pdf', [PDFController::class, 'generatePDF'])->name('generate.pdf');
     Route::get('/delega/dsu/{id}', [PDFController::class, 'DelegaDSU_PDF'])->name('delega.dsu');
     Route::get('/delega/730/{id}', [PDFController::class, 'Delega730_PDF'])->name('delega.730');
