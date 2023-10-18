@@ -91,7 +91,7 @@
                         Prints <i class="mdi mdi-chevron-down"></i>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        @if($files[0]->service == 'IMMIGRAZIONE' || $files[0]->service == 'FLUSSI 2023' )
+                        @if($files[0]->service == 'FLUSSI 2023' )
                         <a class="dropdown-item" href="{{ route ('flussi1', $files[0]->id)}}" target="_blank">Privacy e GDPR</a>
                         <a class="dropdown-item" href="{{ route ('flussi2', $files[0]->id)}}" target="_blank">Mandato Flussi</a>
                         <a class="dropdown-item" href="{{ route ('flussi3', $files[0]->id)}}" target="_blank">Delega Domanda Flussi</a>
@@ -361,8 +361,8 @@
                 <div class="col">
                     <div class="row mb-3">
                         <div class="col-sm-12">
-                            <label for="partita_iva" class="col-form-label">Partita Iva</label>
-                            <input class="form-control" name="partita_iva" type="text" id="partita_iva" value="@if(!empty($pdfdata['partita_iva'][0]->field_value)){{$pdfdata['partita_iva'][0]->field_value}}@endif">
+                            <label for="flussi_partita_iva" class="col-form-label">Partita Iva</label>
+                            <input class="form-control" name="flussi_partita_iva" type="text" id="flussi_partita_iva" value="@if(!empty($pdfdata['flussi_partita_iva'][0]->field_value)){{$pdfdata['flussi_partita_iva'][0]->field_value}}@endif">
                         </div>
                     </div>
                 </div>
