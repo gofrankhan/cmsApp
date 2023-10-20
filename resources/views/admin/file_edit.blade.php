@@ -703,8 +703,8 @@
                 <div class="col">
                     <div class="row mb-3">
                         <div class="col-sm-12">
-                            <label for="partita_iva" class="col-form-label">Partita IVA</label>
-                            <input class="form-control" name="partita_iva" type="text" id="partita_iva" value="@if(!empty($pdfdata['partita_iva'][0]->field_value)){{$pdfdata['partita_iva'][0]->field_value}}@endif">
+                            <label for="flussi_partita_iva" class="col-form-label">Partita IVA</label>
+                            <input class="form-control" name="flussi_partita_iva" type="text" id="flussi_partita_iva" value="@if(!empty($pdfdata['flussi_partita_iva'][0]->field_value)){{$pdfdata['flussi_partita_iva'][0]->field_value}}@endif">
                         </div>
                     </div>
                 </div>

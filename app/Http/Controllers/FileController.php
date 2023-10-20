@@ -613,16 +613,16 @@ class FileController extends Controller
         }
 
         //Flussi 2023
-        if($request->partita_iva != ""){
-            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'partita_iva');
+        if($request->flussi_partita_iva != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'flussi_partita_iva');
             if(($recored_exist->count()> 0)){
-                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'partita_iva')
-                        ->update(['field_value' => $request->partita_iva]);
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'flussi_partita_iva')
+                        ->update(['field_value' => $request->flussi_partita_iva]);
             }else{
                 $pdfdata = new Pdfdata();
                 $pdfdata->file_id = $request->file_id_no;
-                $pdfdata->field_name = "partita_iva";
-                $pdfdata->field_value= $request->partita_iva;
+                $pdfdata->field_name = "flussi_partita_iva";
+                $pdfdata->field_value= $request->flussi_partita_iva;
                 $pdfdata->save();
             }
         }
