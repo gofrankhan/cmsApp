@@ -14,12 +14,10 @@ p, table {
 </head>
 <body>
     <div class="abcdx"> 
-        <p>CHAKRBAORTY NIBASH<br>
-        @if(!empty($pdfdata['indirizzo_sede'][0]->field_value)){{$pdfdata['indirizzo_sede'][0]->field_value}}@endif<br>
-        @if(!empty($pdfdata['cap_sede'][0]->field_value)){{$pdfdata['cap_sede'][0]->field_value}}@endif - 
-        @if(!empty($pdfdata['citta_sede'][0]->field_value)){{$pdfdata['citta_sede'][0]->field_value}}@endif 
-        (@if(!empty($pdfdata['provincia_sede'][0]->field_value)){{$pdfdata['provincia_sede'][0]->field_value}}@endif)<br>
-        @if(!empty($pdfdata['flussi_partita_iva'][0]->field_value)){{$pdfdata['flussi_partita_iva'][0]->field_value}}@endif<br>
+        <p>{{ $customer->lastname." ".$customer->firstname }}<br>
+        {{ $customer->addressline1 }}<br>
+        {{ $customer->postcode }}, {{ $customer->city }} {{ $customer->region }}<br>
+        {{ $customer->taxid }}<br>
         </p>
 
         <p align="right" padding="0px">Spett.le,<br>
@@ -32,7 +30,7 @@ p, table {
 
         <table>
             <tr>
-                <td text-align="justify">Il   sottoscritto   {{ $customer->firstname." ".$customer->lastname }}   nato   in   {{ $customer->citizenship }}  
+                <td text-align="justify">Il   sottoscritto   {{ $customer->firstname." ".$customer->lastname }}   nato   in   {{ $customer->pob }} 
                         @php
                         if($customer->dateofbirth == '0000-00-00')
                         {
