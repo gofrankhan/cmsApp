@@ -94,8 +94,8 @@ p, table {
         <br>
         <table>
             <tr>
-                <td>Luogo e data {{ $customer->city }} __/__/__</td>
-                <td style="width:255px"> </td>
+                <td>Luogo e data {{ $customer->city }} ___/___/______</td>
+                <td style="width:240px"> </td>
                 <td align="right">Firma _________________</td>
             </tr>
         </table>
