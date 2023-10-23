@@ -9,7 +9,7 @@ p, table {
   font-size: 16px;
 }
 </style>
-    <title>Impegno Ospitalità lavoratore Flussi</title>
+    <title>Autodichiarazione previdenziale e Fisacale</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
@@ -25,12 +25,12 @@ p, table {
         Prefettura di RM<br>
         </p>
         
-        <h5 align="center"><b>DICHIARAZIONE DI IMPEGNO</b></h5>
-        <h5 align="center"><b>A FORNIRE LA CESSIONE DI FABBRICATO</b></h5>
+        <h5 align="center"><b>DICHIARAZIONE SOSTITUTIVA DI CERTIFICAZIONE</b></h5>
+        <h5 align="center"><b>(Art. 46 D.P .R. n. 445 del 28 dicembre 2000)</b></h5>
 
         <table>
             <tr>
-                <td text-align="justify">Il   sottoscritto   {{ $customer->firstname." ".$customer->lastname }}   nato   in   {{ $customer->pob }} 
+                <td text-align="justify">Il   sottoscritto   {{ $customer->firstname." ".$customer->lastname }}   nato   in   {{ $customer->pob }}  
                         @php
                         if($customer->dateofbirth == '0000-00-00')
                         {
@@ -50,21 +50,45 @@ p, table {
                     e sede legale @if(!empty($pdfdata['indirizzo_sede'][0]->field_value)){{$pdfdata['indirizzo_sede'][0]->field_value}}@endif
                     in @if(!empty($pdfdata['citta_sede'][0]->field_value)){{$pdfdata['citta_sede'][0]->field_value}}@endif 
                     (@if(!empty($pdfdata['provincia_sede'][0]->field_value)){{$pdfdata['provincia_sede'][0]->field_value}}@endif) 
-                    e @if(!empty($pdfdata['cap_sede'][0]->field_value)){{$pdfdata['cap_sede'][0]->field_value}}@endif
+                    e CAP @if(!empty($pdfdata['cap_sede'][0]->field_value)){{$pdfdata['cap_sede'][0]->field_value}}@endif
                 </td>
             </tr>
         </table>
         <br><br>
-        <h5 align="center"><b>SI IMPEGNA</b></h5>
+        <table>
+            <tr>
+                <td text-align="justify">Sotto la sua personale responsabilità ed a piena conoscenza della responsabilità
+                            penale prevista per le dichiarazioni false dall’art.76 del D.P.R. 445/2000 e dalle
+                            disposizioni del Codice Penale e dalle leggi speciali in materia
+                </td>
+            </tr>
+        </table>
+        <br><br>
+        <h5 align="center"><b>DICHIARA</b></h5>
         <br>
         <table>
             <tr>
-                <td text-align="justify">ad ospitare presso il proprio domicilio sito in
-                    @if(!empty($pdfdata['citta_lav'][0]->field_value)){{$pdfdata['citta_lav'][0]->field_value}}@endif
-                    nella provincia di @if(!empty($pdfdata['provincia_lav'][0]->field_value)){{$pdfdata['provincia_lav'][0]->field_value}}@endif
-                    all'indirizzo @if(!empty($pdfdata['indirizzo_lav'][0]->field_value)){{$pdfdata['indirizzo_lav'][0]->field_value}}@endif, 
-                    @if(!empty($pdfdata['civico_lav'][0]->field_value)){{$pdfdata['civico_lav'][0]->field_value}}@endif
-                    e CAP @if(!empty($pdfdata['cap_lav'][0]->field_value)){{$pdfdata['cap_lav'][0]->field_value}}@endif
+                <td text-align="justify">- che la sede legale dell'impresa è la seguente:
+                </td>
+            </tr>
+        </table>
+
+        <table style="width:100%">
+            <tr>
+                <td colspan="3" style="border: 1px solid black;"><b>SEDE LEGALE</b></td>
+            </tr>
+            <tr>
+                <td colspan="3" style="border: 1px solid black;">Indirizzo : @if(!empty($pdfdata['indirizzo_sede'][0]->field_value)){{$pdfdata['indirizzo_sede'][0]->field_value}}@endif</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black;">
+                    Citta : @if(!empty($pdfdata['citta_sede'][0]->field_value)){{$pdfdata['citta_sede'][0]->field_value}}@endif 
+                </td>
+                <td style="border: 1px solid black;">
+                    Provincia : @if(!empty($pdfdata['provincia_sede'][0]->field_value)){{$pdfdata['provincia_sede'][0]->field_value}}@endif
+                </td>
+                <td style="border: 1px solid black;">
+                    CAP : @if(!empty($pdfdata['cap_sede'][0]->field_value)){{$pdfdata['cap_sede'][0]->field_value}}@endif
                 </td>
             </tr>
         </table>
@@ -72,50 +96,42 @@ p, table {
         <br>
         <table>
             <tr>
-                <td text-align="justify">Il/la cittadino/a extracomunitario/a Signor/ra
+                <td text-align="justify">- che la posizione fiscale e previdenziale sono le seguenti :
                 </td>
             </tr>
         </table>
         <table style="width:100%">
             <tr>
-                <td colspan="6" style="border: 1px solid black;"><b>GENERALITA' DEL LAVORATORE</b></td>
+                <td colspan="2" style="border: 1px solid black;"><b>POSIZIONI FISCALI E PREVIDENZIALI</b></td>
             </tr>
             <tr>
                 <td style="border: 1px solid black;">
-                    Cognome 
+                    Matricola INPS 
                 </td>
                 <td style="border: 1px solid black;">
-                    <b>@if(!empty($pdfdata['cognome'][0]->field_value)){{$pdfdata['cognome'][0]->field_value}}@endif</b>
-                </td>
-                <td style="border: 1px solid black;">
-                    Nome
-                </td>
-                <td colspan="3" style="border: 1px solid black;">
-                    <b>@if(!empty($pdfdata['nome'][0]->field_value)){{$pdfdata['nome'][0]->field_value}}@endif</b>
+                    <b>@if(!empty($pdfdata['matricola_inps'][0]->field_value)){{$pdfdata['matricola_inps'][0]->field_value}}@endif</b>
                 </td>
             </tr>
             <tr>
                 <td style="border: 1px solid black;">
-                    Luogo di Nascita
+                    Codice Azienda INAIL
                 </td>
-                <td style="border: 1px solid black;">
-                    <b>@if(!empty($pdfdata['luogo_nascita'][0]->field_value)){{$pdfdata['luogo_nascita'][0]->field_value}}@endif</b>
-                </td>
-                <td style="border: 1px solid black;">
-                    Data di Nascita
-                </td>
-                <td style="border: 1px solid black;">
-                    <b>@if(!empty($pdfdata['data_nascita'][0]->field_value)){{$pdfdata['data_nascita'][0]->field_value}}@endif</b>
-                </td>
-                <td style="border: 1px solid black;">
-                    Sesso
-                </td>
-                <td style="border: 1px solid black;">
-                    <b>@if(!empty($pdfdata['sesso'][0]->field_value)){{$pdfdata['sesso'][0]->field_value}}@endif</b>
+                <td  style="border: 1px solid black;">
+                    <b>@if(!empty($pdfdata['codice_inail'][0]->field_value)){{$pdfdata['codice_inail'][0]->field_value}}@endif</b>
                 </td>
             </tr>
         </table>
         <br>
+        <table>
+            <tr>
+                <td>
+                <i>Dichiara altresì di essere informato, ai sensi e per gli effetti di cui all'art.10 della
+                legge 675/96, che i dati personali raccolti saranno trattati, anche con strumenti
+                informatici, esclusivamente nell'ambito del procedimento per il quale la presente
+                dichiarazione viene resa</i><br>
+                </td>
+            </tr>
+        </table>
         <br>
         <table>
             <tr>

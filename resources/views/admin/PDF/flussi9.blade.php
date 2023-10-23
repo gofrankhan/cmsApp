@@ -50,7 +50,7 @@ p, table {
                     e sede legale @if(!empty($pdfdata['indirizzo_sede'][0]->field_value)){{$pdfdata['indirizzo_sede'][0]->field_value}}@endif
                     in @if(!empty($pdfdata['citta_sede'][0]->field_value)){{$pdfdata['citta_sede'][0]->field_value}}@endif 
                     (@if(!empty($pdfdata['provincia_sede'][0]->field_value)){{$pdfdata['provincia_sede'][0]->field_value}}@endif) 
-                    e @if(!empty($pdfdata['cap_sede'][0]->field_value)){{$pdfdata['cap_sede'][0]->field_value}}@endif
+                    e CAP @if(!empty($pdfdata['cap_sede'][0]->field_value)){{$pdfdata['cap_sede'][0]->field_value}}@endif
                 </td>
             </tr>
         </table>
@@ -148,7 +148,7 @@ p, table {
         <br>
         <table>
             <tr>
-                <td>Luogo e data @if(!empty($pdfdata['citta_sede'][0]->field_value)){{$pdfdata['citta_sede'][0]->field_value}}@endif __/__/__</td>
+                <td>Luogo e data {{ $customer->city }} __/__/__</td>
                 <td style="width:255px"> </td>
                 <td align="right">Firma _________________</td>
             </tr>

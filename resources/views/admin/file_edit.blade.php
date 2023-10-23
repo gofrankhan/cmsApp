@@ -219,7 +219,6 @@
                 </div>
             </div>
         </div>
-        @if($is_admin)
         <form action="" id="form1">
              @csrf
             <div class="row">
@@ -796,7 +795,6 @@
             </div>
             @endif
         </form>
-        @endif
         <br><br><br>
         <div class="row">
             <div class="col">
