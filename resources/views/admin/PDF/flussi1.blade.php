@@ -33,7 +33,7 @@ p, table {
                 Titolare del trattamento e responsabile della protezione dei dati personali - Titolare del trattamento è
                 L'ASSOCIAZIONE "UCI ZONALE TUSCOLANO STILICONE" in
                 persona del legale rappresentante pro tempore (di seguito indicato anche come "L'ASSOCIAZIONE") con sede
-                XXXXXXXXXXXXXX XXXXXXXxXXxxxxxxx xxxxxx x xxxxxxxxx xxxxx xxxx xxxx xxxxx
+                XXXXXXXXXXXXXX
                 <br>
                 L'ASSOCIAZIONE ha nominato un responsabile della protezione dei dati personali (RPD ovvero, data protection officer, DPO) nella 
                 figura del legale rappresentante pro tempore a cui competono tutti gli obblighi di legge.
@@ -129,6 +129,7 @@ p, table {
                 <td align="right">Firma _________________</td>
             </tr>
         </table>
+        <br>
         <h5 align="center">CONSENSO AL TRATTAMENTO DEI DATI PERSONALI</h5>
         @php
             if($customer->dateofbirth == '0000-00-00')
