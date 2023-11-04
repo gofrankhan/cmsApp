@@ -148,7 +148,7 @@ Route::middleware('auth' , 'admin')->group(function(){
     Route::get('/card/info', [DashboardController::class, 'CardInfo'])->name('card.info');
 });
 
-Route::middleware('auth' , 'admin')->group(function(){
+Route::middleware('auth')->group(function(){
     Route::get('/flussi1/{id}', [PDFController::class, 'flussi1'])->name('flussi1');
     Route::get('/flussi2/{id}', [PDFController::class, 'flussi2'])->name('flussi2');
     Route::get('/flussi3/{id}', [PDFController::class, 'flussi3'])->name('flussi3');

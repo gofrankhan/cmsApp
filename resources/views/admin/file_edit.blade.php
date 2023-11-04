@@ -213,7 +213,7 @@
                         @if($is_admin)
                         <button type="submit" class="form-control btn btn-primary" name="update_btn" id="update_btn">Update</button>
                         @else
-                        <button type="submit" class="form-control btn btn-primary" name="update_btn" id="update_btn" disabled>Update</button>
+                        <button type="submit" class="form-control btn btn-primary" name="update_btn" id="update_btn">Update</button>
                         @endif
                     </div>
                 </div>
