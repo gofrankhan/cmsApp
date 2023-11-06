@@ -113,9 +113,6 @@
                         <a class="dropdown-item" href="{{ route ('auto.red.imp', $files[0]->id)}}" target="_blank">Autocertificazione redditi impresa</a>
                         <a class="dropdown-item" href="{{ route ('del.tra.dis', $files[0]->id)}}" target="_blank">Delega Trasmissione Dichiarazione dei Redditi</a>
                         @endif
-                        <a class="dropdown-item" href="#">Anagrafica Cliente</a>
-                        <a class="dropdown-item" href="#">Lettera Di Benvenuto</a>
-                        <a class="dropdown-item" href="#">Ricevuta di Pagamento</a>
                     </div>
                 </div>
             </div> 

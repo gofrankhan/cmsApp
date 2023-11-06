@@ -32,8 +32,8 @@ p, table {
                 <td style="text-align:justify"><b>A tal proposito Le comunichiamo quanto segue:</b><br>
                 Titolare del trattamento e responsabile della protezione dei dati personali - Titolare del trattamento è
                 L'ASSOCIAZIONE "UCI ZONALE TUSCOLANO STILICONE" in
-                persona del legale rappresentante pro tempore (di seguito indicato anche come "L'ASSOCIAZIONE") con sede
-                XXXXXXXXXXXXXX
+                persona del legale rappresentante pro tempore (di seguito indicato anche come "L'ASSOCIAZIONE") con sede 
+                VIA FLAVIO STILICONE 11, 00175 ROMA
                 <br>
                 L'ASSOCIAZIONE ha nominato un responsabile della protezione dei dati personali (RPD ovvero, data protection officer, DPO) nella 
                 figura del legale rappresentante pro tempore a cui competono tutti gli obblighi di legge.

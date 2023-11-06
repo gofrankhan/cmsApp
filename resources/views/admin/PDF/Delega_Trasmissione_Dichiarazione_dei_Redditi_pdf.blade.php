@@ -32,7 +32,7 @@ table.small9, td, tr {
 <body>
     <div class="nwew23">   
         <div align="center">
-            <img  src="{{ public_path('backend/assets/images/PCPoint_Logo.png') }}" height="100" width="500"  alt="">
+            <img  src="{{ base_path('backend/assets/images/PCPoint_Logo.png') }}" height="100" width="500"  alt="">
         </div>  
         </div>
         <p align="center" style="font-size:12px;">VIA FLAVIO STILCIONE 11, 00175, ROMA (RM)<br>
