@@ -15,7 +15,7 @@ p, table {
 <body>
     <div class="abcdx">
         <div align="center" padding="0px">
-            <img  src="{{ asset('backend/assets/images/PCPoint_Logo.png') }}" height="100" width="500" alt="">
+            <img  src="{{asset('backend/assets/images/PCPoint_Logo.png')}}" height="100" width="500" alt="">
         </div>  
         <p align="center">VIA FLAVIO STILCIONE 11, 00175, ROMA (RM)<br>
         Tel- 06 8788 0399, email- <u>cafpcpoint@yahoo.com</u>, pec- <u>cafpcpoint@pec.it</u></p><br>
