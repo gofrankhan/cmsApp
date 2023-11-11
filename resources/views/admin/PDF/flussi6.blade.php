@@ -22,7 +22,7 @@ p, table {
 
         <p align="right" padding="0px">Spett.le,<br>
         Sportello Unico Immigrazione<br>
-        Prefettura di RM<br>
+        Prefettura di {{ $customer->region }}<br>
         </p>
         
         <h6 align="center"><b>DICHIARAZIONE DI IMPEGNO</b></h6>

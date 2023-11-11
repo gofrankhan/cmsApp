@@ -22,7 +22,7 @@ p, table {
 
         <p align="right" padding="0px">Spett.le,<br>
         Sportello Unico Immigrazione<br>
-        Prefettura di RM<br>
+        Prefettura di {{ $customer->region }}<br>
         </p>
         
         <h5 align="center"><b>PROPOSTA</b></h5>
@@ -142,7 +142,7 @@ p, table {
                     L'inquadramento sarà con la qualifica di operaio/dipendente nel livello @if(!empty($pdfdata['livello_categoria'][0]->field_value)){{$pdfdata['livello_categoria'][0]->field_value}}@endif 
                     e con un orario settimanale di @if(!empty($pdfdata['orario_settimanale'][0]->field_value)){{$pdfdata['orario_settimanale'][0]->field_value}}@endif<br>
                     Si precisa che il rapporto di lavoro sarà regolato, sia per gli aspetti economici che normativi, dal vigente contratto collettivo di lavoro del settore 
-                    @if(!empty($pdfdata['tempo'][0]->field_value)){{$pdfdata['tempo'][0]->field_value}}@endif<br>
+                    @if(!empty($pdfdata['tipologia_contratto'][0]->field_value)){{$pdfdata['tipologia_contratto'][0]->field_value}}@endif<br>
                 </td>
             </tr>
         </table>

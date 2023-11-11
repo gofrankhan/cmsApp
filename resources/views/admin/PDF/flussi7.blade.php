@@ -22,12 +22,13 @@ p, table {
 
         <p align="right" padding="0px">Spett.le,<br>
         Sportello Unico Immigrazione<br>
-        Prefettura di RM<br>
+        Prefettura di {{ $customer->region }}
         </p>
+        <br>
         
         <h6 align="center"><b>DICHIARAZIONE DI IMPEGNO</b></h6>
-        <h6 align="center"><b>A FORNIRE IL CERTIFICATO DI IDONEITA' ALLOGGIATIVA</b></h6> 
-        <p align="center">EX ART. 44, D.L. n. 73/2022</p>
+        <h6 align="center"><b>A FORNIRE IL DOCUMENTO DI ASSEVERAZIONE</b></h6> 
+        <br>
 
         <table>
             <tr>
