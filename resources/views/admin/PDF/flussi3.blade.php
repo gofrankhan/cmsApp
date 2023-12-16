@@ -113,7 +113,7 @@ p, table {
         in particolare riguardo ai diritti da me riconosciuti dalla legge ex art. 7 D.lgs. 196/2003, acconsento al trattamento dei miei 
         dati personali e sensibili, con le modalità e per le finalità indicate nella informativa stessa, comunque, 
         strettamente connesse e strumentali alla gestione dell'attività di "INVIO DOMANDA FLUSSI IMMIGRATORI" del 
-        L'ASSOCIAZIONE UCI ZONALE TUSCOLANO STILICONE E 
+        L'ASSOCIAZIONE UCI ZONALE TUSCOLANO STILICONE E {{ $user->shop_name}}
         </p>
         <table>
             <tr>
@@ -129,18 +129,18 @@ p, table {
         ("Codice in materia di protezione dei dati personali"), prevede la tutela delle persone e di altri soggetti rispetto 
         al trattamento dei dati personali. Secondo la normativa indicata, tale trattamento sarà improntato ai principi di correttezza, 
         liceità e trasparenza e di tutela della Sua riservatezza e dei Suoi diritti. Ai sensi dell'art.13 d.lgs.196/2003 il 
-        L'ASSOCIAZIONE UCI ZONALE TUSCOLANO STILICONE E  è tenuto a fornirLe alcune informazioni relative all'utilizzo dei dati personali e sensibili 
+        L'ASSOCIAZIONE UCI ZONALE TUSCOLANO STILICONE E {{ $user->shop_name}} è tenuto a fornirLe alcune informazioni relative all'utilizzo dei dati personali e sensibili 
         da Lei forniti o comunque dallo stesso acquisiti anche in futuro, nel corso della durata dei servizi connessi all'attività 
-        del L'ASSOCIAZIONE UCI ZONALE TUSCOLANO STILICONE E. 1. FINALITA' E MODALITA' DEL TRATTAMENTO CUI SONO DESTINATI I DATI. Il trattamento dei dati da Lei 
+        del L'ASSOCIAZIONE UCI ZONALE TUSCOLANO STILICONE E {{ $user->shop_name}}. 1. FINALITA' E MODALITA' DEL TRATTAMENTO CUI SONO DESTINATI I DATI. Il trattamento dei dati da Lei 
         forniti avviene mediante strumenti manuali, informatici e telematici. I dati saranno trattati nel rispetto delle regole di 
         riservatezza e sicurezza previsti dalla legge ed avranno il solo fine di consentire la raccolta dei documenti di supporto 
-        necessaria all'attività professionale da parte del L'ASSOCIAZIONE UCI ZONALE TUSCOLANO STILICONE E . Il trattamento dei dati potrebbe riguardare anche 
+        necessaria all'attività professionale da parte del L'ASSOCIAZIONE UCI ZONALE TUSCOLANO STILICONE E {{ $user->shop_name}}. Il trattamento dei dati potrebbe riguardare anche 
         categorie di dati definiti "sensibili" da Lei forniti. 2. NATURA OBBLIGATORIA DEL CONFERIMENTO DEI DATI E CONSEGUENZE DI UN EVENTUALE RIFIUTO DI RISPONDERE.
         I dati da Lei conferiti hanno natura obbligatoria per poter effettuare le operazioni di cui al punto 1. La mancata accettazione ed 
-        autorizzazione all'utilizzo dei dati comporta l'impossibilità per il L'ASSOCIAZIONE UCI ZONALE TUSCOLANO STILICONE E  di procedere alla fornitura del 
+        autorizzazione all'utilizzo dei dati comporta l'impossibilità per il L'ASSOCIAZIONE UCI ZONALE TUSCOLANO STILICONE E {{ $user->shop_name}} di procedere alla fornitura del 
         servizio. 3. AMBITO DI COMUNICAZIONE E DIFFUSIONE. I Suoi dati potranno essere comunicati al personale dipendente incaricato del
-        trattamento per finalità funzionali all'attività del L'ASSOCIAZIONE UCI ZONALE TUSCOLANO STILICONE E . Si informa, inoltre, che i dati necessari per 
-        l'attività professionale saranno raccolti da aziende connesse alla L'ASSOCIAZIONE UCI ZONALE TUSCOLANO STILICONE E . 4. DIRITTI DELL'INTERESSATO. L'art.7 
+        trattamento per finalità funzionali all'attività del L'ASSOCIAZIONE UCI ZONALE TUSCOLANO STILICONE E {{ $user->shop_name}}. Si informa, inoltre, che i dati necessari per 
+        l'attività professionale saranno raccolti da aziende connesse alla L'ASSOCIAZIONE UCI ZONALE TUSCOLANO STILICONE E {{ $user->shop_name}}. 4. DIRITTI DELL'INTERESSATO. L'art.7 
         del d.lgs.196/2003 Le attribuisce, in quanto soggetto interessato, i seguenti diritti: a) ottenere la conferma dell'esistenza dei 
         Suoi dati personali, anche se non ancora registrati e la loro comunicazione in forma intelligibile. b) l'indicazione dell'origine 
         dei dati personali, della finalità e modalità del loro trattamento; della logica applicata in caso di trattamento effettuato con 
@@ -150,9 +150,9 @@ p, table {
         il blocco dei dati trattati in violazione di legge; l'attestazione che tali operazioni sono state portate a conoscenza degli 
         eventuali soggetti cui i dati sono stati comunicati o diffusi. d) opporsi al trattamento dei Suoi dati personali in presenza di 
         giustificati motivi o nel caso in cui gli stessi siano utilizzati per fini diversi da quelli elencati al punto 1. e) il 
-        L'ASSOCIAZIONE UCI ZONALE TUSCOLANO STILICONE E  non si assume alcuna responsabilità in ordine alla veridicità dei dati personali inseriti e ricevuti 
+        L'ASSOCIAZIONE UCI ZONALE TUSCOLANO STILICONE E {{ $user->shop_name}} non si assume alcuna responsabilità in ordine alla veridicità dei dati personali inseriti e ricevuti 
         dall'interessato che, s'intende, ne rimane responsabile unico. 5. ESTREMI IDENTIFICATIVI DEL TITOLARE E' titolare del trattamento 
-        dei Suoi dati, secondo quanto previsto dal D. Lgs. n. 196 del 2003, il L'ASSOCIAZIONE UCI ZONALE TUSCOLANO STILICONE E . Avendo ricevuto l'informativa 
+        dei Suoi dati, secondo quanto previsto dal D. Lgs. n. 196 del 2003, il L'ASSOCIAZIONE UCI ZONALE TUSCOLANO STILICONE E {{ $user->shop_name}}. Avendo ricevuto l'informativa 
         sul trattamento dei dati personali ex art. 13 del D.Lgs. n. 196/2003 
         - acconsento inoltre al trattamento ed alla comunicazione dei dati personali ad aziende connesse direttamente o indirettamente, 
         dei miei dati a fini promozionali, di informazione commerciale, ricerche di mercato, offerte di prodotti e servizi. 
