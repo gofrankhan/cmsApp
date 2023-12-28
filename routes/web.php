@@ -132,6 +132,7 @@ Route::middleware('auth')->group(function(){
 Route::middleware('auth' , 'admin')->group(function(){
     Route::get('/create/settings', [SettingsController::class, 'CreateSettings'])->name('create.settings');
     Route::post('/add/upload_type', [SettingsController::class, 'AddUploadType'])->name('add.upload_type');
+    Route::post('/add/upload_pdf_file', [SettingsController::class, 'UploadPDFFile'])->name('upload.pdf.file');
 });
 
 Route::middleware('auth' , 'admin')->group(function(){

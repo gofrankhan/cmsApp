@@ -14,6 +14,7 @@ use App\Models\File;
 use App\Models\UploadType;
 use App\Models\Category;
 use App\Models\Service;
+use App\Models\PdfFile;
 use DataTables;
 
 class SettingsController extends Controller
@@ -45,6 +46,52 @@ class SettingsController extends Controller
         }else{
             $notification = array(
                 'message' => 'No data inserted!', 
+                'alert-type' => 'warning'
+            );
+            return redirect()->back()->with($notification);
+        }
+    }
+
+    public function UploadPDFFile(Request $request)
+    {
+        $pdf_file_name = $request->pdf_file_name;
+
+        if(!empty($pdf_file_name)){
+
+            if ($request->file('upload_pdf_file')) {
+                $file = $request->file('upload_pdf_file');
+     
+                $filename = $file->getClientOriginalName();
+                $filename = str_replace(' ', '_', $filename);
+                $full_path = 'upload/static_pdf';
+                if(!is_dir($full_path))
+                    mkdir($full_path, 0755);
+                if(file_exists($full_path.'/'.$filename)){
+                    $notification = array(
+                        'message' => 'File already exists!', 
+                        'alert-type' => 'warning'
+                    );
+                    return redirect()->back()->with($notification);
+                }
+                $file->move($full_path ,$filename);
+                $pdf_file = new PdfFile();
+                $pdf_file->pdf_file_name = $pdf_file_name;
+                $pdf_file['upload_pdf_file'] = $filename;
+                $pdf_file->save();
+                $notification = array(
+                    'message' => 'New statif pdf file added successfully', 
+                    'alert-type' => 'success'
+                );
+             }else{
+                $notification = array(
+                    'message' => 'No file added!', 
+                    'alert-type' => 'info'
+                );
+             }
+            return redirect()->back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Must Enter PDF file name!', 
                 'alert-type' => 'warning'
             );
             return redirect()->back()->with($notification);

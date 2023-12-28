@@ -195,6 +195,33 @@ $(document).ready(function(){
                     </div>
                 </form>
             </div>
+            <div class="col-sm-4">
+                <form method="post" action="{{ route('upload.pdf.file')}}" enctype="multipart/form-data">
+                    @csrf    
+                    <div class="row mb-3">
+                        <label for="assign_file" class="col-form-label">Upload Static PDF Files</label>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="upload_type" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" name="pdf_file_name" placeholder="Enter PDF File Name" type="text" id="pdf_file_name" >
+                        </div>
+                    </div>
+                    <input type="hidden" name="file_id" class="btn btn-primary" value="">
+                    <div class="row mb-3">
+                        <label for="profile_image" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <input class="form-control" name="upload_pdf_file" type="file" id="upload_pdf_file">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="profile_image" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <input type="submit" href="" class="btn btn-primary waves-effect waves-light" value="Upload File">
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
