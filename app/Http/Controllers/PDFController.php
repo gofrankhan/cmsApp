@@ -15,6 +15,7 @@ use App\Models\Invoice;
 use App\Models\Customer;
 use App\Models\Service;
 use App\Models\Pdfdata;
+use App\Models\PdfFile;
 use DataTables;
 use PDF;
 
@@ -719,4 +720,12 @@ class PDFController extends Controller
          $pdf = PDF::loadView('admin.PDF.flussi3', $data);
          return $pdf->stream('Delega_Domanda_Flussi.pdf');
     }
+
+    public function Print_Static_PDF($id){
+        $pdf_file = DB::table('pdf_files')->where('id',$id)->first();
+        $pathToFile = 'upload/static_pdf/'.$pdf_file->upload_pdf_file;
+        $headers = [$pdf_file->pdf_file_name];
+        return response()->file($pathToFile, $headers);
+    }
+
 }

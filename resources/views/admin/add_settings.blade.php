@@ -51,6 +51,26 @@ $(document).ready(function(){
 
 <script>
   $(document).ready(function() {
+    $('#pdf_category').change(function() {
+      var value = $(this).val();
+      $.ajax({
+        url: "{{ route('load.services') }}",
+        type: "GET",
+        data: { value: value },
+        success: function(data) {
+          $("#pdf_service").empty();
+          $("#pdf_service").append("<option value=''>Select a service</option>");
+          $.each(data, function(index, item) {
+            $("#pdf_service").append("<option value='" + item.service + "'>" + item.service + "</option>");
+          });
+        }
+      });
+    });
+});
+</script>
+
+<script>
+  $(document).ready(function() {
     $('#service').change(function() {
       var service = $(this).val();
       var category = $('#category').find(":selected").val();
@@ -205,6 +225,25 @@ $(document).ready(function(){
                         <label for="upload_type" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
                             <input class="form-control" name="pdf_file_name" placeholder="Enter PDF File Name" type="text" id="pdf_file_name" >
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <label for="upload_type" class="col-sm-2 col-form-label">Category</label>
+                        <div class="col-sm-10">
+                            <select class="form-select" name="pdf_category" aria-label="Default select example" id="pdf_category">
+                                <option selected value="">Select Category</option>
+                                @foreach ($categories as $category)
+                                <option value="{{ $category->category }}">{{ $category->category }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="upload_type" class="col-sm-2 col-form-label">Service</label>
+                        <div class="col-sm-10">
+                            <select class="form-select" id="pdf_service" name="pdf_service">
+                            </select>
                         </div>
                     </div>
                     <input type="hidden" name="file_id" class="btn btn-primary" value="">

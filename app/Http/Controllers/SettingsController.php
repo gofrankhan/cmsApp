@@ -55,8 +55,10 @@ class SettingsController extends Controller
     public function UploadPDFFile(Request $request)
     {
         $pdf_file_name = $request->pdf_file_name;
+        $pdf_category = $request->pdf_category;
+        $pdf_service = $request->pdf_service;
 
-        if(!empty($pdf_file_name)){
+        if(!empty($pdf_file_name) && !empty($pdf_category)){
 
             if ($request->file('upload_pdf_file')) {
                 $file = $request->file('upload_pdf_file');
@@ -76,6 +78,8 @@ class SettingsController extends Controller
                 $file->move($full_path ,$filename);
                 $pdf_file = new PdfFile();
                 $pdf_file->pdf_file_name = $pdf_file_name;
+                $pdf_file->category = $pdf_category;
+                $pdf_file->service = $pdf_service;
                 $pdf_file['upload_pdf_file'] = $filename;
                 $pdf_file->save();
                 $notification = array(
@@ -91,7 +95,7 @@ class SettingsController extends Controller
             return redirect()->back()->with($notification);
         }else{
             $notification = array(
-                'message' => 'Must Enter PDF file name!', 
+                'message' => 'Must enter PDF file name or category!', 
                 'alert-type' => 'warning'
             );
             return redirect()->back()->with($notification);
