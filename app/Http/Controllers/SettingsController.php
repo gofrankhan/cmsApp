@@ -101,4 +101,12 @@ class SettingsController extends Controller
             return redirect()->back()->with($notification);
         }
     }
+
+    public function StaticPDFFile(){
+        {
+            $title = "Static PDF Files";
+            $pdf_files = DB::table('pdf_files')->get();
+            return view('admin.static_pdf_file', compact('pdf_files', 'title'));
+        }
+    }
 }

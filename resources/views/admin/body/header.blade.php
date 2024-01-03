@@ -62,6 +62,7 @@ $(document).ready(function() {
                 <a class="dropdown-item" href="{{ route('client.table') }}"><i class="ri-user-line align-middle me-1"></i>Config Users</a>
                 <a class="dropdown-item" href="{{ route('reset.password')}}"><i class=" ri-key-line align-middle me-1"></i>Reset Password</a>
                 <a class="dropdown-item" href="{{ route('create.category') }}"><i class="mdi mdi-18px mdi-table-cog align-middle me-1"></i>Set Category</a>
+                <a class="dropdown-item" href="{{ route('config.static.pdf.file') }}"><i class="mdi mdi-18px mdi-table-cog align-middle me-1"></i>Static PDF File</a>
                 <a class="dropdown-item" href="{{ route('create.settings') }}"><i class="mdi mdi-18px mdi-cog-transfer-outline align-middle me-1"></i>Settings</a>
             </div>
         </div>
