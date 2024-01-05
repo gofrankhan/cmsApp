@@ -134,6 +134,7 @@ Route::middleware('auth' , 'admin')->group(function(){
     Route::post('/add/upload_type', [SettingsController::class, 'AddUploadType'])->name('add.upload_type');
     Route::post('/add/upload_pdf_file', [SettingsController::class, 'UploadPDFFile'])->name('upload.pdf.file');
     Route::get('/add/static_pdf_file', [SettingsController::class, 'StaticPDFFile'])->name('config.static.pdf.file');
+    Route::get('/add/delete_pdf_file/{id}', [SettingsController::class, 'DeletePDFFile'])->name('delete.static.pdf.file');
 });
 
 Route::middleware('auth' , 'admin')->group(function(){

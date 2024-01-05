@@ -106,7 +106,31 @@ class SettingsController extends Controller
         {
             $title = "Static PDF Files";
             $pdf_files = DB::table('pdf_files')->get();
-            return view('admin.static_pdf_file', compact('pdf_files', 'title'));
+            $categories = Category::all();
+            return view('admin.static_pdf_file', compact('pdf_files', 'categories', 'title'));
         }
+    }
+
+    public function DeletePDFFile($id){
+        $file_info = DB::table('pdf_files')->where('id', $id)->get();
+        $files = DB::table('pdf_files')
+                        ->where('id', $id)
+                        ->delete();
+        dd('$file_info->upload_pdf_file)');
+        $file = ('upload/static_pdf/'.$file_info->upload_pdf_file);
+        $realPath = realpath($file);
+        if ($realPath) {
+            File::delete($realPath);
+            $notification = array(
+                'message' => 'File deleted successfully!', 
+                'alert-type' => 'success'
+             );
+        } else {
+            $notification = array(
+                'message' => 'File doesnot exist of incorrect path!', 
+                'alert-type' => 'warning'
+             );
+        }
+        return redirect()->back()->with($notification);
     }
 }
