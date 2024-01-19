@@ -104,7 +104,6 @@
                             <a class="dropdown-item" href="{{ route ('print.static.pdf', $pdf_file->id)}}">{{ $pdf_file->pdf_file_name }}</a>
                             @endif
                         @endforeach
-                        
                     </div>
                 </div>
             </div> 

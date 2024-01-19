@@ -113,6 +113,23 @@
                         <a class="dropdown-item" href="{{ route ('auto.red.imp', $files[0]->id)}}" target="_blank">Autocertificazione redditi impresa</a>
                         <a class="dropdown-item" href="{{ route ('del.tra.dis', $files[0]->id)}}" target="_blank">Delega Trasmissione Dichiarazione dei Redditi</a>
                         @endif
+                        <a class="dropdown-item" href="#">Anagrafica Cliente</a>
+                        <a class="dropdown-item" href="#">Lettera Di Benvenuto</a>
+                        <a class="dropdown-item" href="#">Ricevuta di Pagamento</a>
+                        @php
+                            $pdf_files = Illuminate\Support\Facades\DB::table('pdf_files')->get();
+                            $service_db = Illuminate\Support\Facades\DB::table('services')->where('service', $files[0]->service)->first();
+                            $category_name = $service_db->category;
+                        @endphp
+                        @foreach ($pdf_files as $pdf_file)
+                            @if($pdf_file->service == '')
+                                @if($category_name == $pdf_file->category)
+                                <a class="dropdown-item" href="{{ route ('print.static.pdf', $pdf_file->id)}}">{{ $pdf_file->pdf_file_name }}</a>
+                                @endif
+                            @elseif($files[0]->service == $pdf_file->service)
+                            <a class="dropdown-item" href="{{ route ('print.static.pdf', $pdf_file->id)}}">{{ $pdf_file->pdf_file_name }}</a>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </div> 

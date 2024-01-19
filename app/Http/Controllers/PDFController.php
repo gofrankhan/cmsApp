@@ -726,6 +726,9 @@ class PDFController extends Controller
         $pathToFile = 'upload/static_pdf/'.$pdf_file->upload_pdf_file;
         $headers = [$pdf_file->pdf_file_name];
         return response()->file($pathToFile, $headers);
+        // $data["info"] = $pdf_file;
+        // $pdf = PDF::loadView('admin.PDF.static.pdf', $data);
+        // return $pdf->stream($pathToFile);
     }
 
 }
