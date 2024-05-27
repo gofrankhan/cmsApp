@@ -243,7 +243,8 @@ $(document).ready(function() {
                             <th style="width:20%">Tax ID</th>
                             <th style="width:20%">Customer</th>
                             <th style="width:20%">Shop</th>
-                            <th style="width:25%">Service</th>
+                            <th style="width:10%">Service</th>
+                            <th style="width:15%">Created</th>
                             <th style="width:2%"></th>
                             <th style="width:5%">Status</th>
                             <th style="width:3%">Actions</th>
@@ -257,6 +258,8 @@ $(document).ready(function() {
                             <td style="width:20%">{{ $r->customer }}</td>
                             <td style="width:20%">{{ $r->shop }}</td>
                             <td style="width:25%">{{ $r->service }}</td>
+                            <td style="width:25%">{{ $r->created }}</td>
+
                             <td style="width:2%">
                                 @if($r->status == "Completed")
                                     <div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2"></i></div>
