@@ -113,9 +113,8 @@
                         <a class="dropdown-item" href="{{ route ('auto.red.imp', $files[0]->id)}}" target="_blank">Autocertificazione redditi impresa</a>
                         <a class="dropdown-item" href="{{ route ('del.tra.dis', $files[0]->id)}}" target="_blank">Delega Trasmissione Dichiarazione dei Redditi</a>
                         @endif
-                        <a class="dropdown-item" href="#">Anagrafica Cliente</a>
-                        <a class="dropdown-item" href="#">Lettera Di Benvenuto</a>
-                        <a class="dropdown-item" href="#">Ricevuta di Pagamento</a>
+                        <a class="dropdown-item" href="#">DELEGA INPS</a>
+                        <a class="dropdown-item" href="#">Delega per la gestione del rapporto di lavoro domestico</a>
                         @php
                             $pdf_files = Illuminate\Support\Facades\DB::table('pdf_files')->get();
                             $service_db = Illuminate\Support\Facades\DB::table('services')->where('service', $files[0]->service)->first();
