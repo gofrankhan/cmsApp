@@ -169,6 +169,8 @@ Route::middleware('auth')->group(function(){
     Route::get('/del/tra/dis/{id}', [PDFController::class, 'Delega_Trasmissione_Dichiarazione_dei_Redditi_pdf'])->name('del.tra.dis');
     Route::get('/dichiarazione/redditi', [PDFController::class, 'DICHIARAZIONE_REDDITI_PF'])->name('dichiarazione.redditi');
     Route::get('/print/static/pdf/{id}', [PDFController::class, 'Print_Static_PDF'])->name('print.static.pdf');
+    Route::get('/delega/inps/pdf/{id}', [PDFController::class, 'Delega_INPS'])->name('delega.inps.pdf');
+    
 });
 
 require __DIR__.'/auth.php';

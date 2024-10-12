@@ -65,6 +65,20 @@ class PDFController extends Controller
          return $pdf->stream('Delega_730.pdf');
     }
 
+    public function Delega_INPS($id)
+    {
+        $customer = DB::table('customers')->where('id', $id)->first();
+  
+        $data = [
+            'title' => 'Mandato al CAF',
+            'date' => date('m/d/Y'),
+            'customer' => $customer
+        ]; 
+            
+         $pdf = PDF::loadView('admin.PDF.delega_inps', $data);
+         return $pdf->stream('delega_inps.pdf');
+    }
+
     public function Autocertificazione_redditi_impresa_pdf($id)
     {
         $ids = Invoice::select('customer_id', 'user_id', 'file_id')->where('id', $id)->first();
