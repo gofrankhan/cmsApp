@@ -818,8 +818,8 @@
                 <div class="col">
                     <div class="row mb-3">
                         <div class="col-sm-12">
-                            <label for="indirizzo_operativa" class="col-form-label">Indirizzo_sede</label>
-                            <input class="form-control" name="indirizzo_operativa" type="text" id="indirizzo_operativa" value="@if(!empty($pdfdata['indirizzo_operativa'][0]->field_value)){{$pdfdata['indirizzo_operativa'][0]->field_value}}@endif">
+                            <label for="indirizzo_sede" class="col-form-label">Indirizzo_sede</label>
+                            <input class="form-control" name="indirizzo_sede" type="text" id="indirizzo_sede" value="@if(!empty($pdfdata['indirizzo_sede'][0]->field_value)){{$pdfdata['indirizzo_sede'][0]->field_value}}@endif">
                         </div>
                     </div>
                 </div>
@@ -828,24 +828,24 @@
                 <div class="col">
                     <div class="row mb-3">
                         <div class="col-sm-12">
-                            <label for="citta_operativa" class="col-form-label">Comune_sede</label>
-                            <input class="form-control" name="citta_operativa" type="text" id="citta_operativa" value="@if(!empty($pdfdata['citta_operativa'][0]->field_value)){{$pdfdata['citta_operativa'][0]->field_value}}@endif">
+                            <label for="comune_sede" class="col-form-label">Comune_sede</label>
+                            <input class="form-control" name="comune_sede" type="text" id="comune_sede" value="@if(!empty($pdfdata['comune_sede'][0]->field_value)){{$pdfdata['comune_sede'][0]->field_value}}@endif">
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="row mb-3">
                         <div class="col-sm-12">
-                            <label for="provincia_operativa" class="col-form-label">Provincia_sede</label>
-                            <input class="form-control" name="provincia_operativa" type="text" id="provincia_operativa" value="@if(!empty($pdfdata['provincia_operativa'][0]->field_value)){{$pdfdata['provincia_operativa'][0]->field_value}}@endif">
+                            <label for="provincia_sede" class="col-form-label">Provincia_sede</label>
+                            <input class="form-control" name="provincia_sede" type="text" id="provincia_sede" value="@if(!empty($pdfdata['provincia_sede'][0]->field_value)){{$pdfdata['provincia_sede'][0]->field_value}}@endif">
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="row mb-3">
                         <div class="col-sm-12">
-                            <label for="cap_operativa" class="col-form-label">CAP_sede</label>
-                            <input class="form-control" name="cap_operativa" type="text" id="cap_operativa" value="@if(!empty($pdfdata['cap_operativa'][0]->field_value)){{$pdfdata['cap_operativa'][0]->field_value}}@endif">
+                            <label for="cap_sede" class="col-form-label">CAP_sede</label>
+                            <input class="form-control" name="cap_sede" type="text" id="cap_sede" value="@if(!empty($pdfdata['cap_sede'][0]->field_value)){{$pdfdata['cap_sede'][0]->field_value}}@endif">
                         </div>
                     </div>
                 </div>
@@ -857,24 +857,24 @@
                 <div class="col">
                     <div class="row mb-3">
                         <div class="col-sm-12">
-                            <label for="citta_operativa" class="col-form-label">Lunedi_dalle_mattina</label>
-                            <input class="form-control" name="citta_operativa" type="number" id="citta_operativa" value="@if(!empty($pdfdata['citta_operativa'][0]->field_value)){{$pdfdata['citta_operativa'][0]->field_value}}@endif">
+                            <label for="lunedi_dalle_mattina" class="col-form-label">Lunedi_dalle_mattina</label>
+                            <input class="form-control" name="lunedi_dalle_mattina" type="number" id="lunedi_dalle_mattina" value="@if(!empty($pdfdata['lunedi_dalle_mattina'][0]->field_value)){{$pdfdata['lunedi_dalle_mattina'][0]->field_value}}@endif">
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="row mb-3">
                         <div class="col-sm-12">
-                            <label for="provincia_operativa" class="col-form-label">Martedi_dalle_mattina</label>
-                            <input class="form-control" name="provincia_operativa" type="number" id="provincia_operativa" value="@if(!empty($pdfdata['provincia_operativa'][0]->field_value)){{$pdfdata['provincia_operativa'][0]->field_value}}@endif">
+                            <label for="martedi_dalle_mattina" class="col-form-label">Martedi_dalle_mattina</label>
+                            <input class="form-control" name="martedi_dalle_mattina" type="number" id="martedi_dalle_mattina" value="@if(!empty($pdfdata['martedi_dalle_mattina'][0]->field_value)){{$pdfdata['martedi_dalle_mattina'][0]->field_value}}@endif">
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="row mb-3">
                         <div class="col-sm-12">
-                            <label for="cap_operativa" class="col-form-label">Mercoledi_dalle_mattina</label>
-                            <input class="form-control" name="cap_operativa" type="number" id="cap_operativa" value="@if(!empty($pdfdata['cap_operativa'][0]->field_value)){{$pdfdata['cap_operativa'][0]->field_value}}@endif">
+                            <label for="mercoledi_dalle_mattina" class="col-form-label">Mercoledi_dalle_mattina</label>
+                            <input class="form-control" name="mercoledi_dalle_mattina" type="number" id="mercoledi_dalle_mattina" value="@if(!empty($pdfdata['mercoledi_dalle_mattina'][0]->field_value)){{$pdfdata['mercoledi_dalle_mattina'][0]->field_value}}@endif">
                         </div>
                     </div>
                 </div>
@@ -883,24 +883,24 @@
                 <div class="col">
                     <div class="row mb-3">
                         <div class="col-sm-12">
-                            <label for="citta_operativa" class="col-form-label">Giovedi_dalle_mattina</label>
-                            <input class="form-control" name="citta_operativa" type="number" id="citta_operativa" value="@if(!empty($pdfdata['citta_operativa'][0]->field_value)){{$pdfdata['citta_operativa'][0]->field_value}}@endif">
+                            <label for="giovedi_dalle_mattina" class="col-form-label">Giovedi_dalle_mattina</label>
+                            <input class="form-control" name="giovedi_dalle_mattina" type="number" id="giovedi_dalle_mattina" value="@if(!empty($pdfdata['giovedi_dalle_mattina'][0]->field_value)){{$pdfdata['giovedi_dalle_mattina'][0]->field_value}}@endif">
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="row mb-3">
                         <div class="col-sm-12">
-                            <label for="provincia_operativa" class="col-form-label">Venerdi_dalle_mattina</label>
-                            <input class="form-control" name="provincia_operativa" type="number" id="provincia_operativa" value="@if(!empty($pdfdata['provincia_operativa'][0]->field_value)){{$pdfdata['provincia_operativa'][0]->field_value}}@endif">
+                            <label for="venerdi_dalle_mattina" class="col-form-label">Venerdi_dalle_mattina</label>
+                            <input class="form-control" name="venerdi_dalle_mattina" type="number" id="venerdi_dalle_mattina" value="@if(!empty($pdfdata['venerdi_dalle_mattina'][0]->field_value)){{$pdfdata['venerdi_dalle_mattina'][0]->field_value}}@endif">
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="row mb-3">
                         <div class="col-sm-12">
-                            <label for="cap_operativa" class="col-form-label">Sabato_dalle_mattina</label>
-                            <input class="form-control" name="cap_operativa" type="number" id="cap_operativa" value="@if(!empty($pdfdata['cap_operativa'][0]->field_value)){{$pdfdata['cap_operativa'][0]->field_value}}@endif">
+                            <label for="sabato_dalle_mattina" class="col-form-label">Sabato_dalle_mattina</label>
+                            <input class="form-control" name="sabato_dalle_mattina" type="number" id="sabato_dalle_mattina" value="@if(!empty($pdfdata['sabato_dalle_mattina'][0]->field_value)){{$pdfdata['sabato_dalle_mattina'][0]->field_value}}@endif">
                         </div>
                     </div>
                 </div>

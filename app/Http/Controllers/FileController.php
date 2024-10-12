@@ -281,6 +281,261 @@ class FileController extends Controller
         $invoice->price = intval($request->pagamento);
         $invoice->lawyer_price = intval($request->pagamento_lawyer);
         $invoice->save();
+
+        /////////////////////
+        
+        if($request->luogo_di_nascita != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'luogo_di_nascita');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'luogo_di_nascita')
+                        ->update(['field_value' => $request->luogo_di_nascita]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "luogo_di_nascita";
+                $pdfdata->field_value= $request->luogo_di_nascita;
+                $pdfdata->save();
+            }
+        }
+        
+        if($request->data_di_nascita != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'data_di_nascita');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'data_di_nascita')
+                        ->update(['field_value' => $request->data_di_nascita]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "data_di_nascita";
+                $pdfdata->field_value= $request->data_di_nascita;
+                $pdfdata->save();
+            }
+        }
+        
+        if($request->sesso_mf != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'sesso_mf');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'sesso_mf')
+                        ->update(['field_value' => $request->sesso_mf]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "sesso_mf";
+                $pdfdata->field_value= $request->sesso_mf;
+                $pdfdata->save();
+            }
+        }
+        
+        if($request->comune != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'comune');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'ancomuneno')
+                        ->update(['field_value' => $request->comune]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "comune";
+                $pdfdata->field_value= $request->comune;
+                $pdfdata->save();
+            }
+        }
+        
+        if($request->telefono != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'telefono');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'telefono')
+                        ->update(['field_value' => $request->telefono]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "telefono";
+                $pdfdata->field_value= $request->telefono;
+                $pdfdata->save();
+            }
+        }
+        
+        if($request->cellulare != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'cellulare');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'cellulare')
+                        ->update(['field_value' => $request->cellulare]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "cellulare";
+                $pdfdata->field_value= $request->cellulare;
+                $pdfdata->save();
+            }
+        }
+        
+        if($request->determinato_data != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'determinato_data');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'determinato_data')
+                        ->update(['field_value' => $request->determinato_data]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "determinato_data";
+                $pdfdata->field_value= $request->determinato_data;
+                $pdfdata->save();
+            }
+        }
+        
+        if($request->indeterminato_x != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'indeterminato_x');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'indeterminato_x')
+                        ->update(['field_value' => $request->indeterminato_x]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "indeterminato_x";
+                $pdfdata->field_value= $request->indeterminato_x;
+                $pdfdata->save();
+            }
+        }
+        
+        if($request->data_assunzione != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'data_assunzione');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'data_assunzione')
+                        ->update(['field_value' => $request->data_assunzione]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "data_assunzione";
+                $pdfdata->field_value= $request->data_assunzione;
+                $pdfdata->save();
+            }
+        }
+        
+        if($request->ore_settimanali != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'ore_settimanali');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'ore_settimanali')
+                        ->update(['field_value' => $request->ore_settimanali]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "ore_settimanali";
+                $pdfdata->field_value= $request->ore_settimanali;
+                $pdfdata->save();
+            }
+        }
+        
+        if($request->retribuzione_mensile != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'aretribuzione_mensilenno');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'retribuzione_mensile')
+                        ->update(['field_value' => $request->retribuzione_mensile]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "retribuzione_mensile";
+                $pdfdata->field_value= $request->retribuzione_mensile;
+                $pdfdata->save();
+            }
+        }
+        
+        if($request->comune_sede != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'comune_sede');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'comune_sede')
+                        ->update(['field_value' => $request->comune_sede]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "comune_sede";
+                $pdfdata->field_value= $request->comune_sede;
+                $pdfdata->save();
+            }
+        }
+        
+        if($request->lunedi_dalle_mattina != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'lunedi_dalle_mattina');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'lunedi_dalle_mattina')
+                        ->update(['field_value' => $request->lunedi_dalle_mattina]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "lunedi_dalle_mattina";
+                $pdfdata->field_value= $request->lunedi_dalle_mattina;
+                $pdfdata->save();
+            }
+        }
+        
+        if($request->martedi_dalle_mattina != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'martedi_dalle_mattina');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'martedi_dalle_mattina')
+                        ->update(['field_value' => $request->martedi_dalle_mattina]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "martedi_dalle_mattina";
+                $pdfdata->field_value= $request->martedi_dalle_mattina;
+                $pdfdata->save();
+            }
+        }
+        
+        if($request->mercoledi_dalle_mattina != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'mercoledi_dalle_mattina');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'mercoledi_dalle_mattina')
+                        ->update(['field_value' => $request->mercoledi_dalle_mattina]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "mercoledi_dalle_mattina";
+                $pdfdata->field_value= $request->mercoledi_dalle_mattina;
+                $pdfdata->save();
+            }
+        }
+        
+        if($request->giovedi_dalle_mattina != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'giovedi_dalle_mattina');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'giovedi_dalle_mattina')
+                        ->update(['field_value' => $request->giovedi_dalle_mattina]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "giovedi_dalle_mattina";
+                $pdfdata->field_value= $request->giovedi_dalle_mattina;
+                $pdfdata->save();
+            }
+        }
+        
+        if($request->venerdi_dalle_mattina != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'venerdi_dalle_mattina');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'venerdi_dalle_mattina')
+                        ->update(['field_value' => $request->venerdi_dalle_mattina]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "venerdi_dalle_mattina";
+                $pdfdata->field_value= $request->venerdi_dalle_mattina;
+                $pdfdata->save();
+            }
+        }
+        
+        if($request->sabato_dalle_mattina != ""){
+            $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'sabato_dalle_mattina');
+            if(($recored_exist->count()> 0)){
+                Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'sabato_dalle_mattina')
+                        ->update(['field_value' => $request->sabato_dalle_mattina]);
+            }else{
+                $pdfdata = new Pdfdata();
+                $pdfdata->file_id = $request->file_id_no;
+                $pdfdata->field_name = "sabato_dalle_mattina";
+                $pdfdata->field_value= $request->sabato_dalle_mattina;
+                $pdfdata->save();
+            }
+        }
+        /////////////////////
         
         if($request->anno != ""){
             $recored_exist = Pdfdata::where('file_id', $request->file_id_no)->where('field_name', 'anno');
@@ -1186,6 +1441,26 @@ class FileController extends Controller
         $pdfdata['cap_lav'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'cap_lav')->get();
         $pdfdata['citta_lav'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'citta_lav')->get();
         $pdfdata['provincia_lav'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'provincia_lav')->get();
+
+        //ASSUNZIONE/LAVORO DOMESTICO
+        $pdfdata['luogo_di_nascita'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'luogo_di_nascita')->get();
+        $pdfdata['data_di_nascita'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'data_di_nascita')->get();
+        $pdfdata['sesso_mf'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'sesso_mf')->get();
+        $pdfdata['comune'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'comune')->get();
+        $pdfdata['telefono'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'telefono')->get();
+        $pdfdata['cellulare'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'cellulare')->get();
+        $pdfdata['determinato_data'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'determinato_data')->get();
+        $pdfdata['indeterminato_x'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'indeterminato_x')->get();
+        $pdfdata['data_assunzione'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'data_assunzione')->get();
+        $pdfdata['ore_settimanali'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'ore_settimanali')->get();
+        $pdfdata['retribuzione_mensile'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'retribuzione_mensile')->get();
+        $pdfdata['comune_sede'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'comune_sede')->get();
+        $pdfdata['lunedi_dalle_mattina'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'lunedi_dalle_mattina')->get();
+        $pdfdata['martedi_dalle_mattina'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'martedi_dalle_mattina')->get();
+        $pdfdata['mercoledi_dalle_mattina'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'mercoledi_dalle_mattina')->get();
+        $pdfdata['giovedi_dalle_mattina'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'giovedi_dalle_mattina')->get();
+        $pdfdata['venerdi_dalle_mattina'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'venerdi_dalle_mattina')->get();
+        $pdfdata['sabato_dalle_mattina'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'sabato_dalle_mattina')->get();
 
         $user_type = Auth::user()->user_type;
         if(($files[0]->status == "Completed" || $files[0]->status == "Cancelled") && $user_type != 'admin')
