@@ -170,6 +170,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/dichiarazione/redditi', [PDFController::class, 'DICHIARAZIONE_REDDITI_PF'])->name('dichiarazione.redditi');
     Route::get('/print/static/pdf/{id}', [PDFController::class, 'Print_Static_PDF'])->name('print.static.pdf');
     Route::get('/delega/inps/pdf/{id}', [PDFController::class, 'Delega_INPS'])->name('delega.inps.pdf');
+    Route::get('/delega/di/lavoro/domestico/{id}', [PDFController::class, 'Delega_Di_Lavoro_Domestico'])->name('delega.di.lavoro.domestico');
     
 });
 

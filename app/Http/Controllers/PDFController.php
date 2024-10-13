@@ -79,6 +79,51 @@ class PDFController extends Controller
          return $pdf->stream('delega_inps.pdf');
     }
 
+    public function Delega_Di_Lavoro_Domestico($id){
+        $ids = Invoice::select('customer_id', 'user_id', 'file_id')->where('id', $id)->first();
+        $user = DB::table('users')->where('id', $ids->user_id)->first();
+        $customer = DB::table('customers')->where('id', $ids->customer_id)->first();
+
+
+        
+        $pdfdata['cognome'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'cognome')->get();
+        $pdfdata['nome'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'nome')->get();
+        $pdfdata['luogo_di_nascita'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'luogo_di_nascita')->get();
+        $pdfdata['data_di_nascita'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'data_di_nascita')->get();
+        $pdfdata['sesso_mf'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'sesso_mf')->get();
+        $pdfdata['comune'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'comune')->get();
+        $pdfdata['indirizzo'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'indirizzo')->get();
+        $pdfdata['provincia'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'provincia')->get();
+        $pdfdata['cap'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'cap')->get();$pdfdata['telefono'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'telefono')->get();
+        $pdfdata['cellulare'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'cellulare')->get();
+        $pdfdata['determinato_data'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'determinato_data')->get();
+        $pdfdata['indeterminato_x'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'indeterminato_x')->get();
+        $pdfdata['data_assunzione'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'data_assunzione')->get();
+        $pdfdata['ore_settimanali'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'ore_settimanali')->get();
+        $pdfdata['retribuzione_mensile'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'retribuzione_mensile')->get();
+        $pdfdata['indirizzo_sede'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'indirizzo_sede')->get();
+        $pdfdata['comune_sede'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'comune_sede')->get();
+        $pdfdata['provincia_sede'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'provincia_sede')->get();
+        $pdfdata['cap_sede'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'cap_sede')->get();
+        $pdfdata['lunedi_dalle_mattina'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'lunedi_dalle_mattina')->get();
+        $pdfdata['martedi_dalle_mattina'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'martedi_dalle_mattina')->get();
+        $pdfdata['mercoledi_dalle_mattina'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'mercoledi_dalle_mattina')->get();
+        $pdfdata['giovedi_dalle_mattina'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'giovedi_dalle_mattina')->get();
+        $pdfdata['venerdi_dalle_mattina'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'venerdi_dalle_mattina')->get();
+        $pdfdata['sabato_dalle_mattina'] = Pdfdata::select('field_value')->where('file_id', $ids->file_id)->where('field_name', 'sabato_dalle_mattina')->get();
+
+        $data = [
+            'title' => 'Mandato al CAF',
+            'date' => date('m/d/Y'),
+            'customer' => $customer,
+            'user' => $user,
+            'pdfdata' => $pdfdata
+        ]; 
+            
+         $pdf = PDF::loadView('admin.PDF.delega_di_lavoro_domestico', $data);
+         return $pdf->stream('Delega_di_lavoro_domestico.pdf');
+    }
+
     public function Autocertificazione_redditi_impresa_pdf($id)
     {
         $ids = Invoice::select('customer_id', 'user_id', 'file_id')->where('id', $id)->first();

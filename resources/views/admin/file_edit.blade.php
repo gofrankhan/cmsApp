@@ -114,7 +114,7 @@
                         <a class="dropdown-item" href="{{ route ('del.tra.dis', $files[0]->id)}}" target="_blank">Delega Trasmissione Dichiarazione dei Redditi</a>
                         @endif
                         <a class="dropdown-item" href="{{ route ('delega.inps.pdf', $files[0]->customer_id)}}">DELEGA INPS</a>
-                        <a class="dropdown-item" href="#">Delega per la gestione del rapporto di lavoro domestico</a>
+                        <a class="dropdown-item" href="{{ route ('delega.di.lavoro.domestico', $files[0]->id)}}">Delega per la gestione del rapporto di lavoro domestico</a>
                         @php
                             $pdf_files = Illuminate\Support\Facades\DB::table('pdf_files')->get();
                             $service_db = Illuminate\Support\Facades\DB::table('services')->where('service', $files[0]->service)->first();
