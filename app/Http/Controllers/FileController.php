@@ -1369,6 +1369,70 @@ class FileController extends Controller
         $pdfdata['codice_ateco'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'codice_ateco')->get();
         $pdfdata['tipo_attivita'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'tipo_attivita')->get();
         $pdfdata['reddito'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'reddito')->get();
+        
+        //Flussi
+        $pdfdata['nome'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'nome')->get();
+        $pdfdata['cognome'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'cognome')->get();
+        $pdfdata['luogo_nascita'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'luogo_nascita')->get();
+        $pdfdata['data_nascita'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'data_nascita')->get();
+        $pdfdata['sesso'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'sesso')->get();
+        $pdfdata['cittadinanza'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'cittadinanza')->get();
+        $pdfdata['paese_residenza'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'paese_residenza')->get();
+        $pdfdata['ragione_sociale'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'ragione_sociale')->get();
+        $pdfdata['cf_azienda'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'cf_azienda')->get();
+        $pdfdata['flussi_partita_iva'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'flussi_partita_iva')->get();
+        $pdfdata['indirizzo_sede'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'indirizzo_sede')->get();
+        $pdfdata['citta_sede'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'citta_sede')->get();
+        $pdfdata['provincia_sede'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'provincia_sede')->get();
+        $pdfdata['cap_sede'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'cap_sede')->get();
+        $pdfdata['indirizzo_operativa'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'indirizzo_operativa')->get();
+        $pdfdata['citta_operativa'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'citta_operativa')->get();
+        $pdfdata['provincia_operativa'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'provincia_operativa')->get();
+        $pdfdata['cap_operativa'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'cap_operativa')->get();
+        $pdfdata['matricola_inps'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'matricola_inps')->get();
+        $pdfdata['sede_inail'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'sede_inail')->get();
+        $pdfdata['codice_inail'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'codice_inail')->get();
+        $pdfdata['controllo_inail'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'controllo_inail')->get();
+        $pdfdata['provincia_cciaa'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'provincia_cciaa')->get();
+        $pdfdata['numero_cciaa'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'numero_cciaa')->get();
+        $pdfdata['data_iscrizione'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'data_iscrizione')->get();
+        $pdfdata['numero_dipendenti'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'numero_dipendenti')->get();
+        $pdfdata['codice_sdi'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'codice_sdi')->get();
+        $pdfdata['fatturato_annoprima'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'fatturato_annoprima')->get();
+        $pdfdata['redditi_annoprima'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'redditi_annoprima')->get();
+        $pdfdata['tipologia_contratto'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'tipologia_contratto')->get();
+        $pdfdata['tempo'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'tempo')->get();
+        $pdfdata['mansoine'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'mansoine')->get();
+        $pdfdata['mesi_lavoro'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'mesi_lavoro')->get();
+        $pdfdata['orario_settimanale'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'orario_settimanale')->get();
+        $pdfdata['livello_categoria'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'livello_categoria')->get();
+        $pdfdata['indirizzo_lav'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'indirizzo_lav')->get();
+        $pdfdata['civico_lav'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'civico_lav')->get();
+        $pdfdata['cap_lav'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'cap_lav')->get();
+        $pdfdata['citta_lav'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'citta_lav')->get();
+        $pdfdata['provincia_lav'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'provincia_lav')->get();
+
+
+        //ASSUNZIONE/LAVORO DOMESTICO
+        $pdfdata['luogo_di_nascita'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'luogo_di_nascita')->get();
+        $pdfdata['data_di_nascita'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'data_di_nascita')->get();
+        $pdfdata['sesso_mf'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'sesso_mf')->get();
+        $pdfdata['comune'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'comune')->get();
+        $pdfdata['telefono'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'telefono')->get();
+        $pdfdata['cellulare'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'cellulare')->get();
+        $pdfdata['determinato_data'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'determinato_data')->get();
+        $pdfdata['indeterminato_x'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'indeterminato_x')->get();
+        $pdfdata['data_assunzione'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'data_assunzione')->get();
+        $pdfdata['ore_settimanali'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'ore_settimanali')->get();
+        $pdfdata['retribuzione_mensile'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'retribuzione_mensile')->get();
+        $pdfdata['comune_sede'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'comune_sede')->get();
+        $pdfdata['lunedi_dalle_mattina'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'lunedi_dalle_mattina')->get();
+        $pdfdata['martedi_dalle_mattina'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'martedi_dalle_mattina')->get();
+        $pdfdata['mercoledi_dalle_mattina'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'mercoledi_dalle_mattina')->get();
+        $pdfdata['giovedi_dalle_mattina'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'giovedi_dalle_mattina')->get();
+        $pdfdata['venerdi_dalle_mattina'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'venerdi_dalle_mattina')->get();
+        $pdfdata['sabato_dalle_mattina'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'sabato_dalle_mattina')->get();
+
         return view('admin.file_view', compact('comments', 'attachments', 'files', 'pdfdata', 'title'));
     }
 

@@ -88,7 +88,7 @@
                         <a class="dropdown-item" href="{{ route ('del.tra.dis', $files[0]->id)}}" target="_blank">Delega Trasmissione Dichiarazione dei Redditi</a>
                         @endif
                         <a class="dropdown-item" href="{{ route ('delega.inps.pdf', $files[0]->customer_id)}}">DELEGA INPS</a>
-                        <a class="dropdown-item" href="#">Delega per la gestione del rapporto di lavoro domestico</a>
+                        <a class="dropdown-item" href="{{ route ('delega.di.lavoro.domestico', $files[0]->id)}}">Delega per la gestione del rapporto di lavoro domestico</a>
                         @php
                             $pdf_files = Illuminate\Support\Facades\DB::table('pdf_files')->get();
                             $service_db = Illuminate\Support\Facades\DB::table('services')->where('service', $files[0]->service)->first();
@@ -184,6 +184,253 @@
                 </div>
             </div>
         </div>
+        @if($files[0]->service == 'ASSUNZIONE/LAVORO DOMESTICO')
+        <div class="row">
+            <label class="col-form-label"><h5>GENERALITA' DEL LAVORATORE</h5></label>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="cognome" class="col-form-label">Cognome</label>
+                        <input disabled class="form-control" name="cognome" type="text" id="cognome" value="@if(!empty($pdfdata['cognome'][0]->field_value)){{$pdfdata['cognome'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="nome" class="col-form-label">Nome</label>
+                        <input disabled class="form-control" name="nome" type="text" id="nome" value="@if(!empty($pdfdata['nome'][0]->field_value)){{$pdfdata['nome'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="luogo_nascita" class="col-form-label">Luogo_di_Nascita</label>
+                        <input disabled class="form-control" name="luogo_di_nascita" type="text" id="luogo_di_nascita" value="@if(!empty($pdfdata['luogo_di_nascita'][0]->field_value)){{$pdfdata['luogo_di_nascita'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="data_nascita" class="col-form-label">Data_di_Nascita</label>
+                        <input disabled class="form-control" name="data_di_nascita" type="date" id="data_di_nascita" value="@if(!empty($pdfdata['data_di_nascita'][0]->field_value)){{$pdfdata['data_di_nascita'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="sesso" class="col-form-label">Sesso_MF</label>
+                        <input disabled class="form-control" name="sesso_mf" type="text" id="sesso_mf" value="@if(!empty($pdfdata['sesso_mf'][0]->field_value)){{$pdfdata['sesso_mf'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-form-label"><h5>INDIRIZZO DEL LAVORATORE</h5></label>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="indirizzo" class="col-form-label">Indirizzo</label>
+                        <input disabled class="form-control" name="indirizzo" type="text" id="indirizzo" value="@if(!empty($pdfdata['indirizzo'][0]->field_value)){{$pdfdata['indirizzo'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="citta" class="col-form-label">Comune</label>
+                        <input disabled class="form-control" name="comune" type="text" id="comune" value="@if(!empty($pdfdata['comune'][0]->field_value)){{$pdfdata['comune'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="provincia" class="col-form-label">Provincia</label>
+                        <input disabled class="form-control" name="provincia" type="text" id="provincia" value="@if(!empty($pdfdata['provincia'][0]->field_value)){{$pdfdata['provincia'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="cap" class="col-form-label">CAP</label>
+                        <input disabled class="form-control" name="cap" type="text" id="cap" value="@if(!empty($pdfdata['cap'][0]->field_value)){{$pdfdata['cap'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="telefono" class="col-form-label">Telefono</label>
+                        <input disabled class="form-control" name="telefono" type="number" id="telefono" value="@if(!empty($pdfdata['telefono'][0]->field_value)){{$pdfdata['telefono'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="cellulare" class="col-form-label">Cellulare</label>
+                        <input disabled class="form-control" name="cellulare" type="number" id="cellulare" value="@if(!empty($pdfdata['cellulare'][0]->field_value)){{$pdfdata['cellulare'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-form-label"><h5>TIPO CONTRATTO</h5></label>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="determinato_data" class="col-form-label">Determinato_Data</label>
+                        <input disabled class="form-control" name="determinato_data" type="date" id="determinato_data" value="@if(!empty($pdfdata['determinato_data'][0]->field_value)){{$pdfdata['determinato_data'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="provincia" class="col-form-label">Indeterminato_X</label>
+                        <input disabled class="form-control" name="indeterminato_x" type="text" id="indeterminato_x" value="@if(!empty($pdfdata['indeterminato_x'][0]->field_value)){{$pdfdata['indeterminato_x'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="data_assunzione" class="col-form-label">Data_assunzione</label>
+                        <input disabled class="form-control" name="data_assunzione" type="date" id="data_assunzione" value="@if(!empty($pdfdata['data_assunzione'][0]->field_value)){{$pdfdata['data_assunzione'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="ore_settimanali" class="col-form-label">Ore_settimanali</label>
+                        <input disabled class="form-control" name="ore_settimanali" type="number" id="ore_settimanali" value="@if(!empty($pdfdata['ore_settimanali'][0]->field_value)){{$pdfdata['ore_settimanali'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="retribuzione_mensile" class="col-form-label">Retribuzione_mensile</label>
+                        <input disabled class="form-control" name="retribuzione_mensile" type="number" id="retribuzione_mensile" value="@if(!empty($pdfdata['retribuzione_mensile'][0]->field_value)){{$pdfdata['retribuzione_mensile'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-form-label"><h5>SEDE LAVORO(se diverso dalla residenza del datore di lavoro)</h5></label>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="indirizzo_sede" class="col-form-label">Indirizzo_sede</label>
+                        <input disabled class="form-control" name="indirizzo_sede" type="text" id="indirizzo_sede" value="@if(!empty($pdfdata['indirizzo_sede'][0]->field_value)){{$pdfdata['indirizzo_sede'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="comune_sede" class="col-form-label">Comune_sede</label>
+                        <input disabled class="form-control" name="comune_sede" type="text" id="comune_sede" value="@if(!empty($pdfdata['comune_sede'][0]->field_value)){{$pdfdata['comune_sede'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="provincia_sede" class="col-form-label">Provincia_sede</label>
+                        <input disabled class="form-control" name="provincia_sede" type="text" id="provincia_sede" value="@if(!empty($pdfdata['provincia_sede'][0]->field_value)){{$pdfdata['provincia_sede'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="cap_sede" class="col-form-label">CAP_sede</label>
+                        <input disabled class="form-control" name="cap_sede" type="text" id="cap_sede" value="@if(!empty($pdfdata['cap_sede'][0]->field_value)){{$pdfdata['cap_sede'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-form-label"><h5>Orario di lavoro</h5></label>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="lunedi_dalle_mattina" class="col-form-label">Lunedi_dalle_mattina</label>
+                        <input disabled class="form-control" name="lunedi_dalle_mattina" type="number" id="lunedi_dalle_mattina" value="@if(!empty($pdfdata['lunedi_dalle_mattina'][0]->field_value)){{$pdfdata['lunedi_dalle_mattina'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="martedi_dalle_mattina" class="col-form-label">Martedi_dalle_mattina</label>
+                        <input disabled class="form-control" name="martedi_dalle_mattina" type="number" id="martedi_dalle_mattina" value="@if(!empty($pdfdata['martedi_dalle_mattina'][0]->field_value)){{$pdfdata['martedi_dalle_mattina'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="mercoledi_dalle_mattina" class="col-form-label">Mercoledi_dalle_mattina</label>
+                        <input disabled class="form-control" name="mercoledi_dalle_mattina" type="number" id="mercoledi_dalle_mattina" value="@if(!empty($pdfdata['mercoledi_dalle_mattina'][0]->field_value)){{$pdfdata['mercoledi_dalle_mattina'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="giovedi_dalle_mattina" class="col-form-label">Giovedi_dalle_mattina</label>
+                        <input disabled class="form-control" name="giovedi_dalle_mattina" type="number" id="giovedi_dalle_mattina" value="@if(!empty($pdfdata['giovedi_dalle_mattina'][0]->field_value)){{$pdfdata['giovedi_dalle_mattina'][0]->field_value}}@endif">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="venerdi_dalle_mattina" class="col-form-label">Venerdi_dalle_mattina</label>
+                        <input disabled class="form-control" name="venerdi_dalle_mattina" type="number" id="venerdi_dalle_mattina" value="@if(!empty($pdfdata['venerdi_dalle_mattina'][0]->field_value)){{$pdfdata['venerdi_dalle_mattina'][0]->field_value}}@endif" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="sabato_dalle_mattina" class="col-form-label">Sabato_dalle_mattina</label>
+                        <input disabled class="form-control" name="sabato_dalle_mattina" type="number" id="sabato_dalle_mattina" value="@if(!empty($pdfdata['sabato_dalle_mattina'][0]->field_value)){{$pdfdata['sabato_dalle_mattina'][0]->field_value}}@endif" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
         <br><br><br>
         <div class="row">
             <div class="col">
