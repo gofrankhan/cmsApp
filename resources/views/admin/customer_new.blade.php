@@ -3,6 +3,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
+    function getEndDate(months){
+        var now = new Date();
+        now.setMonth(now.getMonth() + months);
+        var month = (now.getMonth() + 1);                 
+        var day = now.getDate();
+        if (month < 10) 
+            month = "0" + month;
+        if (day < 10) 
+            day = "0" + day;
+        var today_end_date = now.getFullYear() + '-' + month + '-' + day;
+        return today_end_date
+    }
+</script>
+
+<script>
     $(document).ready(function(){
         $('select#subscription').change(function(e){
             var selectValue = $(this).children("option:selected").val();
@@ -10,8 +25,7 @@
             $('select#subscription_type').val(selectValue);
             
             var now = new Date();
-            var month = (now.getMonth() + 1);   
-            var month6 = (now.getMonth() - 6);               
+            var month = (now.getMonth() + 1);             
             var day = now.getDate();
             if (month < 10) 
                 month = "0" + month;
@@ -19,21 +33,40 @@
                 day = "0" + day;
             var today = now.getFullYear() + '-' + month + '-' + day;
 
-            var now = new Date();
-            now.setMonth(now.getMonth() + 6);
-            var month6 = (now.getMonth() + 1);                 
-            var day = now.getDate();
-            if (month6 < 10) 
-                month6 = "0" + month6;
-            if (day < 10) 
-                day = "0" + day;
-            var today_6_month = now.getFullYear() + '-' + month6 + '-' + day;
-
+            var end_date;
+            if(selectValue == 'basic')
+                end_date = getEndDate(1);
+            else if(selectValue == 'plus')
+                end_date = getEndDate(3);
+            else if(selectValue == 'premier')
+                end_date = getEndDate(6);
+            else if(selectValue == 'enterprise')
+                end_date = getEndDate(12);
             $('#start_date').val(today);
-            $('#end_date').val(today_6_month);
+            $('#end_date').val(end_date);
         });
     });
 </script>
+
+<script>
+    $(document).ready(function(){
+        $('select#subscription_type').change(function(e){
+            var selectValue = $(this).children("option:selected").val();
+            
+            var end_date;
+            if(selectValue == 'basic')
+                end_date = getEndDate(1);
+            else if(selectValue == 'plus')
+                end_date = getEndDate(3);
+            else if(selectValue == 'premier')
+                end_date = getEndDate(6);
+            else if(selectValue == 'enterprise')
+                end_date = getEndDate(12);
+            $('#end_date').val(end_date);
+        });
+    });
+</script>
+
 <script>
     $(document).ready(function(){
         $('select.form-select').change(function(e){
@@ -168,10 +201,11 @@
                         <label for="subscription" class="col-sm-2 col-form-label">Subscription</label>
                         <div class="col-sm-8">
                             <select class="form-select" name="subscription" aria-label="Default select example" id="subscription">
-                                <option selected="" hidden></option>
-                                <option value="basic">Basic</option>
-                                <option value="plus">Plus</option>
-                                <option value="premier">Premier</option>
+                                <option selected="Choose Subscription ..." hidden>Choose Subscription...</option>
+                                <option value="basic">Basic - 1 Month</option>
+                                <option value="plus">Plus - 3 Months</option>
+                                <option value="premier">Premier - 6 Months</option>
+                                <option value="enterprise">Enterprise - 1 Year</option>
                             </select>
                         </div>
                     </div>
@@ -198,9 +232,10 @@
                                         <div class="mb-3">
                                             <label  class="form-label">Subscription Type</label>
                                             <select class="form-select" id="subscription_type" name="subscription_type">
-                                                <option value="basic" selected>Basic</option>
-                                                <option value="plus" selected>Plus</option>
-                                                <option value="premier" selected>Premier</option>
+                                                <option value="basic" selected>Basic - 1 Month</option>
+                                                <option value="plus" selected>Plus - 3 Months</option>
+                                                <option value="premier" selected>Premier - 6 Months</option>
+                                                <option value="enterprise" selected>Enterprise - 1 Year</option>
                                             </select>
                                         </div>
                                     </div>
