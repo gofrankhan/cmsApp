@@ -4,6 +4,38 @@
 
 <script>
     $(document).ready(function(){
+        $('select#subscription').change(function(e){
+            var selectValue = $(this).children("option:selected").val();
+            $('#modal_subscription').modal('show');
+            $('select#subscription_type').val(selectValue);
+            
+            var now = new Date();
+            var month = (now.getMonth() + 1);   
+            var month6 = (now.getMonth() - 6);               
+            var day = now.getDate();
+            if (month < 10) 
+                month = "0" + month;
+            if (day < 10) 
+                day = "0" + day;
+            var today = now.getFullYear() + '-' + month + '-' + day;
+
+            var now = new Date();
+            now.setMonth(now.getMonth() + 6);
+            var month6 = (now.getMonth() + 1);                 
+            var day = now.getDate();
+            if (month6 < 10) 
+                month6 = "0" + month6;
+            if (day < 10) 
+                day = "0" + day;
+            var today_6_month = now.getFullYear() + '-' + month6 + '-' + day;
+
+            $('#start_date').val(today);
+            $('#end_date').val(today_6_month);
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
         $('select.form-select').change(function(e){
             var selectValue = $(this).children("option:selected").val();
             if(selectValue === "company"){
@@ -133,6 +165,17 @@
                         </div>
                     </div>
                     <div class="row mb-3">
+                        <label for="subscription" class="col-sm-2 col-form-label">Subscription</label>
+                        <div class="col-sm-8">
+                            <select class="form-select" name="subscription" aria-label="Default select example" id="subscription">
+                                <option selected="" hidden></option>
+                                <option value="basic">Basic</option>
+                                <option value="plus">Plus</option>
+                                <option value="premier">Premier</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
                         <label for="email" class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-8">
                             <input  type="submit" class="btn btn-primary btn-rounded waves-effect waves-light" value="Save">
@@ -141,6 +184,58 @@
                 </form>
             </div>
         </div>
+        <div id="modal_subscription" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="myModalLabel">Subscription</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="" id="form_subscription">
+                                @csrf
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="mb-3">
+                                            <label  class="form-label">Subscription Type</label>
+                                            <select class="form-select" id="subscription_type" name="subscription_type">
+                                                <option value="basic" selected>Basic</option>
+                                                <option value="plus" selected>Plus</option>
+                                                <option value="premier" selected>Premier</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Description</label>
+                                            <textarea type="text" id="description" class="form-control"
+                                                placeholder="Descriptioin" name="description">
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label  class="form-label">Start Date</label>
+                                                <input type="date" id="start_date" class="form-control" name="start_date">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label  class="form-label">End Date</label>
+                                                <input type="date" id="end_date" class="form-control" name="end_date">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-light waves-effect" data-bs-dismiss="modal">Cancel</button>
+                                    <button id="submit-subscription" type="submit" class="btn btn-primary waves-effect waves-light">Save</button>
+                                </div>
+                            </form>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+            </div><!-- end col-->
     </div>
 </div>
 
