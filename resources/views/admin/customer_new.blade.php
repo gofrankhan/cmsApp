@@ -3,6 +3,27 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
+    $(document).ready(function(){
+        $('#cancel_subscription').click(function(e){
+            $('select#subscription').val('none');
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('#save_subscription').click(function(e){
+            var description = $('#description').val();
+            var start_date = $('#start_date').val();
+            var end_date = $('#end_date').val();
+            $('#description1').val(description);
+            $('#start_date1').val(start_date1);
+            $('#end_date1').val(end_date1);
+        });
+    });
+</script>
+
+<script>
     function getEndDate(months){
         var now = new Date();
         now.setMonth(now.getMonth() + months);
@@ -21,6 +42,7 @@
     $(document).ready(function(){
         $('select#subscription').change(function(e){
             var selectValue = $(this).children("option:selected").val();
+            if(selectValue == 'none') return;
             $('#modal_subscription').modal('show');
             $('select#subscription_type').val(selectValue);
             
@@ -197,6 +219,11 @@
                             <input class="form-control" name="postcode" placeholder="postcode" type="text " id="postcode">
                         </div>
                     </div>
+
+                    <input class="form-control" name="description1" placeholder="description" type="text " id="description1" hidden>
+                    <input type="date" id="start_date1" class="form-control" name="start_date1" hidden>
+                    <input type="date" id="end_date1" class="form-control" name="end_date1" hidden>
+                    
                     <div class="row mb-3">
                         <label for="subscription" class="col-sm-2 col-form-label">Subscription</label>
                         <div class="col-sm-8">
@@ -206,6 +233,7 @@
                                 <option value="plus">Plus - 3 Months</option>
                                 <option value="premier">Premier - 6 Months</option>
                                 <option value="enterprise">Enterprise - 1 Year</option>
+                                <option value="none">None</option>
                             </select>
                         </div>
                     </div>
@@ -225,48 +253,45 @@
                                 <h5 class="modal-title" id="myModalLabel">Subscription</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action="" id="form_subscription">
-                                @csrf
-                                <div class="modal-body">
-                                    <div class="row">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="mb-3">
+                                        <label  class="form-label">Subscription Type</label>
+                                        <select class="form-select" id="subscription_type" name="subscription_type">
+                                            <option value="basic" selected>Basic - 1 Month</option>
+                                            <option value="plus" selected>Plus - 3 Months</option>
+                                            <option value="premier" selected>Premier - 6 Months</option>
+                                            <option value="enterprise" selected>Enterprise - 1 Year</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Description</label>
+                                        <textarea type="text" id="description" class="form-control"
+                                            placeholder="Descriptioin" name="description">
+                                        </textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label  class="form-label">Subscription Type</label>
-                                            <select class="form-select" id="subscription_type" name="subscription_type">
-                                                <option value="basic" selected>Basic - 1 Month</option>
-                                                <option value="plus" selected>Plus - 3 Months</option>
-                                                <option value="premier" selected>Premier - 6 Months</option>
-                                                <option value="enterprise" selected>Enterprise - 1 Year</option>
-                                            </select>
+                                            <label  class="form-label">Start Date</label>
+                                            <input type="date" id="start_date" class="form-control" name="start_date">
                                         </div>
                                     </div>
-                                    <div>
+                                    <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label">Description</label>
-                                            <textarea type="text" id="description" class="form-control"
-                                                placeholder="Descriptioin" name="description">
-                                            </textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label  class="form-label">Start Date</label>
-                                                <input type="date" id="start_date" class="form-control" name="start_date">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label  class="form-label">End Date</label>
-                                                <input type="date" id="end_date" class="form-control" name="end_date">
-                                            </div>
+                                            <label  class="form-label">End Date</label>
+                                            <input type="date" id="end_date" class="form-control" name="end_date">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-light waves-effect" data-bs-dismiss="modal">Cancel</button>
-                                    <button id="submit-subscription" type="submit" class="btn btn-primary waves-effect waves-light">Save</button>
-                                </div>
-                            </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button id="cancel_subscription" type="button" class="btn btn-light waves-effect" data-bs-dismiss="modal">Cancel</button>
+                                <button id="save_subscription" type="submit" class="btn btn-primary waves-effect waves-light" data-bs-dismiss="modal">Save</button>
+                            </div>
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->

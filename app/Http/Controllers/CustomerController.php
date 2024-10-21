@@ -131,6 +131,7 @@ class CustomerController extends Controller
         $customer->region = $request->region;
         $customer->postcode = $request->postcode;
         $customer->save();
+
         $notification = array(
             'message' => 'Customer data added successfully', 
             'alert-type' => 'success'
