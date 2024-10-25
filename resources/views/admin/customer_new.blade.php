@@ -17,8 +17,8 @@
             var start_date = $('#start_date').val();
             var end_date = $('#end_date').val();
             $('#description1').val(description);
-            $('#start_date1').val(start_date1);
-            $('#end_date1').val(end_date1);
+            $('#start_date1').val(start_date);
+            $('#end_date1').val(end_date);
         });
     });
 </script>

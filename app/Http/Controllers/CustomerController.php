@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\RedirectResponse;
 use App\Models\User;
 use App\Models\Customer;
+use App\Models\Subscription;
 use DataTables;
 
 class CustomerController extends Controller
@@ -131,6 +132,18 @@ class CustomerController extends Controller
         $customer->region = $request->region;
         $customer->postcode = $request->postcode;
         $customer->save();
+
+        $subscription = new Subscription();
+        $subscription->customer_id = $customer->id;
+        if (in_array( $request->subscription , ['basic','plus', 'premier','enterprise'], true )){
+            $subscription->is_subscribed = true;
+        }else
+            $subscription->is_subscribed = false;
+        $subscription->subscription_type = $request->subscription;
+        $subscription->description = $request->description1;
+        $subscription->start_date = $request->start_date1;
+        $subscription->end_date = $request->end_date1;
+        $subscription->save();
 
         $notification = array(
             'message' => 'Customer data added successfully', 
