@@ -174,6 +174,8 @@ class CustomerController extends Controller
     public function DeleteCustomerData($id)
     {
         DB::table('customers')->where('id', $id)->delete();
+        $subscription1 =  Subscription::select('id')->where('customer_id', $id)->first();
+        DB::table('subscriptions')->where('id', $subscription1->id)->delete();
         $notification = array(
             'message' => 'Customer data deleted successfully', 
             'alert-type' => 'success'
@@ -234,6 +236,20 @@ class CustomerController extends Controller
         $customer->region = $request->region;
         $customer->postcode = $request->postcode;
         $customer->save();
+
+        $subscription1 =  Subscription::select('id')->where('customer_id', $id)->first();
+        $subscription = Subscription::find($subscription1->id);
+        $subscription->customer_id = $customer->id;
+        if (in_array( $request->subscription , ['basic','plus', 'premier','enterprise'], true )){
+            $subscription->is_subscribed = true;
+        }else
+            $subscription->is_subscribed = false;
+        $subscription->subscription_type = $request->subscription;
+        $subscription->description = $request->description1;
+        $subscription->start_date = $request->start_date1;
+        $subscription->end_date = $request->end_date1;
+        $subscription->save();
+
         $notification = array(
             'message' => 'Customer data updated successfully', 
             'alert-type' => 'success'

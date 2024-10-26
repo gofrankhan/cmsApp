@@ -216,11 +216,37 @@
                         <div class="col-sm-8">
                             <select class="form-select" name="subscription" aria-label="Default select example" id="subscription">
                                 <option selected="Choose Subscription ..." hidden>Choose Subscription...</option>
-                                <option value="basic">Basic - 1 Month</option>
+                                @if( $subscription->subscription_type == 'basic')
+                                <option value="basic" selected>Basic - 1 Month</option>
                                 <option value="plus">Plus - 3 Months</option>
                                 <option value="premier">Premier - 6 Months</option>
                                 <option value="enterprise">Enterprise - 1 Year</option>
                                 <option value="none">None</option>
+                                @elseif( $subscription->subscription_type == 'plus')
+                                <option value="basic" >Basic - 1 Month</option>
+                                <option value="plus" selected>Plus - 3 Months</option>
+                                <option value="premier">Premier - 6 Months</option>
+                                <option value="enterprise">Enterprise - 1 Year</option>
+                                <option value="none">None</option>
+                                @elseif( $subscription->subscription_type == 'premier')
+                                <option value="basic" >Basic - 1 Month</option>
+                                <option value="plus" >Plus - 3 Months</option>
+                                <option value="premier" selected>Premier - 6 Months</option>
+                                <option value="enterprise">Enterprise - 1 Year</option>
+                                <option value="none">None</option>
+                                @elseif( $subscription->subscription_type == 'enterprise')
+                                <option value="basic" >Basic - 1 Month</option>
+                                <option value="plus" >Plus - 3 Months</option>
+                                <option value="premier">Premier - 6 Months</option>
+                                <option value="enterprise" selected>Enterprise - 1 Year</option>
+                                <option value="none">None</option>
+                                @else
+                                <option value="basic" >Basic - 1 Month</option>
+                                <option value="plus" >Plus - 3 Months</option>
+                                <option value="premier">Premier - 6 Months</option>
+                                <option value="enterprise" selected>Enterprise - 1 Year</option>
+                                <option value="none" selected>None</option>
+                                @endif
                             </select>
                         </div>
                     </div>
