@@ -247,55 +247,55 @@
             </div>
         </div>
         <div id="modal_subscription" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="myModalLabel">Subscription</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="myModalLabel">Subscription</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="mb-3">
+                                    <label  class="form-label">Subscription Type</label>
+                                    <select class="form-select" id="subscription_type" name="subscription_type">
+                                        <option value="basic" selected>Basic - 1 Month</option>
+                                        <option value="plus" selected>Plus - 3 Months</option>
+                                        <option value="premier" selected>Premier - 6 Months</option>
+                                        <option value="enterprise" selected>Enterprise - 1 Year</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="modal-body">
-                                <div class="row">
+                            <div>
+                                <div class="mb-3">
+                                    <label class="form-label">Description</label>
+                                    <textarea type="text" id="description" class="form-control"
+                                        placeholder="Descriptioin" name="description">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label  class="form-label">Subscription Type</label>
-                                        <select class="form-select" id="subscription_type" name="subscription_type">
-                                            <option value="basic" selected>Basic - 1 Month</option>
-                                            <option value="plus" selected>Plus - 3 Months</option>
-                                            <option value="premier" selected>Premier - 6 Months</option>
-                                            <option value="enterprise" selected>Enterprise - 1 Year</option>
-                                        </select>
+                                        <label  class="form-label">Start Date</label>
+                                        <input type="date" id="start_date" class="form-control" name="start_date">
                                     </div>
                                 </div>
-                                <div>
+                                <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Description</label>
-                                        <textarea type="text" id="description" class="form-control"
-                                            placeholder="Descriptioin" name="description">
-                                        </textarea>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label  class="form-label">Start Date</label>
-                                            <input type="date" id="start_date" class="form-control" name="start_date">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label  class="form-label">End Date</label>
-                                            <input type="date" id="end_date" class="form-control" name="end_date">
-                                        </div>
+                                        <label  class="form-label">End Date</label>
+                                        <input type="date" id="end_date" class="form-control" name="end_date">
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button id="cancel_subscription" type="button" class="btn btn-light waves-effect" data-bs-dismiss="modal">Cancel</button>
-                                <button id="save_subscription" type="submit" class="btn btn-primary waves-effect waves-light" data-bs-dismiss="modal">Save</button>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-            </div><!-- end col-->
+                        </div>
+                        <div class="modal-footer">
+                            <button id="cancel_subscription" type="button" class="btn btn-light waves-effect" data-bs-dismiss="modal">Cancel</button>
+                            <button id="save_subscription" type="submit" class="btn btn-primary waves-effect waves-light" data-bs-dismiss="modal">Save</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div><!-- end col-->
     </div>
 </div>
 

@@ -162,7 +162,8 @@ class CustomerController extends Controller
     { 
         $title = "Show Customer";
         $customer = DB::table('customers')->where('id', $id)->first();
-        return view('admin.customer_show',compact('customer', 'title'));
+        $subscription = DB::table('subscriptions')->where('customer_id', $id)->first();
+        return view('admin.customer_show', compact('customer', 'subscription' , 'title'));
     }
       /**
     * Display the specified resource.
@@ -190,7 +191,8 @@ class CustomerController extends Controller
     {
         $title = "Edit Customer";
         $customer = DB::table('customers')->where('id', $id)->first();
-        return view('admin.customer_edit',compact('customer', 'title'));
+        $subscription = DB::table('subscriptions')->where('customer_id', $id)->first();
+        return view('admin.customer_edit',compact('customer','subscription', 'title'));
     }
 
     /**

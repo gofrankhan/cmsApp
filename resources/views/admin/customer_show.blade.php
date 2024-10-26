@@ -104,6 +104,30 @@
                         </div>
                     </div>
                     <div class="row mb-3">
+                        <label for="subscription" class="col-sm-2 col-form-label">Subscription</label>
+                        <div class="col-sm-10">
+                            {{ $subscription->subscription_type }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="description" class="col-sm-2 col-form-label">Description</label>
+                        <div class="col-sm-10">
+                            {{ $subscription->description }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="start_date" class="col-sm-2 col-form-label">Start Date</label>
+                        <div class="col-sm-10">
+                            {{ $subscription->start_date }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="end_date" class="col-sm-2 col-form-label">End Date</label>
+                        <div class="col-sm-10">
+                            {{ $subscription->end_date }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
                         <label for="email" class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-10">
                             <input type="submit" class="btn btn-primary btn-rounded waves-effect waves-light" value="Edit">
