@@ -277,13 +277,13 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label  class="form-label">Start Date</label>
-                                        <input type="date" id="start_date" class="form-control" name="start_date">
+                                        <input type="date" id="start_date" class="form-control" name="start_date" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label  class="form-label">End Date</label>
-                                        <input type="date" id="end_date" class="form-control" name="end_date">
+                                        <input type="date" id="end_date" class="form-control" name="end_date" disabled>
                                     </div>
                                 </div>
                             </div>
