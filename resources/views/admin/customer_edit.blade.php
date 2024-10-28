@@ -2,6 +2,11 @@
 @section('admin')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+@php 
+    $user_type = Auth::user()->user_type;
+    $is_admin = ($user_type == 'admin');
+@endphp
+
 <script>
     $(document).ready(function(){
         $('#cancel_subscription').click(function(e){
@@ -207,6 +212,7 @@
                             <input class="form-control" name="postcode" placeholder="postcode" type="text " id="postcode" value="{{ $customer->postcode }}">
                         </div>
                     </div>
+                    @if($is_admin)
                     <input class="form-control" name="description1" placeholder="description" type="text " id="description1" value="{{ $subscription->description }}" hidden>
                     <input type="date" id="start_date1" class="form-control" name="start_date1" value="{{ $subscription->start_date }}" hidden>
                     <input type="date" id="end_date1" class="form-control" name="end_date1" value="{{ $subscription->end_date }}" hidden>
@@ -250,6 +256,7 @@
                             </select>
                         </div>
                     </div>
+                    @endif
                     <div class="row mb-3">
                         <label for="email" class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-8">
@@ -259,6 +266,7 @@
                 </form>
             </div>
         </div>
+        @if($is_admin)
         <div id="modal_subscription" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -308,6 +316,7 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
+        @endif
     </div><!-- end col-->
     </div>
 </div>
