@@ -7,3 +7,7 @@ SELECT `ID` ,`AccountID` ,`TaxID` ,`CustomerType`, `FirstName` ,`LastName` ,`Com
 
 UPDATE customers
 SET    username = 'gofran.khan';
+
+INSERT INTO subscriptions (customer_id, is_subscribed, subscription_type, description, start_date, end_date)
+SELECT id, 0, 'none' NULL, NULL, NULL
+FROM customers;

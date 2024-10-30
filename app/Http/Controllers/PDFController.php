@@ -120,7 +120,7 @@ class PDFController extends Controller
             'pdfdata' => $pdfdata
         ]; 
             
-         $pdf = PDF::loadView('admin.PDF.delega_di_lavoro_domestico', $data);
+         $pdf = PDF::loadView('admin.PDF.delega_di_lavoro_domestico2', $data);
          return $pdf->stream('Delega_di_lavoro_domestico.pdf');
     }
 

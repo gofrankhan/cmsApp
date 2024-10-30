@@ -106,25 +106,25 @@
                     <div class="row mb-3">
                         <label for="subscription" class="col-sm-2 col-form-label">Subscription</label>
                         <div class="col-sm-10">
-                            {{ $subscription->subscription_type }}
+                            @if(!empty($subscription->subscription_type)){{ $subscription->subscription_type }}@endif
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label for="description" class="col-sm-2 col-form-label">Description</label>
                         <div class="col-sm-10">
-                            {{ $subscription->description }}
+                            @if(!empty($subscription->description)){{ $subscription->description }}@endif
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label for="start_date" class="col-sm-2 col-form-label">Start Date</label>
                         <div class="col-sm-10">
-                            {{ $subscription->start_date }}
+                            @if(!empty($subscription->start_date)){{ $subscription->start_date }}@endif
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label for="end_date" class="col-sm-2 col-form-label">End Date</label>
                         <div class="col-sm-10">
-                            {{ $subscription->end_date }}
+                            @if(!empty($subscription->end_date)){{ $subscription->end_date }}@endif
                         </div>
                     </div>
                     <div class="row mb-3">
