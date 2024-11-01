@@ -21,9 +21,11 @@
             var description = $('#description').val();
             var start_date = $('#start_date').val();
             var end_date = $('#end_date').val();
+            var subscription_type = $('#subscription_type').find(":selected").val();
             $('#description1').val(description);
             $('#start_date1').val(start_date);
             $('#end_date1').val(end_date);
+            $('#subscription').val(subscription_type).change();
         });
     });
 </script>
