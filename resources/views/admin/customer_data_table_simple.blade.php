@@ -115,7 +115,7 @@
                     <th>Tax ID</th>
                     <th>Name</th>
                     <th>Mobile No</th>
-                    <th></th>
+                    <th style="width:0%"></th>
                     <th>Actions</th>
                 </tr>
             </thead>

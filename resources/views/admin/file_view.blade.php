@@ -128,7 +128,7 @@
                         <label for="customer" class="col-form-label">Customer</label>
                     </div>
                     <div class="col-sm-8">
-                        <input class="form-control" name="customer" placeholder="Customer" type="text" id="customer" value="{{ $files[0]->customer }}" disabled>
+                        <label for="customer" class="col-form-label">{{ $files[0]->customer }} @if($files[0]->is_subscribed == '1')<i class="ri-vip-crown-fill">@endif</i></label>
                     </div>
                     <div class="col-sm-2">
                         <a href="{{route('customer.show',$files[0]->customer_id)}}" target="_blank">View</a>

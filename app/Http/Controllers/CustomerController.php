@@ -135,7 +135,7 @@ class CustomerController extends Controller
 
         $subscription = new Subscription();
         $subscription->customer_id = $customer->id;
-        if (in_array( $request->subscription , ['basic','plus', 'premier','enterprise'], true )){
+        if (in_array( $request->subscription , ['subscribed'], true )){
             $subscription->is_subscribed = true;
         }else
             $subscription->is_subscribed = false;
@@ -240,7 +240,7 @@ class CustomerController extends Controller
         $subscription1 =  Subscription::select('id')->where('customer_id', $id)->first();
         $subscription = Subscription::find($subscription1->id);
         $subscription->customer_id = $customer->id;
-        if (in_array( $request->subscription , ['basic','plus', 'premier','enterprise'], true )){
+        if (in_array( $request->subscription , ['subscribed'], true )){
             $subscription->is_subscribed = true;
         }else
             $subscription->is_subscribed = false;

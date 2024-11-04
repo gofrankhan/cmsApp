@@ -1349,9 +1349,11 @@ class FileController extends Controller
         $attachments = DB::table('attachments')->where('file_id', $file_id)->get();
         $files = Invoice::select('invoices.id', 'invoices.price', 'invoices.file_id', 'invoices.customer_id', 
                                 'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop',
-                                'services.service', 'invoices.status', 'invoices.lawyer_id', 'invoices.lawyer_price')
+                                'services.service', 'invoices.status', 'invoices.lawyer_id', 'invoices.lawyer_price',
+                                'subscriptions.is_subscribed')
                                     ->join('customers', 'invoices.customer_id', '=', 'customers.id')
                                     ->join('services', 'invoices.service_id', '=', 'services.id')
+                                    ->join('subscriptions', 'invoices.customer_id', '=', 'subscriptions.customer_id')
                                     ->where('invoices.file_id', $file_id)
                                     ->get();
         $pdfdata['anno'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'anno')->get();
@@ -1443,9 +1445,11 @@ class FileController extends Controller
         $attachments = DB::table('attachments')->where('file_id', $file_id)->get();
         $files = Invoice::select('invoices.id', 'invoices.price', 'invoices.file_id', 'invoices.customer_id', 
                                 'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop',
-                                'services.service', 'invoices.status', 'invoices.lawyer_id', 'invoices.lawyer_price')
+                                'services.service', 'invoices.status', 'invoices.lawyer_id', 'invoices.lawyer_price',
+                                'subscriptions.is_subscribed')
                                     ->join('customers', 'invoices.customer_id', '=', 'customers.id')
                                     ->join('services', 'invoices.service_id', '=', 'services.id')
+                                    ->join('subscriptions', 'invoices.customer_id', '=', 'subscriptions.customer_id')
                                     ->where('invoices.file_id', $file_id)
                                     ->get();
         $pdfdata['anno'] = Pdfdata::select('field_value')->where('file_id', $file_id)->where('field_name', 'anno')->get();

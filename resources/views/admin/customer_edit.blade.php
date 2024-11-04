@@ -16,6 +16,14 @@
 </script>
 
 <script>
+    function getLastDateOfCalender(){
+        var now = new Date();
+        var last_date_of_calender = now.getFullYear() + '-' + 12 + '-' + 31;
+        return last_date_of_calender;
+    }
+</script>
+
+<script>
     $(document).ready(function(){
         $('#save_subscription').click(function(e){
             var description = $('#description').val();
@@ -41,7 +49,7 @@
         if (day < 10) 
             day = "0" + day;
         var today_end_date = now.getFullYear() + '-' + month + '-' + day;
-        return today_end_date
+        return today_end_date;
     }
 </script>
 
@@ -52,7 +60,8 @@
             if(selectValue == 'none') return;
             $('#modal_subscription').modal('show');
             $('select#subscription_type').val(selectValue);
-            
+            $('#description').val("");
+
             var now = new Date();
             var month = (now.getMonth() + 1);             
             var day = now.getDate();
@@ -62,17 +71,8 @@
                 day = "0" + day;
             var today = now.getFullYear() + '-' + month + '-' + day;
 
-            var end_date;
-            if(selectValue == 'basic')
-                end_date = getEndDate(1);
-            else if(selectValue == 'plus')
-                end_date = getEndDate(3);
-            else if(selectValue == 'premier')
-                end_date = getEndDate(6);
-            else if(selectValue == 'enterprise')
-                end_date = getEndDate(12);
             $('#start_date').val(today);
-            $('#end_date').val(end_date);
+            $('#end_date').val(getLastDateOfCalender());
         });
     });
 </script>
@@ -81,17 +81,7 @@
     $(document).ready(function(){
         $('select#subscription_type').change(function(e){
             var selectValue = $(this).children("option:selected").val();
-            
-            var end_date;
-            if(selectValue == 'basic')
-                end_date = getEndDate(1);
-            else if(selectValue == 'plus')
-                end_date = getEndDate(3);
-            else if(selectValue == 'premier')
-                end_date = getEndDate(6);
-            else if(selectValue == 'enterprise')
-                end_date = getEndDate(12);
-            $('#end_date').val(end_date);
+            $('#end_date').val(getLastDateOfCalender());
         });
     });
 </script>
@@ -224,36 +214,12 @@
                         <div class="col-sm-8">
                             <select class="form-select" name="subscription" aria-label="Default select example" id="subscription">
                                 <option selected="Choose Subscription ..." hidden>Choose Subscription...</option>
-                                @if( $subscription->subscription_type == 'basic')
-                                <option value="basic" selected>Basic - 1 Month</option>
-                                <option value="plus">Plus - 3 Months</option>
-                                <option value="premier">Premier - 6 Months</option>
-                                <option value="enterprise">Enterprise - 1 Year</option>
-                                <option value="none">None</option>
-                                @elseif( $subscription->subscription_type == 'plus')
-                                <option value="basic" >Basic - 1 Month</option>
-                                <option value="plus" selected>Plus - 3 Months</option>
-                                <option value="premier">Premier - 6 Months</option>
-                                <option value="enterprise">Enterprise - 1 Year</option>
-                                <option value="none">None</option>
-                                @elseif( $subscription->subscription_type == 'premier')
-                                <option value="basic" >Basic - 1 Month</option>
-                                <option value="plus" >Plus - 3 Months</option>
-                                <option value="premier" selected>Premier - 6 Months</option>
-                                <option value="enterprise">Enterprise - 1 Year</option>
-                                <option value="none">None</option>
-                                @elseif( $subscription->subscription_type == 'enterprise')
-                                <option value="basic" >Basic - 1 Month</option>
-                                <option value="plus" >Plus - 3 Months</option>
-                                <option value="premier">Premier - 6 Months</option>
-                                <option value="enterprise" selected>Enterprise - 1 Year</option>
-                                <option value="none">None</option>
+                                @if( $subscription->subscription_type == 'subscribed')
+                                <option value="subscribed" selected>Subscribe</option>
+                                <option value="none">Non-Subscribe</option>
                                 @else
-                                <option value="basic" >Basic - 1 Month</option>
-                                <option value="plus" >Plus - 3 Months</option>
-                                <option value="premier">Premier - 6 Months</option>
-                                <option value="enterprise" selected>Enterprise - 1 Year</option>
-                                <option value="none" selected>None</option>
+                                <option value="subscribed" >Subscribe</option>
+                                <option value="none" selected>Non-Subscribe</option>
                                 @endif
                             </select>
                         </div>
@@ -280,11 +246,9 @@
                         <div class="row">
                             <div class="mb-3">
                                 <label  class="form-label">Subscription Type</label>
-                                <select class="form-select" id="subscription_type" name="subscription_type">
-                                    <option value="basic" selected>Basic - 1 Month</option>
-                                    <option value="plus" selected>Plus - 3 Months</option>
-                                    <option value="premier" selected>Premier - 6 Months</option>
-                                    <option value="enterprise" selected>Enterprise - 1 Year</option>
+                                <select class="form-select" id="subscription_type" name="subscription_type" disabled>
+                                    <option value="subscribed" selected>Subscribe</option>
+                                    <option value="none">Non-Subscribe</option>
                                 </select>
                             </div>
                         </div>
