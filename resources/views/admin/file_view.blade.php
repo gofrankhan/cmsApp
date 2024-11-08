@@ -65,7 +65,7 @@
                         Prints <i class="mdi mdi-chevron-down"></i>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        @if($files[0]->service == 'IMMIGRAZIONE' || $files[0]->service == 'FLUSSI 2023' )
+                        @if($files[0]->service == 'IMMIGRAZIONE' || $files[0]->service == 'FLUSSI 2023' || $files[0]->service == 'FLUSSI 2025' )
                         <a class="dropdown-item" href="{{ route ('flussi1', $files[0]->id)}}" target="_blank">Privacy e GDPR</a>
                         <a class="dropdown-item" href="{{ route ('flussi2', $files[0]->id)}}" target="_blank">Mandato Flussi</a>
                         <a class="dropdown-item" href="{{ route ('flussi3', $files[0]->id)}}" target="_blank">Delega Domanda Flussi</a>

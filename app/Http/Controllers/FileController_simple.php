@@ -21,6 +21,56 @@ use Debugbar;
 
 class FileController_simple extends Controller
 {
+
+    public function FileDataTable_new_simple(Request $request, $view_type)
+    {
+        $title = "Files";
+        $shop_name = Auth::user()->shop_name;
+        $user_type = Auth::user()->user_type;
+        $user_id = Auth::user()->id;
+        $data = null;
+
+        if($user_type =='admin'){
+            $data = Invoice::select('invoices.id as id', 'invoices.created_at as created','invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
+                                ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                ->orderByDesc('file_id')
+                                ->paginate(50);
+        }
+        else if ($user_type =='lawyer'){
+            $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
+                                ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->leftjoin('users', 'invoices.lawyer_id', '=', 'users.id')
+                                ->where('invoices.lawyer_id', $user_id)
+                                ->orderByDesc('file_id')
+                                ->paginate(50);
+        }
+        else {
+            $data = Invoice::select('invoices.id as id', 'invoices.file_id as file_id', 'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"),'users.shop_name as shop','services.service', 'invoices.status')
+                                ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                ->whereIn('invoices.user_id', function($query) use ($shop_name){
+                                    $query->select('id')->from('users')->where('shop_name', $shop_name);
+                                })
+                                ->orderByDesc('file_id')
+                                ->paginate(50);
+        }
+        $services = Invoice::select('invoices.service_id as service_id', 'services.service')
+                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+                                ->distinct()
+                                ->orderByDesc('file_id')
+                                ->get();
+
+        $shops = Invoice::select('invoices.user_id as user_id', 'users.shop_name')
+                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+                                ->distinct()
+                                ->get();
+
+        return view('admin.files', compact('data', 'title', 'shops', 'services'));
+    }
     public function FileDataTable_simple(Request $request, $view_type)
     {
         $title = "Files";

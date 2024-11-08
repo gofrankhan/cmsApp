@@ -46,6 +46,9 @@ $(document).ready(function() {
         <button type="button" id="btn_movement_simple" class="btn font-size-20 header-item waves-effect">
             Movements
         </button>
+        <button type="button" id="btn_file_new" class="btn font-size-20 header-item waves-effect" hidden>
+            File New
+        </button>
 
     </div>
 
@@ -112,6 +115,11 @@ document.getElementById("btn_file").addEventListener("click", function(event) {
 document.getElementById("btn_file_simple").addEventListener("click", function(event) {
   event.preventDefault();
   window.location.href = '/file/data/simple/admin';
+});
+
+document.getElementById("btn_file_new").addEventListener("click", function(event) {
+  event.preventDefault();
+  window.location.href = '/file_new/data/simple/admin';
 });
 
 document.getElementById("btn_movement").addEventListener("click", function(event) {

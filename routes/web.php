@@ -112,6 +112,7 @@ Route::middleware('auth')->group(function(){
 Route::middleware('auth')->group(function(){
     Route::post('/file/store/simple', [FileController_simple::class, 'FileStore'])->name('file.store.simple');
     Route::get('/file/data/simple/{type}', [FileController_simple::class, 'FileDataTable_simple'])->name('file.data.simple');
+    Route::get('/file_new/data/simple/{type}', [FileController_simple::class, 'FileDataTable_new_simple'])->name('file.new.data.simple');
     Route::get('/load/table/search', [FileController_simple::class, 'LoadTableSearch_simple'])->name('load.table.search');
     Route::get('/movement/filter/service', [FileController_simple::class, 'MovementFilterService_simple'])->name('movement.filter.service');
     Route::get('/movement/filter/service/all', [FileController_simple::class, 'MovementFilterServiceAll_simple'])->name('movement.filter.service.all');
