@@ -1348,7 +1348,7 @@ class FileController extends Controller
         $comments = DB::table('comments')->where('file_id', $file_id)->get();
         $attachments = DB::table('attachments')->where('file_id', $file_id)->get();
         $files = Invoice::select('invoices.id', 'invoices.price', 'invoices.file_id', 'invoices.customer_id', 
-                                'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop',
+                                'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"), 'invoices.shop_name as shop',
                                 'services.service', 'invoices.status', 'invoices.lawyer_id', 'invoices.lawyer_price',
                                 'subscriptions.is_subscribed')
                                     ->join('customers', 'invoices.customer_id', '=', 'customers.id')
@@ -1444,7 +1444,7 @@ class FileController extends Controller
         $comments = DB::table('comments')->where('file_id', $file_id)->get();
         $attachments = DB::table('attachments')->where('file_id', $file_id)->get();
         $files = Invoice::select('invoices.id', 'invoices.price', 'invoices.file_id', 'invoices.customer_id', 
-                                'customers.taxid', 'customers.firstname as customer','invoices.shop_name as shop',
+                                'customers.taxid', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"), 'invoices.shop_name as shop',
                                 'services.service', 'invoices.status', 'invoices.lawyer_id', 'invoices.lawyer_price',
                                 'subscriptions.is_subscribed')
                                     ->join('customers', 'invoices.customer_id', '=', 'customers.id')

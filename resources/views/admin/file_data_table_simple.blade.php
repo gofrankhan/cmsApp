@@ -241,8 +241,9 @@ $(document).ready(function() {
                         <tr>
                             <th style="width:5%">File ID</th>
                             <th style="width:20%">Tax ID</th>
+                            <th style="width:2%"></th>
                             <th style="width:20%">Customer</th>
-                            <th style="width:20%">Shop</th>
+                            <th style="width:18%">Shop</th>
                             <th style="width:10%">Service</th>
                             <th style="width:15%">Created</th>
                             <th style="width:2%"></th>
@@ -255,10 +256,15 @@ $(document).ready(function() {
                         <tr>
                             <td style="width:5%">{{ $r->file_id }}</td>
                             <td style="width:20%">{{ $r->taxid }}</td>
+                            <td style="width:2%">
+                                @if($r->is_subscribed == "1")
+                                    <div><i class="ri-vip-crown-fill" style="color: #cf2847;"></i></div>
+                                @endif
+                            </td>
                             <td style="width:20%">{{ $r->customer }}</td>
-                            <td style="width:20%">{{ $r->shop }}</td>
-                            <td style="width:25%">{{ $r->service }}</td>
-                            <td style="width:25%">{{ $r->created }}</td>
+                            <td style="width:18%">{{ $r->shop }}</td>
+                            <td style="width:10%">{{ $r->service }}</td>
+                            <td style="width:15%">{{ $r->created }}</td>
 
                             <td style="width:2%">
                                 @if($r->status == "Completed")
@@ -512,9 +518,14 @@ $(document).ready(function() {
             var correntFileID = item.file_id;
             var cell1 = $("<td style='width:5%'>").text(correntFileID);
             var cell2 = $("<td style='width:20%'>").text(item.taxid);
-            var cell3 = $("<td style='width:15%'>").text(item.customer);
-            var cell4 = $("<td style='width:15%'>").text(item.shop);
-            var cell5 = $("<td style='width:20%'>").text(item.service);
+            if(item.is_subscribed == '1')
+                var cell21 = $("<td style='width:2%'>").html("<div><i class='ri-vip-crown-fill' style='color: #cf2847;'></i></div>");
+            else
+                var cell21 = $("<td style='width:2%'>").text("");
+            var cell3 = $("<td style='width:20%'>").text(item.customer);
+            var cell4 = $("<td style='width:18%'>").text(item.shop);
+            var cell5 = $("<td style='width:10%'>").text(item.service);
+            var cell51 = $("<td style='width:15%'>").text(item.created);
             if(item.status == "Completed")
                 var cell6 = $("<td style='width:2%'>").html("<div class='font-size-13'><i class='ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2'></i></div>");
             if(item.status == "Pending")
@@ -576,7 +587,7 @@ $(document).ready(function() {
             // Add more cells as needed
 
             // Append the cells to the row
-            row.append(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8);
+            row.append(cell1, cell2, cell21, cell3, cell4, cell5, cell51, cell6, cell7, cell8);
             // Append the row to the table body
             $("#tableBody").append(row);
           });
