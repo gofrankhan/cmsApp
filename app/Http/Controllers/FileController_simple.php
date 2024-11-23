@@ -159,16 +159,31 @@ class FileController_simple extends Controller
                                 ->where('invoices.lawyer_id', $user_id)
                                 ->orderByDesc('file_id');
         }
-        $searchText = $request->search_text;
-        if(!empty($request->search_text)){
-            $query->where(function ($innerQuery) use ($searchText) {
-                $innerQuery->where('file_id', 'like', '%'.$searchText.'%')
-            ->orWhere('taxid', 'like', '%'.$searchText.'%')
-            ->orWhere('customers.firstname', 'like', '%'.$searchText.'%')
-            ->orWhere('customers.lastname', 'like', '%'.$searchText.'%')
-            ->orWhere('users.shop_name', 'like', '%'.$searchText.'%')
-            ->orWhere('services.service', 'like', '%'.$searchText.'%')
-            ->orWhere('status', 'like', '%'.$searchText.'%');
+        $start_date = $request->start_date;
+        $end_date =  $request->end_date;
+        dd($start_date);
+        $search_file_id = $request->search_file_id;
+        $search_tax_id = $request->search_tax_id;
+        $search_customer_name = $request->search_customer_name;
+        if(!empty($request->search_file_id)){
+            $query->where(function ($innerQuery) use ($search_file_id) {
+                $innerQuery->where('invoices.file_id', 'like', '%'.$search_file_id.'%');
+            });
+        }
+        if(!empty($request->start_date) && !empty($request->end_date)){
+            $query->where(function ($innerQuery) use ($start_date, $end_date) {
+                $innerQuery->whereBetween('invoices.created_at', [$start_date, $end_date]);
+            });
+        }
+        if(!empty($request->search_tax_id)){
+            $query->where(function ($innerQuery) use ($search_tax_id) {
+                $innerQuery->where('customers.taxid', 'like', '%'.$search_tax_id.'%');
+            });
+        }
+        if(!empty($request->search_customer_name)){
+            $query->where(function ($innerQuery) use ($search_customer_name) {
+                $innerQuery->where('customers.firstname', 'like', '%'.$search_customer_name.'%')
+                ->OrWhere('customers.lastname', 'like', '%'.$search_customer_name.'%');
             });
         }
         if(!empty($request->shop_name)) {
@@ -181,7 +196,7 @@ class FileController_simple extends Controller
             $query->where('invoices.status', $request->status);
         }
         $data = $query->get();
-        Debugbar::addMessage($data);
+        Debugbar::addMessage($start_date);
         return response()->json([$data, $user_type]);
     }
 

@@ -160,7 +160,7 @@ $(document).ready(function() {
                 <tr>
                     <th class="sortable filterable" data-column="0">
                         <strong>File ID</strong>
-                        <i class="fas fa-filter filter-icon" style="cursor: pointer;"></i>
+                        <i class="fas fa-search search-icon" style="cursor: pointer;"></i>
                         <i class="fas fa-sort sort-icon"></i>
                         <div class="filter-container" style="display: none;">
                             <input type="text" id="filter_file_id" class="form-control filter-input" placeholder="Filter by File ID">

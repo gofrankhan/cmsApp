@@ -6,6 +6,133 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+
+<script>
+$(document).ready(function() {
+    // Sorting functionality for each column
+    $('#file_datatable thead th.sortable').on('click', function(e) {
+        if ($(e.target).is('input, select, .fa-calendar-alt')) {
+            return; // Prevent sorting when clicking inside the filter input or dropdown or calendar icon
+        }
+        const column = $(this).data('column');
+        const order = $(this).hasClass('asc') ? 'desc' : 'asc';
+        $('#file_datatable thead th').removeClass('asc desc');
+        $(this).addClass(order);
+        sortTable(column, order);
+    });
+
+    function sortTable(column, order) {
+        const rows = $('#file_datatable tbody tr').get();
+        rows.sort(function(a, b) {
+            const A = $(a).children('td').eq(column).text().toUpperCase();
+            const B = $(b).children('td').eq(column).text().toUpperCase();
+            if (A < B) {
+                return order === 'asc' ? -1 : 1;
+            }
+            if (A > B) {
+                return order === 'asc' ? 1 : -1;
+            }
+            return 0;
+        });
+        $.each(rows, function(index, row) {
+            $('#file_datatable tbody').append(row);
+        });
+    }
+
+    // Dropdown filter for Shop, Service, and Status columns
+    $('.filter-dropdown').on('change', function() {
+        filterTable();
+        highlightFilterIcon($(this).closest('th'));
+    });
+
+    // Input filter for File ID, Tax ID, and Customer columns
+    $('.filter-input').on('keyup', function() {
+        filterTable();
+        highlightFilterIcon($(this).closest('th'));
+    });
+
+    function filterTable() {
+        const shop = $('#filter_shop').val().toUpperCase();
+        const service = $('#filter_service').val().toUpperCase();
+        const status = $('#filter_status').val().toUpperCase();
+        const fileId = $('#filter_file_id').val().toUpperCase();
+        const taxId = $('#filter_tax_id').val().toUpperCase();
+        const customer = $('#filter_customer').val().toUpperCase();
+
+        $('#file_datatable tbody tr').each(function() {
+            const rowShop = $(this).find('td:nth-child(4)').text().toUpperCase();
+            const rowService = $(this).find('td:nth-child(5)').text().toUpperCase();
+            const rowStatus = $(this).find('td:nth-child(8)').text().toUpperCase();
+            const rowFileId = $(this).find('td:nth-child(1)').text().toUpperCase();
+            const rowTaxId = $(this).find('td:nth-child(2)').text().toUpperCase();
+            const rowCustomer = $(this).find('td:nth-child(3)').text().toUpperCase();
+
+            if ((shop === '' || rowShop === shop) &&
+                (service === '' || rowService === service) &&
+                (status === '' || rowStatus === status) &&
+                (fileId === '' || rowFileId.indexOf(fileId) > -1) &&
+                (taxId === '' || rowTaxId.indexOf(taxId) > -1) &&
+                (customer === '' || rowCustomer.indexOf(customer) > -1)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+
+    // Highlight filter icon when filter is applied
+    function highlightFilterIcon(thElement) {
+        const input = thElement.find('.filter-input').val();
+        const dropdown = thElement.find('.filter-dropdown').val();
+        if (input !== '' || dropdown !== '') {
+            thElement.find('.filter-icon').addClass('highlighted');
+        } else {
+            thElement.find('.filter-icon').removeClass('highlighted');
+        }
+    }
+
+    // Toggle filter input visibility on filter icon click
+    $('.filter-icon').on('click', function(e) {
+        e.stopPropagation();
+        const filterContainer = $(this).siblings('.filter-container');
+        filterContainer.toggle();
+    });
+
+    // Add date range picker to the calendar icon click event
+    $('#daterange-popup').on('click', function() {
+        $('#daterange-popup').daterangepicker({
+            opens: 'center',
+            autoUpdateInput: false,
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        }, function(start, end) {
+            filterByDateRange(start, end);
+        });
+        $('#daterange-popup').data('daterangepicker').show();
+    });
+
+    function filterByDateRange(start, end) {
+        $('#file_datatable tbody tr').each(function() {
+            const rowDate = moment($(this).find('td:nth-child(6)').text(), 'YYYY-MM-DD');
+            if (rowDate.isBetween(start, end, null, '[]')) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+
+    // Clear filter button functionality
+    $('#clear-filters-button').on('click', function() {
+        $('.filter-input').val('');
+        $('.filter-dropdown').prop('selectedIndex', 0);
+        $('.filter-icon').removeClass('highlighted');
+        filterTable();
+    });
+});
+</script>
+
 <script>
 $(document).ready(function() {
   $('#show_filter_list').change(function() {
@@ -191,23 +318,41 @@ $(document).ready(function() {
                         <a href="" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="{{ $modealName }}">New</a>
                     </div>
                 </p>
-                <form action="" id="formFilter">
-                    @csrf
-                    <div class="row">
-                        <div class="col">
-                            <div class="col-sm-8">
-                                <form class="app-search d-none d-lg-block" data-backdrop="static" data-keyboard="false" onsubmit="submitForm(event)">
-                                    <div class="position-relative">
-                                        <input name="search-box" id="search-box" type="text" class="form-control" placeholder="Search...">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class='row'>
-                                <div style="padding:5px" class="col-md-4">
-                                    <select class="form-select" aria-label="Default select example" id="select_shop_name">
-                                        <option value="" selected>Shop Name</option>
+
+                <table data-page-length='50' id="file_datatable" class="table table-bordered file_datatable">
+                    <thead>
+                        <tr>
+                            <th class="sortable filterable" data-column="1">
+                                <strong>File ID</strong>
+                                <i class="fas fa-filter filter-icon" style="cursor: pointer;"></i>
+                                <i class="fas fa-sort sort-icon"></i>
+                                <div class="filter-container" style="display: none;">
+                                    <input type="text" id="search_file_id" class="form-control filter-input" placeholder="File ID">
+                                </div>
+                            </th>
+                            <th class="sortable filterable" data-column="1">
+                                <strong>Tax ID</strong>
+                                <i class="fas fa-filter filter-icon" style="cursor: pointer;"></i>
+                                <i class="fas fa-sort sort-icon"></i>
+                                <div class="filter-container" style="display: none;">
+                                    <input type="text" id="search_tax_id" class="form-control filter-input" placeholder="Search by Tax ID">
+                                </div>
+                            </th>
+                            <th style="width:2%"></th>
+                            <th class="sortable filterable" data-column="1">
+                                <strong>Customer</strong>
+                                <i class="fas fa-filter filter-icon" style="cursor: pointer;"></i>
+                                <i class="fas fa-sort sort-icon"></i>
+                                <div class="filter-container" style="display: none;">
+                                    <input type="text" id="search_customer_name" class="form-control filter-input" placeholder="Search by Customer Name">
+                                </div>
+                            </th>
+                            <th class="filterable">
+                                <strong>Shop</strong>
+                                <i class="fas fa-filter filter-icon" style="cursor: pointer;"></i>
+                                <div class="filter-container" style="display: none;">
+                                    <select id="filter_shop_name" class="form-control filter-dropdown">
+                                        <option value="">All Shops</option>
                                         @foreach($shops as $shop)
                                             @if($shop->shop_name != "")
                                             <option value="{{ $shop->shop_name }}">{{ $shop->shop_name }}</option>
@@ -215,9 +360,13 @@ $(document).ready(function() {
                                         @endforeach
                                     </select>
                                 </div>
-                                <div style="padding:5px" class="col-md-4">
-                                    <select class="form-select" aria-label="Default select example" id="select_service_type">
-                                        <option value="" selected>Service Type</option>
+                            </th>
+                            <th class="filterable">
+                                <strong>Service</strong>
+                                <i class="fas fa-filter filter-icon" style="cursor: pointer;"></i>
+                                <div class="filter-container" style="display: none;">
+                                    <select id="filter_service_type" class="form-control filter-dropdown">
+                                        <option value="">All Services</option>
                                         @foreach($services as $service)
                                             @if($service->service != "")
                                             <option value="{{ $service->service }}">{{ $service->service }}</option>
@@ -225,32 +374,54 @@ $(document).ready(function() {
                                         @endforeach
                                     </select>
                                 </div>
-                                <div style="padding:5px" class="col-md-4">
-                                    <select class="form-select" aria-label="Default select example" id="select_status">
-                                        <option value="" selected>Status</option>
-                                        <option value="submitted">Submitted</option>
-                                        <option value="completed">Completed</option>
-                                        <option value="pending">Pending</option>
-                                        <option value="cancelled">Cancelled</option>
+                            </th>
+                            <div id="modal_daterange" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="mySmallModalLabel">Add Filter</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row mb-3">
+                                                <label for="example-date-input" class="col-form-label">Start Date</label>
+                                                <div>
+                                                    <input class="form-control" type="date" value="<?= date('Y-m-d') ?>" id="start_date" name="start_date">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label for="example-date-input" class="col-form-label">End Date</label>
+                                                <div>
+                                                    <input class="form-control" type="date" value="<?= date('Y-m-d') ?>" id="end_date" name="end_date">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <button type="submit" class="btn btn-outline-primary waves-effect waves-light" id="apply_daterange">Apply</button>
+                                            </div>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->
+                            <th class="filterable" data-column="1">
+                                <strong>Created</strong>
+                                <i class="fas fa-calendar calendar-icon" data-bs-toggle="modal" data-bs-target=".bs-example-modal-sm"></i>
+                                    <input type="text" id="daterange-popup" style="display: none;" />
+                                </div>
+                            </th>
+                            <th style="width:2%"></th>
+                            <th class="filterable">
+                                <strong>Status</strong>
+                                <i class="fas fa-filter filter-icon" style="cursor: pointer;"></i>
+                                <div class="filter-container" style="display: none;">
+                                    <select id="filter_status" class="form-control filter-dropdown">
+                                        <option value="">All Status</option>
+                                        <option value="Submitted">Submitted</option>
+                                        <option value="Completed">Completed</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Cancelled">Cancelled</option>
                                     </select>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-                <table data-page-length='50' id="file_datatable" class="table table-bordered file_datatable">
-                    <thead>
-                        <tr>
-                            <th style="width:5%">File ID</th>
-                            <th style="width:20%">Tax ID</th>
-                            <th style="width:2%"></th>
-                            <th style="width:20%">Customer</th>
-                            <th style="width:18%">Shop</th>
-                            <th style="width:10%">Service</th>
-                            <th style="width:15%">Created</th>
-                            <th style="width:2%"></th>
-                            <th style="width:5%">Status</th>
+                            </th>
                             <th style="width:3%">Actions</th>
                         </tr>
                     </thead>
@@ -503,14 +674,20 @@ $(document).ready(function() {
 
 <script>
     function searchAndFilter(){
-    var searchText = $('#search-box').val().toLowerCase();
-    var shopName = $('#select_shop_name').val();
-    var serviceType = $('#select_service_type').val();
-    var status = $('#select_status').val();
+    var search_file_id = $('#search_file_id').val().toLowerCase();
+    var search_tax_id = $('#search_tax_id').val().toLowerCase();
+    var search_customer_name = $('#search_customer_name').val().toLowerCase();
+    var shopName = $('#filter_shop_name').val();
+    var serviceType = $('#filter_service_type').val();
+    var status = $('#filter_status').val();
+    var start_date = $('#start_date').val();
+    var end_date = $('#end_date').val();
     $.ajax({
         url: "{{ route('load.table.search') }}",
         type: "GET",
-        data: { search_text: searchText, shop_name : shopName, service_type : serviceType, status : status },
+        data: { start_date: start_date, end_date: end_date, search_tax_id: search_tax_id, search_customer_name: search_customer_name, 
+            search_file_id:search_file_id, shop_name : shopName, service_type : serviceType,
+             status : status },
         success: function(data) {
            var user_type = (data[data.length - 1]);
           $("#tableBody").empty();
@@ -599,7 +776,22 @@ $(document).ready(function() {
     }
 
 
+    $("#apply_daterange").on("click", function() {
+        $('#modal_daterange').modal('toggle');
+        searchAndFilter();
+    });
+
     $("#search-box").on("keyup", function() {
+        searchAndFilter();
+    });
+
+    $("#search_file_id").on("keyup", function() {
+        searchAndFilter();
+    });
+    $("#search_tax_id").on("keyup", function() {
+        searchAndFilter();
+    });
+    $("#search_customer_name").on("keyup", function() {
         searchAndFilter();
     });
     $("#select_shop_name").on("change", function() {
@@ -609,6 +801,15 @@ $(document).ready(function() {
         searchAndFilter();
     });
     $("#select_status").on("change", function() {
+        searchAndFilter();
+    });
+    $("#filter_shop_name").on("change", function() {
+        searchAndFilter();
+    });
+    $("#filter_service_type").on("change", function() {
+        searchAndFilter();
+    });
+    $("#filter_status").on("change", function() {
         searchAndFilter();
     });
 
