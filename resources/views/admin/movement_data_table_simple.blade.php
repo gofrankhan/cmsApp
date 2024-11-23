@@ -26,8 +26,8 @@
         </div>
         <div class="row">
             <div style="padding:15px" class="col-md-2">
-                <select style="width:200px" id="select_service_type">
-                    <option value="" selected>---Filter Service Type---</option>
+                <select class="form-select" style="width:200px" id="select_service_type">
+                    <option value="" selected>Service Type</option>
                     @foreach($services as $service)
                         @if($service->service != "")
                         <option value="{{ $service->service }}">{{ $service->service }}</option>

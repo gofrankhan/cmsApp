@@ -194,44 +194,47 @@ $(document).ready(function() {
                 <form action="" id="formFilter">
                     @csrf
                     <div class="row">
-                        <div class="col-sm-3">
-                            <form class="app-search d-none d-lg-block" data-backdrop="static" data-keyboard="false" onsubmit="submitForm(event)">
-                                <div class="position-relative">
-                                    <input name="search-box" id="search-box" type="text" class="form-control" placeholder="Search...">
+                        <div class="col">
+                            <div class="col-sm-8">
+                                <form class="app-search d-none d-lg-block" data-backdrop="static" data-keyboard="false" onsubmit="submitForm(event)">
+                                    <div class="position-relative">
+                                        <input name="search-box" id="search-box" type="text" class="form-control" placeholder="Search...">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class='row'>
+                                <div style="padding:5px" class="col-md-4">
+                                    <select class="form-select" aria-label="Default select example" id="select_shop_name">
+                                        <option value="" selected>Shop Name</option>
+                                        @foreach($shops as $shop)
+                                            @if($shop->shop_name != "")
+                                            <option value="{{ $shop->shop_name }}">{{ $shop->shop_name }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
                                 </div>
-                            </form>
-                        </div>
-                        <div style="padding:15px" class="col-md-2">
-                            
-                        </div>
-                        <div style="padding:15px" class="col-md-2">
-                            <select style="width:200px" id="select_shop_name">
-                                <option value="" selected>---Select Shop Name---</option>
-                                @foreach($shops as $shop)
-                                    @if($shop->shop_name != "")
-                                    <option value="{{ $shop->shop_name }}">{{ $shop->shop_name }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-                        <div style="padding:15px" class="col-md-2">
-                            <select style="width:200px" id="select_service_type">
-                                <option value="" selected>---Select Service Type---</option>
-                                @foreach($services as $service)
-                                    @if($service->service != "")
-                                    <option value="{{ $service->service }}">{{ $service->service }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-                        <div style="padding:15px" class="col-md-2">
-                            <select style="width:200px" id="select_status">
-                                <option value="" selected>---Select Status---</option>
-                                <option value="submitted">Submitted</option>
-                                <option value="completed">Completed</option>
-                                <option value="pending">Pending</option>
-                                <option value="cancelled">Cancelled</option>
-                            </select>
+                                <div style="padding:5px" class="col-md-4">
+                                    <select class="form-select" aria-label="Default select example" id="select_service_type">
+                                        <option value="" selected>Service Type</option>
+                                        @foreach($services as $service)
+                                            @if($service->service != "")
+                                            <option value="{{ $service->service }}">{{ $service->service }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div style="padding:5px" class="col-md-4">
+                                    <select class="form-select" aria-label="Default select example" id="select_status">
+                                        <option value="" selected>Status</option>
+                                        <option value="submitted">Submitted</option>
+                                        <option value="completed">Completed</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="cancelled">Cancelled</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
