@@ -159,22 +159,23 @@ class FileController_simple extends Controller
                                 ->where('invoices.lawyer_id', $user_id)
                                 ->orderByDesc('file_id');
         }
-        $start_date = $request->start_date;
-        $end_date =  $request->end_date;
-        dd($start_date);
         $search_file_id = $request->search_file_id;
         $search_tax_id = $request->search_tax_id;
         $search_customer_name = $request->search_customer_name;
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
         if(!empty($request->search_file_id)){
             $query->where(function ($innerQuery) use ($search_file_id) {
                 $innerQuery->where('invoices.file_id', 'like', '%'.$search_file_id.'%');
             });
         }
-        if(!empty($request->start_date) && !empty($request->end_date)){
+
+        if(!empty($request->start_date)){
             $query->where(function ($innerQuery) use ($start_date, $end_date) {
                 $innerQuery->whereBetween('invoices.created_at', [$start_date, $end_date]);
             });
         }
+
         if(!empty($request->search_tax_id)){
             $query->where(function ($innerQuery) use ($search_tax_id) {
                 $innerQuery->where('customers.taxid', 'like', '%'.$search_tax_id.'%');
@@ -196,7 +197,7 @@ class FileController_simple extends Controller
             $query->where('invoices.status', $request->status);
         }
         $data = $query->get();
-        Debugbar::addMessage($start_date);
+        Debugbar::addMessage($data);
         return response()->json([$data, $user_type]);
     }
 

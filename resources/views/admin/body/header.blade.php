@@ -46,7 +46,7 @@ $(document).ready(function() {
         <button type="button" id="btn_movement_simple" class="btn font-size-20 header-item waves-effect">
             Movements
         </button>
-        <button type="button" id="btn_file_new" class="btn font-size-20 header-item waves-effect">
+        <button type="button" id="btn_file_new" class="btn font-size-20 header-item waves-effect" hidden>
             File New
         </button>
 
