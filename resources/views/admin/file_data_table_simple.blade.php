@@ -10,6 +10,10 @@
 <script>
 $(document).ready(function() {
     // Sorting functionality for each column
+
+    $('#start_date').val("");
+    $('#end_date').val("");
+
     $('#file_datatable thead th.sortable').on('click', function(e) {
         if ($(e.target).is('input, select, .fa-calendar-alt')) {
             return; // Prevent sorting when clicking inside the filter input or dropdown or calendar icon
@@ -386,13 +390,13 @@ $(document).ready(function() {
                                             <div class="row mb-3">
                                                 <label for="example-date-input" class="col-form-label">Start Date</label>
                                                 <div>
-                                                    <input class="form-control" type="date" value="<?= date('Y-m-d') ?>" id="start_date" name="start_date">
+                                                    <input class="form-control" type="date" value="<?= date('Y-m-d') ?>" id="start_date_modal" name="start_date_modal">
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <label for="example-date-input" class="col-form-label">End Date</label>
                                                 <div>
-                                                    <input class="form-control" type="date" value="<?= date('Y-m-d') ?>" id="end_date" name="end_date">
+                                                    <input class="form-control" type="date" value="<?= date('Y-m-d') ?>" id="end_date_modal" name="end_date_modal">
                                                 </div>
                                             </div>
                                             <div>
@@ -408,6 +412,8 @@ $(document).ready(function() {
                                     <input type="text" id="daterange-popup" style="display: none;" />
                                 </div>
                             </th>
+                            <input class="form-control" type="date" value="" id="start_date" name="start_date" hidden>
+                            <input class="form-control" type="date" value="" id="end_date" name="end_date" hidden>
                             <th style="width:2%"></th>
                             <th class="filterable">
                                 <strong>Status</strong>
@@ -777,8 +783,14 @@ $(document).ready(function() {
 
 
     $("#apply_daterange").on("click", function() {
+        var start_date_val = $('#start_date_modal').val();
+        var end_date_val = $('#end_date_modal').val();
+        $('#start_date').val(start_date_val);
+        $('#end_date').val(end_date_val);
         $('#modal_daterange').modal('toggle');
         searchAndFilter();
+        $('#start_date').val("");
+        $('#end_date').val("");
     });
 
     $("#search-box").on("keyup", function() {

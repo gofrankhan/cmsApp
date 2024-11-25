@@ -170,7 +170,7 @@ class FileController_simple extends Controller
             });
         }
 
-        if(!empty($request->start_date)){
+        if(!empty($request->start_date) && !empty($request->end_date)){
             $query->where(function ($innerQuery) use ($start_date, $end_date) {
                 $innerQuery->whereBetween('invoices.created_at', [$start_date, $end_date]);
             });
