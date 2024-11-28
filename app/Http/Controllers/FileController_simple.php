@@ -109,15 +109,14 @@ class FileController_simple extends Controller
                                 ->orderByDesc('file_id')
                                 ->paginate(50);
         }
-        $services = Invoice::select('invoices.service_id as service_id', 'services.service')
-                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+        $services = Service::select('services.service')
                                 ->distinct()
-                                ->orderByDesc('file_id')
+                                ->orderBy('service')
                                 ->get();
 
-        $shops = Invoice::select('invoices.user_id as user_id', 'users.shop_name')
-                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+        $shops = User::select('users.shop_name')
                                 ->distinct()
+                                ->orderBy('shop_name')
                                 ->get();
 
         //$shops = User::select('shop_name')->distinct()->get();
@@ -233,6 +232,21 @@ class FileController_simple extends Controller
                             ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
                             ->where('invoices.status', '=', 'Completed')
                             ->orderByDesc('file_id');
+        }
+
+        $file_id = $request->file_id;
+        $customer_name = $request->customer_name;
+
+        if(!empty($request->file_id)){
+            $query->where(function ($innerQuery) use ($file_id) {
+                $innerQuery->where('invoices.file_id', 'like', '%'.$file_id.'%');
+            });
+        }
+        if(!empty($request->customer_name)){
+            $query->where(function ($innerQuery) use ($customer_name) {
+                $innerQuery->where('customers.firstname', 'like', '%'.$customer_name.'%')
+                ->OrWhere('customers.lastname', 'like', '%'.$customer_name.'%');
+            });
         }
 
         if(!empty($request->service_type)) {
@@ -484,13 +498,14 @@ class FileController_simple extends Controller
                                 ->get();
         }
         
-        $shops = Invoice::select('invoices.user_id as user_id', 'users.shop_name')
-                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
-                                ->where('invoices.status', '=', 'Completed')
-                                ->whereIn('invoices.user_id', function($query) use ($shop_name){
-                                    $query->select('id')->from('users')->where('shop_name', $shop_name);
-                                })
+        $services = Service::select('services.service')
                                 ->distinct()
+                                ->orderBy('service')
+                                ->get();
+
+        $shops = User::select('users.shop_name')
+                                ->distinct()
+                                ->orderBy('shop_name')
                                 ->get();
 
         return view('admin.movement_data_table_simple', compact('title', 'total_sum', 'data', 'shops', 'services'));
@@ -510,15 +525,14 @@ class FileController_simple extends Controller
                                 ->orderByDesc('file_id')
                                 ->paginate(50);
         }
-        $services = Invoice::select('invoices.service_id as service_id', 'services.service')
-                                ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
-                                ->where('invoices.status', '=', 'Completed')
+        $services = Service::select('services.service')
                                 ->distinct()
-                                ->orderByDesc('file_id')
+                                ->orderBy('service')
                                 ->get();
-        $shops = Invoice::select('invoices.user_id as user_id', 'users.shop_name')
-                                ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+
+        $shops = User::select('users.shop_name')
                                 ->distinct()
+                                ->orderBy('shop_name')
                                 ->get();
         return view('admin.movement_data_table_all_simple', compact('title', 'data', 'shops', 'services'));
     }
