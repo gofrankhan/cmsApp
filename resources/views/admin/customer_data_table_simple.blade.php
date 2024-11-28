@@ -2,6 +2,133 @@
 @section('admin')
 
 <script>
+$(document).ready(function() {
+    // Sorting functionality for each column
+
+    $('#customer_datatable_simple thead th.sortable').on('click', function(e) {
+        if ($(e.target).is('input, select, .fa-calendar-alt')) {
+            return; // Prevent sorting when clicking inside the filter input or dropdown or calendar icon
+        }
+        const column = $(this).data('column');
+        const order = $(this).hasClass('asc') ? 'desc' : 'asc';
+        $('#file_datatable thead th').removeClass('asc desc');
+        $(this).addClass(order);
+        sortTable(column, order);
+    });
+
+    function sortTable(column, order) {
+        const rows = $('#file_datatable tbody tr').get();
+        rows.sort(function(a, b) {
+            const A = $(a).children('td').eq(column).text().toUpperCase();
+            const B = $(b).children('td').eq(column).text().toUpperCase();
+            if (A < B) {
+                return order === 'asc' ? -1 : 1;
+            }
+            if (A > B) {
+                return order === 'asc' ? 1 : -1;
+            }
+            return 0;
+        });
+        $.each(rows, function(index, row) {
+            $('#file_datatable tbody').append(row);
+        });
+    }
+
+    // Dropdown filter for Shop, Service, and Status columns
+    $('.filter-dropdown').on('change', function() {
+        filterTable();
+        highlightFilterIcon($(this).closest('th'));
+    });
+
+    // Input filter for File ID, Tax ID, and Customer columns
+    $('.filter-input').on('keyup', function() {
+        filterTable();
+        highlightFilterIcon($(this).closest('th'));
+    });
+
+    function filterTable() {
+        const shop = $('#filter_shop').val().toUpperCase();
+        const service = $('#filter_service').val().toUpperCase();
+        const status = $('#filter_status').val().toUpperCase();
+        const fileId = $('#filter_file_id').val().toUpperCase();
+        const taxId = $('#filter_tax_id').val().toUpperCase();
+        const customer = $('#filter_customer').val().toUpperCase();
+
+        $('#file_datatable tbody tr').each(function() {
+            const rowShop = $(this).find('td:nth-child(4)').text().toUpperCase();
+            const rowService = $(this).find('td:nth-child(5)').text().toUpperCase();
+            const rowStatus = $(this).find('td:nth-child(8)').text().toUpperCase();
+            const rowFileId = $(this).find('td:nth-child(1)').text().toUpperCase();
+            const rowTaxId = $(this).find('td:nth-child(2)').text().toUpperCase();
+            const rowCustomer = $(this).find('td:nth-child(3)').text().toUpperCase();
+
+            if ((shop === '' || rowShop === shop) &&
+                (service === '' || rowService === service) &&
+                (status === '' || rowStatus === status) &&
+                (fileId === '' || rowFileId.indexOf(fileId) > -1) &&
+                (taxId === '' || rowTaxId.indexOf(taxId) > -1) &&
+                (customer === '' || rowCustomer.indexOf(customer) > -1)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+
+    // Highlight filter icon when filter is applied
+    function highlightFilterIcon(thElement) {
+        const input = thElement.find('.filter-input').val();
+        const dropdown = thElement.find('.filter-dropdown').val();
+        if (input !== '' || dropdown !== '') {
+            thElement.find('.search-icon').addClass('highlighted');
+        } else {
+            thElement.find('.search-icon').removeClass('highlighted');
+        }
+    }
+
+    // Toggle filter input visibility on filter icon click
+    $('.search-icon').on('click', function(e) {
+        e.stopPropagation();
+        const filterContainer = $(this).siblings('.filter-container');
+        filterContainer.toggle();
+    });
+
+    // Add date range picker to the calendar icon click event
+    $('#daterange-popup').on('click', function() {
+        $('#daterange-popup').daterangepicker({
+            opens: 'center',
+            autoUpdateInput: false,
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        }, function(start, end) {
+            filterByDateRange(start, end);
+        });
+        $('#daterange-popup').data('daterangepicker').show();
+    });
+
+    function filterByDateRange(start, end) {
+        $('#file_datatable tbody tr').each(function() {
+            const rowDate = moment($(this).find('td:nth-child(6)').text(), 'YYYY-MM-DD');
+            if (rowDate.isBetween(start, end, null, '[]')) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+
+    // Clear filter button functionality
+    $('#clear-filters-button').on('click', function() {
+        $('.filter-input').val('');
+        $('.filter-dropdown').prop('selectedIndex', 0);
+        $('.filter-icon').removeClass('highlighted');
+        filterTable();
+    });
+});
+</script>
+
+<script>
     function submitForm(event) {
         event.preventDefault();
         var taxidOrNameOrMobile = $('#search-box').val();
@@ -110,11 +237,39 @@
         <table data-page-length='50' id="customer_datatable_simple" class="table table-bordered customer_datatable_simple">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th class="sortable filterable" data-column="1">
+                        <strong>ID</strong>
+                        <i class="fas fa-search search-icon" style="cursor: pointer;"></i>
+                        <i class="fas fa-sort sort-icon"></i>
+                        <div class="filter-container" style="display: none;">
+                            <input type="text" id="search_id" class="form-control filter-input" placeholder="Search ID">
+                        </div>
+                    </th>
                     <th>Type</th>
-                    <th>Tax ID</th>
-                    <th>Name</th>
-                    <th>Mobile No</th>
+                    <th class="sortable filterable" data-column="1">
+                        <strong>Tax ID</strong>
+                        <i class="fas fa-search search-icon" style="cursor: pointer;"></i>
+                        <i class="fas fa-sort sort-icon"></i>
+                        <div class="filter-container" style="display: none;">
+                            <input type="text" id="search_tax_id" class="form-control filter-input" placeholder="Search by Tax ID">
+                        </div>
+                    </th>
+                    <th class="sortable filterable" data-column="1">
+                        <strong>Name</strong>
+                        <i class="fas fa-search search-icon" style="cursor: pointer;"></i>
+                        <i class="fas fa-sort sort-icon"></i>
+                        <div class="filter-container" style="display: none;">
+                            <input type="text" id="search_name" class="form-control filter-input" placeholder="Search by Name">
+                        </div>
+                    </th>
+                    <th class="sortable filterable" data-column="1">
+                        <strong>Mobile No</strong>
+                        <i class="fas fa-search search-icon" style="cursor: pointer;"></i>
+                        <i class="fas fa-sort sort-icon"></i>
+                        <div class="filter-container" style="display: none;">
+                            <input type="text" id="search_mobile_no" class="form-control filter-input" placeholder="Search by Mobile No.">
+                        </div>
+                    </th>
                     <th style="width:0%"></th>
                     <th>Actions</th>
                 </tr>
@@ -123,11 +278,11 @@
             <tbody id='tableBody'>
                 @foreach($data as $r)
                 <tr>
-                    <td style="width:5%">{{ $r->id }}</td>
+                    <td style="width:10%">{{ $r->id }}</td>
                     <td style="width:20%">{{ $r->customertype }}</td>
                     <td style="width:20%">{{ $r->taxid }}</td>
                     <td style="width:20%">{{ $r->fullname }}</td>
-                    <td style="width:25%">{{ $r->mobile }}</td>
+                    <td style="width:20%">{{ $r->mobile }}</td>
                     <td style="width:0%"></td>
                     <td style="width:3%">
                         @if($user_type == 'admin')
@@ -201,15 +356,19 @@
 </div>
 
 <script>
-$(document).ready(function() {
-    $("#search-box_any").on("keyup", function() {
-    var searchText = $('#search-box_any').val().toLowerCase();
+
+function searchCustomer(){
+    var searchTextAny = $('#search-box_any').val().toLowerCase();
+    var search_id = $('#search_id').val().toLowerCase();
+    var search_tax_id = $('#search_tax_id').val().toLowerCase();
+    var search_name = $('#search_name').val().toLowerCase();
+    var search_mobile_no = $('#search_mobile_no').val().toLowerCase();
     
     $.ajax({
         
         url: "{{ route('load.customer.table.search') }}",
         type: "GET",
-        data: { search_text: searchText},
+        data: { search_text: searchTextAny, search_id: search_id, search_tax_id:search_tax_id,search_name:search_name, search_mobile_no: search_mobile_no },
         success: function(data) {
             $("#tableBody").empty();
             // Loop through the response and add new rows to the table
@@ -265,10 +424,28 @@ $(document).ready(function() {
             $("#tableBody").append(row);
           });
         }
-        });
-    });
-});
+     });
+};
 
+</script>
+
+<script>
+    $("#search-box_any").on("keyup", function(){
+        searchCustomer();
+    });
+    $("#search_id").on("keyup", function() {
+        searchCustomer();
+    });
+
+    $("#search_tax_id").on("keyup", function() {
+        searchCustomer();
+    });
+    $("#search_name").on("keyup", function() {
+        searchCustomer();
+    });
+    $("#search_mobile_no").on("keyup", function() {
+        searchCustomer();
+    });
 </script>
 
 @endsection

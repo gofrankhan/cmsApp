@@ -43,7 +43,12 @@ class CustomerController_simple extends Controller
         $query = Customer::select('id','taxid','customertype',DB::raw("concat(firstname,' ', lastname) as fullname"), 'mobile')
         ->orderByDesc('id');
 
-        $searchText = $request->search_text;
+        $searchTextAny = $request->search_text;
+        $searchTextID = $request->search_id;
+        $searchTextTaxID = $request->search_tax_id;
+        $searchTextName = $request->search_name;
+        $searchTextMobileNo = $request->search_mobile_no;
+
         if(!empty($request->search_text)){
             $query->where(function ($innerQuery) use ($searchText) {
                 $innerQuery->where('id', 'like', '%'.$searchText.'%')
@@ -52,6 +57,29 @@ class CustomerController_simple extends Controller
             ->orWhere('lastname', 'like', '%'.$searchText.'%')
             ->orWhere('mobile', 'like', '%'.$searchText.'%')
             ->orWhere('customertype', 'like', '%'.$searchText.'%');
+            });
+        }
+
+        if(!empty($request->search_id)){
+            $query->where(function ($innerQuery) use ($searchTextID) {
+                $innerQuery->where('id', 'like', '%'.$searchTextID.'%');
+            });
+        }
+        if(!empty($request->search_tax_id)){
+            $query->where(function ($innerQuery) use ($searchTextTaxID) {
+                $innerQuery->where('taxid', 'like', '%'.$searchTextTaxID.'%');
+            });
+        }
+
+        if(!empty($request->search_name)){
+            $query->where(function ($innerQuery) use ($searchTextName) {
+                $innerQuery->where('firstname', 'like', '%'.$searchTextName.'%')
+                ->orWhere('lastname', 'like', '%'.$searchTextName.'%');
+            });
+        }
+        if(!empty($request->search_mobile_no)){
+            $query->where(function ($innerQuery) use ($searchTextMobileNo) {
+                $innerQuery->where('mobile', 'like', '%'.$searchTextMobileNo.'%');
             });
         }
 
