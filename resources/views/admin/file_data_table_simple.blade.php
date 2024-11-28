@@ -11,9 +11,6 @@
 $(document).ready(function() {
     // Sorting functionality for each column
 
-    $('#start_date').val("");
-    $('#end_date').val("");
-
     $('#file_datatable thead th.sortable').on('click', function(e) {
         if ($(e.target).is('input, select, .fa-calendar-alt')) {
             return; // Prevent sorting when clicking inside the filter input or dropdown or calendar icon
@@ -318,8 +315,13 @@ $(document).ready(function() {
                     </div>
                 </div>
                 <p class="card-title-desc" >
-                    <div align="right">
-                        <a href="" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="{{ $modealName }}">New</a>
+                    <div class='row'>
+                        <div class='col' align="left">
+                            <a href="" class="btn btn-secondary waves-effect waves-light" id='btn_clear_filters'>Clear Filters</a>
+                        </div>
+                        <div class='col' align="right">
+                            <a href="" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="{{ $modealName }}">New</a>
+                        </div>
                     </div>
                 </p>
 
@@ -789,8 +791,6 @@ $(document).ready(function() {
         $('#end_date').val(end_date_val);
         $('#modal_daterange').modal('toggle');
         searchAndFilter();
-        $('#start_date').val("");
-        $('#end_date').val("");
     });
 
     $("#search-box").on("keyup", function() {
@@ -823,6 +823,11 @@ $(document).ready(function() {
     });
     $("#filter_status").on("change", function() {
         searchAndFilter();
+    });
+
+    document.getElementById("btn_clear_filters").addEventListener("click", function(event) {
+    event.preventDefault();
+    window.location.href = '/file/data/simple/admin';
     });
 
 </script>
