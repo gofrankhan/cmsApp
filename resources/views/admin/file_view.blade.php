@@ -87,8 +87,10 @@
                         <a class="dropdown-item" href="{{ route ('auto.red.imp', $files[0]->id)}}" target="_blank">Autocertificazione redditi impresa</a>
                         <a class="dropdown-item" href="{{ route ('del.tra.dis', $files[0]->id)}}" target="_blank">Delega Trasmissione Dichiarazione dei Redditi</a>
                         @endif
-                        <a class="dropdown-item" href="{{ route ('delega.inps.pdf', $files[0]->customer_id)}}">DELEGA INPS</a>
-                        <a class="dropdown-item" href="{{ route ('delega.di.lavoro.domestico', $files[0]->id)}}">Delega per la gestione del rapporto di lavoro domestico</a>
+                        @if($files[0]->service == 'ASSUNZIONE/LAVORO DOMESTICO')
+                        <a class="dropdown-item" href="{{ route ('delega.inps.pdf', $files[0]->customer_id)}}" target="_blank">DELEGA INPS</a>
+                        <a class="dropdown-item" href="{{ route ('delega.di.lavoro.domestico', $files[0]->id)}}" target="_blank">Delega per la gestione del rapporto di lavoro domestico</a>
+                        @endif
                         @php
                             $pdf_files = Illuminate\Support\Facades\DB::table('pdf_files')->get();
                             $service_db = Illuminate\Support\Facades\DB::table('services')->where('service', $files[0]->service)->first();
