@@ -207,8 +207,8 @@ $(document).ready(function() {
                     </div>
                 </div>
                 <p class="card-title-desc" >
-                    <div class="row mb-3">
-                        <div class="col-sm-5">
+                    <div class="row">
+                        <div class="col-sm-4">
                             <form class="app-search d-none d-lg-block" data-backdrop="static" data-keyboard="false" onsubmit="submitForm(event)">
                                 <div class="position-relative">
                                     <input name="search-box" id="search-box" type="text" class="form-control" placeholder="Search By Tax ID, Name or Mobile No.">
@@ -216,7 +216,7 @@ $(document).ready(function() {
                                 </div>
                             </form>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <form class="app-search d-none d-lg-block" data-backdrop="static" data-keyboard="false">
                                 <div class="position-relative">
                                     <input name="search-box_any" id="search-box_any" type="text" class="form-control" placeholder="Search...">
@@ -224,11 +224,17 @@ $(document).ready(function() {
                                 </div>
                             </form>
                         </div>
-                        <div class="col-sm-3" align="right">
-                        <button type="button" hidden id="btn_modal" data-bs-target="#listmodal" data-bs-toggle="modal" data-bs-dismiss="modal" class="btn btn-primary waves-effect waves-light">New</button>
-                        </div>
-                        <div class="col-sm-1" align="right">
-                            <a href="{{ route('customer.new') }}" class="btn btn-primary waves-effect waves-light">New</a>
+                        <div class="col-sm-4" style='padding:0px'>
+                            <div class="row">
+                                <div class="col"></div>
+                                
+                                <div class='col' span='2' style='padding:0px'>
+                                    <a href="" class="btn btn-secondary" id='btn_clear_filters'>Clear Filters</a>
+                                </div>
+                                <div class='col' align="right" style='padding:0px'>
+                                    <a href="{{ route('customer.new') }}" class="btn btn-primary">New</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </p>
@@ -445,6 +451,11 @@ function searchCustomer(){
     });
     $("#search_mobile_no").on("keyup", function() {
         searchCustomer();
+    });
+
+    document.getElementById("btn_clear_filters").addEventListener("click", function(event) {
+        event.preventDefault();
+        window.location.href = '/customer/data/simple';
     });
 </script>
 

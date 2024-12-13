@@ -120,11 +120,11 @@
                     </div>
                 </div>
 
-                <table id="alternative-page-datatable" class="table dt-responsive nowrap w-100">
+                <table id="alternative-page-datatable" >
                     <thead>
                         <tr>
                             <th style="width:2%">ID</th>
-                            <th style="width:8%">Name</th>
+                            <th style="width:25%">Name</th>
                             <th style="width:25%">File Name</th>
                             <th style="width:25%">Category</th>
                             <th style="width:35%">Service</th>
@@ -137,7 +137,7 @@
                         @foreach ($pdf_files as $pdf_file)
                         <tr>
                             <td style="width:2%">{{ $pdf_file->id }}</td>
-                            <td style="width:8%">{{ $pdf_file->pdf_file_name }}</td>
+                            <td style="width:25%">{{ $pdf_file->pdf_file_name }}</td>
                             <td style="width:25%">{{ $pdf_file->upload_pdf_file }}</td>
                             <td style="width:25%">{{ $pdf_file->category }}</td>
                             <td style="width:35%">{{ $pdf_file->service }}</td>

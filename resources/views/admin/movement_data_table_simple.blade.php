@@ -160,8 +160,10 @@ $(document).ready(function() {
             </div>
         </div>
         <p class="card-title-desc" >
-            <div align="right">
-                <a href="" hidden class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target=""></a>
+            <div class='row'>
+                <div class='col' align="left">
+                    <a href="" class="btn btn-secondary waves-effect waves-light" id='btn_clear_filters'>Clear Filters</a>
+                </div>
             </div>
         </p>
         <table id="movement_datatable_simple" class="table table-bordered movement_datatablel_simple">
@@ -289,6 +291,11 @@ $(document).ready(function() {
     });
     $("#search_name").on("keyup", function() {
         FilterServiceType();
+    });
+
+    document.getElementById("btn_clear_filters").addEventListener("click", function(event) {
+        event.preventDefault();
+        window.location.href = '/movement/data/simple';
     });
 
 </script>

@@ -826,8 +826,8 @@ $(document).ready(function() {
     });
 
     document.getElementById("btn_clear_filters").addEventListener("click", function(event) {
-    event.preventDefault();
-    window.location.href = '/file/data/simple/admin';
+        event.preventDefault();
+        window.location.href = '/file/data/simple/admin';
     });
 
 </script>
