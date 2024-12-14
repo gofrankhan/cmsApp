@@ -5,19 +5,19 @@
 $(document).ready(function() {
     // Sorting functionality for each column
 
-    $('#customer_datatable_simple thead th.sortable').on('click', function(e) {
+    $('#movement_datatable_all_simple thead th.sortable').on('click', function(e) {
         if ($(e.target).is('input, select, .fa-calendar-alt')) {
             return; // Prevent sorting when clicking inside the filter input or dropdown or calendar icon
         }
         const column = $(this).data('column');
         const order = $(this).hasClass('asc') ? 'desc' : 'asc';
-        $('#file_datatable thead th').removeClass('asc desc');
+        $('#movement_datatable_all_simple thead th').removeClass('asc desc');
         $(this).addClass(order);
         sortTable(column, order);
     });
 
     function sortTable(column, order) {
-        const rows = $('#file_datatable tbody tr').get();
+        const rows = $('#movement_datatable_all_simple tbody tr').get();
         rows.sort(function(a, b) {
             const A = $(a).children('td').eq(column).text().toUpperCase();
             const B = $(b).children('td').eq(column).text().toUpperCase();
@@ -30,7 +30,7 @@ $(document).ready(function() {
             return 0;
         });
         $.each(rows, function(index, row) {
-            $('#file_datatable tbody').append(row);
+            $('#movement_datatable_all_simple tbody').append(row);
         });
     }
 

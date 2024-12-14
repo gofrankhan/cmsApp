@@ -99,6 +99,13 @@ $(document).ready(function() {
         filterContainer.toggle();
     });
 
+    // Toggle filter input visibility on filter icon click
+    $('.search-icon').on('click', function(e) {
+        e.stopPropagation();
+        const filterContainer = $(this).siblings('.filter-container');
+        filterContainer.toggle();
+    });
+
     // Add date range picker to the calendar icon click event
     $('#daterange-popup').on('click', function() {
         $('#daterange-popup').daterangepicker({
@@ -330,7 +337,7 @@ $(document).ready(function() {
                         <tr>
                             <th class="sortable filterable" data-column="1">
                                 <strong>File ID</strong>
-                                <i class="fas fa-filter filter-icon" style="cursor: pointer;"></i>
+                                <i class="fas fa-search search-icon" style="cursor: pointer;"></i>
                                 <i class="fas fa-sort sort-icon"></i>
                                 <div class="filter-container" style="display: none;">
                                     <input type="text" id="search_file_id" class="form-control filter-input" placeholder="File ID">
@@ -338,7 +345,7 @@ $(document).ready(function() {
                             </th>
                             <th class="sortable filterable" data-column="1">
                                 <strong>Tax ID</strong>
-                                <i class="fas fa-filter filter-icon" style="cursor: pointer;"></i>
+                                <i class="fas fa-search search-icon" style="cursor: pointer;"></i>
                                 <i class="fas fa-sort sort-icon"></i>
                                 <div class="filter-container" style="display: none;">
                                     <input type="text" id="search_tax_id" class="form-control filter-input" placeholder="Search by Tax ID">
@@ -347,15 +354,16 @@ $(document).ready(function() {
                             <th style="width:2%"></th>
                             <th class="sortable filterable" data-column="1">
                                 <strong>Customer</strong>
-                                <i class="fas fa-filter filter-icon" style="cursor: pointer;"></i>
+                                <i class="fas fa-search search-icon" style="cursor: pointer;"></i>
                                 <i class="fas fa-sort sort-icon"></i>
                                 <div class="filter-container" style="display: none;">
                                     <input type="text" id="search_customer_name" class="form-control filter-input" placeholder="Search by Customer Name">
                                 </div>
                             </th>
-                            <th class="filterable">
+                            <th class="sortable filterable">
                                 <strong>Shop</strong>
                                 <i class="fas fa-filter filter-icon" style="cursor: pointer;"></i>
+                                <i class="fas fa-sort sort-icon"></i>
                                 <div class="filter-container" style="display: none;">
                                     <select id="filter_shop_name" class="form-control filter-dropdown">
                                         <option value="">All Shops</option>
@@ -367,9 +375,10 @@ $(document).ready(function() {
                                     </select>
                                 </div>
                             </th>
-                            <th class="filterable">
+                            <th class="sortable filterable">
                                 <strong>Service</strong>
                                 <i class="fas fa-filter filter-icon" style="cursor: pointer;"></i>
+                                <i class="fas fa-sort sort-icon"></i>
                                 <div class="filter-container" style="display: none;">
                                     <select id="filter_service_type" class="form-control filter-dropdown">
                                         <option value="">All Services</option>
@@ -408,7 +417,7 @@ $(document).ready(function() {
                                     </div><!-- /.modal-content -->
                                 </div><!-- /.modal-dialog -->
                             </div><!-- /.modal -->
-                            <th class="filterable" data-column="1">
+                            <th class="sortable filterable" data-column="1">
                                 <strong>Created</strong>
                                 <i class="fas fa-calendar calendar-icon" data-bs-toggle="modal" data-bs-target=".bs-example-modal-sm"></i>
                                     <input type="text" id="daterange-popup" style="display: none;" />
@@ -417,9 +426,10 @@ $(document).ready(function() {
                             <input class="form-control" type="date" value="" id="start_date" name="start_date" hidden>
                             <input class="form-control" type="date" value="" id="end_date" name="end_date" hidden>
                             <th style="width:2%"></th>
-                            <th class="filterable">
+                            <th style="width:15%" class="sortable filterable">
                                 <strong>Status</strong>
                                 <i class="fas fa-filter filter-icon" style="cursor: pointer;"></i>
+                                <i class="fas fa-sort sort-icon"></i>
                                 <div class="filter-container" style="display: none;">
                                     <select id="filter_status" class="form-control filter-dropdown">
                                         <option value="">All Status</option>
@@ -459,7 +469,7 @@ $(document).ready(function() {
                                     <div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-danger align-middle me-2"></i></div>
                                 @endif
                             </td>
-                            <td style="width:5%">{{ $r->status }}</td>
+                            <td style="width:15%">{{ $r->status }}</td>
                             <td style="width:3%">
                                 @if($user_type == 'admin')
                                     <div style="width:150px" class="row">
