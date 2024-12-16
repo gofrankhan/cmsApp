@@ -36,7 +36,7 @@ $(document).ready(function() {
         });
     }
 
-    // Dropdown filter for Shop, Service, and Status columns
+    // Dropdown filter for Shop, Service, and Status columnst
     $('.filter-dropdown').on('change', function() {
         filterTable();
         highlightFilterIcon($(this).closest('th'));
@@ -209,8 +209,8 @@ $(document).ready(function() {
                     </div>
                 </div>
                 <p class="card-title-desc" >
-                    <div class="row">
-                        <div class="col-sm-4">
+                    <div hidden class="row">
+                        <div hidden class="col-sm-4">
                             <form class="app-search d-none d-lg-block" data-backdrop="static" data-keyboard="false" onsubmit="submitForm(event)">
                                 <div class="position-relative">
                                     <input name="search-box" id="search-box" type="text" class="form-control" placeholder="Search By Tax ID, Name or Mobile No.">
@@ -218,7 +218,7 @@ $(document).ready(function() {
                                 </div>
                             </form>
                         </div>
-                        <div class="col-sm-4">
+                        <div hidden class="col-sm-4">
                             <form class="app-search d-none d-lg-block" data-backdrop="static" data-keyboard="false">
                                 <div class="position-relative">
                                     <input name="search-box_any" id="search-box_any" type="text" class="form-control" placeholder="Search...">
@@ -226,21 +226,21 @@ $(document).ready(function() {
                                 </div>
                             </form>
                         </div>
-                        <div class="col-sm-4" style='padding:0px'>
-                            <div class="row">
-                                <div class="col"></div>
-                                
-                                <div class='col' span='2' style='padding:0px'>
-                                    <a href="" class="btn btn-secondary" id='btn_clear_filters'>Clear Filters</a>
-                                </div>
-                                <div class='col' align="right" style='padding:0px'>
-                                    <a href="{{ route('customer.new') }}" class="btn btn-primary">New</a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </p>
             </div><!-- end col-->
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row">                    
+                    <div class='col'>
+                        <a href="" class="btn btn-secondary" id='btn_clear_filters'>Clear Filters</a>
+                    </div>
+                    <div class='col' align="right">
+                        <a href="{{ route('customer.new') }}" class="btn btn-primary">New</a>
+                    </div>
+                </div>
+            </div>
         </div>
         <table data-page-length='50' id="customer_datatable_simple" class="table table-bordered customer_datatable_simple">
             <thead>
