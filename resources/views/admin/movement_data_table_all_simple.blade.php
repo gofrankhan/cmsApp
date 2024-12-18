@@ -183,6 +183,7 @@ $(document).ready(function() {
                     <th class="filterable">
                         <strong>Service</strong>
                         <i class="fas fa-filter filter-icon" style="cursor: pointer;"></i>
+                        <i class="fas fa-sort sort-icon"></i>
                         <div class="filter-container" style="display: none;">
                             <select id="filter_service_type" class="form-control filter-dropdown">
                                 <option value="">All Services</option>
@@ -198,6 +199,7 @@ $(document).ready(function() {
                     <th class="filterable">
                         <strong>Shop</strong>
                         <i class="fas fa-filter filter-icon" style="cursor: pointer;"></i>
+                        <i class="fas fa-sort sort-icon"></i>
                         <div class="filter-container" style="display: none;">
                             <select id="filter_shop_name" class="form-control filter-dropdown">
                                 <option value="">All Shops</option>
