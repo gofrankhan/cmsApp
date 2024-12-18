@@ -212,7 +212,15 @@ $(document).ready(function() {
                         </div>
                     </th>
                     <th></th>
-                    <th style="width:15%">Amount</th>
+                    <th class="filterable">
+                        <strong>Amount</strong>
+                        <i class="fas fa-filter filter-icon" style="cursor: pointer;"></i>
+                        <i class="fas fa-sort sort-icon"></i>
+                        <div class="filter-container" style="display: none;">
+                            <input type="text" id="search_amount" class="form-control filter-input" placeholder="Search Amount">
+                        </div>
+                        </div>
+                    </th>
                 </tr>
             </thead>
         
