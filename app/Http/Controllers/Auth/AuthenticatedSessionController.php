@@ -28,11 +28,12 @@ class AuthenticatedSessionController extends Controller
         try {
             $request->authenticate();
             $request->session()->regenerate();
+            $request->session()->put('show_modal', true); // Set session variable
             return redirect()->intended(RouteServiceProvider::HOME);
 
         } catch (AuthenticationException $exception) {
             return redirect()->route('login')->withErrors([
-                'email' => 'These credentials do not match our records.',
+                'password' => 'These credentials do not match our records.',
             ]);
         }
     }

@@ -19,9 +19,9 @@ use DataTables;
 class DashboardController extends Controller
 {
     public function CreateTable( Request $request){
-
+        $varShowModal = $request->session()->pull('show_modal', false);
         if(Auth::user()->user_type != 'admin')
-            return view('admin.index');
+            return view('admin.index' , compact('varShowModal'));
 
         if(!empty($request->start_date)){
 
@@ -71,6 +71,6 @@ class DashboardController extends Controller
                         ->groupBy('users.shop_name')
                         ->get();
         }
-        return view('admin.index', compact('totalInvoiceByShop', 'card_array'));
+        return view('admin.index', compact('totalInvoiceByShop', 'card_array', 'varShowModal'));
     }
 }
