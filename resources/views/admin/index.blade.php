@@ -1,6 +1,34 @@
 @extends('admin.admin_master')
 @section('admin')
 
+<script type="text/javascript">
+    $(window).on('load', function() {
+        $('#pupup-modal').modal('show');
+    });
+</script>
+
+<div class="modal fade bs-example-modal-center" id="pupup-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Center modal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            @php
+                $broadcast_messages = Illuminate\Support\Facades\DB::table('broadcast_messages')->get();
+                $broadcast_messages_count = Illuminate\Support\Facades\DB::table('broadcast_messages')->count();
+            @endphp
+            @if(($broadcast_messages_count))
+            @foreach($broadcast_messages as $broadcast_message)
+                <p style='color:red'><b>{{$broadcast_message->message}}</b></p>
+            @endforeach
+            @endif
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <div class="page-content">
     <div class="container-fluid">
         @php
@@ -59,7 +87,7 @@
                         </form>
                     </div>
                     <!-- end row -->
-
+                   
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="javascript: void(0);">PC Point</a></li>
