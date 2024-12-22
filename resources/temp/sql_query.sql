@@ -11,3 +11,22 @@ SET    username = 'gofran.khan';
 INSERT INTO subscriptions (customer_id, is_subscribed, subscription_type, description, start_date, end_date)
 SELECT id, 0, 'none' NULL, NULL, NULL
 FROM customers;
+
+invoices 
+CREATE INDEX idx_invoices_status_userid ON invoices (status, user_id);
+CREATE INDEX idx_invoices_fileid ON invoices (file_id DESC);
+CREATE INDEX idx_invoices_customerid ON invoices (customer_id);
+CREATE INDEX idx_invoices_serviceid ON invoices (service_id);
+
+users
+CREATE INDEX idx_users_shopname ON users (shop_name);
+CREATE INDEX idx_users_id ON users (id);
+
+customers
+CREATE INDEX idx_customers_id ON customers (id);
+
+services
+CREATE INDEX idx_services_id ON services (id);
+
+subscriptions
+CREATE INDEX idx_subscriptions_customerid ON subscriptions (customer_id);

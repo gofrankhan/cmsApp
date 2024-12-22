@@ -1,4 +1,5 @@
 node_modules
 public/upload
+vendor/composer
 .gitignore
 database/.gitignore
