@@ -30,3 +30,6 @@ CREATE INDEX idx_services_id ON services (id);
 
 subscriptions
 CREATE INDEX idx_subscriptions_customerid ON subscriptions (customer_id);
+
+/* To reset all subsciption value to Not-subscribed*/
+UPDATE subscriptionsSET is_subscribed = 0;
