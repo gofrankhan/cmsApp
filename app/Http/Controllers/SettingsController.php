@@ -15,6 +15,7 @@ use App\Models\UploadType;
 use App\Models\Category;
 use App\Models\Service;
 use App\Models\PdfFile;
+use App\Models\Subscription;
 use DataTables;
 
 class SettingsController extends Controller
@@ -132,5 +133,15 @@ class SettingsController extends Controller
              );
         }
         return redirect()->back()->with($notification);
+    }
+
+    public function ResetSubscription(Request $request){
+        $year = $request->reset_year;
+        Subscription::whereYear('end_date', $year)->update(['is_subscribed' => 0, 'subscription_type' => "", 'start_date' => null, 'end_date' => null]);
+        $notification = array(
+            'message' => 'Reset subscriptions successfully!', 
+            'alert-type' => 'success'
+         );
+         return redirect()->back()->with($notification);
     }
 }

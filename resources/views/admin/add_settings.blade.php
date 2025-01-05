@@ -261,6 +261,37 @@ $(document).ready(function(){
                     </div>
                 </form>
             </div>
+            <div class="col-sm-4">
+                <form method="post" action="{{ route('reset.subscription')}}">
+                    @csrf    
+                    <div class="row mb-3">
+                        <label for="assign_file" class="col-form-label">Reset Subscriptions</label>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="upload_type" class="col-sm-2 col-form-label">Year</label>
+                        <div class="col-sm-10">
+                            <select class="form-select" name="reset_year" aria-label="Default select example" id="reset_year">
+                                <option selected value="">Select Year</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                                <option value="2029">2029</option>
+                                <option value="2030">2030</option>
+                                <option value="2031">2031</option>
+                                <option value="2032">2032</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="profile_image" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <input type="submit" href="" class="btn btn-primary waves-effect waves-light" value="Upload File">
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

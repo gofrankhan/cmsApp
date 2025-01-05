@@ -33,3 +33,4 @@ CREATE INDEX idx_subscriptions_customerid ON subscriptions (customer_id);
 
 /* To reset all subsciption value to Not-subscribed*/
 UPDATE subscriptions SET is_subscribed = 0 where end_date <= '2024-12-31';
+SELECT * FROM `subscriptions` where subscription_type='subscribed';
