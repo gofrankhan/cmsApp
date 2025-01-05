@@ -89,7 +89,9 @@ $(document).ready(function(){
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col">
+        <div class="col-sm-4">
+            <div class="card mt-2">
+            <div class="card-body">
                 <form method="post" action="{{ route('add.upload_type') }}">
                     @csrf
                     <div id="field_wrapper1">
@@ -109,8 +111,12 @@ $(document).ready(function(){
                         <input  type="submit" class="btn btn-primary btn-rounded waves-effect waves-light" value="Submit">
                     </div>
                 </form>
+                </div>
+                </div>
             </div>  
-            <div class="col">
+            <div class="col-sm-4">
+                <div class="card mt-2">
+                <div class="card-body">
                 <form method="post" action="{{ route('update.service.price') }}">
                     @csrf
                     <div id="field_wrapper1">
@@ -141,8 +147,12 @@ $(document).ready(function(){
                         <input  type="submit" class="btn btn-primary btn-rounded waves-effect waves-light" value="Update">
                     </div>
                 </form>
+                </div>
+                </div>
             </div>
-            <div class="col">
+            <div class="col-sm-4">
+                <div class="card mt-2">
+                <div class="card-body">
                 <div>
                     <div class="row mb-3">
                         <label for="update" class="col-form-label">Broadcast Message</label>
@@ -186,10 +196,14 @@ $(document).ready(function(){
                     </form>
                     @endif
                 </div>
+                </div>
+                </div>
             </div>
         </div> 
         <div class="row">
             <div class="col-sm-4">
+                <div class="card mt-2">
+                <div class="card-body">
                 <form method="post" action="{{ route('assign.files')}}">
                     @csrf
                     <div class="row mb-3">
@@ -214,23 +228,27 @@ $(document).ready(function(){
                         <input type="submit" class="btn btn-primary btn-rounded waves-effect waves-light" value="Save">
                     </div>
                 </form>
+                </div>
+                </div>
             </div>
             <div class="col-sm-4">
+                <div class="card mt-2">
+                <div class="card-body">
                 <form method="post" action="{{ route('upload.pdf.file')}}" enctype="multipart/form-data">
                     @csrf    
                     <div class="row mb-3">
                         <label for="assign_file" class="col-form-label">Upload Static PDF Files</label>
                     </div>
                     <div class="row mb-3">
-                        <label for="upload_type" class="col-sm-2 col-form-label">Name</label>
-                        <div class="col-sm-10">
+                        <label for="upload_type" class="col-sm-3 col-form-label">Name</label>
+                        <div class="col-sm-9">
                             <input class="form-control" name="pdf_file_name" placeholder="Enter PDF File Name" type="text" id="pdf_file_name" >
                         </div>
                     </div>
                     
                     <div class="row mb-3">
-                        <label for="upload_type" class="col-sm-2 col-form-label">Category</label>
-                        <div class="col-sm-10">
+                        <label for="upload_type" class="col-sm-3 col-form-label">Category</label>
+                        <div class="col-sm-9">
                             <select class="form-select" name="pdf_category" aria-label="Default select example" id="pdf_category">
                                 <option selected value="">Select Category</option>
                                 @foreach ($categories as $category)
@@ -240,28 +258,32 @@ $(document).ready(function(){
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="upload_type" class="col-sm-2 col-form-label">Service</label>
-                        <div class="col-sm-10">
+                        <label for="upload_type" class="col-sm-3 col-form-label">Service</label>
+                        <div class="col-sm-9">
                             <select class="form-select" id="pdf_service" name="pdf_service">
                             </select>
                         </div>
                     </div>
                     <input type="hidden" name="file_id" class="btn btn-primary" value="">
                     <div class="row mb-3">
-                        <label for="profile_image" class="col-sm-2 col-form-label"></label>
-                        <div class="col-sm-10">
+                        <label for="profile_image" class="col-sm-3 col-form-label"></label>
+                        <div class="col-sm-9">
                             <input class="form-control" name="upload_pdf_file" type="file" id="upload_pdf_file">
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="profile_image" class="col-sm-2 col-form-label"></label>
-                        <div class="col-sm-10">
+                        <label for="profile_image" class="col-sm-3 col-form-label"></label>
+                        <div class="col-sm-9">
                             <input type="submit" href="" class="btn btn-primary waves-effect waves-light" value="Upload File">
                         </div>
                     </div>
                 </form>
+                </div>
+                </div>
             </div>
             <div class="col-sm-4">
+                <div class="card mt-2">
+                <div class="card-body">
                 <form method="post" action="{{ route('reset.subscription')}}">
                     @csrf    
                     <div class="row mb-3">
@@ -291,6 +313,8 @@ $(document).ready(function(){
                         </div>
                     </div>
                 </form>
+                </div>
+                </div>
             </div>
         </div>
     </div>

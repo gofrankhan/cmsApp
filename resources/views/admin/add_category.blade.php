@@ -91,7 +91,9 @@ $(document).ready(function(){
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col">
+            <div class="col-sm-4">
+                <div class="card mt-2">
+                <div class="card-body">
                 <form method="post" action="{{ route('add.category') }}">
                     @csrf
                     <div id="field_wrapper1">
@@ -111,9 +113,13 @@ $(document).ready(function(){
                         <input  type="submit" class="btn btn-primary btn-rounded waves-effect waves-light" value="Submit">
                     </div>
                 </form>
+                </div>
+                </div>
             </div>
             
-            <div class="col">
+            <div class="col-sm-4">
+                <div class="card mt-2">
+                <div class="card-body">
                 <form method="post" action="{{ route('add.service') }}">
                     @csrf
                     <div id="field_wrapper2">
@@ -151,9 +157,13 @@ $(document).ready(function(){
                         <input  type="submit" class="btn btn-primary btn-rounded waves-effect waves-light" value="Submit">
                     </div>
                 </form>
+                </div>
+                </div>
             </div>
 
-                <div class="col">
+            <div class="col-sm-4">
+                <div class="card mt-2">
+                <div class="card-body">
                     <form method="post" action="{{ route('add.service_category') }}">
                         @csrf
                         <div class="row mb-3">
@@ -183,6 +193,8 @@ $(document).ready(function(){
                             <input  type="submit" class="btn btn-primary btn-rounded waves-effect waves-light" value="Submit">
                         </div>
                     </form>
+                    </div>
+                    </div>
                 </div>
             </div>     
         </div> 
