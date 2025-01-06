@@ -86,6 +86,8 @@ $(document).ready(function(){
 });
 </script>
 
+
+
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
@@ -309,7 +311,7 @@ $(document).ready(function(){
                     <div class="row mb-3">
                         <label for="profile_image" class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-10">
-                            <input type="submit" href="" class="btn btn-primary waves-effect waves-light" value="Upload File">
+                            <input type="submit" href="" class="btn btn-danger waves-effect waves-light" value="Reset Subscription">
                         </div>
                     </div>
                 </form>
