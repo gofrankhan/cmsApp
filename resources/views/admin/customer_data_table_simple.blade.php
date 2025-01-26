@@ -211,14 +211,6 @@ $(document).ready(function() {
                 <p class="card-title-desc" >
                     <div hidden class="row">
                         <div hidden class="col-sm-4">
-                            <form class="app-search d-none d-lg-block" data-backdrop="static" data-keyboard="false" onsubmit="submitForm(event)">
-                                <div class="position-relative">
-                                    <input name="search-box" id="search-box" type="text" class="form-control" placeholder="Search By Tax ID, Name or Mobile No.">
-                                    <span class="ri-search-line"></span>
-                                </div>
-                            </form>
-                        </div>
-                        <div hidden class="col-sm-4">
                             <form class="app-search d-none d-lg-block" data-backdrop="static" data-keyboard="false">
                                 <div class="position-relative">
                                     <input name="search-box_any" id="search-box_any" type="text" class="form-control" placeholder="Search...">
@@ -236,6 +228,17 @@ $(document).ready(function() {
                     <div class='col'>
                         <a href="" class="btn btn-secondary" id='btn_clear_filters'>Clear Filters</a>
                     </div>
+                    <div class="col-sm-4">
+                        <form class="app-search d-none d-lg-block" data-backdrop="static" data-keyboard="false" onsubmit="submitForm(event)">
+                            <div class="position-relative">
+                                <input name="search-box" id="search-box" type="text" class="form-control" placeholder="Search By Tax ID, Name or Mobile No.">
+                                <span class="ri-search-line"></span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-3" align="right">
+                        <button type="button" hidden id="btn_modal" data-bs-target="#listmodal" data-bs-toggle="modal" data-bs-dismiss="modal" class="btn btn-primary waves-effect waves-light">New</button>
+                        </div>
                     <div class='col' align="right">
                         <a href="{{ route('customer.new') }}" class="btn btn-primary">New</a>
                     </div>
