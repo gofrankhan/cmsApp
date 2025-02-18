@@ -242,12 +242,15 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-sm-3" align="right">
+                        <div class="col-sm-2" align="right">
                             <button type="button" hidden id="btn_modal" data-bs-target="#listmodal" data-bs-toggle="modal"
                                 data-bs-dismiss="modal" class="btn btn-primary waves-effect waves-light">New</button>
                         </div>
-                        <div class='col' align="right">
-                            <a href="{{ route('customer.new') }}" class="btn btn-primary">New</a>
+                        <div class='col-sm-1' align="right">
+                            <a href="{{ route('customer.new') }}" class="form-control btn btn-primary">New</a>
+                        </div>
+                        <div class='col-sm-1' align="right">
+                            <a href="{{ route('customer.export') }}" class="form-control btn btn-primary">Export</a>
                         </div>
                     </div>
                 </div>
