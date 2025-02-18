@@ -32,34 +32,33 @@ class ClientController extends Controller
     }
 
     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  \App\Company  $company
-    * @return \Illuminate\Http\Response
-    */
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Company  $company
+     * @return \Illuminate\Http\Response
+     */
     public function EditClientData($id): View
     {
         $title = "Edit User";
         $user = DB::table('users')->where('id', $id)->first();
-        return view('admin.client_edit',compact('user', 'title'));
+        return view('admin.client_edit', compact('user', 'title'));
     }
 
     public function StoreClientData(Request $request): View
     {
         $validateData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255', 'unique:'.User::class],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'usertype' => ['required', 'string', 'max:255', Rule::in(['admin','user','lawyer'])],
+            'username' => ['required', 'string', 'max:255', 'unique:' . User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
+            'usertype' => ['required', 'string', 'max:255', Rule::in(['admin', 'user', 'lawyer'])],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        if(empty($request->new_shop) && $request->shop_name != 'create_new')
-            {
-                $new_shop_name =  $request->shop_name;
-            }else{ 
-                $new_shop_name =  $request->new_shop;
-            }
+        if (empty($request->new_shop) && $request->shop_name != 'create_new') {
+            $new_shop_name =  $request->shop_name;
+        } else {
+            $new_shop_name =  $request->new_shop;
+        }
 
         $user = User::create([
             'name' => $request->name,
@@ -73,19 +72,19 @@ class ClientController extends Controller
         return $this->ClientDataTable();
     }
 
-     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  \App\Company  $company
-    * @return \Illuminate\Http\Response
-    */
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Company  $company
+     * @return \Illuminate\Http\Response
+     */
     public function UpdateClientData(Request $request, $id): View
     {
         $validateData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
-            'usertype' => ['required', 'string', 'max:255', Rule::in(['admin','user', 'lawyer'])],
+            'usertype' => ['required', 'string', 'max:255', Rule::in(['admin', 'user', 'lawyer'])],
         ]);
 
         $user = User::find($id);
@@ -102,12 +101,30 @@ class ClientController extends Controller
     public function DeleteClientData($id)
     {
         $customer = DB::table('users')->where('id', $id)->delete();
-        
+
         $notification = array(
-            'message' => 'Customer data deleted successfully', 
+            'message' => 'Customer data deleted successfully',
             'alert-type' => 'success'
         );
         return response()->json();
     }
 
+    public function exportCSV()
+    {
+        $users = User::all();
+        $filename = "users.csv";
+        $handle = fopen($filename, 'w');
+
+        // Add headers
+        fputcsv($handle, ['ID', 'Name', 'Email']);
+
+        // Add rows
+        foreach ($users as $user) {
+            fputcsv($handle, [$user->id, $user->name, $user->email]);
+        }
+
+        fclose($handle);
+
+        return response()->download($filename)->deleteFileAfterSend();
+    }
 }

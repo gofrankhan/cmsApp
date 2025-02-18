@@ -31,7 +31,7 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth', 'verified')->group(function () {
-    
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/dashboard', [DashboardController::class, 'CreateTable'])->name('dashboard');
     // Route::get('/dashboard/user', [DashboardController::class, 'CreateTableUser'])->name('dashboard.user');
@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/update/password', [AdminController::class, 'UpdatePassword'])->name('update.password');
 });
 
-Route::middleware('auth')->group(function(){
+Route::middleware('auth')->group(function () {
     Route::get('/customer/data', [CustomerController::class, 'CustomerDataTable'])->name('customer.data');
     Route::get('/customer/data/simple', [CustomerController_simple::class, 'CustomerDataTable_simple'])->name('customer.data.simple');
     Route::get('/load/customer/table/search', [CustomerController_simple::class, 'LoadCustomerTableSearch_simple'])->name('load.customer.table.search');
@@ -59,10 +59,9 @@ Route::middleware('auth')->group(function(){
     Route::get('/customer/edit/{id}', [CustomerController::class, 'EditCustomerData'])->name('customer.edit');
     Route::get('/customer/show/{id}', [CustomerController::class, 'ShowCustomerData'])->name('customer.show');
     Route::get('/customer/delete/{id}', [CustomerController::class, 'DeleteCustomerData'])->name('customer.delete')->middleware('admin');
-
 });
 
-Route::middleware('auth' , 'admin')->group(function(){
+Route::middleware('auth', 'admin')->group(function () {
     Route::get('/client/table', [ClientController::class, 'ClientDataTable'])->name('client.table');
     Route::get('/client/new', [ClientController::class, 'NewClientData'])->name('client.new');
     Route::post('/client/store', [ClientController::class, 'StoreClientData'])->name('client.store');
@@ -70,9 +69,10 @@ Route::middleware('auth' , 'admin')->group(function(){
     Route::get('/client/edit/{id}', [ClientController::class, 'EditClientData'])->name('client.edit');
     Route::get('/client/show', [ClientController::class, 'ShowClientData'])->name('client.show');
     Route::get('/client/delete/{id}', [ClientController::class, 'DeleteClientData'])->name('client.delete');
+    Route::get('/client/export', [ClientController::class, 'exportCSV'])->name('client.export');
 });
 
-Route::middleware('auth')->group(function(){
+Route::middleware('auth')->group(function () {
     Route::post('/post/comment', [CommentAttachmentController::class, 'PostComment'])->name('post.comment');
     Route::post('/upload/file', [CommentAttachmentController::class, 'UploadFile'])->name('upload.file');
     Route::get('/delete/file/{id}', [CommentAttachmentController::class, 'DeleteFile'])->name('delete.file');
@@ -81,7 +81,7 @@ Route::middleware('auth')->group(function(){
     Route::post('/download/file/{id}', [CommentAttachmentController::class, 'DownloadFile'])->name('download.file');
 });
 
-Route::middleware('auth', 'admin')->group(function(){
+Route::middleware('auth', 'admin')->group(function () {
     Route::get('/create/category', [ServiceCategoryController::class, 'CreateCategory'])->name('create.category');
     Route::get('/show/category', [ServiceCategoryController::class, 'ShowCategory'])->name('show.category');
     Route::post('/add/category', [ServiceCategoryController::class, 'AddCategory'])->name('add.category');
@@ -91,7 +91,7 @@ Route::middleware('auth', 'admin')->group(function(){
     Route::post('/update/service/price', [ServiceCategoryController::class, 'UpdateServicePrice'])->name('update.service.price');
 });
 
-Route::middleware('auth')->group(function(){
+Route::middleware('auth')->group(function () {
     Route::post('/file/store', [FileController::class, 'FileStore'])->name('file.store');
     Route::get('/file/data/{type}', [FileController::class, 'FileDataTable'])->name('file.data');
     Route::get('/file/edit/{id}', [FileController::class, 'FileEdit'])->name('file.edit');
@@ -109,7 +109,7 @@ Route::middleware('auth')->group(function(){
     Route::post('/assign/files', [FileController::class, 'AssignFiles'])->name('assign.files');
 });
 
-Route::middleware('auth')->group(function(){
+Route::middleware('auth')->group(function () {
     Route::post('/file/store/simple', [FileController_simple::class, 'FileStore'])->name('file.store.simple');
     Route::get('/file/data/simple/{type}', [FileController_simple::class, 'FileDataTable_simple'])->name('file.data.simple');
     Route::get('/file_new/data/simple/{type}', [FileController_simple::class, 'FileDataTable_new_simple'])->name('file.new.data.simple');
@@ -130,7 +130,7 @@ Route::middleware('auth')->group(function(){
     Route::post('/assign/files/simple', [FileController_simple::class, 'AssignFiles'])->name('assign.files.simple');
 });
 
-Route::middleware('auth' , 'admin')->group(function(){
+Route::middleware('auth', 'admin')->group(function () {
     Route::get('/create/settings', [SettingsController::class, 'CreateSettings'])->name('create.settings');
     Route::post('/add/upload_type', [SettingsController::class, 'AddUploadType'])->name('add.upload_type');
     Route::post('/add/upload_pdf_file', [SettingsController::class, 'UploadPDFFile'])->name('upload.pdf.file');
@@ -139,21 +139,21 @@ Route::middleware('auth' , 'admin')->group(function(){
     Route::post('/reset/subscription', [SettingsController::class, 'ResetSubscription'])->name('reset.subscription');
 });
 
-Route::middleware('auth' , 'admin')->group(function(){
+Route::middleware('auth', 'admin')->group(function () {
     Route::post('/delete/broadcast/message', [BroadcastMessageController::class, 'DeleteBroadcastMessage'])->name('delete.broadcast.message');
     Route::post('/create/broadcast/message', [BroadcastMessageController::class, 'CreateBroadcastMessage'])->name('create.broadcast.message');
 });
 
-Route::middleware('auth' , 'admin')->group(function(){
+Route::middleware('auth', 'admin')->group(function () {
     Route::get('/reset/password', [AdminController::class, 'ViewResetPassword'])->name('reset.password');
     Route::post('/store/new_password', [AdminController::class, 'ResetPassword'])->name('store.new_password');
 });
 
-Route::middleware('auth' , 'admin')->group(function(){
+Route::middleware('auth', 'admin')->group(function () {
     Route::get('/card/info', [DashboardController::class, 'CardInfo'])->name('card.info');
 });
 
-Route::middleware('auth')->group(function(){
+Route::middleware('auth')->group(function () {
     Route::get('/flussi1/{id}', [PDFController::class, 'flussi1'])->name('flussi1');
     Route::get('/flussi2/{id}', [PDFController::class, 'flussi2'])->name('flussi2');
     Route::get('/flussi3/{id}', [PDFController::class, 'flussi3'])->name('flussi3');
@@ -173,7 +173,6 @@ Route::middleware('auth')->group(function(){
     Route::get('/print/static/pdf/{id}', [PDFController::class, 'Print_Static_PDF'])->name('print.static.pdf');
     Route::get('/delega/inps/pdf/{id}', [PDFController::class, 'Delega_INPS'])->name('delega.inps.pdf');
     Route::get('/delega/di/lavoro/domestico/{id}', [PDFController::class, 'Delega_Di_Lavoro_Domestico'])->name('delega.di.lavoro.domestico');
-    
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
