@@ -119,6 +119,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/load/table/search', [FileController_simple::class, 'LoadTableSearch_simple'])->name('load.table.search');
     Route::get('/movement/filter/service', [FileController_simple::class, 'MovementFilterService_simple'])->name('movement.filter.service');
     Route::get('/movement/filter/service/all', [FileController_simple::class, 'MovementFilterServiceAll_simple'])->name('movement.filter.service.all');
+    Route::get('/file/export', [FileController_simple::class, 'exportCSV'])->name('file.export');
+    Route::get('/file/export/pdf', [FileController_simple::class, 'exportPDF'])->name('file.export.pdf');
     Route::get('/file/edit/simple/{id}', [FileController_simple::class, 'FileEdit'])->name('file.edit.simple');
     Route::get('/file/delete/simple/{file_id}', [FileController_simple::class, 'FileDelete'])->name('file.delete.simple')->middleware('admin');
     Route::post('/update/service/simple', [FileController_simple::class, 'UpdateService'])->name('update.service.simple');
