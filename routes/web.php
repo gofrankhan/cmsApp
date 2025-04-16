@@ -71,6 +71,7 @@ Route::middleware('auth', 'admin')->group(function () {
     Route::get('/client/show', [ClientController::class, 'ShowClientData'])->name('client.show');
     Route::get('/client/delete/{id}', [ClientController::class, 'DeleteClientData'])->name('client.delete');
     Route::get('/client/export', [ClientController::class, 'exportCSV'])->name('client.export');
+    Route::get('/client/export/pdf', [ClientController::class, 'exportPDF'])->name('client.export.pdf');
 });
 
 Route::middleware('auth')->group(function () {

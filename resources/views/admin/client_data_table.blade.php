@@ -40,14 +40,18 @@
                     </div>
                     <p class="card-title-desc">
                     <div class="row">
-                        <div align="right" class="col-10"></div>
+                        <div align="right" class="col-9"></div>
                         <div align="right" class="col-1">
                             <a href="{{ route('client.new') }}"
                                 class="form-control btn btn-primary waves-effect waves-light">New</a>
                         </div>
                         <div align="right" class="col-1">
                             <a href="{{ route('client.export') }}"
-                                class="form-control  btn btn-primary waves-effect waves-light">Export</a>
+                                class="form-control  btn btn-primary waves-effect waves-light">Export CSV</a>
+                        </div>
+                        <div align="right" class="col-1">
+                            <a href="{{ route('client.export.pdf') }}"
+                                class="form-control  btn btn-primary waves-effect waves-light">Export PDF</a>
                         </div>
                     </div>
                     </p>

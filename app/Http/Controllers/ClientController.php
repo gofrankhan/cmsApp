@@ -13,6 +13,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Customer;
+use PDF;
 
 class ClientController extends Controller
 {
@@ -116,15 +117,25 @@ class ClientController extends Controller
         $handle = fopen($filename, 'w');
 
         // Add headers
-        fputcsv($handle, ['ID', 'Name', 'Email']);
+        fputcsv($handle, ['ID', 'Name', 'Email', 'Username', 'Type', 'Shop Name']);
 
         // Add rows
         foreach ($users as $user) {
-            fputcsv($handle, [$user->id, $user->name, $user->email]);
+            fputcsv($handle, [$user->id, $user->name, $user->email, $user->username, $user->user_type, $user->shop_name]);
         }
 
         fclose($handle);
 
         return response()->download($filename)->deleteFileAfterSend();
+    }
+
+    public function exportPDF()
+    {
+        $users = User::all();
+        $pdf = PDF::loadView('admin.export.all_user_list', compact('users'))->setPaper('a4')->setOptions([
+            'tempDir' => public_path(),
+            'chroot' => public_path(),
+        ]);
+        return $pdf->download('all_user_list.pdf');
     }
 }
