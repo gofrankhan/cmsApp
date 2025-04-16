@@ -53,7 +53,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/customer/data/simple', [CustomerController_simple::class, 'CustomerDataTable_simple'])->name('customer.data.simple');
     Route::get('/load/customer/table/search', [CustomerController_simple::class, 'LoadCustomerTableSearch_simple'])->name('load.customer.table.search');
     Route::get('/customer/new', [CustomerController::class, 'NewCustomerData'])->name('customer.new');
-    Route::get('/customer/export', [CustomerController::class, 'CustomerExport'])->name('customer.export');
+    Route::get('/customer/export', [CustomerController_simple::class, 'exportCSV'])->name('customer.export');
+    Route::get('/customer/export/pdf', [CustomerController_simple::class, 'exportPDF'])->name('customer.export.pdf');
     Route::get('/customer/search', [CustomerController::class, 'CustomerSearch'])->name('customer.search');
     Route::post('/customer/store', [CustomerController::class, 'StoreCustomerData'])->name('customer.store');
     Route::post('/customer/update/{id}', [CustomerController::class, 'UpdateCustomerData'])->name('customer.update');
