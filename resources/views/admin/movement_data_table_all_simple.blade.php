@@ -156,10 +156,25 @@ $(document).ready(function() {
         </div>
         <p class="card-title-desc" >
             <div class='row'>
-                <div class='col' align="left">
+                <div class='col-1' align="left">
                     <a href="" class="btn btn-secondary waves-effect waves-light" id='btn_clear_filters'>Clear Filters</a>
                 </div>
+                <div class="col-9" align="right">
+                    <button type="button" hidden id="btn_modal" data-bs-target="#listmodal" data-bs-toggle="modal"
+                        data-bs-dismiss="modal" class="btn btn-primary waves-effect waves-light">New</button>
+                </div>
+                @if ($user_type == 'admin')
+                    <div align="right" class="col-1">
+                        <a href="{{ route('movement.export.all') }}"
+                            class="form-control  btn btn-primary waves-effect waves-light">Export CSV</a>
+                    </div>
+                    <div align="right" class="col-1">
+                        <a href="{{ route('movement.export.pdf.all') }}"
+                            class="form-control  btn btn-primary waves-effect waves-light">Export PDF</a>
+                    </div>
+                @endif
             </div>
+           
         </p>
         <table data-page-length='50' id="movement_datatable_all_simple" class="table table-bordered movement_datatable_all_simple">
             <thead>

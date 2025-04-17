@@ -1044,4 +1044,129 @@ class FileController_simple extends Controller
         ]);
         return $pdf->download('all_file_list.pdf');
     }
+
+    public function exportCSVm()
+    {
+        ini_set('max_execution_time', 300); // 300 seconds = 5 minutes
+        $shop_name = Auth::user()->shop_name;
+        $movements = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"), 'services.service', 'users.shop_name as shop')
+            ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+            ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+            ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+            ->where('invoices.status', '=', 'Completed')
+            ->whereIn('invoices.user_id', function ($query) use ($shop_name) {
+                $query->select('id')->from('users')->where('shop_name', $shop_name);
+            })
+            ->orderByDesc('file_id')
+            ->get();
+        $filename = "movements.csv";
+        $handle = fopen($filename, 'w');
+
+        // Add headers
+        fputcsv($handle, [
+            'File ID',
+            'Customer Name',
+            'Description',
+            'Shop Name',
+            'Service Name',
+            'Amount'
+        ]);
+
+        // Add rows
+        foreach ($movements as $movement) {
+            fputcsv($handle, [
+                $movement->file_id,
+                $movement->customer,
+                $movement->description,
+                $movement->shop,
+                $movement->service,
+                $movement->amount,
+            ]);
+        }
+
+        fclose($handle);
+
+        return response()->download($filename)->deleteFileAfterSend();
+    }
+
+    public function exportPDFm()
+    {
+        ini_set('max_execution_time', 300); // 300 seconds = 5 minutes
+        $shop_name = Auth::user()->shop_name;
+        $movements = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"), 'services.service', 'users.shop_name as shop')
+            ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+            ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+            ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+            ->where('invoices.status', '=', 'Completed')
+            ->whereIn('invoices.user_id', function ($query) use ($shop_name) {
+                $query->select('id')->from('users')->where('shop_name', $shop_name);
+            })
+            ->orderByDesc('file_id')
+            ->get();
+        $pdf = PDF::loadView('admin.export.all_movement_list', compact('movements'))->setPaper('a4')->setOptions([
+            'tempDir' => public_path(),
+            'chroot' => public_path(),
+        ]);
+        return $pdf->download('all_movement_list.pdf');
+    }
+
+    public function exportCSVma()
+    {
+        ini_set('max_execution_time', 300); // 300 seconds = 5 minutes
+        $shop_name = Auth::user()->shop_name;
+        $movements = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"), 'services.service', 'users.shop_name as shop')
+            ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+            ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+            ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+            ->where('invoices.status', '=', 'Completed')
+            ->orderByDesc('file_id')
+            ->get();
+        $filename = "movements_all.csv";
+        $handle = fopen($filename, 'w');
+
+        // Add headers
+        fputcsv($handle, [
+            'File ID',
+            'Customer Name',
+            'Description',
+            'Shop Name',
+            'Service Name',
+            'Amount'
+        ]);
+
+        // Add rows
+        foreach ($movements as $movement) {
+            fputcsv($handle, [
+                $movement->file_id,
+                $movement->customer,
+                $movement->description,
+                $movement->shop,
+                $movement->service,
+                $movement->amount,
+            ]);
+        }
+
+        fclose($handle);
+
+        return response()->download($filename)->deleteFileAfterSend();
+    }
+
+    public function exportPDFma()
+    {
+        ini_set('max_execution_time', 300); // 300 seconds = 5 minutes
+        $shop_name = Auth::user()->shop_name;
+        $movements = Invoice::select('invoices.file_id as file_id', 'invoices.description', 'invoices.price as amount', DB::raw("concat(customers.firstname,' ', customers.lastname) as customer"), 'services.service', 'users.shop_name as shop')
+            ->leftjoin('customers', 'invoices.customer_id', '=', 'customers.id')
+            ->leftjoin('services', 'invoices.service_id', '=', 'services.id')
+            ->leftjoin('users', 'invoices.user_id', '=', 'users.id')
+            ->where('invoices.status', '=', 'Completed')
+            ->orderByDesc('file_id')
+            ->get();
+        $pdf = PDF::loadView('admin.export.all_movement_list_all', compact('movements'))->setPaper('a4')->setOptions([
+            'tempDir' => public_path(),
+            'chroot' => public_path(),
+        ]);
+        return $pdf->download('all_admin_movement_list.pdf');
+    }
+
 }

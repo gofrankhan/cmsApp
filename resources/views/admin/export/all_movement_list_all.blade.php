@@ -25,7 +25,7 @@
         }
 
         .font {
-            font-size: 7px;
+            font-size: 10px;
         }
 
         .authority {
@@ -53,31 +53,29 @@
 </head>
 
 <body>
-    <h3>All File List</h3>
+    <h3>Admin Movement File List</h3>
 
     <table width="100%">
         <thead style="background-color: green; color:#FFFFFF;">
             <tr class="font">
-                <th>ID</th>
                 <th>File Id</th>
-                <th>Tax Id</th>
                 <th>Customer Name</th>
+                <th>Description</th>
                 <th>Shop Name</th>
                 <th>Service</th>
-                <th>Status</th>
+                <th>Amount</th>
             </tr>
         </thead>
         <tbody>
 
-            @foreach ($files as $file)
+            @foreach ($movements as $movement)
                 <tr class="font">
-                    <td align="center">{{ $file->id }}</td>
-                    <td align="center">{{ $file->file_id }}</td>
-                    <td align="center">{{ $file->taxid }}</td>
-                    <td align="center">{{ $file->customer }}</td>
-                    <td align="center">{{ $file->shop }} </td>
-                    <td align="center">{{ $file->service }} </td>
-                    <td align="center">{{ $file->status }}</td>
+                    <td align="center">{{ $movement->file_id }}</td>
+                    <td align="center">{{ $movement->customer }}</td>
+                    <td align="center">{{ $movement->description }}</td>
+                    <td align="center">{{ $movement->shop }} </td>
+                    <td align="center">{{ $movement->service }} </td>
+                    <td align="center">{{ $movement->amount }}</td>
                 </tr>
             @endforeach
 

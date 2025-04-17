@@ -164,6 +164,20 @@ $(document).ready(function() {
                 <div class='col' align="left">
                     <a href="" class="btn btn-secondary waves-effect waves-light" id='btn_clear_filters'>Clear Filters</a>
                 </div>
+                <div class="col-9" align="right">
+                    <button type="button" hidden id="btn_modal" data-bs-target="#listmodal" data-bs-toggle="modal"
+                        data-bs-dismiss="modal" class="btn btn-primary waves-effect waves-light">New</button>
+                </div>
+                @if ($user_type == 'admin')
+                    <div align="right" class="col-1">
+                        <a href="{{ route('movement.export') }}"
+                            class="form-control  btn btn-primary waves-effect waves-light">Export CSV</a>
+                    </div>
+                    <div align="right" class="col-1">
+                        <a href="{{ route('movement.export.pdf') }}"
+                            class="form-control  btn btn-primary waves-effect waves-light">Export PDF</a>
+                    </div>
+                @endif
             </div>
         </p>
         <table id="movement_datatable_simple" class="table table-bordered movement_datatablel_simple">
