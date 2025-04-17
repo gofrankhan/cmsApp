@@ -249,14 +249,16 @@
                         <div class='col-sm-1' align="right">
                             <a href="{{ route('customer.new') }}" class="form-control btn btn-primary">New</a>
                         </div>
-                        <div align="right" class="col-1">
-                            <a href="{{ route('customer.export') }}"
-                                class="form-control  btn btn-primary waves-effect waves-light">Export CSV</a>
-                        </div>
-                        <div align="right" class="col-1">
-                            <a href="{{ route('customer.export.pdf') }}"
-                                class="form-control  btn btn-primary waves-effect waves-light">Export PDF</a>
-                        </div>
+                        @if ($user_type == 'admin')
+                            <div align="right" class="col-1">
+                                <a href="{{ route('customer.export') }}"
+                                    class="form-control  btn btn-primary waves-effect waves-light">Export CSV</a>
+                            </div>
+                            <div align="right" class="col-1">
+                                <a href="{{ route('customer.export.pdf') }}"
+                                    class="form-control  btn btn-primary waves-effect waves-light">Export PDF</a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
