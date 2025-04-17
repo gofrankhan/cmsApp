@@ -160,6 +160,8 @@ Route::middleware('auth', 'admin')->group(function () {
 
 Route::middleware('auth', 'admin')->group(function () {
     Route::get('/card/info', [DashboardController::class, 'CardInfo'])->name('card.info');
+    Route::get('/dashboard/export', [DashboardController::class, 'exportCSV'])->name('dashboard.export');
+    Route::get('/dashboard/export/pdf', [DashboardController::class, 'exportPDF'])->name('dashboard.export.pdf');
 });
 
 Route::middleware('auth')->group(function () {

@@ -30,46 +30,57 @@
         @if(isset($card_array))
         <!-- start page title -->
         <div class="row">
-            <div class="col-12">
+            <div class="col-sm-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0">Dashboard</h4>
+                    <h4 class="mb-sm-2">Dashboard</h4>
+                    <div class="col-sm-4 mb-0"></div>
                     <!-- end row -->
-                    <div class="col-sm-6 col-md-4 col-xl-3">
-                        <div class="my-4 text-center">
-                            <button type="button" class="btn btn-outline-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".bs-example-modal-sm">Add Filter</button>
-                            <label for="">{{$card_array['daterange']}}</label>
+                    <div class="col mb-0">
+                        <div class="row" align="right">
+                            <div class="col-sm-2" align="right">
+                                <button type="button" class="form-control btn btn-outline-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".bs-example-modal-sm">Add Filter</button>
+                                <label for="">{{$card_array['daterange']}}</label>
+                            </div>
+                            <div class="col-sm-2" align="right">
+                                <a href="{{ route('dashboard.export') }}"
+                                    class="form-control  btn btn-primary waves-effect waves-light">Export CSV</a>
+                            </div>
+                            <div class="col-sm-2" align="right">
+                                <a href="{{ route('dashboard.export.pdf') }}"
+                                    class="form-control  btn btn-primary waves-effect waves-light">Export PDF</a>
+                            </div>
+                            <form action="{{ route('dashboard')}}" id="daterange">
+                                    @csrf
+                                <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="mySmallModalLabel">Add Filter</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row mb-3">
+                                                    <label for="example-date-input" class="col-form-label">Start Date</label>
+                                                    <div>
+                                                        <input class="form-control" type="date" value="<?= date('Y-m-d') ?>" id="start_date" name="start_date">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="example-date-input" class="col-form-label">End Date</label>
+                                                    <div>
+                                                        <input class="form-control" type="date" value="<?= date('Y-m-d') ?>" id="end_date" name="end_date">
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <button type="submit" class="btn btn-outline-primary waves-effect waves-light">Apply</button>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+                            </form>
+                            
                         </div>
-
-                        <form action="{{ route('dashboard')}}" id="daterange">
-                                @csrf
-                            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-sm">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="mySmallModalLabel">Add Filter</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row mb-3">
-                                                <label for="example-date-input" class="col-form-label">Start Date</label>
-                                                <div>
-                                                    <input class="form-control" type="date" value="<?= date('Y-m-d') ?>" id="start_date" name="start_date">
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <label for="example-date-input" class="col-form-label">End Date</label>
-                                                <div>
-                                                    <input class="form-control" type="date" value="<?= date('Y-m-d') ?>" id="end_date" name="end_date">
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <button type="submit" class="btn btn-outline-primary waves-effect waves-light">Apply</button>
-                                            </div>
-                                        </div>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-                            </div><!-- /.modal -->
-                        </form>
                     </div>
                     <!-- end row -->
                    
