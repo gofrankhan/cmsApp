@@ -9,5 +9,12 @@ class Subscription extends Model
 {
     use HasFactory;
 
-    protected $quarded = []; 
+    protected $fillable = [
+        'customer_id',
+        'is_subscribed',
+        'subscription_type',
+        'start_date',
+        'end_date',
+        'description'
+    ];
 }
